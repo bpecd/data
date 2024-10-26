@@ -42,8 +42,11 @@
         body {
             background-color: #f0f2f5;
             padding: 20px;
-          
-        }
+            transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
         .container {
             display: block;
             max-width: 1200px;
@@ -128,6 +131,17 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+        }
+        .claim-button1 {
+            background-color: #f8f0fc;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
         }
 
         .balance-info {
@@ -259,6 +273,7 @@
         </div>
     </div>
     <div class="container1">
+        <button class="claim-button1" id="backButton"><i class="fas fa-circle-arrow-left"></i></button>
         <div class="container">
             <div class="left-section">
                 <h1>Owner Contract</h1>
@@ -287,7 +302,10 @@
                     <input id="amount" class="button" placeholder="$10">
                     <button class="button cost-btn" id="costbtn">Cost</button><button class="button receive-btn" id="recbtn">Receive</button>
                     <p style="font-size: 22px;color: rgb(7, 7, 214);background-color: #95ffff; border-radius: 10px;" id="result"></p>
-                    </pre>
+                    <label>
+                        <input type="checkbox" id="mailCheckbox"> Do you want to mail?
+                    </label>    
+                </pre>
                 </div></div>
                 </div>
     </div>
@@ -312,27 +330,396 @@
             <div style="margin-top:-25px" id="transaction-list">
                 <!-- Transactions will be dynamically inserted here -->
             </div>
-        </div>
-    <script>
-        const e=JSON.parse(localStorage.getItem("secureData"));e||(window.location.href="index.html"),document.getElementById("img").src=e.img;const stt=e.state;"admin"===stt?document.getElementById("nn").style.display="block":"mod"===stt?(document.getElementById("adcost").style.display="none",document.getElementById("nn").style.display="none"):(document.getElementById("adcost").style.display="none",document.getElementById("nn").style.display="none",document.getElementById("shtl").style.display="none"),document.getElementById("clearButton").addEventListener("click",function t(){localStorage.removeItem("secureData"),localStorage.removeItem("userdata"),window.location.href="verify.html"});     
+        </div><script>const e = JSON.parse(localStorage.getItem("secureData"));
+            if (!e) {
+                window.location.href = "index.html";
+            }
+             document.getElementById("img").src = e.img;
+             const stt = e.state;
+             if(stt === "admin"){
+                document.getElementById("nn").style.display = "block";
+             } else if(stt === "mod"){
+             document.getElementById("adcost").style.display = "none";
+                document.getElementById("nn").style.display = "none";
+             }else{
+                document.getElementById("adcost").style.display = "none";
+                document.getElementById("nn").style.display = "none";
+                document.getElementById('shtl').style.display = 'none';
+             }
+             
+             document.getElementById("clearButton").addEventListener("click", function e() {
+            localStorage.removeItem("secureData");
+            localStorage.removeItem("userdata");
+            window.location.href = "index.html";
+        });
+        document.getElementById('backButton').addEventListener('click', function() {
+    // Add class to move the body down
+    document.body.classList.add('move-down');
+    
+    // Wait for the animation to complete (1 second), then go back
+    setTimeout(function() {
+        window.history.back();
+    }, 400);  // Match this duration with the CSS transition time
+});
+             
+             
+             
              </script>
+             <script type="text/javascript"
+             src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+     </script>
         <script>
-          document.addEventListener("DOMContentLoaded",function(){let e=JSON.parse(localStorage.getItem("userdata"));e||(window.location.href="owners.html"),document.getElementById("sname").innerText=e.name,document.getElementById("sphone").innerText=e.phone,document.getElementById("semail").innerText=e.mail,document.getElementById("sstate").innerText=e.state;let t=e.sheetid,n="https://docs.google.com/spreadsheets/d/"+t+"/htmlview";async function s(e,t,s,r,a){try{var o,l,i;let d=await (await fetch(n)).text(),c=new DOMParser().parseFromString(d,"text/html").querySelectorAll("table");if(c.length<=e)throw Error(`Sheet index ${e} out of bounds`);let p=c[e].rows;if(p.length<=t)throw Error(`Row index ${t} out of bounds`);let y=p[t].cells;if(y.length<=s)throw Error(`Cell index ${s} out of bounds`);let m=y[s],u=m.innerText||m.textContent,g;a?(o=u.trim(),l=r,i=a,(g=document.getElementById(l)).innerHTML="",o.split("").forEach((e,t)=>{let n=document.createElement("span");n.textContent=" "===e?"\xa0":e,n.classList.add(i),n.style.animationDelay=`${.1*t}s`,g.appendChild(n)})):document.getElementById(r).innerText=Math.abs(u.trim())}catch(h){console.error("Error fetching data:",h)}}s(0,3,4,"total-cost"),s(0,3,1,"total"),s(0,3,2,"balance"),s(0,3,3,"total-receive")}),setTimeout(function(){let e=parseFloat(document.getElementById("total-receive").innerText)||0,t=parseFloat(document.getElementById("total").innerText)||0,n=t-e;n>=0?document.getElementById("due").innerText=n:document.getElementById("due").innerText="0"},3e3);const userdata=JSON.parse(localStorage.getItem("userdata")),sheetid=userdata.sheetid,gid=userdata.gid,sheetUrl=`https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${gid}`,sheetUrl2=`https://docs.google.com/spreadsheets/d/${sheetid}/edit`;document.getElementById("shtl").addEventListener("click",function(){window.open(sheetUrl2,"_blank")});let transactions=[];function displayTransaction(e){let t=document.getElementById("transaction-list");transactions=[];for(let n=e.length-1;n>0;n--){let s=e[n],r=s.c[0]?.v||"N/A",a=s.c[1]?.v||0,o=s.c[2]?.v||"N/A",l=s.c[3]?.v||0,i=r;"string"==typeof r&&r.startsWith("Date")&&(i=parseGoogleDate(r)),transactions.push({Description:a,Reason:o,Amount:l,formattedDate:i,html:`
+            emailjs.init({ publicKey: "2YgGWzyn6XD7EcrL_" });
+            document.addEventListener("DOMContentLoaded", function() {
+                const userdata = JSON.parse(localStorage.getItem('userdata'));
+                if(!userdata){
+                    window.location.href = "owners.html";
+                }
+                document.getElementById("sname").innerText = userdata.name;
+                document.getElementById("sphone").innerText = userdata.phone;
+                document.getElementById("semail").innerText = userdata.mail;
+                document.getElementById("sstate").innerText = userdata.state;
+                const sheetid = userdata.sheetid;
+                const url = 'https://docs.google.com/spreadsheets/d/'+ sheetid +'/htmlview';
+                let t = 0;
+
+async function n(t, n, l, r, o) {
+    try {
+        let a = await fetch(url),
+            i = await a.text(),
+            s = new DOMParser(),
+            c = s.parseFromString(i, "text/html"),
+            d = c.querySelectorAll("table");
+        if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
+        let m = d[t].rows;
+        if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
+        let u = m[n].cells;
+        if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
+        let h = u[l],
+            g = h.innerText || h.textContent;
+        o
+            ? (function e(t, n, l) {
+                  let r = document.getElementById(n);
+                  (r.innerHTML = ""),
+                      t.split("").forEach((e, t) => {
+                          let n = document.createElement("span");
+                          (n.textContent = " " === e ? "\xa0" : e), n.classList.add(l), (n.style.animationDelay = `${0.1 * t}s`), r.appendChild(n);
+                      });
+              })(g.trim(), r, o)
+            : (document.getElementById(r).innerText = Math.abs(g.trim()));
+    } catch (p) {
+        console.error("Error fetching data:", p);
+    }
+} 
+n(t, 3, 4, "total-cost"),
+n(t, 3, 1, "total"),
+           n(t, 3,2,"balance"),
+           n(t, 3,3,"total-receive");
+        });
+        setTimeout(function() {
+    const rec = parseFloat(document.getElementById("total-receive").innerText) || 0;
+    const tot = parseFloat(document.getElementById("total").innerText) || 0;
+    const due = tot - rec;
+    if(due >= 0){
+    document.getElementById("due").innerText = due;
+}else{
+    document.getElementById("due").innerText = '0';
+}
+}, 3000);
+
+        const userdata = JSON.parse(localStorage.getItem('userdata'));
+        const sheetid =userdata.sheetid;
+        const gid = userdata.gid;
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${gid}`;
+        const sheetUrl2 = `https://docs.google.com/spreadsheets/d/${sheetid}/edit`;
+        document.getElementById('shtl').addEventListener('click', function() {
+    window.open(sheetUrl2, '_blank');
+});
+        let transactions = [];
+
+        fetch(sheetUrl)
+            .then(response => response.text())
+            .then(data => {
+                const jsonData = JSON.parse(data.substr(47).slice(0, -2));
+                const rows = jsonData.table.rows;
+                displayTransaction(rows);
+            })
+            .catch(error => console.error('Error fetching the Google Sheet data:', error));
+
+        function displayTransaction(rows) {
+            const container = document.getElementById('transaction-list');
+            transactions = [];
+
+            for (let i = rows.length - 1; i > 0; i--) {
+                const row = rows[i];
+                const rawDate = row.c[0]?.v || 'N/A';
+                const Description = row.c[1]?.v || 0;
+                const Reason = row.c[2]?.v || 'N/A';
+                const Amount = row.c[3]?.v || 0;
+                let formattedDate = rawDate;
+        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
+            formattedDate = parseGoogleDate(rawDate);
+        }
+                transactions.push({
+                    Description: Description,
+                    Reason: Reason,
+                    Amount: Amount,
+                    formattedDate: formattedDate,
+                    html: `
     <div class="transaction" style="display: flex; justify-content: space-between;">
         <div style="flex: 1; text-align: center;">
-            ${i}
+            ${formattedDate}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${a}
+            ${Description}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${o}
+            ${Reason}
         </div>
-        <div style="flex: 1; text-align: center;" class="transaction-amount ${l>0?"credit":"debit"}">
-                ${l>0?"+":"-"} ৳${Math.abs(l).toFixed(2)}
+        <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : 'debit'}">
+                ${Amount > 0 ? '+' : '-'} ৳${Math.abs(Amount).toFixed(2)}
             </div>
     </div>
-`}),t.innerHTML+=transactions[transactions.length-1].html}}function filterTransactions(){let e=document.getElementById("search-input").value.toLowerCase(),t=document.getElementById("transaction-list");t.innerHTML="",transactions.forEach(n=>{let{Description:s,Reason:r,formattedDate:a,html:o}=n;(a.toString().includes(e)||s.toLowerCase().includes(e)||r.toLowerCase().includes(e))&&(t.innerHTML+=o)})}function parseGoogleDate(e){let t=e.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/);if(t){let n=t[1],s=String(parseInt(t[2])+1).padStart(2,"0"),r=String(t[3]).padStart(2,"0"),a=parseInt(t[4]),o=String(t[5]).padStart(2,"0"),l=String(t[6]).padStart(2,"0"),i=a>=12?"PM":"AM";return a%=12,`${s}/${r}/${n} ${a=a?String(a).padStart(2,"0"):"12"}:${o}:${l} ${i}`}return"Invalid Date"}fetch(sheetUrl).then(e=>e.text()).then(e=>{let t=JSON.parse(e.substr(47).slice(0,-2)),n=t.table.rows;displayTransaction(n)}).catch(e=>console.error("Error fetching the Google Sheet data:",e));const showbtn=document.getElementById("adcost"),btns=document.getElementById("buttons");showbtn.addEventListener("click",function(e){btns.style.display="block",showbtn.style.display="none"});const costbtn=document.getElementById("costbtn");costbtn.addEventListener("click",function(e){let t=!1,n=new Audio("ting.mp3");n.preload="auto",n.load(),costbtn.style.display="block",costbtn.style.opacity="0.5",costbtn.innerText="wait....",costbtn.disabled=!0,document.getElementById("recbtn").style.display="none";let s=JSON.parse(localStorage.getItem("userdata")),r=s.furl,a=s.name,o=`https://docs.google.com/forms/u/0/d/e/${r}/formResponse`,l=s.sdentry,i=s.srentry,d=s.saentry,c=parseFloat(document.getElementById("amount").value),p="Owner Cost - "+a,y=document.getElementById("reason").value,m=y;if(c>=5){let u=[{url:o,entries:{reason:`entry.${i}`,amount:`entry.${d}`,description:`entry.${l}`}},{url:"https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",entries:{reason:"entry.458544774",amount:"entry.2032103830",description:"entry.2111696735"}}];u.forEach(e=>{let s=new FormData;s.append(e.entries.amount,(u[0],`-${c}`)),s.append(e.entries.description,e===u[0]?"Cost":p),s.append(e.entries.reason,e===u[0]?y:m),fetch(e.url,{method:"POST",mode:"no-cors",body:new URLSearchParams(s)}).then(e=>{document.getElementById("result").innerText="Transaction Complete",costbtn.style.display="none",t||(n.play().catch(e=>{console.error("Audio playback failed:",e)}),t=!0),setTimeout(()=>{location.reload()},1500)}).catch(e=>{document.getElementById("result").innerText="Failure in Transaction",costbtn.style.display="block"})})}else document.getElementById("result").innerText="Error Please Contact App Admin"});const recbtn=document.getElementById("recbtn");recbtn.addEventListener("click",function(e){recbtn.style.display="block",costbtn.style.display="none",recbtn.style.opacity="0.5",recbtn.innerText="wait....",recbtn.disabled=!0;let t=!1,n=new Audio("ting.mp3");n.preload="auto",n.load();let s=JSON.parse(localStorage.getItem("userdata")),r=s.furl,a=`https://docs.google.com/forms/u/0/d/e/${r}/formResponse`,o=s.name,l=s.sdentry,i=s.srentry,d=s.saentry,c=parseFloat(document.getElementById("amount").value),p="Receive from "+o,y=document.getElementById("reason").value,m=y;if(c>=5){let u=[{url:a,entries:{reason:`entry.${i}`,amount:`entry.${d}`,description:`entry.${l}`}},{url:"https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",entries:{reason:"entry.458544774",amount:"entry.2032103830",description:"entry.2111696735"}}];u.forEach(e=>{let s=new FormData;s.append(e.entries.amount,e===u[0]?`${c}`:c),s.append(e.entries.description,e===u[0]?"Receive":p),s.append(e.entries.reason,e===u[0]?y:m),fetch(e.url,{method:"POST",mode:"no-cors",body:new URLSearchParams(s)}).then(e=>{document.getElementById("result").innerText="Transaction Complete",recbtn.style.display="none",t||(n.play().catch(e=>{console.error("Audio playback failed:",e)}),t=!0),setTimeout(()=>{location.reload()},2e3)}).catch(e=>{document.getElementById("result").innerText="Failure in Transaction",recbtn.style.display="block"})})}else document.getElementById("result").innerText="Error Please Contact App Admin"});
+`
+                });
+
+                container.innerHTML += transactions[transactions.length - 1].html;
+            }
+        }
+
+
+        function filterTransactions() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const container = document.getElementById('transaction-list');
+            container.innerHTML = '';
+
+            transactions.forEach(transaction => {
+                const { Description, Reason, formattedDate, html } = transaction;
+                if (
+                    formattedDate.toString().includes(searchValue) ||
+                    Description.toLowerCase().includes(searchValue) ||
+                    Reason.toLowerCase().includes(searchValue)
+                ) {
+                    container.innerHTML += html;
+                }
+            });
+        }
+
+        function parseGoogleDate(dateString) {
+    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+    const matches = dateString.match(regex);
+
+            if (matches) {
+        const year = matches[1];
+        const month = String(parseInt(matches[2]) + 1).padStart(2, '0'); // Adjust month and pad with zero
+        const day = String(matches[3]).padStart(2, '0'); // Pad day with zero
+        let hour = parseInt(matches[4]);
+        const minute = String(matches[5]).padStart(2, '0'); // Pad minute with zero
+        const second = String(matches[6]).padStart(2, '0'); // Pad second with zero
+
+        // Convert to 12-hour format
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        hour = hour % 12;
+        hour = hour ? String(hour).padStart(2, '0') : '12';  // Pad hour with zero and handle midnight/noon
+
+        // Return date in MM/DD/YYYY HH:MM:SS AM/PM format
+        return `${day}/${month}/${year} ${hour}:${minute}:${second} ${ampm}`;
+    }
+
+    return 'Invalid Date';  // Fallback if parsing fails
+}
+            const showbtn = document.getElementById("adcost");
+            const btns = document.getElementById("buttons");
+            showbtn.addEventListener('click', function(e) {
+                btns.style.display = 'block';
+                showbtn.style.display = 'none';
+            });
+            
+            
+            const costbtn = document.getElementById("costbtn");
+costbtn.addEventListener('click', function(e) {
+    let audioPlayed = false;
+const audioElement2 = new Audio('ting.mp3');
+
+// Preload the audio
+audioElement2.preload = 'auto';
+audioElement2.load();
+    costbtn.style.display = 'block';
+    costbtn.style.opacity = '0.5';
+    costbtn.innerText = 'wait....';
+    costbtn.disabled = true;
+    document.getElementById("recbtn").style.display = 'none';
+
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    const surlid = userdata.furl;
+    const name = userdata.name;
+    const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
+    const sdentry = userdata.sdentry;
+    const srentry = userdata.srentry;
+    const saentry = userdata.saentry;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const msg2 = "Cost";
+    const description = "Owner Cost - " + name;
+    const rmsg2 = document.getElementById('reason').value;
+    const reason = rmsg2;
+
+    if (amount >= 5) {
+        let googleFormsData = [
+            {
+                url: surl,
+                entries: {
+                    reason: `entry.${srentry}`,
+                    amount: `entry.${saentry}`,
+                    description: `entry.${sdentry}`
+                }
+            },
+            {
+                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
+                entries: {
+                    reason: "entry.458544774",
+                    amount: "entry.2032103830",
+                    description: "entry.2111696735"
+                }
+            }
+        ];
+
+        googleFormsData.forEach((form) => {
+            const formData = new FormData();
+            formData.append(form.entries.amount, form === googleFormsData[0] ? `-${amount}` : `-${amount}`);
+            formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
+            formData.append(form.entries.reason, form === googleFormsData[0] ? rmsg2 : reason);
+
+            fetch(form.url, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                document.getElementById('result').innerText = `Transaction Complete`;
+                costbtn.style.display = 'none';
+                if (!audioPlayed) {
+            audioElement2.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+            audioPlayed = true;
+        }  
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            })
+            .catch(error => {
+                document.getElementById('result').innerText = `Failure in Transaction`;
+                costbtn.style.display = 'block';
+            });
+        });
+    } else {
+        document.getElementById('result').innerText = `Error Please Contact App Admin`;
+    }
+});
+
+const recbtn = document.getElementById("recbtn");
+recbtn.addEventListener('click', function(e){
+    recbtn.style.display = 'block';
+    costbtn.style.display = 'none';
+    recbtn.style.opacity = '0.5';
+    recbtn.innerText = 'wait....';
+    recbtn.disabled = true;
+    let audioPlayed = false;
+    const audioElement2 = new Audio('ting.mp3');
+
+    // Preload the audio
+    audioElement2.preload = 'auto';
+    audioElement2.load();
+    
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    const surlid = userdata.furl;
+    const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
+    const name = userdata.name;
+    const sdentry = userdata.sdentry;
+    const srentry = userdata.srentry;
+    const saentry = userdata.saentry;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const msg2 = "Receive";
+    const description = "Receive from " + name;
+    const rmsg2 = document.getElementById('reason').value;
+    const reason = rmsg2;
+    const checkbox = document.getElementById("mailCheckbox");
+
+    if (amount >= 5) {
+        let googleFormsData = [
+            {
+                url: surl,
+                entries: {
+                    reason: `entry.${srentry}`,
+                    amount: `entry.${saentry}`,
+                    description: `entry.${sdentry}`
+                }
+            },
+            {
+                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
+                entries: {
+                    reason: "entry.458544774",
+                    amount: "entry.2032103830",
+                    description: "entry.2111696735"
+                }
+            }
+        ];
+
+        googleFormsData.forEach((form) => {
+            const formData = new FormData();
+            formData.append(form.entries.amount, form === googleFormsData[0] ? `${amount}` : amount);
+            formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
+            formData.append(form.entries.reason, form === googleFormsData[0] ? rmsg2 : reason);
+
+            fetch(form.url, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                document.getElementById('result').innerText = `Transaction Complete`;
+                recbtn.style.display = 'none';
+                if (!audioPlayed) {
+                    audioElement2.play().catch(error => {
+                        console.error('Audio playback failed:', error);
+                    });
+                    audioPlayed = true;
+                }
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
+
+                // Check if the checkbox is checked before sending the email
+                if (checkbox.checked) {
+                    const e = JSON.parse(localStorage.getItem("secureData"));
+                    const paid = e.paid;
+                    const totalpaid = document.getElementById("total-receive").textContent;
+                    const due = document.getElementById("due").textContent;
+                    const date = new Date();
+                    const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+                    
+                    emailjs.send("service_hqdocea", "template_o0i8snf", {
+                        to_email: e.email,
+                        name: name,
+                        paid: paid,
+                        totalpaid: totalpaid,
+                        due: due,
+                        today: formattedDate,
+                        description: "Received Money",
+                        amount: amount,
+                        username: e.name,
+                    });
+                }
+            })
+            .catch(error => {
+                document.getElementById('result').innerText = `Failure in Transaction`;
+                recbtn.style.display = 'block';
+            });
+        });
+    } else {
+        document.getElementById('result').innerText = `Error Please Contact App Admin`;
+    }
+});
         </script>
 </body>    
 </html>
