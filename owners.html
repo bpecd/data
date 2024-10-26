@@ -230,7 +230,16 @@ body.move-down {
 
         setTimeout(function() {
             window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
-        }, 300); // 200 ms delay
+        }, 500); // 200 ms delay
+    });
+});document.querySelectorAll('.redirect-btn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents immediate navigation
+        document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+        setTimeout(function() {
+            window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+        }, 500); // 200 ms delay
     });
 });
 
