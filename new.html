@@ -485,7 +485,7 @@ body.move-down {
     <div class="registration-container">
         <div class="container">
             <h3>Tap On create Link then open!</h3>
-            <button class="button2" onclick="createFormAndSheet()">Create link</button>
+            <button id="hideit" class="button2" onclick="createFormAndSheet()">Create link</button>
             <div style="margin-left: 20px;" id="result">
             </div>
             </div>
@@ -576,6 +576,7 @@ body.move-down {
     }, 400);  // Match this duration with the CSS transition time
 });
         function createFormAndSheet() {
+            document.getElementById("hideit").style.display = 'none';
           fetch("https://script.google.com/macros/s/AKfycbwA3hlkD8zIxvhunqXxp5ghqvrbqnhDG-GkSR-SWMIyCBPx0R0vle-GXoB5Y5ur4Vcd/exec")
             .then(response => response.json())
             .then(data => displayResult(data))
