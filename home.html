@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office Cost and Balance</title>
+    <meta Date="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
     <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css"
@@ -42,7 +42,7 @@
         body {
             background-color: #f0f2f5;
             padding: 20px;
-          
+            
             transition: transform 0.5s ease-in-out;
 }
 body.move-down {
@@ -56,7 +56,8 @@ body.move-down {
             
             padding: 20px;
             border-radius: 8px;
-              opacity: 0;
+            
+            opacity: 0;
           transform: translateY(5vh);
             animation: fadeIn 1s forwards;
         }
@@ -67,7 +68,7 @@ body.move-down {
             }
         }
         .container1 {
-            height: 55vh;
+            max-height: 60vh;
             display: flex;
             max-width: 1200px;
             margin: 0 auto;
@@ -84,102 +85,6 @@ body.move-down {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin: 0;
-        }
-
-        .info {
-            margin: 5px;
-            font-size: 18px;
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        .button {
-            background-color: #e2e7ea;
-            border: none;
-            padding: 15px;
-            width: 150px;
-            text-align: center;
-            border-radius: 20px;
-            font-size: 18px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .cost-btn {
-            background-color: #f28d8d;
-            color: black;
-        }
-
-        .right-section {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .balance-info {
-            font-size: 24px;
-            margin: 5px;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border-radius: 20px;
-            opacity: 0;
-          transform: translateY(5vh);
-            animation: fadeIn 1s forwards;
-        }
-  @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .top-bar .nav-items {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .top-bar .nav-items a {
-            text-decoration: none;
-            color: #000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .top-bar .nav-items a i {
-            color: #096faa;
-        }
-        .bb{
-            width: 80vh;
-            display: flex;
-            flex-direction: row;
-            background-color: rgb(188, 247, 194);
-            padding: 10px;
-            border-radius: 15px;
-            margin-bottom: 10px;
-        }
-        .top-bar .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
         }
         .header {
             display: flex;
@@ -240,6 +145,127 @@ body.move-down {
             color: #cfcfcf;
             font-size: 8px;
         } 
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            align-content: center;
+            margin: 20px;
+            max-width: 70%;
+            width: 600px;
+        }
+        .progress-container {
+            flex: 1;
+            height: 30px;
+            background-color: #ff92a4;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #c91111;
+        }
+        .progress-label {
+            color: #000000;
+        }
+        .summary-text {
+            justify-content: space-between;
+            font-size: 20px;
+            color: black;
+        }
+
+        .circular-progress {
+    margin: 10%;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #da1717;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circular-progress::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0px, 150px, 150px, 75px); /* Half circle clipping */
+    background-color: #3128a7;
+    transform: rotate(var(--rotation, 0deg)); /* Default rotation at 0deg */
+    transition: transform 0.5s ease;
+}
+
+.circular-progress::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #3128a7;
+    clip: rect(0px, 75px, 150px, 0px); /* Half circle clipping for background */
+}
+
+.circular-progress span {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 1;
+}
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 20px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bb{
+            width: 80vh;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+        .top-bar .nav-items a i {
+            color: #096faa;
+        }
+        .top-bar .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         .transaction-amount {
             font-size: 15px;
             font-weight: bold;
@@ -255,85 +281,67 @@ body.move-down {
 <body>
     <div class="top-bar">
         <div class="nav-items">
-            <a class="backbtn"href="home.html"><i class="fa-duotone fa-solid fa-table"></i> Dashboard</a>
+            <a class="backbtn"style="color: #364fa1;font-weight: bold;font-size: large;" href=""><i class="fa-duotone fa-solid fa-table"></i> Dashboard</a>
             <a class="backbtn"href="owners.html"><i class="fa-duotone fa-solid fa-chart-simple-horizontal"></i> Owners</a>
-            <a class="backbtn"style="color: #364fa1;font-weight: bold;font-size: large;" href=""><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
+            <a class="backbtn"href="office.html"><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
             <a class="backbtn"id="nn" href="new.html"><i class="fas fa-user-plus"></i> New Account</a>
         </div>
         <div style="display: flex;flex-direction: row;gap: 10px;" class="logo">
             <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="backbtn" style="border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" id="clearButton"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
-    <div class="container1">
-        <div class="container">
-            <div class="left-section">
-                <h1>Office</h1>
-                <div class="info">Name: <span id="username">Guest</span></div>
-                <div class="info">Mobile: <span id="phonenumber"> 01xxxxxxxx</span></div><br>
-                <div class="bb"><div class="balance-info">total Cost: <span style="color: red;font-size: 28px;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT</div></div>
-                </div>        
-           </div>
-           <div class="container">
-            <div class="right-section">
-                <button class="button cost-btn" id="adcost">+ ADD Cost</button>
-                <div style="display: none;" id="buttons" class="buttons">
-                    <pre>
-    <label>Reason:</label>
-                    <input id="reason" class="button" placeholder="Coffee">
-
-    <label>Amount:</label>
-                    <input id="amount" class="button" placeholder="$10">
-                    <button id="cost" class="button cost-btn">Cost</button>
-                    <p style="font-size: 22px;color: rgb(8, 8, 221);background-color: #8cffff;border-radius: 10px;" id="result"></p>
-                    </pre>
-                </div></div>
-                </div>
+<div class="container1">
+    <div class="container">
+         <div class="progress-bar">
+            <div class="progress-container">
+                <div class="progress" id="build-progress"></div>
+            </div>
+            <div class="progress-label">Constraction Cost: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="blcost"></span> BDT</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-container">
+                <div class="progress" id="office-progress"></div>
+            </div>
+            <div class="progress-label">Office Cost: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="ofcost"></span> BDT</div>
+        </div>
+       </div>
+       <div class="container">
+            <div style="background-color: rgb(216, 216, 255); border-radius: 15px;padding: 10px;" class="summary-text">
+                Total Cost: <span style="color: rgb(211, 15, 15);font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT<br>
+                Total Receive: <span style="color: blue;font-family: 'Arial Black', sans-serif;" id="total-receive"></span> BDT
+            </div>
+            <h3 style="margin-left: 4vh;margin-bottom: 5vh;margin-top: 5vh;">Cost vs Receive</h3>
+            <div class="circular-progress">
+                <div class="mask full"></div>
+                <div class="fill"></div>
+                <div class="mask half"></div>
+                <span id="percentage-text"></span>
+            </div>            
     </div>
-        <div class="container">
-            <div class="header">
-                <h1> Available balance: <span style="color: rgb(0, 187, 0);padding: 5px;background-color: #c3fabd;border-radius: 10px;" id="balance"></span> BDT
-                </h1>s
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
-                    <i id="shtl" onclick="window.open('https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/edit?gid=1886029600#gid=1886029600', '_blank');" class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
- </div>
-            </div>
-    
-            <p>List of Transactions</p>
-    
-            <div class="menu">
-                <span>DATE</span>
-                <span>DESCPTION</span>
-                <span>REASON</span>
-                <span>AMOUNT</span>
-            </div>
-            <div style="margin-top:-25px" id="transaction-list">
-                <!-- Transactions will be dynamically inserted here -->
+</div>
+    <div class="container">
+        <div class="header">
+            <h1> Available balance: <span style="color: rgb(0, 187, 0);padding: 5px;background-color: #c3fabd;border-radius: 10px;" id="balance"></span> BDT
+            </h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <i id="shtl" onclick="window.open('https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/edit?gid=1886029600#gid=1886029600', '_blank');" class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
             </div>
         </div>
-        <script>const e = JSON.parse(localStorage.getItem("secureData"));
-            if (!e) {
-                window.location.href = "index.html";
-            }
-             document.getElementById("img").src = e.img;
-             const stt = e.state;
-             if(stt === "admin"){
-                document.getElementById("nn").style.display = "";
-             } else if(stt === "mod"){
-             document.getElementById("adcost").style.display = "none";
-                document.getElementById("nn").style.display = "none";
-             }else{
-                document.getElementById("adcost").style.display = "none";
-                document.getElementById("nn").style.display = "none";
-                document.getElementById('shtl').style.display = 'none';
-             }
-             document.getElementById("username").innerText = e.name;
-             document.getElementById("phonenumber").innerText = e.cvv;
-             document.getElementById("clearButton").addEventListener("click", function e() {
-            localStorage.removeItem("secureData");
-            localStorage.removeItem("userdata");
-            window.location.href = "index.html";
-        });
+
+        <p>List of all Transactions</p>
+
+        <div class="menu">
+            <span>DATE</span>
+            <span>DESCPTION</span>
+            <span>REASON</span>
+            <span>AMOUNT</span>
+        </div>
+        <div style="margin-top:-25px" id="transaction-list">
+            <!-- Transactions will be dynamically inserted here -->
+        </div>
+    </div>
+    <script>
         document.querySelectorAll('.backbtn').forEach(function(button) {
     button.addEventListener('click', function(event) {
         event.preventDefault(); // Prevents immediate navigation
@@ -341,22 +349,17 @@ body.move-down {
 
         setTimeout(function() {
             window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
-        }, 200); // 200 ms delay
+        }, 200); // 300 ms delay
     });
 });
 
-             
-             
-             
-             </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const burl = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview';
+        document.addEventListener("DOMContentLoaded", function() {
+                const url = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview';
                 let t = 0;
 
 async function n(t, n, l, r, o) {
     try {
-        let a = await fetch(burl),
+        let a = await fetch(url),
             i = await a.text(),
             s = new DOMParser(),
             c = s.parseFromString(i, "text/html"),
@@ -382,15 +385,25 @@ async function n(t, n, l, r, o) {
         console.error("Error fetching data:", p);
     }
 }
- function fetchData1() {
-                const secureData = JSON.parse(localStorage.getItem('secureData'));
+setTimeout(function() {
+    const ofcost = parseFloat(document.getElementById("ofcost").textContent);
+    const totalc = parseFloat(document.getElementById("total-cost").textContent);
+    let owcost = totalc - ofcost;
+
+    // Ensure owcost is not negative
+    owcost = Math.max(0, owcost);
+
+    document.getElementById("blcost").innerText = owcost;
+}, 2000);
+
+                function fetchData2() {
                 const tbl = 0;
                 if (isNaN(tbl)) {
                     console.error('Invalid table number in local storage');
                     return;
                 }
 
-                const url = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview';
+                const url = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview';
                 fetch(url)
                     .then(response => response.text())
                     .then(data => {
@@ -404,16 +417,19 @@ async function n(t, n, l, r, o) {
                             return;
                         }
 
-                        const cellElement = tables[tbl].rows[3].cells[2];
+                        const cellElement = tables[tbl].rows[3].cells[4];
                         const cellText = cellElement.innerText || cellElement.textContent;
                         fetchedDataValue = parseFloat(cellText.trim());
-                        document.getElementById("balance").innerText = Math.abs(cellText.trim());
+                        document.getElementById("ofcost").innerText = Math.abs(cellText.trim());
                     })
                     .catch(error => console.error('Error fetching data:', error));
-            }fetchData1();
+            }
+            fetchData2();
             n(t, 3, 4, "total-cost");
+            n(t, 3, 3, "total-receive");
+            n(t, 3, 2, "balance");
         });
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/gviz/tq?gid=1886029600';
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/gviz/tq?gid=454571186';
 
         let transactions = [];
 
@@ -507,83 +523,56 @@ async function n(t, n, l, r, o) {
 
     return 'Invalid Date';  // Fallback if parsing fails
 }
-            const showbtn = document.getElementById("adcost");
-            const btns = document.getElementById("buttons");
-            showbtn.addEventListener('click', function(e) {
-                btns.style.display = 'block';
-                showbtn.style.display = 'none';
-            });
-            const costbtn = document.getElementById("cost");
-costbtn.addEventListener('click', function(e) {
-    let audioPlayed = false;
-const audioElement2 = new Audio('ting.mp3');
-
-// Preload the audio
-audioElement2.preload = 'auto';
-audioElement2.load();
-    costbtn.style.display = 'block';
-    costbtn.style.opacity = '0.5';
-    costbtn.innerText = 'wait....';
-    costbtn.disabled = true;
-    const amount = parseFloat(document.getElementById('amount').value);
-    const msg2 = "Cost";
-    const description = "Office Cost";
-    const rmsg2 = document.getElementById('reason').value;
-    const reason = rmsg2;
-
-    if (amount >= 5) {
-        let googleFormsData = [
-            {
-                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwn_TRFC_uj8yuD7r9FyT4kwN9-353YvLRgGqCtF4dV-apvw/formResponse",
-                entries: {
-                    reason: "entry.741005997",
-                    amount: "entry.1531813260",
-                    description: "entry.1180482190"
-                }
-            },
-            {
-                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
-                entries: {
-                    reason: "entry.458544774",
-                    amount: "entry.2032103830",
-                    description: "entry.2111696735"
-                }
+    </script>
+    <script>const e = JSON.parse(localStorage.getItem("secureData"));
+          if (!e) {
+                window.location.href = "index.html";
             }
-        ];
-
-        googleFormsData.forEach((form) => {
-            const formData = new FormData();
-            formData.append(form.entries.amount, form === googleFormsData[0] ? `-${amount}` : `-${amount}`);
-            formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, form === googleFormsData[0] ? rmsg2 : reason);
-
-            fetch(form.url, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: new URLSearchParams(formData)
-            })
-            .then(response => {
-                document.getElementById('result').innerText = `Transaction Complete`;
-                if (!audioPlayed) {
-            audioElement2.play().catch(error => {
-                console.error('Audio playback failed:', error);
-            });
-            audioPlayed = true;
-        }  
-                costbtn.style.display = 'none';
-                setTimeout(() => {
-                    location.reload();
-                }, 1500);
-            })
-            .catch(error => {
-                document.getElementById('result').innerText = `Failure in Transaction`;
-                costbtn.style.display = 'block';
-            });
+             document.getElementById("img").src = e.img;
+             const stt = e.state;
+             if(stt === "admin"){
+                document.getElementById("nn").style.display = "block";
+             } else if(stt === "mod"){
+                document.getElementById("nn").style.display = "none";
+             }else{
+                document.getElementById("nn").style.display = "none";
+                document.getElementById('shtl').style.display = 'none';
+             }
+             
+             document.getElementById("clearButton").addEventListener("click", function e() {
+            localStorage.removeItem("secureData");
+            localStorage.removeItem("userdata");
+            window.location.href = "index.html";
         });
-    } else {
-        document.getElementById('result').innerText = `Error Please Contact App Admin`;
-    }
-});
-        </script>
-</body>    
+         
+         
+         
+         
+         </script>
+    <script>
+        
+        setTimeout( function(){
+       // Get costs and calculate percentages
+const totalCost = parseInt(document.getElementById("total-cost").innerText);
+const totalReceive = parseInt(document.getElementById("total-receive").innerText); // Corrected
+const buildCost = parseInt(document.getElementById("blcost").innerText);
+const officeCost = parseInt(document.getElementById("ofcost").innerText);
+
+// Calculate build and office percentages
+const buildPercentage = (buildCost / totalCost) * 100;
+const officePercentage = (officeCost / totalCost) * 100;
+
+// Set width of progress bars
+document.getElementById("build-progress").style.width = buildPercentage + "%";
+document.getElementById("office-progress").style.width = officePercentage + "%";
+// Calculate percentage
+const percentage = (totalCost / totalReceive) * 100;
+document.getElementById("percentage-text").innerText = `${Math.round(percentage)}%`;
+
+// Calculate rotation and set it
+const rotationDegree = percentage * 3.6; // Convert percentage to degrees
+document.querySelector(".circular-progress").style.setProperty("--rotation", `${rotationDegree}deg`);
+
+            },4000);    </script>
+</body>
 </html>
