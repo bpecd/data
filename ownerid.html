@@ -166,6 +166,15 @@ body.move-down {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             border-radius: 20px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .top-bar .nav-items {
             display: flex;
@@ -257,19 +266,21 @@ body.move-down {
         .debit {
             color: red;
         }
-        
+        .neutral{
+            color: #808080;
+        }
     </style>
 </head>
 <body>
     <div class="top-bar">
         <div class="nav-items">
-            <a href="home.html"><i class="fa-duotone fa-solid fa-table"></i> Dashboard</a>
-            <a style="color: #364fa1;font-weight: bold;font-size: large;" href="owners.html"><i style="color: green;font-size: large;" class="fa-duotone fa-solid fa-pen-field"></i> Owners</a>
-            <a href="office.html"><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
-            <a id="nn" href="new.html"><i class="fas fa-user-plus"></i> New Account</a>
+            <a class="backbtn" href="home.html"><i class="fa-duotone fa-solclass fa-table"></i> Dashboard</a>
+            <a class="backbtn" style="color: #364fa1;font-weight: bold;font-size: large;" href="owners.html"><i style="color: green;font-size: large;" class="fa-duotone fa-solid fa-pen-field"></i> Owners</a>
+            <a class="backbtn" href="office.html"><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
+            <a class="backbtn" id="nn" href="new.html"><i class="fas fa-user-plus"></i> New Account</a>
 </div>
         <div style="display: flex;flex-direction: row;gap: 10px;" class="logo">
-            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button style="border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" id="clearButton"><i class="fas fa-arrow-right"></i></button>
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="backbtn" style="border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" id="clearButton"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
     <div class="container1">
@@ -303,7 +314,7 @@ body.move-down {
                     <button class="button cost-btn" id="costbtn">Cost</button><button class="button receive-btn" id="recbtn">Receive</button>
                     <p style="font-size: 22px;color: rgb(7, 7, 214);background-color: #95ffff; border-radius: 10px;" id="result"></p>
                     <label>
-                        <input type="checkbox" id="mailCheckbox"> Do you want to mail?
+                        <input type="checkbox" id="mailCheckbox"> Want to send Receive mail?
                     </label>    
                 </pre>
                 </div></div>
@@ -330,7 +341,20 @@ body.move-down {
             <div style="margin-top:-25px" id="transaction-list">
                 <!-- Transactions will be dynamically inserted here -->
             </div>
-        </div><script>const e = JSON.parse(localStorage.getItem("secureData"));
+        </div><script>
+        document.querySelectorAll('.backbtn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents immediate navigation
+        document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+        setTimeout(function() {
+            window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+        }, 200); // 300 ms delay
+    });
+});
+
+        
+        const e = JSON.parse(localStorage.getItem("secureData"));
             if (!e) {
                 window.location.href = "index.html";
             }
@@ -359,7 +383,7 @@ body.move-down {
     // Wait for the animation to complete (1 second), then go back
     setTimeout(function() {
         window.history.back();
-    }, 400);  // Match this duration with the CSS transition time
+    }, 300);  // Match this duration with the CSS transition time
 });
              
              
@@ -476,10 +500,10 @@ n(t, 3, 1, "total"),
         <div style="flex: 1; text-align: center;">
             ${Reason}
         </div>
-        <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : 'debit'}">
-                ${Amount > 0 ? '+' : '-'} ৳${Math.abs(Amount).toFixed(2)}
-            </div>
-    </div>
+     <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : (Amount < 0 ? 'debit' : 'neutral')}">
+    ${Amount > 0 ? '+' : (Amount < 0 ? '-' : '!')} ৳${Math.abs(Amount).toFixed(2)}
+</div>
+</div>
 `
                 });
 
@@ -697,9 +721,10 @@ recbtn.addEventListener('click', function(e){
                     const due = document.getElementById("due").textContent;
                     const date = new Date();
                     const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
-                    
+                    const email = userdata.mail;
+    
                     emailjs.send("service_hqdocea", "template_o0i8snf", {
-                        to_email: e.email,
+                        to_email: email,
                         name: name,
                         paid: paid,
                         totalpaid: totalpaid,
