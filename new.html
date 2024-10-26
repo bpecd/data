@@ -576,20 +576,23 @@ body.move-down {
     }, 400);  // Match this duration with the CSS transition time
 });
         function createFormAndSheet() {
-            document.getElementById("hideit").style.display = 'none';
-          fetch("https://script.google.com/macros/s/AKfycbwA3hlkD8zIxvhunqXxp5ghqvrbqnhDG-GkSR-SWMIyCBPx0R0vle-GXoB5Y5ur4Vcd/exec")
-            .then(response => response.json())
-            .then(data => displayResult(data))
-            .catch(error => console.error("Error:", error));
-        }
-    
-        function displayResult(result) {
-          const resultDiv = document.getElementById("result");
-          resultDiv.innerHTML = `
-            <p><strong>Form URL:</strong> <a href="${result.formUrl}" target="_blank">${result.formUrl}</a></p>
-            <p><strong>Sheet URL:</strong> <a href="${result.sheetUrl}" target="_blank">${result.sheetUrl}</a></p>
-          `;
-        }
+  fetch("https://script.google.com/macros/s/AKfycbwA3hlkD8zIxvhunqXxp5ghqvrbqnhDG-GkSR-SWMIyCBPx0R0vle-GXoB5Y5ur4Vcd/exec")
+    .then(response => response.json())
+    .then(data => displayResult(data))
+    .catch(error => console.error("Error:", error));
+}
+
+function displayResult(result) {
+  const formUrl = result.formUrl.replace(/\/edit.*/, '/viewform');
+  const sheetUrl = result.sheetUrl.replace(/\/edit.*/, '/');
+
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = `
+    <p><strong>Form URL:</strong> <a href="${formUrl}" target="_blank">${formUrl}</a></p>
+    <p><strong>Sheet URL:</strong> <a href="${sheetUrl}" target="_blank">${sheetUrl}</a></p>
+  `;
+}
+
       </script>
     <script>
 document.getElementById('calculate').addEventListener('click', async function(event) {
