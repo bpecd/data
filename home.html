@@ -329,227 +329,27 @@
         </div>
     </div>
     <script>
-        
-        document.addEventListener("DOMContentLoaded", function() {
-                const url = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview';
-                let t = 0;
-
-async function n(t, n, l, r, o) {
-    try {
-        let a = await fetch(url),
-            i = await a.text(),
-            s = new DOMParser(),
-            c = s.parseFromString(i, "text/html"),
-            d = c.querySelectorAll("table");
-        if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
-        let m = d[t].rows;
-        if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
-        let u = m[n].cells;
-        if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
-        let h = u[l],
-            g = h.innerText || h.textContent;
-        o
-            ? (function e(t, n, l) {
-                  let r = document.getElementById(n);
-                  (r.innerHTML = ""),
-                      t.split("").forEach((e, t) => {
-                          let n = document.createElement("span");
-                          (n.textContent = " " === e ? "\xa0" : e), n.classList.add(l), (n.style.animationDelay = `${0.1 * t}s`), r.appendChild(n);
-                      });
-              })(g.trim(), r, o)
-            : (document.getElementById(r).innerText = Math.abs(g.trim()));
-    } catch (p) {
-        console.error("Error fetching data:", p);
-    }
-}
-setTimeout(function() {
-    const ofcost = parseFloat(document.getElementById("ofcost").textContent);
-    const totalc = parseFloat(document.getElementById("total-cost").textContent);
-    let owcost = totalc - ofcost;
-
-    // Ensure owcost is not negative
-    owcost = Math.max(0, owcost);
-
-    document.getElementById("blcost").innerText = owcost;
-}, 2000);
-
-                function fetchData2() {
-                const tbl = 0;
-                if (isNaN(tbl)) {
-                    console.error('Invalid table number in local storage');
-                    return;
-                }
-
-                const url = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview';
-                fetch(url)
-                    .then(response => response.text())
-                    .then(data => {
-                        const parser = new DOMParser();
-                        const htmlDoc = parser.parseFromString(data, 'text/html');
-                        const tables = htmlDoc.querySelectorAll('table');
-
-                        if (tbl >= tables.length) {
-                            console.error('Table number exceeds available tables');
-                            
-                            return;
-                        }
-
-                        const cellElement = tables[tbl].rows[3].cells[4];
-                        const cellText = cellElement.innerText || cellElement.textContent;
-                        fetchedDataValue = parseFloat(cellText.trim());
-                        document.getElementById("ofcost").innerText = Math.abs(cellText.trim());
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            }
-            fetchData2();
-            n(t, 3, 4, "total-cost");
-            n(t, 3, 3, "total-receive");
-            n(t, 3, 2, "balance");
-        });
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/gviz/tq?gid=454571186';
-
-        let transactions = [];
-
-        fetch(sheetUrl)
-            .then(response => response.text())
-            .then(data => {
-                const jsonData = JSON.parse(data.substr(47).slice(0, -2));
-                const rows = jsonData.table.rows;
-                displayTransaction(rows);
-            })
-            .catch(error => console.error('Error fetching the Google Sheet data:', error));
-
-        function displayTransaction(rows) {
-            const container = document.getElementById('transaction-list');
-            transactions = [];
-
-            for (let i = rows.length - 1; i > 0; i--) {
-                const row = rows[i];
-                const rawDate = row.c[0]?.v || 'N/A';
-                const Description = row.c[1]?.v || 0;
-                const Reason = row.c[2]?.v || 'N/A';
-                const Amount = row.c[3]?.v || 0;
-                let formattedDate = rawDate;
-        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
-            formattedDate = parseGoogleDate(rawDate);
-        }
-                transactions.push({
-                    Description: Description,
-                    Reason: Reason,
-                    Amount: Amount,
-                    formattedDate: formattedDate,
-                    html: `
+     document.addEventListener("DOMContentLoaded",function(){async function t(t,e,n,a,r){try{var l,o,s;let i=await (await fetch("https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview")).text(),c=new DOMParser().parseFromString(i,"text/html").querySelectorAll("table");if(c.length<=t)throw Error(`Sheet index ${t} out of bounds`);let d=c[t].rows;if(d.length<=e)throw Error(`Row index ${e} out of bounds`);let h=d[e].cells;if(h.length<=n)throw Error(`Cell index ${n} out of bounds`);let g=h[n],f=g.innerText||g.textContent,m;r?(l=f.trim(),o=a,s=r,(m=document.getElementById(o)).innerHTML="",l.split("").forEach((t,e)=>{let n=document.createElement("span");n.textContent=" "===t?"\xa0":t,n.classList.add(s),n.style.animationDelay=`${.1*e}s`,m.appendChild(n)})):document.getElementById(a).innerText=Math.abs(f.trim())}catch(x){console.error("Error fetching data:",x)}}setTimeout(function(){let t=parseFloat(document.getElementById("ofcost").textContent),e=parseFloat(document.getElementById("total-cost").textContent),n=e-t;n=Math.max(0,n),document.getElementById("blcost").innerText=n},2e3),!function t(){if(isNaN(0)){console.error("Invalid table number in local storage");return}fetch("https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview").then(t=>t.text()).then(t=>{let e=new DOMParser,n=e.parseFromString(t,"text/html"),a=n.querySelectorAll("table");if(0>=a.length){console.error("Table number exceeds available tables");return}let r=a[0].rows[3].cells[4],l=r.innerText||r.textContent;fetchedDataValue=parseFloat(l.trim()),document.getElementById("ofcost").innerText=Math.abs(l.trim())}).catch(t=>console.error("Error fetching data:",t))}(),t(0,3,4,"total-cost"),t(0,3,3,"total-receive"),t(0,3,2,"balance")});const sheetUrl="https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/gviz/tq?gid=454571186";let transactions=[];function displayTransaction(t){let e=document.getElementById("transaction-list");transactions=[];for(let n=t.length-1;n>0;n--){let a=t[n],r=a.c[0]?.v||"N/A",l=a.c[1]?.v||0,o=a.c[2]?.v||"N/A",s=a.c[3]?.v||0,i=r;"string"==typeof r&&r.startsWith("Date")&&(i=parseGoogleDate(r)),transactions.push({Description:l,Reason:o,Amount:s,formattedDate:i,html:`
     <div class="transaction" style="display: flex; justify-content: space-between;">
         <div style="flex: 1; text-align: center;">
-            ${formattedDate}
+            ${i}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${Description}
+            ${l}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${Reason}
+            ${o}
         </div>
-        <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : 'debit'}">
-                ${Amount > 0 ? '+' : '-'} ৳${Math.abs(Amount).toFixed(2)}
+        <div style="flex: 1; text-align: center;" class="transaction-amount ${s>0?"credit":"debit"}">
+                ${s>0?"+":"-"} ৳${Math.abs(s).toFixed(2)}
             </div>
     </div>
-`
-                });
-
-                container.innerHTML += transactions[transactions.length - 1].html;
-            }
-        }
-
-        function filterTransactions() {
-            const searchValue = document.getElementById('search-input').value.toLowerCase();
-            const container = document.getElementById('transaction-list');
-            container.innerHTML = '';
-
-            transactions.forEach(transaction => {
-                const { Description, Reason, formattedDate, html } = transaction;
-                if (
-                    formattedDate.toString().includes(searchValue) ||
-                    Description.toLowerCase().includes(searchValue) ||
-                    Reason.toLowerCase().includes(searchValue)
-                ) {
-                    container.innerHTML += html;
-                }
-            });
-        }
-
-        function parseGoogleDate(dateString) {
-    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
-    const matches = dateString.match(regex);
-
-            if (matches) {
-        const year = matches[1];
-        const month = String(parseInt(matches[2]) + 1).padStart(2, '0'); // Adjust month and pad with zero
-        const day = String(matches[3]).padStart(2, '0'); // Pad day with zero
-        let hour = parseInt(matches[4]);
-        const minute = String(matches[5]).padStart(2, '0'); // Pad minute with zero
-        const second = String(matches[6]).padStart(2, '0'); // Pad second with zero
-
-        // Convert to 12-hour format
-        const ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour % 12;
-        hour = hour ? String(hour).padStart(2, '0') : '12';  // Pad hour with zero and handle midnight/noon
-
-        // Return date in MM/DD/YYYY HH:MM:SS AM/PM format
-        return `${month}/${day}/${year} ${hour}:${minute}:${second} ${ampm}`;
-    }
-
-    return 'Invalid Date';  // Fallback if parsing fails
-}
+`}),e.innerHTML+=transactions[transactions.length-1].html}}function filterTransactions(){let t=document.getElementById("search-input").value.toLowerCase(),e=document.getElementById("transaction-list");e.innerHTML="",transactions.forEach(n=>{let{Description:a,Reason:r,formattedDate:l,html:o}=n;(l.toString().includes(t)||a.toLowerCase().includes(t)||r.toLowerCase().includes(t))&&(e.innerHTML+=o)})}function parseGoogleDate(t){let e=t.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/);if(e){let n=e[1],a=String(parseInt(e[2])+1).padStart(2,"0"),r=String(e[3]).padStart(2,"0"),l=parseInt(e[4]),o=String(e[5]).padStart(2,"0"),s=String(e[6]).padStart(2,"0"),i=l>=12?"PM":"AM";return l%=12,`${a}/${r}/${n} ${l=l?String(l).padStart(2,"0"):"12"}:${o}:${s} ${i}`}return"Invalid Date"}fetch("https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/gviz/tq?gid=454571186").then(t=>t.text()).then(t=>{let e=JSON.parse(t.substr(47).slice(0,-2)),n=e.table.rows;displayTransaction(n)}).catch(t=>console.error("Error fetching the Google Sheet data:",t));   
     </script>
-    <script>const e = JSON.parse(localStorage.getItem("secureData"));
-          if (!e) {
-                window.location.href = "index.html";
-            }
-             document.getElementById("img").src = e.img;
-             const stt = e.state;
-             if(stt === "admin"){
-                document.getElementById("nn").style.display = "block";
-             } else if(stt === "mod"){
-                document.getElementById("nn").style.display = "none";
-             }else{
-                document.getElementById("nn").style.display = "none";
-                document.getElementById('shtl').style.display = 'none';
-             }
-             
-             document.getElementById("clearButton").addEventListener("click", function e() {
-            localStorage.removeItem("secureData");
-            localStorage.removeItem("userdata");
-            window.location.href = "index.html";
-        });
-         
-         
-         
-         
+    <script>const e=JSON.parse(localStorage.getItem("secureData"));e||(window.location.href="index.html"),document.getElementById("img").src=e.img;const stt=e.state;"admin"===stt?document.getElementById("nn").style.display="block":"mod"===stt?document.getElementById("nn").style.display="none":(document.getElementById("nn").style.display="none",document.getElementById("shtl").style.display="none"),document.getElementById("clearButton").addEventListener("click",function t(){localStorage.removeItem("secureData"),localStorage.removeItem("userdata"),window.location.href="index.html"});
          </script>
     <script>
         
-        setTimeout( function(){
-       // Get costs and calculate percentages
-const totalCost = parseInt(document.getElementById("total-cost").innerText);
-const totalReceive = parseInt(document.getElementById("total-receive").innerText); // Corrected
-const buildCost = parseInt(document.getElementById("blcost").innerText);
-const officeCost = parseInt(document.getElementById("ofcost").innerText);
-
-// Calculate build and office percentages
-const buildPercentage = (buildCost / totalCost) * 100;
-const officePercentage = (officeCost / totalCost) * 100;
-
-// Set width of progress bars
-document.getElementById("build-progress").style.width = buildPercentage + "%";
-document.getElementById("office-progress").style.width = officePercentage + "%";
-// Calculate percentage
-const percentage = (totalCost / totalReceive) * 100;
-document.getElementById("percentage-text").innerText = `${Math.round(percentage)}%`;
-
-// Calculate rotation and set it
-const rotationDegree = percentage * 3.6; // Convert percentage to degrees
-document.querySelector(".circular-progress").style.setProperty("--rotation", `${rotationDegree}deg`);
-
-            },3000);    </script>
+       setTimeout(function(){let e=parseInt(document.getElementById("total-cost").innerText),t=parseInt(document.getElementById("total-receive").innerText),n=parseInt(document.getElementById("blcost").innerText),r=parseInt(document.getElementById("ofcost").innerText);document.getElementById("build-progress").style.width=n/e*100+"%",document.getElementById("office-progress").style.width=r/e*100+"%";let l=e/t*100;document.getElementById("percentage-text").innerText=`${Math.round(l)}%`,document.querySelector(".circular-progress").style.setProperty("--rotation",`${3.6*l}deg`)},3e3);    </script>
 </body>
 </html>
