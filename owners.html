@@ -43,7 +43,11 @@
         body {
             background-color: #f8f9fa;
             padding: 20px;
-        }
+            transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -68,6 +72,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             border-radius: 20px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .top-bar .nav-items {
             display: flex;
@@ -136,9 +149,9 @@
         }
         .menu span {
             padding: 10px 20px;
-            background-color: #059b9b;
+            background-color: #2edddd;
             border-radius: 20px;
-            color: white;
+            color: black;
             font-weight: bold;
         }
         .transaction {
@@ -175,13 +188,13 @@
 
     <div class="top-bar">
         <div class="nav-items">
-            <a  href="home.html"><i class="fa-duotone fa-solid fa-table"></i> Dashboard</a>
-            <a style="color: #364fa1;font-weight: bold;font-size: large;" href="#"><i class="fa-duotone fa-solid fa-chart-simple-horizontal"></i> Owners</a>
-            <a href="office.html"><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
-            <a id="nn" href="new.html"><i class="fas fa-user-plus"></i> New Account</a>
+            <a class="backButton" href="home.html"><i class="fa-duotone fa-solid fa-table"></i> Dashboard</a>
+<a class="backButton" style="color: #364fa1;font-weight: bold;font-size: large;" href=""><i class="fa-duotone fa-solid fa-chart-simple-horizontal"></i> Owners</a>
+<a class="backButton" href="office.html"><i class="fa-duotone fa-solid fa-cube"></i> Office</a>
+<a class="backButton"id="nn" href="new.html"><i class="fas fa-user-plus"></i> New Account</a>
         </div>
         <div style="display: flex;flex-direction: row;gap: 10px;" class="logo">
-            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button style="border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" id="clearButton"><i class="fas fa-arrow-right"></i></button>
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="backButton"style="border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" id="clearButton"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 
@@ -210,30 +223,185 @@
         </div>
     </div>
     <script>
-   const e=JSON.parse(localStorage.getItem("secureData"));e||(window.location.href="index.html"),document.getElementById("img").src=e.img;const stt=e.state;"admin"===stt?document.getElementById("nn").style.display="block":"mod"===stt?document.getElementById("nn").style.display="none":(document.getElementById("nn").style.display="none",document.getElementById("shtl").style.display="none"),document.getElementById("clearButton").addEventListener("click",function t(){localStorage.removeItem("secureData"),localStorage.removeItem("userdata"),window.location.href="index.html"});      </script>
+        document.querySelectorAll('.backButton').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents immediate navigation
+        document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+        setTimeout(function() {
+            window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+        }, 300); // 200 ms delay
+    });
+});
+
+    const e = JSON.parse(localStorage.getItem("secureData"));
+        if (!e) {
+            window.location.href = "index.html";
+        }
+         document.getElementById("img").src = e.img;
+         const stt = e.state;
+         if(stt === "admin"){
+                document.getElementById("nn").style.display = "block";
+             } else if(stt === "mod"){
+                document.getElementById("nn").style.display = "none";
+             }else{
+                document.getElementById("nn").style.display = "none";
+                document.getElementById('shtl').style.display = 'none';
+             }
+         
+         document.getElementById("clearButton").addEventListener("click", function e() {
+        localStorage.removeItem("secureData");
+        localStorage.removeItem("userdata");
+        window.location.href = "index.html";
+    });
+         
+         
+         
+         
+         </script>
     <script>
-   const sheetUrl="https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?gid=138275939";let transactions=[];function displayTransaction(t){let e=document.getElementById("transaction-list");transactions=[];for(let s=t.length-1;s>=0;s--){let a=t[s],n=a.c[0]?.v||"N/A",i=a.c[1]?.v||"N/A",l=a.c[2]?.v||0,r=a.c[3]?.v||"N/A",o=a.c[5]?.v||"N/A",c=a.c[6]?.v||"N/A",d=a.c[7]?.v||"N/A",v=a.c[8]?.v||"N/A",g=a.c[9]?.v||"N/A",u=a.c[10]?.v||0,f=a.c[11]?.v||"N/A",h=a.c[4]?.v||"N/A",y=n;"string"==typeof n&&n.startsWith("Date")&&(y=parseGoogleDate(n));let p=`viewbtn-${s}`;transactions.push({Name:i,Land:l,phone:r,status:o,formattedDate:y,html:`
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?gid=138275939';
+
+let transactions = [];
+
+fetch(sheetUrl)
+    .then(response => response.text())
+    .then(data => {
+        const jsonData = JSON.parse(data.substr(47).slice(0, -2));
+        const rows = jsonData.table.rows;
+        displayTransaction(rows);
+    })
+    .catch(error => console.error('Error fetching the Google Sheet data:', error));
+
+function displayTransaction(rows) {
+    const container = document.getElementById('transaction-list');
+    transactions = [];
+
+    for (let i = rows.length - 1; i >= 0; i--) {
+        const row = rows[i];
+        const rawDate = row.c[0]?.v || 'N/A';
+        const Name = row.c[1]?.v || 'N/A';
+        const Land = row.c[2]?.v || 0;
+        const phone = row.c[3]?.v || 'N/A';
+        const Status = row.c[5]?.v || 'N/A';  
+        const Surl = row.c[6]?.v || 'N/A';
+        const Gid = row.c[7]?.v || 'N/A';
+        const Furl = row.c[8]?.v || 'N/A';  
+        const sdentry = row.c[9]?.v || 'N/A';
+        const srentry = row.c[10]?.v || 0;  
+        const saentry = row.c[11]?.v || 'N/A';
+        const Mail = row.c[4]?.v || 'N/A';
+
+        let formattedDate = rawDate;
+        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
+            formattedDate = parseGoogleDate(rawDate);
+        }
+
+        const uniqueId = `viewbtn-${i}`;
+        transactions.push({
+            Name: Name,
+            Land: Land,
+            phone: phone,
+            status: Status,
+            formattedDate: formattedDate,
+            html: `
 <div class="transaction" style="display: flex; justify-content: space-between;">
     <div style="flex: 1; text-align: center;">
-        ${i}
+        ${Name}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${l}
+        ${Land}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${r}
+        ${phone}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${getStatusIcon(o)} ${o}
+        ${getStatusIcon(Status)} ${Status}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${y}
+        ${formattedDate}
     </div>
     <div style="flex: 1; text-align: center;">
-        <button class="redirect-btn" id="${p}">View</button>
+        <button class="redirect-btn" id="${uniqueId}">View</button>
     </div>
 </div>
-`}),e.innerHTML+=transactions[transactions.length-1].html,setTimeout(()=>{document.getElementById(p).addEventListener("click",t=>{t.preventDefault(),localStorage.removeItem("userdata");let e={name:i,phone:r,land:l,mail:h,sheetid:c,gid:d,furl:v,sdentry:g,srentry:u,saentry:f,state:o};localStorage.setItem("userdata",JSON.stringify(e)),setTimeout(()=>{window.location.href="ownerid.html"},400)})},400)}}function filterTransactions(){let t=document.getElementById("search-input").value.toLowerCase(),e=document.getElementById("transaction-list");e.innerHTML="",transactions.forEach(s=>{let{Name:a,Land:n,phone:i,status:l,formattedDate:r,html:o}=s;(a.toLowerCase().includes(t)||r.toLowerCase().includes(t)||n.toString().toLowerCase().includes(t)||l.toLowerCase().includes(t)||i.toString().includes(t))&&(e.innerHTML+=o)})}function parseGoogleDate(t){let e=t.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/);if(e){let s=e[1],a=String(parseInt(e[2])+1).padStart(2,"0"),n=String(e[3]).padStart(2,"0");return`${a}/${n}/${s}`}return"Invalid Date"}function getStatusIcon(t){switch(t.toLowerCase()){case"waiting":return'<i class="fa-solid fa-clock" style="color:orange;"></i>';case"working":return'<i class="fa-solid fa-bars-progress" style="color:blue;"></i>';case"end":return'<i class="fa-solid fa-box-check" style="color:green;"></i>';default:return'<i class="fa-solid fa-cloud-question" style="color:gray;"></i>'}}fetch("https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?gid=138275939").then(t=>t.text()).then(t=>{let e=JSON.parse(t.substr(47).slice(0,-2)),s=e.table.rows;displayTransaction(s)}).catch(t=>console.error("Error fetching the Google Sheet data:",t));
+`
+        });
+
+        container.innerHTML += transactions[transactions.length - 1].html;
+
+        setTimeout(() => {
+            document.getElementById(uniqueId).addEventListener('click', (event) => {
+                event.preventDefault();
+                localStorage.removeItem("userdata");
+                const userdata = {
+                    name: Name,
+                    phone: phone,
+                    land: Land,
+                    mail: Mail,
+                    sheetid: Surl,
+                    gid: Gid,
+                    furl: Furl,
+                    sdentry: sdentry,
+                    srentry: srentry,
+                    saentry: saentry,
+                    state: Status
+                };
+                localStorage.setItem('userdata', JSON.stringify(userdata));
+
+                setTimeout(() => { window.location.href = 'ownerid.html'; }, 300);      
+            });
+        }, 300);
+    }
+}
+
+function filterTransactions() {
+    const searchValue = document.getElementById('search-input').value.toLowerCase();
+    const container = document.getElementById('transaction-list');
+    container.innerHTML = '';
+
+    transactions.forEach(transaction => {
+        const { Name, Land, phone, status, formattedDate, html } = transaction;
+        if (
+            Name.toLowerCase().includes(searchValue) ||
+            formattedDate.toLowerCase().includes(searchValue) ||
+            Land.toString().toLowerCase().includes(searchValue) ||
+            status.toLowerCase().includes(searchValue) ||
+            phone.toString().includes(searchValue)
+        ) {
+            container.innerHTML += html;
+        }
+    });
+}
+
+function parseGoogleDate(dateString) {
+    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+    const matches = dateString.match(regex);
+
+    if (matches) {
+        const year = matches[1];
+        const month = String(parseInt(matches[2]) + 1).padStart(2, '0');
+        const day = String(matches[3]).padStart(2, '0');
+        return `${day}/${month}/${year}`;
+    }
+
+    return 'Invalid Date';
+}
+
+function getStatusIcon(status) {
+    switch (status.toLowerCase()) {
+        case 'waiting':
+            return '<i class="fa-solid fa-clock" style="color:orange;"></i>';
+        case 'working':
+            return '<i class="fa-solid fa-bars-progress" style="color:blue;"></i>';
+            case 'end':
+            return '<i class="fa-solid fa-box-check" style="color:green;"></i>';
+            case 'engineer':
+            return '<i class="fa-solid fa-user-tie" style="color:blue;"></i>';
+        default:
+            return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';
+    }
+}
     </script>
 </body>
 </html>
