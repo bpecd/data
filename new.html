@@ -59,16 +59,7 @@
     font-family: 'Poppins', sans-serif;
 
 }
-.claim-button1 {
-            background-color: #f8f0fc;
-            color: black;
-            border: none;
-            border-radius: 25px;
-            font-size: 28px;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-        }
+
 
 
 body{
@@ -82,9 +73,22 @@ body{
     height: 100vh;
 
     background: var(--primary-color);
-
+    transition: transform 0.5s ease-in-out;
 }
-
+body.move-down {
+    transform: translateY(5vh);
+}
+.claim-button1 {
+            background-color: #f8f0fc;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
 
 
 .registration-container{
@@ -477,8 +481,7 @@ body{
 
   </style>
 </head>
-<body>
-     <button class="claim-button1" onclick="window.history.back()"><i class="fas fa-circle-arrow-left"></i></button>
+<body> <button class="claim-button1" id="backButton"><i class="fas fa-circle-arrow-left"></i></button>
     <div class="registration-container">
         <div class="container">
             <h3>Tap On create Link then open!</h3>
@@ -563,17 +566,166 @@ body{
         </div>
     </div>
     <script>
-       function createFormAndSheet(){fetch("https://script.google.com/macros/s/AKfycbwA3hlkD8zIxvhunqXxp5ghqvrbqnhDG-GkSR-SWMIyCBPx0R0vle-GXoB5Y5ur4Vcd/exec").then(e=>e.json()).then(e=>displayResult(e)).catch(e=>console.error("Error:",e))}function displayResult(e){let r=document.getElementById("result"),t=e.sheetUrl.replace(/\/edit$/,"/viewform?usp=sf_link");r.innerHTML=`
-    <p><strong>Form URL:</strong> <a href="${e.formUrl}" target="_blank">${e.formUrl}</a></p>
-    <p><strong>Sheet URL:</strong> <a href="${t}" target="_blank">${t}</a></p>
-  `}
+        document.getElementById('backButton').addEventListener('click', function() {
+    // Add class to move the body down
+    document.body.classList.add('move-down');
+    
+    // Wait for the animation to complete (1 second), then go back
+    setTimeout(function() {
+        window.history.back();
+    }, 400);  // Match this duration with the CSS transition time
+});
+        function createFormAndSheet() {
+          fetch("https://script.google.com/macros/s/AKfycbwA3hlkD8zIxvhunqXxp5ghqvrbqnhDG-GkSR-SWMIyCBPx0R0vle-GXoB5Y5ur4Vcd/exec")
+            .then(response => response.json())
+            .then(data => displayResult(data))
+            .catch(error => console.error("Error:", error));
+        }
+    
+        function displayResult(result) {
+          const resultDiv = document.getElementById("result");
+          resultDiv.innerHTML = `
+            <p><strong>Form URL:</strong> <a href="${result.formUrl}" target="_blank">${result.formUrl}</a></p>
+            <p><strong>Sheet URL:</strong> <a href="${result.sheetUrl}" target="_blank">${result.sheetUrl}</a></p>
+          `;
+        }
       </script>
-    <script>const pass = localStorage.getItem('phoneNumber');
-    if(!pass){
-        window.location.href = 'verify.html';
-    }</script>
     <script>
-    document.getElementById("calculate").addEventListener("click",async function(e){e.preventDefault(),document.getElementById("calculate").style.display="none";let t=document.getElementById("formid").value,n=`https://script.google.com/macros/s/AKfycbwLHHfv5S_Y68QHP64_Xe5tp5s7XfVRuaKhppNb2bxqSLdOyKQwU24KvMHZ_wV42-qicg/exec?formId=${t}`;try{let l=await fetch(n);if(l.ok){let d=await l.json(),a=d[1][1][0][4][0][0],o=d[1][1][1][4][0][0],r=d[1][1][2][4][0][0];document.getElementById("sd").value=a||"Description not found",document.getElementById("sr").value=o||"Reason not found",document.getElementById("sa").value=r||"Amount not found"}else document.getElementById("result").textContent="Failed to fetch form data!"}catch(y){document.getElementById("result").textContent="Error fetching form data!"}}),document.getElementById("calculate2").addEventListener("click",async function(e){e.preventDefault(),document.getElementById("calculate2").style.display="none",document.getElementById("calculate").style.display="block";let t=document.getElementById("sheeturl").value,n=document.getElementById("formurl").value,l=t.match(/\/d\/([a-zA-Z0-9_-]+)/),d=t.match(/gid=([0-9]+)/),a=l?l[1]:"Not found",o=d?d[1]:"Not found";document.getElementById("sheetid").value=a,document.getElementById("sheetgid").value=o;let r=n.match(/\/e\/([a-zA-Z0-9_-]+)/),y=r?r[1]:"Not found";document.getElementById("formid").value=y,document.getElementById("sheeturl").style.display="none",document.getElementById("formurl").style.display="none"}),document.getElementById("regi").addEventListener("submit",function(e){e.preventDefault(),document.getElementById("btn-register").style.opacity="0.5",document.getElementById("btn-register").innerText="Working...";let t=document.getElementById("name").value,n=document.getElementById("land").value,l=document.getElementById("phone").value,d=document.getElementById("email").value,a=document.getElementById("sheetid").value,o=document.getElementById("sheetgid").value,r=document.getElementById("formid").value,y=document.getElementById("sd").value,m=document.getElementById("sr").value,s=document.getElementById("sa").value,p=document.getElementById("ind").value,g="Installment - "+p,u=document.getElementById("wdt").value,i=`https://docs.google.com/forms/d/e/${r}/formResponse`,c=new FormData;c.append(`entry.${y}`,"=SUM(D3:D100,0)"),c.append(`entry.${m}`,'=SUMIF(D3:D100,">0")'),c.append(`entry.${s}`,'=SUMIF(D3:D100,"<0")');let E=new FormData;E.append("entry.890999944",t),E.append("entry.696253293",n),E.append("entry.1220953509",l),E.append("entry.315450195",d),E.append("entry.1604063136","Waiting"),E.append("entry.189558853",a),E.append("entry.2104162461",o),E.append("entry.2031665051",r),E.append("entry.1199415050",y),E.append("entry.828373213",m),E.append("entry.1358821049",s);let I=new FormData;I.append("entry.458544774","1st Installment"),I.append("entry.2032103830",p),I.append("entry.2111696735",`Receive from ${t}`),Promise.all([fetch(i,{method:"POST",body:c,mode:"no-cors"}),fetch("https://docs.google.com/forms/d/e/1FAIpQLSf18yByJRUU7yPuJ2qxwQIxtaBVyzZRp3xXM3KA0Vvu3Z2Hig/formResponse",{method:"POST",body:E,mode:"no-cors"}),fetch("https://docs.google.com/forms/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",{method:"POST",body:I,mode:"no-cors"})]).then(()=>{setTimeout(()=>{let e=new FormData;e.append(`entry.${y}`,"New Contact"),e.append(`entry.${m}`,u),e.append(`entry.${s}`,g),fetch(i,{method:"POST",body:e,mode:"no-cors"}).then(()=>{document.getElementById("btn-register").style.display="none",document.getElementById("result2").innerText="Registration successful"}).catch(e=>{document.getElementById("result2").innerText="Error: "+e,console.error("Error submitting form:",e)})},1e3)}).catch(e=>{document.getElementById("result2").innerText="Error: "+e,console.error("Error submitting form:",e)})});
+document.getElementById('calculate').addEventListener('click', async function(event) {
+    event.preventDefault();
+    document.getElementById("calculate").style.display = 'none';
+    const formId = document.getElementById('formid').value;
+    const scriptUrl = `https://script.google.com/macros/s/AKfycbwLHHfv5S_Y68QHP64_Xe5tp5s7XfVRuaKhppNb2bxqSLdOyKQwU24KvMHZ_wV42-qicg/exec?formId=${formId}`; // Replace YOUR_SCRIPT_ID
+
+    try {
+        const response = await fetch(scriptUrl);
+
+        if (response.ok) {
+            const fbData = await response.json();
+
+            // Extract data from `fbData` (adjust based on form structure)
+            const descriptionNumber = fbData[1][1][0][4][0][0]; // Description value
+            const reasonNumber = fbData[1][1][1][4][0][0];      // Reason value
+            const amountNumber = fbData[1][1][2][4][0][0];      // Amount value
+
+            // Populate input fields with extracted values
+            document.getElementById("sd").value = descriptionNumber || "Description not found";
+            document.getElementById("sr").value = reasonNumber || "Reason not found";
+            document.getElementById("sa").value = amountNumber || "Amount not found";
+        } else {
+            document.getElementById("result").textContent = 'Failed to fetch form data!';
+        }
+    } catch (error) {
+        document.getElementById("result").textContent = 'Error fetching form data!';
+    }
+});
+
+document.getElementById('calculate2').addEventListener('click', async function(e) {
+    e.preventDefault();
+    document.getElementById("calculate2").style.display = 'none';
+    document.getElementById("calculate").style.display = 'block';
+
+    const sheetUrl = document.getElementById('sheeturl').value;
+    const formUrl = document.getElementById('formurl').value;
+
+    const idRegexSheet = /\/d\/([a-zA-Z0-9_-]+)/;
+    const gidRegex = /gid=([0-9]+)/;
+    const sheetIdMatch = sheetUrl.match(idRegexSheet);
+    const gidMatch = sheetUrl.match(gidRegex);
+
+    const sheetId = sheetIdMatch ? sheetIdMatch[1] : "Not found";
+    const sheetGid = gidMatch ? gidMatch[1] : "Not found";
+
+    document.getElementById('sheetid').value = sheetId;
+    document.getElementById('sheetgid').value = sheetGid;
+
+    const idRegexForm = /\/e\/([a-zA-Z0-9_-]+)/;
+    const formIdMatch = formUrl.match(idRegexForm);
+    const formId = formIdMatch ? formIdMatch[1] : "Not found";
+    document.getElementById('formid').value = formId;
+    document.getElementById('sheeturl').style.display ='none';
+    document.getElementById('formurl').style.display = 'none';
+});
+
+document.getElementById('regi').addEventListener('submit', function(e) {
+    e.preventDefault();   
+    document.getElementById('btn-register').style.opacity = '0.5';
+    document.getElementById('btn-register').innerText = 'Working...';
+
+    const name = document.getElementById('name').value;
+    const land = document.getElementById('land').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const state = "Waiting";
+    const sheetId = document.getElementById('sheetid').value;
+    const sheetGid = document.getElementById('sheetgid').value;
+    const formId = document.getElementById('formid').value;
+    const sd = document.getElementById('sd').value;
+    const sr = document.getElementById('sr').value;
+    const sa = document.getElementById('sa').value;
+    const ind = document.getElementById('ind').value;
+    const ind2 = "Installment - " + ind;
+    const wdt = document.getElementById('wdt').value;
+
+    const ts = '=SUM(D3:D100,0)';
+    const rst = '=SUMIF(D3:D100,">0")';
+    const cst = '=SUMIF(D3:D100,"<0")';
+
+    const formUrl1 = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+    const formUrl2 = 'https://docs.google.com/forms/d/e/1FAIpQLSf18yByJRUU7yPuJ2qxwQIxtaBVyzZRp3xXM3KA0Vvu3Z2Hig/formResponse';
+    const formUrl3 = 'https://docs.google.com/forms/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse';
+
+    const formData2 = new FormData();
+    formData2.append(`entry.${sd}`, ts);
+    formData2.append(`entry.${sr}`, rst);
+    formData2.append(`entry.${sa}`, cst);
+
+    const formData1 = new FormData();
+    formData1.append('entry.890999944', name);
+    formData1.append('entry.696253293', land);
+    formData1.append('entry.1220953509', phone);
+    formData1.append('entry.315450195', email);
+    formData1.append('entry.1604063136', state);
+    formData1.append('entry.189558853', sheetId);
+    formData1.append('entry.2104162461', sheetGid);
+    formData1.append('entry.2031665051', formId);
+    formData1.append('entry.1199415050', sd);
+    formData1.append('entry.828373213', sr);
+    formData1.append('entry.1358821049', sa);
+
+    const formData4 = new FormData();
+    formData4.append(`entry.458544774`, "1st Installment");
+    formData4.append(`entry.2032103830`, ind);
+    formData4.append(`entry.2111696735`, `Receive from ${name}`);
+
+    Promise.all([
+        fetch(formUrl1, { method: 'POST', body: formData2, mode: 'no-cors' }),
+        fetch(formUrl2, { method: 'POST', body: formData1, mode: 'no-cors' }),
+        fetch(formUrl3, { method: 'POST', body: formData4, mode: 'no-cors' })
+    ])
+    .then(() => {
+        setTimeout(() => {
+            const formData3 = new FormData();
+            formData3.append(`entry.${sd}`, "New Contact");
+            formData3.append(`entry.${sr}`, wdt);
+            formData3.append(`entry.${sa}`, ind2);
+            
+            fetch(formUrl1, { method: 'POST', body: formData3, mode: 'no-cors' })
+            .then(() => {
+                document.getElementById('btn-register').style.display = 'none';
+                document.getElementById('result2').innerText = 'Registration successful';
+            })
+            .catch(error => {
+                document.getElementById('result2').innerText = 'Error: ' + error;
+                console.error('Error submitting form:', error);
+            });
+        }, 1000);
+    })
+    .catch(error => {
+        document.getElementById('result2').innerText = 'Error: ' + error;
+        console.error('Error submitting form:', error);
+    });
+});
     </script>
 </body>
   </html>
