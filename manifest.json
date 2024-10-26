@@ -1,7 +1,7 @@
 {
   "name": "Building Plan",
   "short_name": "BPEC&D ERP",
-  "start_url": "index.html",
+  "start_url": "/data/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#f0f2f5",
