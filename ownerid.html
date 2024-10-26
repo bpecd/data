@@ -393,7 +393,7 @@ body.move-down {
              src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
      </script>
         <script>
-            emailjs.init({ publicKey: "2YgGWzyn6XD7EcrL_" });
+            emailjs.init({ publicKey: "V33OVjXvWiuEWy-VD" });
             document.addEventListener("DOMContentLoaded", function() {
                 const userdata = JSON.parse(localStorage.getItem('userdata'));
                 if(!userdata){
@@ -723,7 +723,7 @@ recbtn.addEventListener('click', function(e){
                     const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
                     const email = userdata.mail;
     
-                    emailjs.send("service_hqdocea", "template_o0i8snf", {
+                    emailjs.send("service_7albdgs", "template_4oyl6vc", {
                         to_email: email,
                         name: name,
                         paid: paid,
