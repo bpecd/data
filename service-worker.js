@@ -1,7 +1,7 @@
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('app').then((cache) => {
-      return cache.addAll([ 'index.css', 'verify.html', 'office.html', 'home.html','logo.jpg']);
+      return cache.addAll([ 'index.html','index.css', 'verify.html', 'office.html', 'home.html','logo.jpg']);
     })
   );
 });
