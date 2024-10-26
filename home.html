@@ -153,20 +153,10 @@ body.move-down {
     align-content: center;
     margin: 20px;
     max-width: 70%;
-    width: 0; /* Start from 0 width */
+    width: 0; /* Initial width */
     height: 20px;
-    background-color: #4caf50; /* Progress bar color */
-    transition: width 5s ease-in-out; /* Slow transition */
-    animation: fillWidth 5s forwards; /* Trigger the fill animation */
-}
-
-@keyframes fillWidth {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%; /* Fill to full width */
-    }
+    background-color: #4caf50; /* Color of the progress bar */
+    transition: width 3s ease; /* Smooth transition over 3 seconds */
 }
 
         .progress-container {
