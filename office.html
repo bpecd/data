@@ -299,269 +299,27 @@
                 <!-- Transactions will be dynamically inserted here -->
             </div>
         </div>
-        <script>const e = JSON.parse(localStorage.getItem("secureData"));
-            if (!e) {
-                window.location.href = "index.html";
-            }
-             document.getElementById("img").src = e.img;
-             const stt = e.state;
-             if(stt === "admin"){
-                document.getElementById("nn").style.display = "";
-             } else if(stt === "mod"){
-             document.getElementById("adcost").style.display = "none";
-                document.getElementById("nn").style.display = "none";
-             }else{
-                document.getElementById("adcost").style.display = "none";
-                document.getElementById("nn").style.display = "none";
-                document.getElementById('shtl').style.display = 'none';
-             }
-             document.getElementById("username").innerText = e.name;
-             document.getElementById("phonenumber").innerText = e.cvv;
-             document.getElementById("clearButton").addEventListener("click", function e() {
-            localStorage.removeItem("secureData");
-            localStorage.removeItem("userdata");
-            window.location.href = "index.html";
-        });
-             
-             
-             
+        <script>
+             const e=JSON.parse(localStorage.getItem("secureData"));e||(window.location.href="index.html"),document.getElementById("img").src=e.img;const stt=e.state;"admin"===stt?document.getElementById("nn").style.display="":"mod"===stt?(document.getElementById("adcost").style.display="none",document.getElementById("nn").style.display="none"):(document.getElementById("adcost").style.display="none",document.getElementById("nn").style.display="none",document.getElementById("shtl").style.display="none"),document.getElementById("username").innerText=e.name,document.getElementById("phonenumber").innerText=e.cvv,document.getElementById("clearButton").addEventListener("click",function t(){localStorage.removeItem("secureData"),localStorage.removeItem("userdata"),window.location.href="index.html"});
              
              </script>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const burl = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview';
-                let t = 0;
-
-async function n(t, n, l, r, o) {
-    try {
-        let a = await fetch(burl),
-            i = await a.text(),
-            s = new DOMParser(),
-            c = s.parseFromString(i, "text/html"),
-            d = c.querySelectorAll("table");
-        if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
-        let m = d[t].rows;
-        if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
-        let u = m[n].cells;
-        if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
-        let h = u[l],
-            g = h.innerText || h.textContent;
-        o
-            ? (function e(t, n, l) {
-                  let r = document.getElementById(n);
-                  (r.innerHTML = ""),
-                      t.split("").forEach((e, t) => {
-                          let n = document.createElement("span");
-                          (n.textContent = " " === e ? "\xa0" : e), n.classList.add(l), (n.style.animationDelay = `${0.1 * t}s`), r.appendChild(n);
-                      });
-              })(g.trim(), r, o)
-            : (document.getElementById(r).innerText = Math.abs(g.trim()));
-    } catch (p) {
-        console.error("Error fetching data:", p);
-    }
-}
- function fetchData1() {
-                const secureData = JSON.parse(localStorage.getItem('secureData'));
-                const tbl = 0;
-                if (isNaN(tbl)) {
-                    console.error('Invalid table number in local storage');
-                    return;
-                }
-
-                const url = 'https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview';
-                fetch(url)
-                    .then(response => response.text())
-                    .then(data => {
-                        const parser = new DOMParser();
-                        const htmlDoc = parser.parseFromString(data, 'text/html');
-                        const tables = htmlDoc.querySelectorAll('table');
-
-                        if (tbl >= tables.length) {
-                            console.error('Table number exceeds available tables');
-                            
-                            return;
-                        }
-
-                        const cellElement = tables[tbl].rows[3].cells[2];
-                        const cellText = cellElement.innerText || cellElement.textContent;
-                        fetchedDataValue = parseFloat(cellText.trim());
-                        document.getElementById("balance").innerText = Math.abs(cellText.trim());
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            }fetchData1();
-            n(t, 3, 4, "total-cost");
-        });
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/gviz/tq?gid=1886029600';
-
-        let transactions = [];
-
-        fetch(sheetUrl)
-            .then(response => response.text())
-            .then(data => {
-                const jsonData = JSON.parse(data.substr(47).slice(0, -2));
-                const rows = jsonData.table.rows;
-                displayTransaction(rows);
-            })
-            .catch(error => console.error('Error fetching the Google Sheet data:', error));
-
-        function displayTransaction(rows) {
-            const container = document.getElementById('transaction-list');
-            transactions = [];
-
-            for (let i = rows.length - 1; i > 0; i--) {
-                const row = rows[i];
-                const rawDate = row.c[0]?.v || 'N/A';
-                const Description = row.c[1]?.v || 0;
-                const Reason = row.c[2]?.v || 'N/A';
-                const Amount = row.c[3]?.v || 0;
-                let formattedDate = rawDate;
-        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
-            formattedDate = parseGoogleDate(rawDate);
-        }
-                transactions.push({
-                    Description: Description,
-                    Reason: Reason,
-                    Amount: Amount,
-                    formattedDate: formattedDate,
-                    html: `
+            document.addEventListener("DOMContentLoaded",function(){async function t(t,e,n,o,s){try{var r,a,l;let i=await (await fetch("https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/htmlview")).text(),c=new DOMParser().parseFromString(i,"text/html").querySelectorAll("table");if(c.length<=t)throw Error(`Sheet index ${t} out of bounds`);let d=c[t].rows;if(d.length<=e)throw Error(`Row index ${e} out of bounds`);let p=d[e].cells;if(p.length<=n)throw Error(`Cell index ${n} out of bounds`);let y=p[n],u=y.innerText||y.textContent,h;s?(r=u.trim(),a=o,l=s,(h=document.getElementById(a)).innerHTML="",r.split("").forEach((t,e)=>{let n=document.createElement("span");n.textContent=" "===t?"\xa0":t,n.classList.add(l),n.style.animationDelay=`${.1*e}s`,h.appendChild(n)})):document.getElementById(o).innerText=Math.abs(u.trim())}catch(g){console.error("Error fetching data:",g)}}!function t(){if(JSON.parse(localStorage.getItem("secureData")),isNaN(0)){console.error("Invalid table number in local storage");return}fetch("https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/htmlview").then(t=>t.text()).then(t=>{let e=new DOMParser,n=e.parseFromString(t,"text/html"),o=n.querySelectorAll("table");if(0>=o.length){console.error("Table number exceeds available tables");return}let s=o[0].rows[3].cells[2],r=s.innerText||s.textContent;fetchedDataValue=parseFloat(r.trim()),document.getElementById("balance").innerText=Math.abs(r.trim())}).catch(t=>console.error("Error fetching data:",t))}(),t(0,3,4,"total-cost")});const sheetUrl="https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/gviz/tq?gid=1886029600";let transactions=[];function displayTransaction(t){let e=document.getElementById("transaction-list");transactions=[];for(let n=t.length-1;n>0;n--){let o=t[n],s=o.c[0]?.v||"N/A",r=o.c[1]?.v||0,a=o.c[2]?.v||"N/A",l=o.c[3]?.v||0,i=s;"string"==typeof s&&s.startsWith("Date")&&(i=parseGoogleDate(s)),transactions.push({Description:r,Reason:a,Amount:l,formattedDate:i,html:`
     <div class="transaction" style="display: flex; justify-content: space-between;">
         <div style="flex: 1; text-align: center;">
-            ${formattedDate}
+            ${i}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${Description}
+            ${r}
         </div>
         <div style="flex: 1; text-align: center;">
-            ${Reason}
+            ${a}
         </div>
-        <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : 'debit'}">
-                ${Amount > 0 ? '+' : '-'} ৳${Math.abs(Amount).toFixed(2)}
+        <div style="flex: 1; text-align: center;" class="transaction-amount ${l>0?"credit":"debit"}">
+                ${l>0?"+":"-"} ৳${Math.abs(l).toFixed(2)}
             </div>
     </div>
-`
-                });
-
-                container.innerHTML += transactions[transactions.length - 1].html;
-            }
-        }
-
-        function filterTransactions() {
-            const searchValue = document.getElementById('search-input').value.toLowerCase();
-            const container = document.getElementById('transaction-list');
-            container.innerHTML = '';
-
-            transactions.forEach(transaction => {
-                const { Description, Reason, formattedDate, html } = transaction;
-                if (
-                    formattedDate.toString().includes(searchValue) ||
-                    Description.toLowerCase().includes(searchValue) ||
-                    Reason.toLowerCase().includes(searchValue)
-                ) {
-                    container.innerHTML += html;
-                }
-            });
-        }
-
-        function parseGoogleDate(dateString) {
-    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
-    const matches = dateString.match(regex);
-
-            if (matches) {
-        const year = matches[1];
-        const month = String(parseInt(matches[2]) + 1).padStart(2, '0'); // Adjust month and pad with zero
-        const day = String(matches[3]).padStart(2, '0'); // Pad day with zero
-        let hour = parseInt(matches[4]);
-        const minute = String(matches[5]).padStart(2, '0'); // Pad minute with zero
-        const second = String(matches[6]).padStart(2, '0'); // Pad second with zero
-
-        // Convert to 12-hour format
-        const ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour % 12;
-        hour = hour ? String(hour).padStart(2, '0') : '12';  // Pad hour with zero and handle midnight/noon
-
-        // Return date in MM/DD/YYYY HH:MM:SS AM/PM format
-        return `${month}/${day}/${year} ${hour}:${minute}:${second} ${ampm}`;
-    }
-
-    return 'Invalid Date';  // Fallback if parsing fails
-}
-            const showbtn = document.getElementById("adcost");
-            const btns = document.getElementById("buttons");
-            showbtn.addEventListener('click', function(e) {
-                btns.style.display = 'block';
-                showbtn.style.display = 'none';
-            });
-            const costbtn = document.getElementById("cost");
-costbtn.addEventListener('click', function(e) {
-    let audioPlayed = false;
-const audioElement2 = new Audio('ting.mp3');
-
-// Preload the audio
-audioElement2.preload = 'auto';
-audioElement2.load();
-    costbtn.style.display = 'block';
-    costbtn.style.opacity = '0.5';
-    costbtn.innerText = 'wait....';
-    costbtn.disabled = true;
-    const amount = parseFloat(document.getElementById('amount').value);
-    const msg2 = "Cost";
-    const description = "Office Cost";
-    const rmsg2 = document.getElementById('reason').value;
-    const reason = rmsg2;
-
-    if (amount >= 5) {
-        let googleFormsData = [
-            {
-                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwn_TRFC_uj8yuD7r9FyT4kwN9-353YvLRgGqCtF4dV-apvw/formResponse",
-                entries: {
-                    reason: "entry.741005997",
-                    amount: "entry.1531813260",
-                    description: "entry.1180482190"
-                }
-            },
-            {
-                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
-                entries: {
-                    reason: "entry.458544774",
-                    amount: "entry.2032103830",
-                    description: "entry.2111696735"
-                }
-            }
-        ];
-
-        googleFormsData.forEach((form) => {
-            const formData = new FormData();
-            formData.append(form.entries.amount, form === googleFormsData[0] ? `-${amount}` : `-${amount}`);
-            formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, form === googleFormsData[0] ? rmsg2 : reason);
-
-            fetch(form.url, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: new URLSearchParams(formData)
-            })
-            .then(response => {
-                document.getElementById('result').innerText = `Transaction Complete`;
-                if (!audioPlayed) {
-            audioElement2.play().catch(error => {
-                console.error('Audio playback failed:', error);
-            });
-            audioPlayed = true;
-        }  
-                costbtn.style.display = 'none';
-                setTimeout(() => {
-                    location.reload();
-                }, 1500);
-            })
-            .catch(error => {
-                document.getElementById('result').innerText = `Failure in Transaction`;
-                costbtn.style.display = 'block';
-            });
-        });
-    } else {
-        document.getElementById('result').innerText = `Error Please Contact App Admin`;
-    }
-});
+`}),e.innerHTML+=transactions[transactions.length-1].html}}function filterTransactions(){let t=document.getElementById("search-input").value.toLowerCase(),e=document.getElementById("transaction-list");e.innerHTML="",transactions.forEach(n=>{let{Description:o,Reason:s,formattedDate:r,html:a}=n;(r.toString().includes(t)||o.toLowerCase().includes(t)||s.toLowerCase().includes(t))&&(e.innerHTML+=a)})}function parseGoogleDate(t){let e=t.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/);if(e){let n=e[1],o=String(parseInt(e[2])+1).padStart(2,"0"),s=String(e[3]).padStart(2,"0"),r=parseInt(e[4]),a=String(e[5]).padStart(2,"0"),l=String(e[6]).padStart(2,"0"),i=r>=12?"PM":"AM";return r%=12,`${o}/${s}/${n} ${r=r?String(r).padStart(2,"0"):"12"}:${a}:${l} ${i}`}return"Invalid Date"}fetch("https://docs.google.com/spreadsheets/d/1LPv7bORNSyoSM6Kyu7v-7r19HJTiLtI0DKcJ99Xwwr8/gviz/tq?gid=1886029600").then(t=>t.text()).then(t=>{let e=JSON.parse(t.substr(47).slice(0,-2)),n=e.table.rows;displayTransaction(n)}).catch(t=>console.error("Error fetching the Google Sheet data:",t));const showbtn=document.getElementById("adcost"),btns=document.getElementById("buttons");showbtn.addEventListener("click",function(t){btns.style.display="block",showbtn.style.display="none"});const costbtn=document.getElementById("cost");costbtn.addEventListener("click",function(t){let e=!1,n=new Audio("ting.mp3");n.preload="auto",n.load(),costbtn.style.display="block",costbtn.style.opacity="0.5",costbtn.innerText="wait....",costbtn.disabled=!0;let o=parseFloat(document.getElementById("amount").value),s=document.getElementById("reason").value,r=s;if(o>=5){let a=[{url:"https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwn_TRFC_uj8yuD7r9FyT4kwN9-353YvLRgGqCtF4dV-apvw/formResponse",entries:{reason:"entry.741005997",amount:"entry.1531813260",description:"entry.1180482190"}},{url:"https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",entries:{reason:"entry.458544774",amount:"entry.2032103830",description:"entry.2111696735"}}];a.forEach(t=>{let l=new FormData;l.append(t.entries.amount,(a[0],`-${o}`)),l.append(t.entries.description,t===a[0]?"Cost":"Office Cost"),l.append(t.entries.reason,t===a[0]?s:r),fetch(t.url,{method:"POST",mode:"no-cors",body:new URLSearchParams(l)}).then(t=>{document.getElementById("result").innerText="Transaction Complete",e||(n.play().catch(t=>{console.error("Audio playback failed:",t)}),e=!0),costbtn.style.display="none",setTimeout(()=>{location.reload()},1500)}).catch(t=>{document.getElementById("result").innerText="Failure in Transaction",costbtn.style.display="block"})})}else document.getElementById("result").innerText="Error Please Contact App Admin"});
         </script>
 </body>    
 </html>
