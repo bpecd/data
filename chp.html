@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Match</title>
+    <title>Password Set</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -113,7 +113,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Create New PIN</h2>
+        <h2>Set New PIN</h2>
         <form onsubmit="event.preventDefault(); savePassword();">
             <div class="error" id="error-message"></div>
             <label for="password1">New PIN:</label>
@@ -129,6 +129,13 @@
     <script>
         function savePassword(){let e=document.getElementById("password1").value,t=document.getElementById("password2").value,n=document.getElementById("error-message");e===t?(localStorage.removeItem("pin"),localStorage.setItem("pin",e),console.log("pin set",e),setTimeout(function(){window.location.href="index.html"},1e3)):n.textContent="Passwords do not match. Please try again."}
     </script>
-
+    
+<script>
+    const pass = localStorage.getItem('phoneNumber');
+    if(!pass){
+        window.location.href = 'verify.html';
+    }
+    
+</script>
 </body>
 </html>
