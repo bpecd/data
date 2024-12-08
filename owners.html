@@ -1,0 +1,504 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta Date="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner List</title>
+    
+    <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+<style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 18px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 20px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            transition: padding 0.8s ease;
+        }
+        a:hover{
+            background-color: #dbdbfd;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .bb{
+            width: 80vh;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 10px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+        }
+        .top-bar .nav-items a i {
+            font-size: 20px;
+            color: #096faa;
+        }
+        
+        .top-bar .logo img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            
+        }
+        img:hover{
+            border: 3px solid #45eba1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #000;
+            transition: transform 0.3s ease;
+        }
+        .header h1:hover{
+            transform: scale(1.05);
+        }
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+        .search-bar:hover{
+            transform: scale(1.05);
+        }
+        .search-bar input {
+            padding: 10px;
+            border: 3px dotted blue;
+            border-radius: 20px;
+            outline: none;
+            width: 250px;
+        }
+        .search-bar .fa-file-spreadsheet {
+            color: #096faa;
+            font-size: 32px;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 10px;
+            margin-bottom: 2%;
+            margin-top: 2%;
+            background-color: #ddd;
+            border-radius: 20px;
+        }
+        .menu span {
+            padding: 10px 20px;
+            background-color: #2edddd;
+            border-radius: 20px;
+            color: black;
+            font-weight: bold;
+        }
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px dotted black;
+            border-radius:10px;
+            padding: 10px;
+        }
+        .transaction-info {
+            flex: 1;
+            font-size: 14px;
+        }
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 8px;
+        } 
+        .redirect-btn {
+            margin-left: 20px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .redirect-btn:hover {
+
+            transform: scale(1.2);
+
+            background-color: #0056b3;
+        }.loader {
+  width: 50px;
+  padding: 8px;position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn" href="officehome.html"><i class="fa-duotone fa-regular fa-chart-tree-map"></i> Office Dashboard</a>
+            <a class="backbtn" style="color: #db049b;font-weight: bold;font-size: large;background-color: #fae6f4;padding: 10px;border-radius: 15px;" href="owners.html"><i class="fa-solid fa-bars-progress"></i> Owners</a>
+            <a class="backbtn"href="office.html"><i class="fa-duotone fa-solid fa-chair-office"></i> Office</a>
+            <a class="backbtn"href="loan.html"><i class="fa-solid fa-hand-holding-circle-dollar"></i> Loan</a>
+            <a class="backbtn"id="nn" href="newowner.html"><i class="fas fa-user-plus"></i> New Owner</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 10px;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button style="border: none;cursor: pointer;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" onclick="window.location.href='home.html'"><i class="fa-solid fa-house-chimney"></i></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa fa-list-alt"></i> 
+                Owners list</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <i id="shtl" onclick="window.open('https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/edit?resourcekey=&gid=138275939#gid=138275939', '_blank');" class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
+ </div>
+        </div>
+
+        <p>List of all owners. Click View for more.</p>
+
+        <div class="menu">
+            <span>No.</span>
+            <span>Name</span>
+            <span>Land Area</span>
+            <span>Phone No</span>
+            <span>Status</span>
+            <span>Assign Date</span>
+            <span>ID</span>
+        </div>
+        <div style="margin-top:-25px" id="transaction-list">
+            <div class="loader"></div>  </div>
+    </div>
+    <script type="text/javascript" src="reminder.js"></script>
+    <script> 
+    
+        document.querySelectorAll('.backButton').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents immediate navigation
+        document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+        setTimeout(function() {
+            window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+        }, 500); // 200 ms delay
+    });
+});
+
+    const e = JSON.parse(localStorage.getItem("secureData"));
+        if (!e) {
+            window.location.href = "index.html";
+        }
+         document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+                const popupImage = document.createElement('img');
+
+                // Set styles for the popup overlay
+                popupOverlay.style.position = "fixed";
+                popupOverlay.style.top = "0";
+                popupOverlay.style.left = "0";
+                popupOverlay.style.width = "100%";
+                popupOverlay.style.height = "100%";
+                popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                popupOverlay.style.display = "none";
+                popupOverlay.style.justifyContent = "center";
+                popupOverlay.style.alignItems = "center";
+
+                // Set styles for the popup image
+                popupImage.style.maxWidth = "90%";
+                popupImage.style.maxHeight = "90%";
+                popupImage.style.borderRadius = "10px";
+                popupImage.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.5)";
+
+                // Append the image to the popup overlay
+                popupOverlay.appendChild(popupImage);
+
+                // Append the popup overlay to the body
+                document.body.appendChild(popupOverlay);
+
+                // Add event listener to the original image to show the popup
+                document.getElementById("img").addEventListener('click', function () {
+                    popupImage.src = e.img;  // Set the image source for the popup
+                    popupOverlay.style.display = "flex";  // Show the popup
+                });
+
+                // Add event listener to the popup to close it when clicked
+                popupOverlay.addEventListener('click', function (e) {
+                    if (e.target === popupOverlay) {
+                        popupOverlay.style.display = "none";  // Hide the popup
+                    }
+                });
+         const stt = e.state;
+         if(stt === "admin"){
+                document.getElementById("nn").style.display = "block";
+             } else if(stt === "mod"){
+                document.getElementById("nn").style.display = "none";
+             }else{
+                document.getElementById("nn").style.display = "none";
+                document.getElementById('shtl').style.display = 'none';
+             }
+          
+         </script>
+    <script>
+// URL to the Google Sheets API
+const sheetUrl = 'https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?gid=138275939';
+
+let transactions = [];
+
+fetch(sheetUrl)
+    .then(response => response.text())
+    .then(data => {
+        const jsonData = JSON.parse(data.substr(47).slice(0, -2));
+        const rows = jsonData.table.rows;
+        displayTransaction(rows);
+    })
+    .catch(error => console.error('Error fetching the Google Sheet data:', error));
+
+function displayTransaction(rows) {
+    const container = document.getElementById('transaction-list');
+    transactions = [];
+
+    // Start serial number from the total count of rows
+    let serialNumber = rows.length;
+
+    for (let i = rows.length - 1; i >= 0; i--) {
+        const row = rows[i];
+        const rawDate = row.c[0]?.v || 'N/A';
+        const Name = row.c[1]?.v || 'N/A';
+        const Land = row.c[2]?.v || 0;
+        const phone = row.c[3]?.v || 'N/A';
+        const Status = row.c[5]?.v || 'N/A';
+        const Surl = row.c[6]?.v || 'N/A';
+        const Gid = row.c[7]?.v || 'N/A';
+        const Furl = row.c[8]?.v || 'N/A';
+        const sdentry = row.c[9]?.v || 'N/A';
+        const srentry = row.c[10]?.v || 0;
+        const saentry = row.c[11]?.v || 'N/A';
+        const Mail = row.c[4]?.v || 'N/A';
+
+        let formattedDate = rawDate;
+        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
+            formattedDate = parseGoogleDate(rawDate);
+        }
+
+        const uniqueId = `viewbtn-${i}`;
+
+        transactions.push({
+            Name, Land, phone, Status, formattedDate, Mail, Surl, Gid, Furl, sdentry, srentry, saentry,
+            html: `
+<div class="transaction" style="display: flex; justify-content: space-between;">
+    <div style="flex: 0.5; text-align: center; margin-right: 15px;">
+        ${serialNumber}
+    </div>
+    <div style="flex: 1; text-align: left; margin-right: 15px; line-height: 1.5;">
+        ${Name}
+    </div>
+    <div style="flex: 1; text-align: left; line-height: 1.5;">
+        ${Land}
+    </div>
+    <div style="flex: 1; text-align: right;">
+        ${phone}
+    </div>
+    <div style="flex: 1; text-align: right;">
+        ${getStatusIcon(Status)} ${Status}
+    </div>
+    <div style="flex: 1; text-align: right;">
+        ${formattedDate}
+    </div>
+    <div style="flex: 1; text-align: right;">
+        <button class="redirect-btn" id="${uniqueId}">View</button>
+    </div>
+</div>
+`
+        });
+        document.querySelector('.loader').style.display = 'none';
+               
+        container.innerHTML += transactions[transactions.length - 1].html;
+
+        serialNumber--;
+
+        // Attach event listener for the "View" button
+        attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
+    }
+}
+
+function attachRedirectEvent(buttonId, transaction) {
+    setTimeout(() => {
+        document.getElementById(buttonId).addEventListener('click', (event) => {
+            event.preventDefault();
+            saveAndRedirect(transaction);
+        });
+    }, 400);
+}
+
+function saveAndRedirect(transaction) {
+    localStorage.removeItem("userdata");
+    const userdata = {
+        name: transaction.Name,
+        phone: transaction.phone,
+        land: transaction.Land,
+        mail: transaction.Mail,
+        sheetid: transaction.Surl,
+        gid: transaction.Gid,
+        furl: transaction.Furl,
+        sdentry: transaction.sdentry,
+        srentry: transaction.srentry,
+        saentry: transaction.saentry,
+        state: transaction.Status
+    };
+    localStorage.setItem('userdata', JSON.stringify(userdata));
+    setTimeout(() => { window.location.href = 'ownerid.html'; }, 300);
+}
+
+function filterTransactions() {
+    const searchValue = document.getElementById('search-input').value.toLowerCase();
+    const container = document.getElementById('transaction-list');
+    container.innerHTML = '';
+
+    transactions.forEach((transaction, index) => {
+        if (
+            transaction.Name.toLowerCase().includes(searchValue) ||
+            transaction.formattedDate.toLowerCase().includes(searchValue) ||
+            transaction.Land.toString().toLowerCase().includes(searchValue) ||
+            transaction.Status.toLowerCase().includes(searchValue) ||
+            transaction.phone.toString().includes(searchValue)
+        ) {
+            container.innerHTML += transaction.html;
+
+            // Reattach the event listener for the "View" button after rendering the HTML
+            const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
+            attachRedirectEvent(uniqueId, transaction);
+        }
+    });
+}
+
+function parseGoogleDate(dateString) {
+    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+    const matches = dateString.match(regex);
+
+    if (matches) {
+        const year = matches[1];
+        const month = String(parseInt(matches[2]) + 1).padStart(2, '0');
+        const day = String(matches[3]).padStart(2, '0');
+        return `${day}/${month}/${year}`;
+    }
+
+    return 'Invalid Date';
+}
+
+function getStatusIcon(status) {
+    switch (status.toLowerCase()) {
+        case 'waiting':
+            return '<i class="fa-solid fa-user-clock" style="color:orange;"></i>';
+        case 'working':
+            return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
+            case 'end':
+            return '<i class="fa-solid fa-box-check" style="color:green;"></i>';
+            case 'admin':
+            return '<i class="fa-solid fa-user-robot" style="color:red;"></i>';
+            case 'land owner':
+            return '<i class="fa-solid fa-user-tag" style="color:black;"></i>';
+            case 'owner':
+            return '<i class="fa-solid fa-user-tag" style="color:black;"></i>';
+            case 'engineer':
+            return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
+        default:
+            return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';
+    }
+}
+    </script>
+</body>
+</html>
