@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1547,7 +1546,7 @@ if (amount >= 0) {
 
                 
                 if (checkbox.checked) {
-                    sendEmailWithRetry();
+                    sendEmailWithRetrys();
                 }else {
                     setTimeout(() => {
                         location.reload();
@@ -1565,11 +1564,11 @@ if (amount >= 0) {
             });
         });
 
-       let isSending = false; // Flag to prevent multiple email sends at the same time
+       let isSendings = false; // Flag to prevent multiple email sends at the same time
 
-async function sendEmailWithRetry() {
-    if (isSending) return; // Prevent function execution if an email is already being sent
-    isSending = true; // Set flag to indicate an email is in progress
+async function sendEmailWithRetrys() {
+    if (isSendings) return; // Prevent function execution if an email is already being sent
+    isSendings = true; // Set flag to indicate an email is in progress
 
     const secureData = JSON.parse(localStorage.getItem("secureData"));
     const totalp = Number(document.getElementById("total-receive").textContent.replace(/,/g, ""));
@@ -1596,7 +1595,7 @@ const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
 
     try {
         await emailjs.send("service_7albdgs", "template_4oyl6vc", emailParams, "V33OVjXvWiuEWy-VD");
-        emailSent = true;
+        emailSents = true;
         suc.style.display ='';
         suc.src = "mail.gif";
             result.innerText = `Email Sent successfully.`;
@@ -1609,7 +1608,7 @@ const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
         console.error("First email service failed:", error);
     }
 
-    if (!emailSent) {
+    if (!emailSents) {
         try {
             await emailjs.send("service_f3ydpcl", "template_o5b5lhq", emailParams, "7Atp02WPiZ4w8sYOz");
             suc.style.display ='';suc.src = "mail.gif";
@@ -1630,7 +1629,7 @@ const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
         }
     }
 
-    isSending = false; // Reset the flag after email send attempt(s)
+    isSendings = false; // Reset the flag after email send attempt(s)
 }
 
     } else {
@@ -2442,8 +2441,6 @@ const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
         document.getElementById('result222').innerText = `Error Please Contact Head Admin`;
     }
 });
-
-
-        </script>
+    </script>
 </body>    
 </html>
