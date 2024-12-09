@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta Date="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Dashboard</title>
+    <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+<style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            
+            transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            
+            padding: 20px;
+            border-radius: 18px;
+            
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotateX(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+        /* Style for individual letters */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform-origin: bottom;
+            animation: rotateIn 0.4s ease forwards;
+        }
+        .container1 {
+            max-height: 600px;
+            display: flex;
+            max-width: 1250px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 28px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #000;
+    transition: transform 0.5s ease;
+}
+.header h1:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+}
+.header .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.5s ease; /* Adds space between elements */
+}
+.search-bar:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 3px dotted #100aca;
+    border-radius: 20px;
+    outline: none;
+    width: 250px;
+}
+
+.search-bar .fa-file-spreadsheet {
+    color: #096faa;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 10px;
+            margin: 3%;
+            background-color: #ddd;
+            border-radius: 20px;
+        }
+        .menu span {
+            padding: 10px 20px;
+            background-color: #0ccccc;
+            border-radius: 20px;
+            color: black;
+            font-weight: bold;
+            margin-left: 3%;
+            margin-right: 1.8%;
+        }
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px dotted black;
+            border-radius:10px;
+            padding: 10px;
+        }
+        .transaction-info {
+            flex: 1;
+            font-size: 14px;
+        }
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 8px;
+        } 
+       .progress-bar {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 18px;
+    transition: transform 0.5s ease;
+}
+.progress-bar:hover {
+  transform: scale(1.15); /* Slightly enlarge the card */
+}
+.progress-container {
+    width: 150px; /* Fixed width to give more space to the label */
+    height: 30px;
+    background-color: #ffd1d1;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-right: 20px;
+    
+}
+
+.progress-label {
+    flex-grow: 1; /* Allow the label to expand */
+    color: #000000;
+    font-size: 20px;
+    white-space: normal;
+    text-align: left;
+}
+
+ .summary-text {
+            justify-content: space-between;
+            font-size: 22px;
+            color: black;
+            transition: transform 0.5s ease;
+        }
+        .summary-text:hover {
+  transform: scale(1.1); /* Slightly enlarge the card */
+}
+        .progress {
+            height: 100%;
+            background-color: red;
+            border-radius: 18px;
+            width: 0px;
+            transition: width 3s ease;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 20px;
+            opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+        a:hover{
+            background-color: #dbdbfd;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .bb{
+            width: 500px;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 10px;
+            border-radius: 25px;
+            margin-bottom: 10px;
+            
+        }
+        
+        .top-bar .nav-items a i {
+            font-size: 20px;
+            color: #096faa;
+        }
+        
+        .top-bar .logo img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            
+        }
+        
+        .transaction-amount {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .credit {
+            color: green;
+        }
+        .debit {
+            color: red;
+        }.neutral{
+            color: #808080;
+        }
+        
+        .progress-containerr {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    }
+.circular-progress {
+    transform: rotate(-90deg); /* Start from the top */
+}
+
+.bg-circle,
+.progress-circle {
+    fill: none;
+    stroke-width: 30; /* Set thickness to 30 */
+    cx: 100;
+    cy: 100;
+    r: 70;
+     /* Adjust radius to fit within the container */
+}
+
+.bg-circle {
+    stroke: #3e3eff;
+     /* Background circle color */
+}
+
+.progress-circle {
+    stroke:red; /* Progress color */
+    stroke-linecap: round; /* Rounded ends */
+    stroke-dasharray: 439.82; /* Circumference of the circle (2 * π * r) */
+    stroke-dashoffset: 439.82; /* Start with the stroke hidden */
+    transition: stroke-dashoffset 1s ease;
+   
+}
+.progress-containerr:hover {
+  transform: scale(1.08); /* Slightly enlarge the card */
+}
+.redirect-btn {
+            margin-left: 20px;
+            padding: 5px 10px;
+            background-color: #7a7a7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .redirect-btn:hover {
+            background-color: #0056b3;
+        }
+.percentage {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000;
+}.loader {
+  width: 50px;
+  padding: 8px;position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup.active {
+    display: flex;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h1 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.popup-content .close-btn {
+    background-color: #2a23ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+/* Overlay */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+#overlay.active {
+    display: block;
+}
+
+/* Loading and Success Messages */
+#loading,
+#success {
+    display: none;
+    position: fixed;
+        border-radius: 10px;
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+
+    z-index: 1001;
+}
+
+.inputField {
+    background-color: #b9e5ff;
+            border: 2px solid red;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+            margin: 10px;
+            margin-bottom: 10px;
+}
+.inputField:focus {
+    outline: none;
+}/* HTML: <div class="loader"></div> */
+.loader2 {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  color: #e40000;
+  background: radial-gradient(farthest-side, currentColor calc(100% - 6px),#0000 calc(100% - 5px) 0);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 13px),#000 calc(100% - 12px));
+  border-radius: 50%;
+  animation: l19 2s infinite linear;
+}
+.loader2::before,
+.loader2::after {    
+  content: "";
+  grid-area: 1/1;
+  background:
+    linear-gradient(currentColor 0 0) center,
+    linear-gradient(currentColor 0 0) center;
+  background-size: 100% 10px,10px 100%;
+  background-repeat: no-repeat;
+}
+.loader2::after {
+   transform: rotate(45deg);
+}
+
+@keyframes l19 { 
+  100%{transform: rotate(1turn)}
+}  
+#edit-permission-toggle {
+    transition: color 0.5s;
+}
+
+#edit-icon {
+    transition: color 0.5s;
+}
+
+#edit-permission-toggle.active {
+    color: green; /* Color when enabled */
+}
+
+#edit-permission-toggle.inactive {
+    color: red; /* Color when disabled */
+}
+#xvc {
+    border-radius: 8px;
+    z-index: 1001; /* Ensures it appears above the overlay */
+    transition: box-shadow 0.5s ease; /* Smooth transition for the pop effect */
+    transform: translateY(5vh);
+    animation: fadeIn 1s forwards; 
+}
+
+.stats-container {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-card {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  background-color: var(--bg-color, #fff);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  overflow: hidden;
+  text-align: left;
+  padding: 0 15px;
+  transition: transform 0.5s ease; /* Smooth scaling on hover */
+}
+
+.stat-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-number {
+  font-size: 24px;
+}
+
+.stat-label {
+  font-size: 16px;
+}
+
+.stat-icon {
+  font-size: 30px;
+  opacity: 0.8;
+  transition: transform 0.5s ease; /* Smooth scaling on hover */
+}
+
+/* Hover effect */
+.stat-card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.2); /* Zoom in the icon */
+}
+.xbb{
+    transition: box-shadow 0.5s ease;
+}
+.xbb:hover{
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    
+}
+</style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn"style="color: #db049b;font-weight: bold;font-size: large;background-color: #fae6f4;padding: 10px;border-radius: 15px;" href="devhome.html"><i class="fa-solid fa-table-tree"></i> Developer Dashboard</a>
+            <a class="backbtn"href="developers.html"><i class="fa-solid fa-list-ol"></i> Projects</a>
+            <a class="backbtn"id="nn" href="newdev.html"><i class="fas fa-user-plus"></i> New Projects</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 10px;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="xbb" style="cursor: pointer;border: none;font-size: 20px;padding: 10px; border-radius: 15px;position: relative;" onclick="window.location.href='home.html'"><i class="fa-solid fa-house-chimney"></i></button>
+        </div>
+    </div><div class="popup" id="popupx">
+        <div class="popup-content">
+            <h1 id="popstxt">Your are Editing Data!</h1>
+            <input type="text" id="cellValue" class="inputField" required><br>
+            <button style="background-color: #d61f2c;" class="close-btn" onclick="location.reload()"><i class="fa-solid fa-rectangle-xmark"></i></button>
+<button class="close-btn" onclick="generateLink()">Edit</button>   
+         <p id="result"></p>
+        </div>
+    </div>
+    
+    <div id="overlay"></div>
+    <div id="popup">
+        <iframe style="display: none;" id="iframe" src=""></iframe>
+    </div>
+    <div id="loading"><img style="width: 100px;height: 100px;border-radius: 8px;" src="edt.gif"></div>
+    <div id="success"><img style="width: 100px;height: 100px;border-radius: 8px;" src="done.gif"></div>          
+    
+<div class="container1" id="xvchd">
+    <div class="container" style="min-width: 710px;">
+         <div class="progress-bar">
+            <div class="progress-container">
+                <div class="progress" id="build-progress"></div>
+            </div>
+            <div   class="progress-label">Material Cost: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="ccost"></span> BDT <i id="mmshh" style="color: blue;cursor: pointer;" class="fa-duotone fa-solid fa-file-spreadsheet"></i></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-container">
+                <div class="progress" id="office-progress"></div>
+            </div>
+            <div  class="progress-label">Labour Cost: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="lcost"></span> BDT <i id="llshh" style="color: blue;cursor: pointer;" class="fa-duotone fa-solid fa-file-spreadsheet"></i></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-container">
+                <div class="progress" id="p-progress"></div>
+            </div>
+            <div  class="progress-label">Other Cost: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="pCost"></span> BDT</div>
+        </div>
+        <div class="container">
+
+            <div class="stats-container">
+                <div class="stat-card" style="--bg-color: #1b2850;">
+                  <div class="stat-content">
+                    <div class="stat-info">
+                      <div class="stat-number" id="customers-count">0</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <i class="stat-icon fa-solid fa-building-user"></i>
+                  </div>
+                </div>
+                <div class="stat-card" style="--bg-color: #209655;">
+                  <div class="stat-content">
+                    <div class="stat-info">
+                      <div class="stat-number" id="suppliers-count">0</div>
+                      <div class="stat-label">transactions</div>
+                    </div>
+                    <i class="stat-icon fa-duotone fa-regular fa-clock-rotate-left"></i>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+       </div>
+       <div class="container"  style="align-items: left;justify-content: left;display: flex;flex-direction: column;min-width: 510px;text-align: center;">
+            <div style="background-color: rgb(255, 255, 255); border-radius: 15px;padding: 10px;text-align: left;" class="summary-text">
+                Total Cost: <span style="color:red ;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT<br>
+                Total Receive: <span style="color: blue;font-family: 'Arial Black', sans-serif;" id="total-receive"></span> BDT<br>
+                Payment Due: <span style="color: rgb(219, 27, 37);font-family: 'Arial Black', sans-serif;" id="total-pdue"></span> BDT
+            
+            </div>
+            <h3 style="margin-bottom: 20px;margin-top: 20px;">All Cost vs All Receive</h3>
+            <div class="progress-containerr">
+                <svg class="circular-progress" width="200" height="200">
+                    <circle class="bg-circle" cx="100" cy="100" r="90"></circle>
+                    <circle class="progress-circle" cx="100" cy="100" r="90"></circle>
+                </svg>
+                <div class="percentage">0%</div>
+            </div>              
+    </div>
+</div>
+    <div class="container" id="xvc">
+        <div class="header">
+            <h1 id="resultElem"> Available balance: 
+                <span style="color: rgb(46, 27, 219); padding: 5px; background-color: #ffffff; border-radius: 15px;" id="balance"></span> BDT
+            </h1>
+            <div class="search-bar">
+                          
+<button id="edit-permission-toggle2" style="background: none; border: none; cursor: pointer; font-size: 32px;">
+    <i id="edit-icon2" class="fa-duotone fa-regular fa-fire-flame-curved"style="color: #7a7a7a;"></i> <!-- Initial icon: Lock -->
+</button>
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <i id="shtl" onclick="window.open('https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/edit?gid=728012299#gid=728012299', '_blank');" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+                          <!-- Toggle button for Edit Permission -->
+<button id="edit-permission-toggle" style="background: none; border: none; cursor: pointer; font-size: 32px;">
+    <i id="edit-icon" class="fa-duotone fa-regular fa-pen-to-square"style="color: #ff3021;"></i> <!-- Initial icon: Lock -->
+</button>
+            </div>
+        </div>
+        
+
+        <p>List of all Developer Transactions</p>
+
+        <div class="menu">
+            <span>DATE</span>
+            <span>DESCPTION</span>
+            <span>REASON</span>
+            <span>AMOUNT</span>
+            <span>REMARK</span>
+        </div>
+        <div style="margin-top:-25px" id="transaction-list">
+            <div class="loader"></div> </div>
+    </div><script type="text/javascript" src="reminder.js"></script>
+    <script> 
+    
+        document.querySelectorAll('.backbtn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevents immediate navigation
+        document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+        setTimeout(function() {
+            window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+        }, 400); // 300 ms delay
+    });
+});
+document.getElementById("resultElem").addEventListener("click", function(){
+            location.reload();
+        });
+        function formatNumber(num) {
+    // Handle negative numbers
+    const isNegative = num < 0;
+    const absNumStr = Math.abs(num).toString(); // Convert the absolute value to a string
+    
+    // Split into the last three digits and the rest
+    const lastThree = absNumStr.slice(-3);
+    let otherNumbers = absNumStr.slice(0, -3);
+
+    if (otherNumbers) {
+        // Format the other part with commas every two digits
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
+    } else {
+        return (isNegative ? "-" : "") + lastThree;
+    }
+}
+
+function formatNumber2(num) {
+    // Convert number to an absolute value for formatting
+    let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+
+    // Split last three digits and format the rest in groups of two
+    let lastThree = numStr.slice(-3);
+    let otherNumbers = numStr.slice(0, -3);
+
+    if (otherNumbers) {
+        // Format the other part with commas every two digits
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return otherNumbers + "," + lastThree;
+    } else {
+        return lastThree;
+    }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const url = 'https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/htmlview';
+    let t = 0;
+
+async function n(t, n, l, r, o) {
+    try {
+        let a = await fetch(url),
+            i = await a.text(),
+            s = new DOMParser(),
+            c = s.parseFromString(i, "text/html"),
+            d = c.querySelectorAll("table");
+        if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
+        let m = d[t].rows;
+        if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
+        let u = m[n].cells;
+        if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
+        let h = u[l],
+            g = h.innerText || h.textContent;
+
+        // Check if the value should be formatted as a number
+        const value = parseFloat(g.trim());
+        const formattedValue = (r === "balance") 
+            ? formatNumber(value)
+            : formatNumber(Math.abs(value));
+
+        const element = document.getElementById(r);
+        element.innerText = formattedValue;
+
+        // Apply red color if the balance is negative
+        if (r === "balance" && value < 0) {
+            element.style.color = "red";
+        } else {
+            // Reset to default color
+        }
+
+        if (o) {
+            (function e(t, n, l) {
+        let r = document.getElementById(n);
+
+        // Get computed styles of the parent element
+        const computedStyle = window.getComputedStyle(r);
+
+        // Clear child elements
+        while (r.firstChild) {
+            r.removeChild(r.firstChild);
+        }
+
+        // Animate each character
+        t.split("").forEach((char, index) => {
+            let span = document.createElement("span");
+            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+            span.classList.add(l); // Add animation class
+            span.style.animationDelay = `${0.03 * index}s`;
+
+            // Copy styles from parent element
+            span.style.color = computedStyle.color;
+            span.style.fontFamily = computedStyle.fontFamily;
+            span.style.fontSize = computedStyle.fontSize;
+            span.style.fontWeight = computedStyle.fontWeight;
+            span.style.fontStyle = computedStyle.fontStyle;
+
+            r.appendChild(span);
+        });
+            })(formattedValue, r, o);
+        }
+    } catch (p) {
+        console.error("Error fetching data:", p);
+    }
+}
+
+    n(t, 3, 4, "total-cost","letter"),
+    n(t, 3, 3, "total-receive","letter"),
+    n(t, 3, 2, "balance","letter");
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const url = 'https://docs.google.com/spreadsheets/d/13q-w16qD4ng-iLjjzqbV9ZFW3cnlIMyPIslsiWvhqVo/htmlview';
+    let t = 0;
+
+    async function n(t, n, l, r, o) {
+        try {
+            let a = await fetch(url),
+                i = await a.text(),
+                s = new DOMParser(),
+                c = s.parseFromString(i, "text/html"),
+                d = c.querySelectorAll("table");
+            if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
+            let m = d[t].rows;
+            if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
+            let u = m[n].cells;
+            if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
+            let h = u[l],
+                g = h.innerText || h.textContent;
+            const formattedValue = formatNumber(Math.abs(g.trim()));
+            o
+                ? (function e(t, n, l) {
+        let r = document.getElementById(n);
+
+        // Get computed styles of the parent element
+        const computedStyle = window.getComputedStyle(r);
+
+        // Clear child elements
+        while (r.firstChild) {
+            r.removeChild(r.firstChild);
+        }
+
+        // Animate each character
+        t.split("").forEach((char, index) => {
+            let span = document.createElement("span");
+            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+            span.classList.add(l); // Add animation class
+            span.style.animationDelay = `${0.03 * index}s`;
+
+            // Copy styles from parent element
+            span.style.color = computedStyle.color;
+            span.style.fontFamily = computedStyle.fontFamily;
+            span.style.fontSize = computedStyle.fontSize;
+            span.style.fontWeight = computedStyle.fontWeight;
+            span.style.fontStyle = computedStyle.fontStyle;
+
+            r.appendChild(span);
+        });                  })(formattedValue, r, o)
+                : (document.getElementById(r).innerText = formattedValue); // Applying formatNumber here
+        } catch (p) {
+            console.error("Error fetching data:", p);
+        }
+    }
+    n(t, 3, 2, "lcost","letter");
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const url = 'https://docs.google.com/spreadsheets/d/1lfRbCMyfzDuB6MYF_S5n9sl6RabQfYrGF08aEw7eDaw/htmlview';
+    let t = 0;
+
+    async function n(t, n, l, r, o) {
+        try {
+            let a = await fetch(url),
+                i = await a.text(),
+                s = new DOMParser(),
+                c = s.parseFromString(i, "text/html"),
+                d = c.querySelectorAll("table");
+            if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
+            let m = d[t].rows;
+            if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
+            let u = m[n].cells;
+            if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
+            let h = u[l],
+                g = h.innerText || h.textContent;
+            const formattedValue = formatNumber(Math.abs(g.trim()));
+            o
+                ? (function e(t, n, l) {
+        let r = document.getElementById(n);
+
+        // Get computed styles of the parent element
+        const computedStyle = window.getComputedStyle(r);
+
+        // Clear child elements
+        while (r.firstChild) {
+            r.removeChild(r.firstChild);
+        }
+
+        // Animate each character
+        t.split("").forEach((char, index) => {
+            let span = document.createElement("span");
+            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+            span.classList.add(l); // Add animation class
+            span.style.animationDelay = `${0.03 * index}s`;
+
+            // Copy styles from parent element
+            span.style.color = computedStyle.color;
+            span.style.fontFamily = computedStyle.fontFamily;
+            span.style.fontSize = computedStyle.fontSize;
+            span.style.fontWeight = computedStyle.fontWeight;
+            span.style.fontStyle = computedStyle.fontStyle;
+
+            r.appendChild(span);
+        });
+                  })(formattedValue, r, o)
+                : (document.getElementById(r).innerText = formattedValue); // Applying formatNumber here
+        } catch (p) {
+            console.error("Error fetching data:", p);
+        }
+    }
+    n(t, 3, 2, "ccost","letter");
+
+       });
+
+     const sheetUrl = 'https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/gviz/tq?gid=728012299';
+
+     let transactions = []; 
+fetch(sheetUrl)
+    .then((response) => response.text())
+    .then((data) => {
+        try {
+            const jsonData = JSON.parse(data.substring(47, data.length - 2)); // Safer substring parsing
+            const rows = jsonData.table.rows || [];
+            displayTransaction(rows);
+        } catch (error) {
+            console.error('Error parsing Google Sheet data:', error);
+        }
+    })
+    .catch((error) => console.error('Error fetching the Google Sheet data:', error));
+   // Display Transactions
+   function displayTransaction(rows) {
+    const container = document.getElementById('transaction-list');
+    transactions = [];
+    let serialNumber = rows.length + 1;
+    let htmlContent = '';
+
+    for (let i = rows.length - 1; i > 0; i--) {
+        const row = rows[i];
+        const rawDate = row.c[0]?.v || 'N/A';
+        const Description = row.c[1]?.v || 'N/A';
+        const Reason = row.c[2]?.v || 'N/A';
+        const Amount = row.c[3]?.v || 0;
+        const remark = row.c[4]?.v || '';
+
+        let formattedDate = rawDate;
+        if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
+            formattedDate = parseGoogleDate(rawDate);
+        }
+
+        const uniqueId = `viewbtn-${serialNumber}`;
+        transactions.push({
+            Description,
+            Reason,
+            Amount,
+            remark,
+            serialNumber,
+            formattedDate,
+        });
+
+        const formattedAmount = `${Amount > 0 ? '+' : Amount < 0 ? '-' : ''} ৳${formatNumber2(Amount)}`;
+        const rowClass = serialNumber % 2 === 0 ? 'even' : 'odd';
+
+        htmlContent += `
+            <div class="transaction ${rowClass}" style="display: flex; justify-content: space-between;" data-transaction-id="${serialNumber}">
+                <div style="flex: 1; text-align: center;">${formattedDate}</div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-description" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="B">
+                    ${Description}
+                </div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-reason" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="C">
+                    ${Reason}
+                </div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-amount ${Amount > 0 ? 'credit' : Amount < 0 ? 'debit' : 'neutral'}" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="D">
+                    ${formattedAmount}
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    ${
+                        remark
+                            ? `<span>${remark}</span>`
+                            : stt === 'admin'
+                            ? `<button class="redirect-btn" id="${uniqueId}" data-transaction-id="${serialNumber}">Remark</button>`
+                            : ''
+                    }
+                </div>
+            </div>
+        `;
+        serialNumber--;
+    }
+    document.querySelector('.loader').style.display = 'none';
+    container.innerHTML = htmlContent;
+}
+
+// Add Remark and Editing Logic
+document.getElementById('transaction-list').addEventListener('click', (event) => {
+    const target = event.target;
+
+    // Handle Remark Button
+    if (target.classList.contains('redirect-btn')) {
+        const transactionId = target.getAttribute('data-transaction-id');
+        const transaction = transactions.find((t) => t.serialNumber === parseInt(transactionId, 10));
+        if (transaction) {
+            const redirectUrl = `https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/edit?gid=728012299#range=E${transaction.serialNumber}`;
+            window.open(redirectUrl, '_blank');
+        }
+    }
+
+    // Handle Editing Logic
+    const editPermission = document.getElementById('edit-icon').classList.contains('fa-pen-field');
+    if (editPermission) {
+        if (
+            target.classList.contains('transaction-reason') || 
+            target.classList.contains('transaction-amount') || 
+            target.classList.contains('transaction-description')
+        ) {
+            const transactionId = parseInt(target.getAttribute('data-transaction-id'), 10);
+            const column = target.getAttribute('data-column');
+            if (transactionId && column && stt === "admin") {
+                const iframe = document.getElementById('iframe');
+                const popupx = document.getElementById('popupx');
+                const overlay = document.getElementById('overlay');
+                const loading = document.getElementById('loading');
+                const success = document.getElementById('success');
+                const popstxt = document.getElementById('popstxt');
+                const cellValueInput = document.getElementById('cellValue');
+                popstxt.innerHTML = `<del><span style="color:red; border-radius: 18px;padding: 10px;"> ${target.textContent.trim()}</span></del><i class="fa-sharp-duotone fa-regular fa-pencil"></i>`;
+                popupx.style.display = "flex";
+                cellValueInput.focus();
+                let isPopupClosed = false;
+
+                window.generateLink = function () {
+                    const sheetId = `1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE`;
+                    const cellRange = `${column}${transactionId}`;
+                    const value = cellValueInput.value.trim();
+
+                    if (!value) {
+                        alert('Please enter a value.');
+                        return;
+                    }
+
+                    const url = `https://script.google.com/macros/s/AKfycbyHoAFcyRL5S45eGMObqQRc-GuV6B9GA7MqAtqlRaoodlaHbl6ckwOoM3w93KKUvfjq/exec?sheetId=${sheetId}&cellRange=${cellRange}&value=${encodeURIComponent(value)}`;
+
+                    isPopupClosed = false;
+                    loading.style.display = 'block';
+                    overlay.classList.add('active');
+                    iframe.style.display = 'none';
+                    popupx.style.display = 'none';
+                    iframe.src = url;
+
+                    iframe.onload = () => {
+                        setTimeout(closePopup, 4000);
+                    };
+                };
+
+                function closePopup() {
+                    if (isPopupClosed) return;
+
+                    isPopupClosed = true;
+
+                    popupx.style.display = 'none';
+                    iframe.src = '';
+                    loading.style.display = 'none';
+                    success.style.display = 'block';
+
+                    setTimeout(() => {
+                        overlay.classList.remove('active');
+                        success.style.display = 'none';
+                        location.reload();
+                    }, 2000);
+                }
+
+                window.addEventListener('message', (event) => {
+                    if (event.data === 'closeIframe') {
+                        closePopup();
+                    }
+                });
+            }
+        }
+    } else {
+        console.log("Editing is disabled. Please enable the edit permission.");
+    }
+});
+
+// Debounce Function
+function debounce(func, delay) {
+    let debounceTimer;
+    return function (...args) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+function filterTransactions() {
+    const searchValue = document.getElementById('search-input').value.toLowerCase().trim();
+    const keywords = searchValue.split(' ');
+    const container = document.getElementById('transaction-list');
+    const resultElem = document.getElementById('resultElem'); // Element to display total amount
+    container.innerHTML = '';
+
+    let totalAmount = 0; // Initialize total amount
+    const fragment = document.createDocumentFragment();
+
+    let limitedTransactions;
+    const editPermission2 = document.getElementById('edit-icon2').classList.contains('fa-fire');
+    if (editPermission2) {
+          limitedTransactions = transactions;
+                } else{
+                    limitedTransactions = transactions.slice(0, 2500);
+                }
+    
+
+    limitedTransactions.forEach(transaction => {
+        const { Description, Reason, Amount, formattedDate, remark, serialNumber } = transaction;
+        const combinedText = `${Description} ${Reason} ${remark}`.toLowerCase();
+        const matchesSearch = keywords.every(keyword => 
+            combinedText.includes(keyword) || formattedDate.toString().includes(keyword)
+        );
+
+        if (matchesSearch) {
+            // Create the row dynamically
+            const transactionDiv = document.createElement('div');
+            transactionDiv.classList.add('transaction');
+            transactionDiv.style.display = 'flex';
+            transactionDiv.style.justifyContent = 'space-between';
+            transactionDiv.setAttribute('data-transaction-id', serialNumber);
+
+            // Date
+            const dateDiv = document.createElement('div');
+            dateDiv.style.flex = '1';
+            dateDiv.style.textAlign = 'center';
+            dateDiv.innerHTML = formattedDate;
+            transactionDiv.appendChild(dateDiv);
+
+            // Description
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.style.flex = '1';
+            descriptionDiv.style.textAlign = 'center';
+            descriptionDiv.classList.add('transaction-description');
+            descriptionDiv.setAttribute('data-transaction-id', serialNumber);
+            descriptionDiv.setAttribute('data-column', 'B');
+            descriptionDiv.textContent = Description;
+            transactionDiv.appendChild(descriptionDiv);
+
+            // Reason
+            const reasonDiv = document.createElement('div');
+            reasonDiv.style.flex = '1';
+            reasonDiv.style.textAlign = 'center';
+            reasonDiv.classList.add('transaction-reason');
+            reasonDiv.setAttribute('data-transaction-id', serialNumber);
+            reasonDiv.setAttribute('data-column', 'C');
+            reasonDiv.textContent = Reason;
+            transactionDiv.appendChild(reasonDiv);
+
+            // Amount
+            const amountDiv = document.createElement('div');
+            amountDiv.style.flex = '1';
+            amountDiv.style.textAlign = 'center';
+            amountDiv.classList.add('transaction-amount');
+            amountDiv.classList.add(Amount > 0 ? 'credit' : (Amount < 0 ? 'debit' : 'neutral'));
+            amountDiv.setAttribute('data-transaction-id', serialNumber);
+            amountDiv.setAttribute('data-column', 'D');
+            amountDiv.textContent = `${Amount > 0 ? '+' : (Amount < 0 ? '-' : '')} ৳${formatNumber2(Amount)}`;
+            transactionDiv.appendChild(amountDiv);
+
+            // Remark
+            const remarkDiv = document.createElement('div');
+            remarkDiv.style.flex = '1';
+            remarkDiv.style.textAlign = 'center';
+
+            if (remark) {
+                // Display the remark if it exists
+                remarkDiv.textContent = remark;
+            } else if (stt === 'admin') {
+                // Display "Remark" button for admins if remark is missing
+                const addRemarkButton = document.createElement('button');
+                addRemarkButton.textContent = 'Remark';
+                addRemarkButton.classList.add('redirect-btn');
+                addRemarkButton.setAttribute('data-transaction-id', serialNumber);
+                remarkDiv.appendChild(addRemarkButton);
+            }
+
+            transactionDiv.appendChild(remarkDiv);
+
+            // Append the transaction to the fragment
+            fragment.appendChild(transactionDiv);
+
+            // Accumulate the total amount
+            totalAmount += Number(Amount); // Ensure Amount is treated as a number
+        }
+    });
+
+    // Update the DOM in a single operation
+    container.appendChild(fragment);
+
+    // Format the total amount for display
+    const formattedTotal = `${totalAmount > 0 ? '+' : ''} ৳${formatNumber2(totalAmount)}`;
+
+    // Update the result element with the total amount
+    resultElem.textContent = `Total searched Amount: ${formattedTotal}`;
+    resultElem.style.color = totalAmount > 0 ? 'green' : totalAmount < 0 ? 'red' : 'black'; // Color code the total amount
+}
+
+// Add a debounced event listener to the search input
+document.getElementById('search-input').addEventListener('input', debounce(filterTransactions, 300));
+ function parseGoogleDate(dateString) {
+    const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+    const matches = dateString.match(regex);
+
+    if (matches) {
+        const year = matches[1];
+        const month = String(parseInt(matches[2]) + 1).padStart(2, '0'); // Adjust month and pad with zero
+        const day = String(matches[3]).padStart(2, '0'); // Pad day with zero
+        let hour = parseInt(matches[4]);
+        const minute = String(matches[5]).padStart(2, '0'); // Pad minute with zero
+        const second = String(matches[6]).padStart(2, '0'); // Pad second with zero
+
+        // Convert to 12-hour format
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        hour = hour % 12;
+        hour = hour ? String(hour).padStart(2, '0') : '12';  // Pad hour with zero and handle midnight/noon
+
+        // Separate date and time with a line break
+        const datePart = `${day}/${month}/${year}`;
+        const timePart = `${hour}:${minute}:${second} ${ampm}`;
+
+        return `${datePart}<br>${timePart}`; // Include <br> for line break
+    }
+
+    return 'Invalid Date';  // Fallback if parsing fails
+}
+    </script>
+    <script>const e = JSON.parse(localStorage.getItem("secureData"));
+          if (!e) {
+                window.location.href = "index.html";
+            }
+             document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+                const popupImage = document.createElement('img');
+
+                // Set styles for the popup overlay
+                popupOverlay.style.position = "fixed";
+                popupOverlay.style.top = "0";
+                popupOverlay.style.left = "0";
+                popupOverlay.style.width = "100%";
+                popupOverlay.style.height = "100%";
+                popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                popupOverlay.style.display = "none";
+                popupOverlay.style.justifyContent = "center";
+                popupOverlay.style.alignItems = "center";
+
+                // Set styles for the popup image
+                popupImage.style.maxWidth = "90%";
+                popupImage.style.maxHeight = "90%";
+                popupImage.style.borderRadius = "10px";
+                popupImage.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.5)";
+
+                // Append the image to the popup overlay
+                popupOverlay.appendChild(popupImage);
+
+                // Append the popup overlay to the body
+                document.body.appendChild(popupOverlay);
+
+                // Add event listener to the original image to show the popup
+                document.getElementById("img").addEventListener('click', function () {
+                    popupImage.src = e.img;  // Set the image source for the popup
+                    popupOverlay.style.display = "flex";  // Show the popup
+                });
+
+                // Add event listener to the popup to close it when clicked
+                popupOverlay.addEventListener('click', function (e) {
+                    if (e.target === popupOverlay) {
+                        popupOverlay.style.display = "none";  // Hide the popup
+                    }
+                });
+                
+                document.getElementById('edit-permission-toggle').addEventListener('click', () => {
+    const editIcon = document.getElementById('edit-icon');
+    const editPermissionToggle = document.getElementById('edit-permission-toggle');
+    
+    // Toggle the edit permission state
+    const isEditEnabled = editIcon.classList.contains('fa-pen-to-square'); // If it shows a lock (disabled)
+    
+    if (isEditEnabled) {
+        // Enable editing: change to unlocked icon and set the state to true
+        editIcon.classList.remove('fa-pen-to-square'); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
+        editIcon.classList.add('fa-pen-field'); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+        editIcon.style.color = 'green'; // Set green color when editing is enabled
+        editPermissionToggle.classList.add('active');
+        editPermissionToggle.classList.remove('inactive');
+    const xvc = document.getElementById('xvc');
+    xvc.style.boxShadow = 'rgba(222, 7, 7, 0.4) 0px 0px 0px 2px, rgba(222, 7, 7, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset';
+    document.getElementById('xvchd').style.display = 'none';
+} else {
+        // Disable editing: change to locked icon and set the state to false
+        editIcon.classList.remove('fa-pen-field'); // Remove unlock icon
+        editIcon.classList.add('fa-pen-to-square'); // Add lock icon
+        editIcon.style.color = '#ff3021'; // Set default color for locked state
+        editPermissionToggle.classList.add('inactive');
+        editPermissionToggle.classList.remove('active');
+        document.getElementById('xvc').style.boxShadow = '';
+        document.getElementById('xvchd').style.display = '';
+    }
+});
+
+document.getElementById('edit-permission-toggle2').addEventListener('click', () => {
+    const editIcon2 = document.getElementById('edit-icon2');
+    const editPermissionToggle2 = document.getElementById('edit-permission-toggle2');
+    
+    // Toggle the edit permission state
+    const isEditEnabled2 = editIcon2.classList.contains('fa-fire-flame-curved'); // If it shows a lock (disabled)
+    
+    if (isEditEnabled2) {
+        // Enable editing: change to unlocked icon and set the state to true
+        editIcon2.classList.remove('fa-fire-flame-curved'); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
+        editIcon2.classList.add('fa-fire'); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+        editIcon2.style.color = 'red'; // Set green color when editing is enabled
+        editPermissionToggle2.classList.add('active');
+        editPermissionToggle2.classList.remove('inactive');
+        document.getElementById('search-input').style.border = '3px dotted red';
+        alert('আহা! সার্চ বার ২০২৪ সাল থেকে আজ পর্যন্ত সব তথ্য খুঁজে বের করবে। তবে, এটি কিছুটা ধীরগতির');
+    } else {
+        // Disable editing: change to locked icon and set the state to false
+        editIcon2.classList.remove('fa-fire'); // Remove unlock icon
+        editIcon2.classList.add('fa-fire-flame-curved'); // Add lock icon
+        editIcon2.style.color = '#7a7a7a'; // Set default color for locked state
+        editPermissionToggle2.classList.add('inactive');
+        editPermissionToggle2.classList.remove('active');
+        document.getElementById('search-input').style.border = '3px dotted blue';
+        alert('হুম! এখন সার্চ বার গত 2৫০০ ট্রানজেকশনের তথ্য খুঁজে বের করতে পারবে। যা অনেক দ্রুত গতির');
+    }
+});
+  
+             const stt = e.state;
+             if(stt === "admin"){
+                document.getElementById('llshh').addEventListener('click', function (e) {
+    window.open('https://docs.google.com/spreadsheets/d/13q-w16qD4ng-iLjjzqbV9ZFW3cnlIMyPIslsiWvhqVo/edit?gid=739886964#gid=739886964', '_blank');
+});
+
+document.getElementById('mmshh').addEventListener('click', function (e) {
+    window.open('https://docs.google.com/spreadsheets/d/1lfRbCMyfzDuB6MYF_S5n9sl6RabQfYrGF08aEw7eDaw/edit?gid=1332981763#gid=1332981763', '_blank');
+});
+
+                document.getElementById("nn").style.display = "block";
+             } else if(stt === "mod"){
+                document.getElementById("nn").style.display = "none";
+             }else{
+                document.getElementById("nn").style.display = "none";
+                document.getElementById('shtl').style.display = 'none';
+                document.getElementById('edit-permission-toggle').style.display ='none';
+                document.getElementById('mmshh').style.display ='none';
+                document.getElementById('llshh').style.display = 'none';
+             }
+  
+             const customersSheetUrl = 'https://docs.google.com/spreadsheets/d/1-eLT3ufiAq5QEUMtJPPl3UFeVlbGuFe_1NSnIgXdncw/htmlview';
+const suppliersSheetUrl = 'https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/htmlview';
+
+async function fetchSheetData(sheetUrl, skipRows = 2) {
+  try {
+    const response = await fetch(sheetUrl);
+    const text = await response.text();
+
+    // Use DOMParser to parse the HTML and extract the row count
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    const rows = doc.querySelectorAll('table tbody tr');
+
+    // Skip the specified number of rows (e.g., header rows)
+    const validRows = Array.from(rows).slice(skipRows);
+    return validRows.length; // Return the count of valid rows
+  } catch (error) {
+    console.error('Error fetching sheet data:', error);
+    return 0;
+  }
+}
+
+// Function to animate the number counting
+function animateCount(element, max) {
+  let count = 0;
+  const increment = Math.ceil(max / 50); // Controls animation speed
+  const interval = setInterval(() => {
+    count += increment;
+    if (count > max) {
+      count = max;
+      clearInterval(interval);
+    }
+    element.textContent = count;
+  }, 30); // Controls animation smoothness
+}
+
+// Main function to update the stats for both cards
+async function updateStats() {
+  // Fetch data for both URLs
+  const customersCount = await fetchSheetData(customersSheetUrl);
+  const suppliersCount = await fetchSheetData(suppliersSheetUrl);
+
+  // Animate counts
+  animateCount(document.getElementById('customers-count'), customersCount);
+  animateCount(document.getElementById('suppliers-count'), suppliersCount);
+}
+
+// Start updating stats on page load
+updateStats();
+    const checkAndUpdate = () => {
+        const xyz = ["total-cost", "total-receive", "ccost", "lcost", "balance"];
+
+        // Helper function to check if all elements have valid values
+        const areAllIdsValid = (ids) => {
+            return ids.every(id => {
+                const element = document.getElementById(id);
+                return element && element.textContent.trim() !== "";
+            });
+        };
+
+        if (areAllIdsValid(xyz)) {
+            setTimeout(() => {
+                function calculateDue() {
+    let dueamt = 0; // Initialize the due amount
+    const pdueElem = document.getElementById('total-pdue'); // Element to display total due amount
+
+    transactions.forEach(transaction => {
+        const { Description } = transaction;
+
+        // Extract the due stay and due paid values using regex
+        const stayMatch = Description.match(/\[ Due = (\d+) \]/);
+        const paidMatch = Description.match(/\[ Due paid = (\d+) \]/);
+
+        const dueStay = stayMatch ? parseInt(stayMatch[1], 10) : 0; // Extract the due stay amount
+        const duePaid = paidMatch ? parseInt(paidMatch[1], 10) : 0; // Extract the due paid amount
+
+        const transactionDue = dueStay - duePaid; // Calculate the transaction's due amount
+        dueamt += transactionDue; // Accumulate the total due amount
+    });
+
+    ;
+    pdueElem.textContent = `${formatNumber2(dueamt)}`
+    pdueElem.style.color = dueamt > 0 ? 'red' : 'blue'; // Color the total due amount
+}
+
+calculateDue();
+                const totalCost = parseFloat(document.getElementById("total-cost").textContent.replace(/,/g, ""));
+                const totalReceive = parseFloat(document.getElementById("total-receive").textContent.replace(/,/g, "")); // Corrected
+                const buildCost = parseInt(document.getElementById("ccost").textContent.replace(/,/g, ""));
+                const officeCost = parseInt(document.getElementById("lcost").textContent.replace(/,/g, ""));
+const pCost = parseFloat( totalCost - (officeCost+buildCost));
+document.getElementById("pCost").innerText = formatNumber2(pCost);
+                // Calculate build and office percentages
+                const buildPercentage = (buildCost / totalCost) * 100;
+                const officePercentage = (officeCost / totalCost) * 100;
+                const pPercentage = (pCost / totalCost) * 100;
+                // Set width of progress bars
+                document.getElementById("build-progress").style.width = buildPercentage + "%";
+                document.getElementById("office-progress").style.width = officePercentage + "%";
+                document.getElementById("p-progress").style.width = pPercentage + "%";
+                const px = (totalCost / totalReceive) * 100;
+                const percentage = Math.min(Math.max(isFinite(px) ? px : 100, 0), 100);
+                const progressCircle = document.querySelector('.progress-circle');
+                const circumference = 2 * Math.PI * 70; // Radius is 70
+                const offset = circumference - (percentage / 100) * circumference;
+                const duration = 1000; // Animation duration in milliseconds (2 seconds)
+                const intervalTime = duration / percentage; // Adjust interval based on percentage and duration
+
+                progressCircle.style.strokeDashoffset = circumference; // Hide the stroke initially
+
+                let currentPercentage = 0;
+                const interval = setInterval(() => {
+                    if (currentPercentage >= percentage) {
+                        clearInterval(interval);
+                    } else {
+                        currentPercentage++;
+                        const currentOffset = circumference - (currentPercentage / 100) * circumference;
+                        progressCircle.style.strokeDashoffset = currentOffset;
+                        document.querySelector(".percentage").textContent = `${currentPercentage}%`;
+                    }
+                }, intervalTime);
+            }, 500); // Initial delay before calculating and updating
+        } else {
+            console.log("Not all required IDs have valid values. Retrying...");
+
+            // Retry after 1 second if not all IDs are valid
+            setTimeout(checkAndUpdate, 1000);
+        }
+    };
+
+    // Initial call to check and update
+    checkAndUpdate();
+</script>
+</body>
+</html>

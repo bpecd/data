@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Set</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(180deg, #f8f0fc, #e0f7fa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 500;
+            color: #34495e;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        label {
+            color: #2c3e50;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+            text-align: left;
+        }
+
+       input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 2px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Add this to include padding and border in the element's width */
+}
+
+        input:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 10px rgba(41, 128, 185, 0.2);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f62f5e, #6dd5fa);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            color: white;
+            background: linear-gradient(135deg, #1f6391, #f62f5e);
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            button {
+                color:white;
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Set New PASSWORD</h2>
+        <form onsubmit="event.preventDefault(); savePassword();">
+            <div class="error" id="error-message"></div>
+            <label for="password1">New Password:</label>
+            <input type="text" id="password1" required>
+
+            <label for="password2">Confirm Password:</label>
+            <input type="text" id="password2" required>
+
+            <button type="submit">Set it</button>
+        </form>
+    </div> 
+
+    <script>
+        function savePassword(){let e=document.getElementById("password1").value,t=document.getElementById("password2").value,n=document.getElementById("error-message");e===t?(localStorage.removeItem("pin"),localStorage.setItem("pin",e),console.log("pin set",e),setTimeout(function(){window.location.href="index.html"},1e3)):n.textContent="Passwords do not match. Please try again."}
+    </script>
+    
+<script>
+    document.body.addEventListener('contextmenu', function(event) {
+    event.preventDefault();  // Prevent the right-click context menu
+});
+
+    const pass = localStorage.getItem('phoneNumber');
+    if(!pass){
+        window.location.href = 'verify.html';
+    }
+    
+</script>
+</body>
+</html>
