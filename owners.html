@@ -486,9 +486,9 @@ function parseGoogleDate(dateString) {
 function getStatusIcon(status) {
     switch (status.toLowerCase()) {
         case 'waiting':
-            return '<i class="fa-solid fa-user-clock" style="color:orange;"></i>';
+            return '<i class="fa-solid fa-user-clock" style="color:black;"></i>';
         case 'staff':
-            return '<i class="fa-regular fa-clipboard-user" style="color:black;"></i>';
+            return '<i class="fa-duotone fa-solid fa-user-bounty-hunter" style="color:red;"></i>';
         case 'working':
             return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
             case 'end':
@@ -496,9 +496,9 @@ function getStatusIcon(status) {
             case 'admin':
             return '<i class="fa-solid fa-user-robot" style="color:red;"></i>';
             case 'land owner':
-            return '<i class="fa-solid fa-user-tag" style="color:black;"></i>';
+            return '<i class="fa-duotone fa-regular fa-person-shelter" style="color:orange;"></i>';
             case 'owner':
-            return '<i class="fa-solid fa-user-tag" style="color:black;"></i>';
+            return '<i class="fa-sharp fa-regular fa-user-tie-hair" style="color:#069494;"></i>';
             case 'engineer':
             return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
         default:
