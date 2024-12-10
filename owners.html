@@ -487,6 +487,8 @@ function getStatusIcon(status) {
     switch (status.toLowerCase()) {
         case 'waiting':
             return '<i class="fa-solid fa-user-clock" style="color:orange;"></i>';
+        case 'staff':
+            return '<i class="fa-regular fa-clipboard-user" style="color:black;"></i>';
         case 'working':
             return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
             case 'end':
