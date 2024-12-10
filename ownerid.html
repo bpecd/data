@@ -753,7 +753,7 @@ document.getElementById('edit-permission-toggle2').addEventListener('click', () 
                 document.getElementById("semail").innerText = userdata.mail;
                 document.getElementById("sstate").innerText = userdata.state;
                 const checksta = userdata.state;
-                if (checksta.toLowerCase() === "engineer"){
+                if (checksta.toLowerCase() === "engineer" || checksta.toLowerCase() === "staff"){
 document.getElementById("xaxa").innerHTML = `<div  class="balance-info">Total handed: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT (<span style="color: red;" id="closed"></span>)</div>
 `;
 document.getElementById("resultElem").innerHTML =`Sum balance: <span style="color: blue;padding: 5px;background-color: #ebf1ff;border-radius: 15px;" id="balance"></span> BDT`;
