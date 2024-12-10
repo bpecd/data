@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1838,14 +1839,14 @@ if (cldata.state.toLowerCase() === 'wasa') {
     const lres = document.getElementById('lreason').value;
     
     
-    let rmgs2 = `${lres}`; // Initialize with the base value
+    let rmsg2 = `${lres}`; // Initialize with the base value
 
 if (vcno && vcno !== '0') {
-    rmgs2 += ` vc: ${vcno}`;
+    rmsg2 += ` vc: ${vcno}`;
 }
 
 if (reminderDate2 && reminderDate2 !== '0') {
-    rmgs2 += ` date: ${reminderDate2}`;
+    rmsg2 += ` date: ${reminderDate2}`;
 }
 
   
@@ -2441,6 +2442,8 @@ const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
         document.getElementById('result222').innerText = `Error Please Contact Head Admin`;
     }
 });
-    </script>
+
+
+        </script>
 </body>    
 </html>
