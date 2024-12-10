@@ -1685,7 +1685,7 @@ const descriptionx = `Material cost ${name2} - ${name}`;
 let msg2 = "Material Cost"; // Initialize with the base value
 let description2 = `Material cost for ${name2}`; // Initialize with the base value
 
-if (mdueamount) {
+if (mdueamount && mdueamount !== '0') {
     if (dueCheckbox.checked) {
         msg2 += ` [ Due paid = ${mdueamount} ]`;
         description2 += ` [ Due paid = ${mdueamount} ]`;
