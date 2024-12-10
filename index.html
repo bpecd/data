@@ -46,11 +46,11 @@
 <body><div class="popup" id="popup">
   <div class="popup-content">
     <img src="gift.gif" alt="Gift Box">
-    <p class="title"><i class="fa-duotone fa-regular fa-fire-flame-curved" style="color:red;"></i> Version 14.9.0 <i class="fa-duotone fa-regular fa-fire-flame-curved" style="color:red;"></i></p>
+    <p class="title"><i class="fa-duotone fa-regular fa-fire-flame-curved" style="color:red;"></i> Version 15.0.0 <i class="fa-duotone fa-regular fa-fire-flame-curved" style="color:red;"></i></p>
     <p class="message">Whats new:
       <ul style="text-align: left;margin-left: 10px;">
         <li>Bug fixes.</li>
-        <li>Some owners / clients 1st instl is hidden but counts.</li>
+        <li>Please add phone number to project list.</li>
       </ul>
       <br>
     </p>
@@ -101,7 +101,7 @@ function requestNotificationPermission() {
     function sendNotification() {
       if (Notification.permission === 'granted') {
         const options = {
-          body: 'Software was updated to Version 14.9.0!',
+          body: 'Software was updated to Version 15.0.0!',
           icon: 'logo.png', // Example placeholder icon
           tag: 'Update v149' // Ensures the notification is not duplicated
         };
