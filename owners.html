@@ -179,7 +179,9 @@ body.move-down {
             border-radius:10px;
             padding: 10px;
         }
-        .transaction-info {
+    .transaction i {
+        font-size: 20px;
+    }        .transaction-info {
             flex: 1;
             font-size: 14px;
         }
@@ -284,8 +286,7 @@ body.move-down {
 
     const e = JSON.parse(localStorage.getItem("secureData"));
         if (!e) {
-            window.location.href = "index.html";
-        }
+          }
          document.getElementById("img").src = e.img;
         const popupOverlay = document.createElement('div');
                 const popupImage = document.createElement('img');
@@ -486,9 +487,9 @@ function parseGoogleDate(dateString) {
 function getStatusIcon(status) {
     switch (status.toLowerCase()) {
         case 'waiting':
-            return '<i class="fa-solid fa-user-clock" style="color:black;"></i>';
+            return '<i class="fa-solid fa-user-clock" style="color:gray;"></i>';
         case 'staff':
-            return '<i class="fa-duotone fa-solid fa-user-bounty-hunter" style="color:red;"></i>';
+            return '<i class="fa-solid fa-user-headset" style="color:blue;"></i>';
         case 'working':
             return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
             case 'end':
@@ -496,9 +497,9 @@ function getStatusIcon(status) {
             case 'admin':
             return '<i class="fa-solid fa-user-robot" style="color:red;"></i>';
             case 'land owner':
-            return '<i class="fa-duotone fa-regular fa-person-shelter" style="color:orange;"></i>';
+            return '<i class="fa-solid fa-street-view" style="color:magenta;"></i>';
             case 'owner':
-            return '<i class="fa-sharp fa-regular fa-user-tie-hair" style="color:#069494;"></i>';
+            return '<i class="fa-sharp fa-solid fa-user-tie" style="color:#069494;"></i>';
             case 'engineer':
             return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
         default:
