@@ -615,12 +615,12 @@ margin: auto;
                         <input type="text" class="input-field" id="land"placeholder=""required>
                     </div>
                     <div class="input-box">
-                        <label >Agreement</label>
-                        <input type="text" class="input-field" id="agree"placeholder=""required>
+                        <label >Phone Number</label>
+                        <input type="text" class="input-field" id="instal"placeholder=""required>
                     </div>
                     <div class="input-box">
-                        <label >1st instalment</label>
-                        <input type="text" class="input-field" id="instal"placeholder=""required>
+                        <label >Agreement</label>
+                        <input type="text" class="input-field" id="agree"placeholder=""required>
                     </div>
                     
                 </div><div style="display: flex; gap: 10px;">
@@ -948,7 +948,7 @@ function displayResult2(result) {
     const formData1 = new FormData();
     formData1.append('entry.890999944', name);
     formData1.append('entry.696253293', land);
-    formData1.append('entry.1604063136', "waiting");
+    formData1.append('entry.1604063136', ind2);
     formData1.append('entry.189558853', sheetId);
     formData1.append('entry.2104162461', sheetGid);
     formData1.append('entry.2031665051', formId);
@@ -977,9 +977,9 @@ function displayResult2(result) {
     .then(() => {
         setTimeout(() => {
             const formData3 = new FormData();
-            formData3.append(`entry.${sd}`, "Remove Installment money");
-            formData3.append(`entry.${sr}`, `agreement ${wdt} Installment ->`);
-            formData3.append(`entry.${sa}`, ind2);
+            formData3.append(`entry.${sd}`, "Move agreement money to A2");
+            formData3.append(`entry.${sr}`, `agreement ${wdt}`);
+            formData3.append(`entry.${sa}`, "0");
             
             fetch(formUrl1, { method: 'POST', body: formData3, mode: 'no-cors' })
             .then(() => {
