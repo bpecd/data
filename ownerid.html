@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1406,7 +1404,7 @@ costbtn.addEventListener("click", function (e) {
             const formData = new FormData();
             formData.append(form.entries.amount, `-${amount}`);
             formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, form === googleFormsData[0] ? rmsg2 : rmsg2);
+            formData.append(form.entries.reason, form === googleFormsData[0] ? `${rmsg2} ${payment}` :`${rmsg2} ${payment}`);
 
             fetch(form.url, {
                 method: "POST",
@@ -1599,7 +1597,7 @@ recbtn.addEventListener('click', function (e) {
             const formData = new FormData();
             formData.append(form.entries.amount, `${amount}`);
             formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, rmsg2);
+            formData.append(form.entries.reason, `${rmsg2} ${payment}`);
 
             fetch(form.url, {
                 method: 'POST',
