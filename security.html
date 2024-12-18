@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Password</title>
+</head>
+<body>
+  <h1>Password Viewer</h1>
+  <input type="text" id="phone" placeholder="Enter phone number">
+  <button id="fetch">Get Password</button>
+  <p id="result"></p>
+
+  <script>
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbyK5uS5qqHrhyLtVhf_nms3Aeu3f91SIDpI_jIPgtna4BdTqPFaustsD3Ok-STSVOkQ/exec"; // Replace with your Apps Script URL
+    const sharedSecret = "sharedSecretKey123"; // Shared secret key (same as in Apps Script)
+    const timeStep = 30; // Time step in seconds for the generated codes
+
+    /**
+     * Generate the secret code using the shared secret and current time step.
+     */
+    function generateSecretCode(sharedSecret, timeStep) {
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      const currentStep = Math.floor(currentTimestamp / timeStep);
+
+      // Generate HMAC using a JavaScript library
+      return btoa(CryptoJS.HmacSHA256(String(currentStep), sharedSecret).toString(CryptoJS.enc.Base64))
+        .substring(0, 8);
+    }
+
+    document.getElementById('fetch').addEventListener('click', async () => {
+      const phone = document.getElementById('phone').value;
+      if (!phone) {
+        alert("Please enter a phone number.");
+        return;
+      }
+
+      // Generate the secret code
+      const secretCode = generateSecretCode(sharedSecret, timeStep);
+
+      try {
+        const response = await fetch(`${scriptUrl}?phone=${encodeURIComponent(phone)}&secretCode=${secretCode}`);
+        const result = await response.text();
+        document.getElementById('result').textContent = `Result: ${result}`;
+      } catch (error) {
+        console.error("Error fetching password:", error);
+        document.getElementById('result').textContent = "Error fetching password.";
+      }
+    });
+  </script>
+
+  <!-- Import CryptoJS for HMAC generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+</html>
