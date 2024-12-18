@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -549,7 +551,7 @@ body.move-down {
 <button class="claim-button1" onclick="location.reload()">
 <i class="fa-duotone fa-solid fa-turn-left"></i></button>
                     <input list="reasonss" id="reason" class="button" placeholder="Reason">
-                    <input list="ppm" id="ereason" class="button" placeholder="Payment Mathod">
+                    <input list="ppm" id="payment" class="button" placeholder="Payment Mathod">
                     <datalist id="reasonss" >
                         <option value="1st Instalment">
                             <option value="2nd Instalment">
@@ -757,7 +759,7 @@ document.getElementById('edit-permission-toggle2').addEventListener('click', () 
                 document.getElementById("semail").innerText = userdata.mail;
                 document.getElementById("sstate").innerText = userdata.state;
                 const checksta = userdata.state;
-                if (checksta.toLowerCase() === "engineer" || checksta.toLowerCase() === "staff"){
+                if (checksta.toLowerCase() === "engineer" || checksta.toLowerCase() === "staff" || checksta.toLowerCase() === "admin"){
 document.getElementById("xaxa").innerHTML = `<div  class="balance-info">Total handed: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT (<span style="color: red;" id="closed"></span>)</div>
 `;
 document.getElementById("resultElem").innerHTML =`Sum balance: <span style="color: blue;padding: 0.313rem;background-color: #ebf1ff;border-radius: 0.938rem;" id="balance"></span> BDT`;
