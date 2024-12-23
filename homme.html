@@ -1478,9 +1478,11 @@ audioElement2.load();
     const amount = parseFloat(document.getElementById('eamount').value.replace(/,/g, ''));
     const msg2 = "Cost [Receive]";
     const description = `Cost [Give Back] ${name}`;
-    const rmsg2 = document.getElementById('ereason').value;
     const payment = document.getElementById('payment').value || "";
-const name2 = devdata.name;
+ let rmsg2 = document.getElementById('ereason').value;
+ if (payment) {
+    rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+}  const name2 = devdata.name;
 const description2 = `Cost [Give Back] ${name2}`;
 const checkbox = document.getElementById("mailCheckbox");
 const dformid = devdata.formid;
@@ -1498,7 +1500,7 @@ if (amount >= 0) {
                 description: `entry.${sdentry}`
             },
             data: {
-                reason: `${rmsg2} [${payment}]`,
+                reason: `${rmsg2}`,
                 amount: `-${amount}`,
                 description: msg2
             }
@@ -1511,7 +1513,7 @@ if (amount >= 0) {
                 description: `entry.${dsdentry}`
             },
             data: {
-                reason: `${rmsg2} [${payment}]`,
+                reason: `${rmsg2}`,
                 amount: `-${amount}`,
                 description: description
             }
@@ -1524,7 +1526,7 @@ if (amount >= 0) {
                 description: "entry.2111696735"
             },
             data: {
-                reason: `${rmsg2} [${payment}]`,
+                reason: `${rmsg2}`,
                 amount: `-${amount}`,
                 description: description2
             }
@@ -2301,7 +2303,10 @@ erecbtn.addEventListener('click', function (e) {
     const payment = document.getElementById('payment').value || "";
     const msg2 = "Receive";
     const description = `Receive from ${name}`;
-    const rmsg2 = document.getElementById('ereason').value;
+    let rmsg2 = document.getElementById('ereason').value;
+ if (payment) {
+    rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+}  
     const checkbox = document.getElementById("mailCheckbox");
 
 const description2 = `Receive from ${name2}`;
@@ -2319,7 +2324,7 @@ if (amount >= 0) {
                 description: `entry.${sdentry}`
             },
             data: {
-                reason: `${rmsg2} [${payment}]`,
+                reason: `${rmsg2}`,
                 amount: amount,
                 description: description
             }
@@ -2332,7 +2337,7 @@ if (amount >= 0) {
                 description: `entry.${dsdentry}`
             },
             data: {
-                reason:`${rmsg2} [${payment}]`,
+                reason:`${rmsg2}`,
                 amount: amount,
                 description: description 
             }
@@ -2345,7 +2350,7 @@ if (amount >= 0) {
                 description: "entry.2111696735"
             },
             data: {
-                reason: `${rmsg2} [${payment}]`,
+                reason: `${rmsg2}`,
                 amount: amount,
                 description: description2
             }
