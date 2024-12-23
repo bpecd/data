@@ -1374,7 +1374,7 @@ costbtn.addEventListener("click", function (e) {
     const srentry = userdata.srentry;
     const saentry = userdata.saentry;
     const amount = parseFloat(document.getElementById("amount").value.replace(/,/g, ""));
-    const payment = document.getElementById('payment').value || "Cash";
+    const payment = document.getElementById('payment').value || "";
     const msg2 = "Cost";
     const description = "Owner Cost " + name;
     const rmsg2 = document.getElementById("reason").value;
@@ -1567,7 +1567,7 @@ recbtn.addEventListener('click', function (e) {
     const srentry = userdata.srentry;
     const saentry = userdata.saentry;
     const amount = parseFloat(document.getElementById("amount").value.replace(/,/g, ''));
-    const payment = document.getElementById('payment').value || "Cash";
+    const payment = document.getElementById('payment').value || "";
     const msg2 = "Receive";
     const description = `Receive from ${name}`;
     const rmsg2 = document.getElementById('reason').value;
