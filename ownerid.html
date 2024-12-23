@@ -1377,8 +1377,10 @@ costbtn.addEventListener("click", function (e) {
     const payment = document.getElementById('payment').value || "";
     const msg2 = "Cost";
     const description = "Owner Cost " + name;
-    const rmsg2 = document.getElementById("reason").value;
-    const checkbox = document.getElementById("mailCheckbox");
+    let rmsg2 = document.getElementById("reason").value;
+ if (payment) {
+    rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+}   const checkbox = document.getElementById("mailCheckbox");
 
     if (amount >= 0) {
         let googleFormsData = [
@@ -1404,7 +1406,7 @@ costbtn.addEventListener("click", function (e) {
             const formData = new FormData();
             formData.append(form.entries.amount, `-${amount}`);
             formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, form === googleFormsData[0] ? `${rmsg2} ${payment}` :`${rmsg2} ${payment}`);
+            formData.append(form.entries.reason, form === googleFormsData[0] ? `${rmsg2}` :`${rmsg2}`);
 
             fetch(form.url, {
                 method: "POST",
@@ -1570,8 +1572,10 @@ recbtn.addEventListener('click', function (e) {
     const payment = document.getElementById('payment').value || "";
     const msg2 = "Receive";
     const description = `Receive from ${name}`;
-    const rmsg2 = document.getElementById('reason').value;
-    const checkbox = document.getElementById("mailCheckbox");
+    let rmsg2 = document.getElementById("reason").value;
+ if (payment) {
+    rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+}   const checkbox = document.getElementById("mailCheckbox");
 
     if (amount >= 0) {
         const googleFormsData = [
@@ -1597,7 +1601,7 @@ recbtn.addEventListener('click', function (e) {
             const formData = new FormData();
             formData.append(form.entries.amount, `${amount}`);
             formData.append(form.entries.description, form === googleFormsData[0] ? msg2 : description);
-            formData.append(form.entries.reason, `${rmsg2} [${payment}]`);
+            formData.append(form.entries.reason, `${rmsg2}`);
 
             fetch(form.url, {
                 method: 'POST',
