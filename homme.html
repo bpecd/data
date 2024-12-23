@@ -1479,7 +1479,7 @@ audioElement2.load();
     const msg2 = "Cost [Receive]";
     const description = `Cost [Give Back] ${name}`;
     const rmsg2 = document.getElementById('ereason').value;
-    const payment = document.getElementById('payment').value || "Cash";
+    const payment = document.getElementById('payment').value || "";
 const name2 = devdata.name;
 const description2 = `Cost [Give Back] ${name2}`;
 const checkbox = document.getElementById("mailCheckbox");
@@ -2298,7 +2298,7 @@ erecbtn.addEventListener('click', function (e) {
     const srentry = cldata.srentry;
     const saentry = cldata.saentry;
     const amount = parseFloat(document.getElementById('eamount').value.replace(/,/g, ''));
-    const payment = document.getElementById('payment').value || "Cash";
+    const payment = document.getElementById('payment').value || "";
     const msg2 = "Receive";
     const description = `Receive from ${name}`;
     const rmsg2 = document.getElementById('ereason').value;
