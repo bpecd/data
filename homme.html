@@ -1455,6 +1455,7 @@ document.getElementById('search-input').addEventListener('input', debounce(filte
             const buttons222 = document.getElementById('buttons222');
             const buttons22 = document.getElementById('buttons22');
             const fall = document.getElementById("fall");
+             const dermsg2 = document.getElementById("ereason").value;
             
 ecostbtn.addEventListener('click', function(e) {
     let audioPlayed = false;
@@ -1598,7 +1599,7 @@ async function sendEmailWithRetrys() {
         amount: amount,
         totalpaid: totalpaid,
         due: totaldue,
-        description: rmsg2,
+        description: dermsg2,
         payment:payment,
         today: formattedDate,
         username: `Engr ${secureDataV2.name}`,
@@ -2419,7 +2420,7 @@ async function sendEmailWithRetry() {
         amount: amount,
         totalpaid: totalpaid,
         due: totaldue,
-        description: rmsg2,
+        description: dermsg2,
         payment: payment,
         today: formattedDate,
         username: `Engr ${secureDataV2.name}`,
