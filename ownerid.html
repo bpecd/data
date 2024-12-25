@@ -1377,6 +1377,7 @@ costbtn.addEventListener("click", function (e) {
     const payment = document.getElementById('payment').value || "";
     const msg2 = "Cost";
     const description = "Owner Cost " + name;
+     const dermsg2 = document.getElementById("reason").value;
     let rmsg2 = document.getElementById("reason").value;
  if (payment) {
     rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
@@ -1485,7 +1486,7 @@ async function sendEmailWithRetry() {
         amount: amount,
         totalpaid: totalpaid,
         due: totaldue,
-        description: rmsg2,
+        description: dermsg2,
         payment:payment,
         today: formattedDate,
         username: `Admin`,
@@ -1572,7 +1573,9 @@ recbtn.addEventListener('click', function (e) {
     const payment = document.getElementById('payment').value || "";
     const msg2 = "Receive";
     const description = `Receive from ${name}`;
+    const dermsg2 = document.getElementById("reason").value;
     let rmsg2 = document.getElementById("reason").value;
+    
  if (payment) {
     rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
 }   const checkbox = document.getElementById("mailCheckbox");
@@ -1650,13 +1653,13 @@ async function sendEmailWithRetrys() {
     const email = userdata.mail;
     const username = secureDataV2.name;
     const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
-
+    
     const emailParams = {
         name: name,
         amount: amount,
         totalpaid: totalpaid,
         due: totaldue,
-        description: rmsg2,
+        description: dermsg2,
         payment:payment,
         today: formattedDate,
         username: `Engr ${username}`,
