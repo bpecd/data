@@ -1219,8 +1219,7 @@ function filterTransactions() {
         const { Description, Reason, Amount, formattedDate, remark, serialNumber } = transaction;
         const combinedText = `${Description} ${Reason} ${remark}`.toLowerCase();
         const matchesSearch = keywords.every(keyword => 
-            combinedText.includes(keyword) || formattedDate.toString().includes(keyword)
-        );
+            combinedText.includes(keyword));
 
         if (matchesSearch) {
             // Create the row dynamically
