@@ -739,7 +739,7 @@ function filterTransactions2() {
 
         // Check if all keywords are found in the combined text or date
         const matchesSearch = keywords.every(keyword =>
-            combinedText.includes(keyword) || formattedDate.toString().includes(keyword)
+            combinedText.includes(keyword)
         );
 
         if (matchesSearch) {
