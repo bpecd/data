@@ -735,12 +735,10 @@ function filterTransactions2() {
         const { Description, Reason, Amount, formattedDate, remark, serialNumber2 } = transaction;
 
         // Combine Description and Reason for a universal search
-        const combinedText = `${Description} ${Reason} ${remark}`.toLowerCase();
-
+        const combinedText = `${Description} ${remark}`.toLowerCase();
+ const resotxt = `${Reason}`.toLowerCase();
         // Check if all keywords are found in the combined text or date
-        const matchesSearch = keywords.every(keyword =>
-            combinedText.includes(keyword)
-        );
+        const matchesSearch = keywords.every(keyword =>combinedText.includes(keyword)  || resotxt.includes(keyword));
 
         if (matchesSearch) {
             // Create elements manually instead of using innerHTML to ensure proper display
