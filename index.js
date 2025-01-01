@@ -48,11 +48,18 @@ if (!what) {
                 const response = await fetch(
                     `https://script.google.com/macros/s/AKfycbxxzXGjRVspn41gozY42ap79eZDtTRCiy4LjIVvTY0NqMVx1qQmiQd41mN9E5pzNno3CA/exec?phone=${encodeURIComponent(phone)}&secretCode=${secretCode}`
                 );
+
+                if (!response.ok) {
+                    throw new Error('Fetch failed');
+                }
+
                 const passFromScript = await response.text();
                 localStorage.setItem("pass", passFromScript);
                 document.getElementById("popup").classList.remove("active");
             } catch (error) {
-                document.getElementById("result").innerText = "Error, please contact admin!";
+                // Handle fetch failure
+                localStorage.removeItem("phonenumberV2"); // Remove phonenumberV2
+                window.location.href = "verify.html"; // Redirect to verify.html
             }
         }
 
