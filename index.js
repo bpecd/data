@@ -56,6 +56,8 @@ if (!what) {
                 const passFromScript = await response.text();
                 localStorage.setItem("pass", passFromScript);
                 document.getElementById("popup").classList.remove("active");
+               location.reload();
+
             } catch (error) {
                 // Handle fetch failure
                 localStorage.removeItem("phonenumberV2"); // Remove phonenumberV2
