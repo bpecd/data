@@ -292,11 +292,16 @@ font-size: 1rem;
                      inset -0.063rem -0.063rem 0.125rem #ffffff73;
       }
       .field span{
+         display: flex;
          position: absolute;
+         justify-content: center;
+         align-items: center;
          color: black;
          width: 3.125rem;
-         line-height: 3.125rem;
+         font-size: 1.25rem;
+         height: 3.125rem;
       }
+      
       .field label{
          position: absolute;
          top: 50%;
