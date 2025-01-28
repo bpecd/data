@@ -173,9 +173,7 @@ body.move-down {
         .transaction {
             display: flex;
             justify-content: center;
-           
             border-bottom: 0.125rem dotted black;
-            border-radius:0.625rem;
             padding: 0.625rem;
         }
     .transaction i {
@@ -234,6 +232,12 @@ body.move-down {
     padding:  0.1rem;
     font-size: smaller;
 }
+     .even{
+    background-color: #fafafa;
+  }
+    .odd{
+      background-color: #dedede;
+    }
     </style>
 </head>
 <body>
@@ -396,13 +400,14 @@ function displayTransaction(rows) {
         }
 
         const uniqueId = `viewbtn-${i}`;
+const rowClass = serialNumber % 2 === 0 ? 'even' : 'odd';
 
         transactions.push({
             Name, Land, Status, formattedDate, sheetid, sheetid2, sgid, sgid2, formid,
             formid2, sdentry, sdentry2, srentry, srentry2, saentry, saentry2,
             nameen, phoneen, houseen, mailen, statusen, sheetiden, sgiden, formiden,
             html: `
-<div class="transaction">
+<div class="transaction ${rowClass}">
     <div style="flex: 0.5; text-align: center;">
         ${serialNumber}
     </div>
