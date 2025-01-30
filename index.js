@@ -149,20 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("secureDataV2", JSON.stringify(r));
             document.getElementById("log").src = "index2.gif";
 
-            let isFirstVisit = localStorage.getItem('firstVisitn') === null;
-
-            if (isFirstVisit) {
-                setTimeout(() => {
-                    window.location.href = m.url;
-                }, 8000);
-                showpp();
-                audioElementn.play();
-                localStorage.setItem('firstVisitn', 'false');
-            } else {
                 setTimeout(() => {
                     window.location.href = m.url;
                 }, 800);
-            }
+            
         } else {
             if (!o) {
                 a.play().catch((e) => {
