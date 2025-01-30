@@ -240,7 +240,7 @@ async function a() {
 
         if (localStorage.getItem("popupShown") !== "true") {
             console.log("Showing popup");
-            const popupElement = document.getElementById("popup");
+            const popupElement = document.getElementById("popupnone");
             if (popupElement) {
                 sendNotification();
               setTimeout(() => {
@@ -255,7 +255,7 @@ async function a() {
   
                 popupElement.classList.add("active");
             } else {
-                console.warn("Popup element not found");
+                console.log("Popup element not found");
             }
         }
     } catch (i) {
