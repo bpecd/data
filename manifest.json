@@ -1,0 +1,52 @@
+
+{
+  "name": "Building Plan Database",
+  "short_name": "Building Plan",
+  "start_url": "/data/index.html",
+  "scope": "/data/",
+  "background_color": "#ffffff",
+  "theme_color": "#f0f2f5",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/data/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },{
+      "src": "/data/icons.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/data/iconss.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "buildingplanapp",
+  "description": "Building Plan official Data Entry webapp by @Moraladnan",
+  "categories": [
+    "productivity"
+  ],
+  "lang": "en",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "screenshots": [
+    {
+      "src": "/data/screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Main interface"
+    },
+    {
+      "src": "/data/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Data entry screen"
+    }
+  ]
+}

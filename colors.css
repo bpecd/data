@@ -1,0 +1,31 @@
+.dark{
+--bg: #425156;
+--search: #100aca;
+--sheet:#096faa;
+--menu-bg:#0ccccc;
+--circlebg: #60deed;
+--circle: #f9475a;
+--rd:#f0e2e2;
+--persentage:#f9475a; 
+--avtextbg:white;
+--in:#5d8e93;
+--out:#c42b3a;
+--topbar:#212e34;
+--text: #fafafa;
+}
+:root{
+    --bg: #f0f2f5;
+    --search: #100aca;
+    --sheet:#096faa;
+    --menu-bg:#0ccccc;
+    --circlebg: #3e3eff;
+    --circle: red;
+    --rd:#7a7a7a;
+    --persentage:#ff0000; 
+    --avtextbg:white;
+    --in:blue;
+    --out:red;
+    --topbar:#fff;
+    --text: black;
+  }  
+   
