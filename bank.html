@@ -668,7 +668,8 @@ if (stt === "admin") {
     // Admin has full access; no changes needed
 } else if (stt === "mod") {
     document.getElementById("adcost").style.display = "none";
-} else {
+} else {const editIcon = document.getElementById('edit-icon');
+    
     document.getElementById("adcost").style.display = "none";
     editIcon.style.display = "none";
     document.getElementById('shtl2').style.display = 'none';
