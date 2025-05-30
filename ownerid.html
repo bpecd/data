@@ -764,9 +764,11 @@ document.getElementById("resultElem").innerHTML =`Sum balance: <span style="colo
        document.getElementById("costbtn").innerHTML =`Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;       
 } else {}
                 document.title = `Owner List > ${userdata.name} ( ${checksta} )`;
-                const sheetid = userdata.sheetid;
-                const url = 'https://docs.google.com/spreadsheets/d/'+ sheetid +'/htmlview';
-                let t = 0;
+const sheetid = userdata.sheetid;
+const url = 'https://docs.google.com/spreadsheets/d/' + sheetid + '/htmlview';
+let t = 0;
+let rec = 0;
+let tot = 0;
 
 async function n(t, n, l, r, o) {
     try {
@@ -775,11 +777,23 @@ async function n(t, n, l, r, o) {
             s = new DOMParser(),
             c = s.parseFromString(i, "text/html"),
             d = c.querySelectorAll("table");
-        if (d.length <= t) throw Error(`Sheet index ${t} out of bounds`);
+        if (d.length <= t) {
+            console.warn(`Sheet index ${t} out of bounds`);
+            document.getElementById(r).innerText = o;
+            return;
+        }
         let m = d[t].rows;
-        if (m.length <= n) throw Error(`Row index ${n} out of bounds`);
+        if (m.length <= n) {
+            console.warn(`Row index ${n} out of bounds`);
+            document.getElementById(r).innerText = o;
+            return;
+        }
         let u = m[n].cells;
-        if (u.length <= l) throw Error(`Cell index ${l} out of bounds`);
+        if (u.length <= l) {
+            console.warn(`Cell index ${l} out of bounds`);
+            document.getElementById(r).innerText = o;
+            return;
+        }
         let h = u[l],
             g = h.innerText || h.textContent;
 
@@ -795,54 +809,51 @@ async function n(t, n, l, r, o) {
         // Apply red color if the balance is negative
         if (r === "balance" && value < 0) {
             element.style.color = "red";
-
         } else {
-            
+            // Reset color to default if not negative
+            element.style.color = "";
         }
 
         if (o) {
             (function e(t, n, l) {
-        let r = document.getElementById(n);
+                let r = document.getElementById(n);
 
-        // Get computed styles of the parent element
-        const computedStyle = window.getComputedStyle(r);
+                // Get computed styles of the parent element
+                const computedStyle = window.getComputedStyle(r);
 
-        // Clear child elements
-        while (r.firstChild) {
-            r.removeChild(r.firstChild);
-        }
+                // Clear child elements
+                while (r.firstChild) {
+                    r.removeChild(r.firstChild);
+                }
 
-        // Animate each character
-        t.split("").forEach((char, index) => {
-            let span = document.createElement("span");
-            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
-            span.classList.add(l); // Add animation class
-            span.style.animationDelay = `${0.03 * index}s`;
+                // Animate each character
+                t.split("").forEach((char, index) => {
+                    let span = document.createElement("span");
+                    span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+                    span.classList.add(l); // Add animation class
+                    span.style.animationDelay = `${0.03 * index}s`;
 
-            // Copy styles from parent element
-            span.style.color = computedStyle.color;
-            span.style.fontFamily = computedStyle.fontFamily;
-            span.style.fontSize = computedStyle.fontSize;
-            span.style.fontWeight = computedStyle.fontWeight;
-            span.style.fontStyle = computedStyle.fontStyle;
+                    // Copy styles from parent element
+                    span.style.color = computedStyle.color;
+                    span.style.fontFamily = computedStyle.fontFamily;
+                    span.style.fontSize = computedStyle.fontSize;
+                    span.style.fontWeight = computedStyle.fontWeight;
+                    span.style.fontStyle = computedStyle.fontStyle;
 
-            r.appendChild(span);
-        });
+                    r.appendChild(span);
+                });
             })(formattedValue, r, o);
         }
+        // Return the parsed value for use in calculations
+        return isNaN(value) ? 0 : value;
     } catch (p) {
         console.error("Error fetching data:", p);
+        document.getElementById(r).innerText = o;
+        return 0;
     }
 }
 
-           n(t, 3,3,"total-receive", "letter"),
-n(t, 3, 4, "total-cost", "letter"),
-n(t, 3, 1, "total", "letter"),
-           n(t, 3,2,"balance", "letter");
-           
-
-        });
-        document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const userdata = JSON.parse(localStorage.getItem('userdata'));
     const sheetid = userdata.sheetid;
 
@@ -905,33 +916,32 @@ n(t, 3, 1, "total", "letter"),
         }
     }
    
-// Function to animate and display text
-function displayAnimatedText(elementId, text, animationClass) {
-    const element = document.getElementById(elementId);
-    const computedStyle = window.getComputedStyle(element);
-    const inlineStyle = element.style; // Inline styles
+    // Function to animate and display text
+    function displayAnimatedText(elementId, text, animationClass) {
+        const element = document.getElementById(elementId);
+        const computedStyle = window.getComputedStyle(element);
+        const inlineStyle = element.style; // Inline styles
 
-    element.innerHTML = ""; // Clear the element
+        element.innerHTML = ""; // Clear the element
 
-    text.split("").forEach((char, index) => {
-        const span = document.createElement("span");
-        span.textContent = char === " " ? "\xa0" : char; // Handle spaces
-        span.classList.add(animationClass);
-        span.style.animationDelay = `${0.03 * index}s`;
+        text.split("").forEach((char, index) => {
+            const span = document.createElement("span");
+            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+            span.classList.add(animationClass);
+            span.style.animationDelay = `${0.03 * index}s`;
 
-        // Preserve computed and inline styles
-        span.style.color = computedStyle.color;
+            // Preserve computed and inline styles
+            span.style.color = computedStyle.color;
             span.style.fontFamily = computedStyle.fontFamily;
             span.style.fontSize = computedStyle.fontSize;
             span.style.fontWeight = computedStyle.fontWeight;
             span.style.fontStyle = computedStyle.fontStyle;
 
-        element.appendChild(span);
-    });
-}
-        function fetchAndAnimateDue() {
-        const rec = parseFloat(document.getElementById("total-receive").textContent.replace(/,/g, "")) || 0;
-        const tot = parseFloat(document.getElementById("total").textContent.replace(/,/g, "")) || 0;
+            element.appendChild(span);
+        });
+    }
+
+    function fetchAndAnimateDue() {
         let due = tot - rec;
 
         // Ensure `due` is non-negative
@@ -946,27 +956,28 @@ function displayAnimatedText(elementId, text, animationClass) {
         // Animate the due amount text
         displayAnimatedText("due", formattedDue, "letter");
     }
+
     // Example calls
-  // Wrap your n() calls in a Promise
-Promise.resolve()
-  .then(() => {
-    n(t, 3, 6, "closed", "?");
-    n(t, 4, 6, "closed2", "?");
-  })
-  .then(() => {
-    // Delay the next function using setTimeout inside then
-    return new Promise(resolve => {
-      setTimeout(() => {
-        fetchAndAnimateDue();
-        resolve();
-      }, 1000);
-    });
-  });
-
-   
+    Promise.resolve()
+        .then(async () => {
+            rec = await n(t, 3, 3, "total-receive", "letter") || 0;
+            tot = await n(t, 3, 1, "total", "letter") || 0;
+            await n(t, 3, 4, "total-cost", "letter");
+            await n(t, 3, 2, "balance", "letter");
+        })
+        .then(() => {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    fetchAndAnimateDue();
+                    resolve();
+                }, 1000);
+            });
+        })
+        .then(() => {
+            n(t, 3, 6, "closed", "?");
+            n(t, 4, 6, "closed2", "?");
+        });
 });
-     
-
 
 function formatNumber(num) {
     // Handle negative numbers
@@ -1002,7 +1013,6 @@ function formatNumber2(num) {
         return lastThree;
     }
 }
-
         const userdata = JSON.parse(localStorage.getItem('userdata'));
         const sheetid =userdata.sheetid;
         const gid = userdata.gid;
