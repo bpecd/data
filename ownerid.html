@@ -854,8 +854,9 @@ async function n(t, n, l, r, o) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const sheetid = userdata.sheetid;
-
+ const userdata = JSON.parse(localStorage.getItem('userdata'));
+        const sheetid =userdata.sheetid;
+        
     const url = 'https://docs.google.com/spreadsheets/d/' + sheetid + '/htmlview';
     let t = 0;
 
@@ -1012,9 +1013,7 @@ function formatNumber2(num) {
         return lastThree;
     }
 }
-        const userdata = JSON.parse(localStorage.getItem('userdata'));
-        const sheetid =userdata.sheetid;
-        const gid = userdata.gid;
+       const gid = userdata.gid;
         const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${gid}`;
         const sheetUrl2 = `https://docs.google.com/spreadsheets/d/${sheetid}/edit`;
         document.getElementById('shtl').addEventListener('click', function() {
