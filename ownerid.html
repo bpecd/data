@@ -929,14 +929,7 @@ function displayAnimatedText(elementId, text, animationClass) {
         element.appendChild(span);
     });
 }
-
-    // Example calls
-    n(t, 3, 6, "closed", "?"),
-    n(t, 4, 6, "closed2", "?"),setTimeout(fetchAndAnimateDue, 1000);
-
-   
-});
-             function fetchAndAnimateDue() {
+        function fetchAndAnimateDue() {
         const rec = parseFloat(document.getElementById("total-receive").textContent.replace(/,/g, "")) || 0;
         const tot = parseFloat(document.getElementById("total").textContent.replace(/,/g, "")) || 0;
         let due = tot - rec;
@@ -953,6 +946,26 @@ function displayAnimatedText(elementId, text, animationClass) {
         // Animate the due amount text
         displayAnimatedText("due", formattedDue, "letter");
     }
+    // Example calls
+  // Wrap your n() calls in a Promise
+Promise.resolve()
+  .then(() => {
+    n(t, 3, 6, "closed", "?");
+    n(t, 4, 6, "closed2", "?");
+  })
+  .then(() => {
+    // Delay the next function using setTimeout inside then
+    return new Promise(resolve => {
+      setTimeout(() => {
+        fetchAndAnimateDue();
+        resolve();
+      }, 1000);
+    });
+  });
+
+   
+});
+     
 
 
 function formatNumber(num) {
