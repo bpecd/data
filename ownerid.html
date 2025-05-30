@@ -931,9 +931,12 @@ function displayAnimatedText(elementId, text, animationClass) {
 }
 
     // Example calls
-    n(t, 3, 6, "closed", "?");
-    n(t, 4, 6, "closed2", "?");
-    function fetchAndAnimateDue() {
+    n(t, 3, 6, "closed", "?"),
+    n(t, 4, 6, "closed2", "?"),setTimeout(fetchAndAnimateDue, 1000);
+
+   
+});
+             function fetchAndAnimateDue() {
         const rec = parseFloat(document.getElementById("total-receive").textContent.replace(/,/g, "")) || 0;
         const tot = parseFloat(document.getElementById("total").textContent.replace(/,/g, "")) || 0;
         let due = tot - rec;
@@ -951,10 +954,6 @@ function displayAnimatedText(elementId, text, animationClass) {
         displayAnimatedText("due", formattedDue, "letter");
     }
 
-    // Fetch and display total-receive and total, then trigger animation
-    setTimeout(fetchAndAnimateDue, 3500);
-
-});
 
 function formatNumber(num) {
     // Handle negative numbers
