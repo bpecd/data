@@ -1152,8 +1152,7 @@ async function n(t, n, l, r, alternateText) {
 
     // Parse and return the value
     const value = parseFloat(g.replace(/,/g, "").trim());
-  return isNaN(value) ? 0 : r === "total-cost" ? Math.abs(value) : value;
-} catch (p) {
+ return isNaN(value) ? 0 : formatNumber(value);} catch (p) {
     console.error("Error fetching data:", p);
     document.getElementById(r).innerText = alternateText;
     return 0;
