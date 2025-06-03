@@ -973,277 +973,150 @@
     </script>
 
     <script>
-      const userdata = JSON.parse(localStorage.getItem("userdata"));
-      if (!userdata) {
-        window.location.href = "owners.html";
-      }
-      document.getElementById("sname").innerText = userdata.name;
-      document.getElementById("sphone").innerText = userdata.phone;
-      document.getElementById("semail").innerText = userdata.mail;
-      document.getElementById("sstate").innerText = userdata.state;
-      const checksta = userdata.state;
-      if (
-        checksta.toLowerCase() === "engineer" ||
-        checksta.toLowerCase() === "staff" ||
-        checksta.toLowerCase() === "admin"
-      ) {
-        document.getElementById(
-          "xaxa"
-        ).innerHTML = `<div  class="balance-info">Total handed: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT (<span style="color: red;" id="closed"></span>)</div>
-`;
-        document.getElementById(
-          "resultElem"
-        ).innerHTML = `Sum balance: <span style="color: blue;padding: 0.313rem;background-color: #ebf1ff;border-radius: 0.938rem;" id="balance"></span> BDT`;
-        document.getElementById(
-          "costbtn"
-        ).innerHTML = `Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;
-      } else {
-      }
-      document.title = `Owner List > ${userdata.name} ( ${checksta} )`;
-      const sheetid = userdata.sheetid;
-      const url =
-        "https://docs.google.com/spreadsheets/d/" + sheetid + "/htmlview";
-      let t = 0;
-      let rec = 0;
-      let tot = 0;
+     // Retrieve user data from localStorage
+const userdata = JSON.parse(localStorage.getItem("userdata"));
+if (!userdata) {
+  window.location.href = "owners.html";
+}
 
-      async function n(t, n, l, r, o) {
-        try {
-          let a = await fetch(url),
-            i = await a.text(),
-            s = new DOMParser(),
-            c = s.parseFromString(i, "text/html"),
-            d = c.querySelectorAll("table");
-          if (d.length <= t) {
-            console.warn(`Sheet index ${t} out of bounds`);
-            document.getElementById(r).innerText = o;
-            return;
-          }
-          let m = d[t].rows;
-          if (m.length <= n) {
-            console.warn(`Row index ${n} out of bounds`);
-            document.getElementById(r).innerText = o;
-            return;
-          }
-          let u = m[n].cells;
-          if (u.length <= l) {
-            console.warn(`Cell index ${l} out of bounds`);
-            document.getElementById(r).innerText = o;
-            return;
-          }
-          let h = u[l],
-            g = h.innerText || h.textContent;
+// Set user data in the DOM
+document.getElementById("sname").innerText = userdata.name;
+document.getElementById("sphone").innerText = userdata.phone;
+document.getElementById("semail").innerText = userdata.mail;
+document.getElementById("sstate").innerText = userdata.state;
 
-          // Check if the value should be formatted as a number
-          const value = parseFloat(g.trim());
-          const formattedValue =
-            r === "balance"
-              ? formatNumber(value)
-              : formatNumber(Math.abs(value));
+// Check user state and update UI for specific roles
+const checksta = userdata.state;
+if (["engineer", "staff", "admin"].includes(checksta.toLowerCase())) {
+  document.getElementById("xaxa").innerHTML = `
+    <div class="balance-info">
+      Total handed: <span style="color: red; font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT 
+      (<span style="color: red;" id="closed"></span>)
+    </div>`;
+  document.getElementById("resultElem").innerHTML = `
+    Sum balance: <span style="color: blue; padding: 0.313rem; background-color: #ebf1ff; border-radius: 0.938rem;" id="balance"></span> BDT`;
+  document.getElementById("costbtn").innerHTML = `
+    Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;
+}
 
-          const element = document.getElementById(r);
-          element.innerText = formattedValue;
+// Set document title
+document.title = `Owner List > ${userdata.name} (${checksta})`;
 
-          // Apply red color if the balance is negative
-          if (r === "balance" && value < 0) {
-            element.style.color = "red";
-          } else {
-            // Reset color to default if not negative
-            element.style.color = "";
-          }
+// Construct Google Sheets URL
+const sheetid = userdata.sheetid;
+const url = `https://docs.google.com/spreadsheets/d/${sheetid}/htmlview`;
 
-          if (o) {
-            (function e(t, n, l) {
-              let r = document.getElementById(n);
-
-              // Get computed styles of the parent element
-              const computedStyle = window.getComputedStyle(r);
-
-              // Clear child elements
-              while (r.firstChild) {
-                r.removeChild(r.firstChild);
-              }
-
-              // Animate each character
-              t.split("").forEach((char, index) => {
-                let span = document.createElement("span");
-                span.textContent = char === " " ? "\xa0" : char; // Handle spaces
-                span.classList.add(l); // Add animation class
-                span.style.animationDelay = `${0.03 * index}s`;
-
-                // Copy styles from parent element
-                span.style.color = computedStyle.color;
-                span.style.fontFamily = computedStyle.fontFamily;
-                span.style.fontSize = computedStyle.fontSize;
-                span.style.fontWeight = computedStyle.fontWeight;
-                span.style.fontStyle = computedStyle.fontStyle;
-
-                r.appendChild(span);
-              });
-            })(formattedValue, r, o);
-          }
-          // Return the parsed value for use in calculations
-          return isNaN(value) ? 0 : value;
-        } catch (p) {
-          console.error("Error fetching data:", p);
-          document.getElementById(r).innerText = o;
-          return 0;
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const userdata = JSON.parse(localStorage.getItem("userdata"));
-        const sheetid = userdata.sheetid;
-        const url =
-          "https://docs.google.com/spreadsheets/d/" + sheetid + "/htmlview";
-        let t = 0;
-
-       // ...inside DOMContentLoaded...
-async function n(t, n, l, r, alternateText) {
+// Function to fetch and process data from Google Sheets
+async function fetchSheetData(sheetIndex, rowIndex, cellIndex, elementId, animationClass) {
   try {
-    let a = await fetch(url),
-      i = await a.text(),
-      s = new DOMParser(),
-      c = s.parseFromString(i, "text/html"),
-      d = c.querySelectorAll("table");
+    const response = await fetch(url);
+    const text = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    const tables = doc.querySelectorAll("table");
 
-    if (d.length <= t) {
-      console.warn(`Sheet index ${t} out of bounds`);
-      document.getElementById(r).innerText = alternateText;
+    // Check bounds for sheet, row, and cell
+    if (tables.length <= sheetIndex) {
+      console.warn(`Sheet index ${sheetIndex} out of bounds`);
+      document.getElementById(elementId).innerText = animationClass || "0";
+      return 0;
+    }
+    const rows = tables[sheetIndex].rows;
+    if (rows.length <= rowIndex) {
+      console.warn(`Row index ${rowIndex} out of bounds`);
+      document.getElementById(elementId).innerText = animationClass || "0";
+      return 0;
+    }
+    const cells = rows[rowIndex].cells;
+    if (cells.length <= cellIndex) {
+      console.warn(`Cell index ${cellIndex} out of bounds`);
+      document.getElementById(elementId).innerText = animationClass || "0";
       return 0;
     }
 
-    let m = d[t].rows;
-    if (m.length <= n) {
-      console.warn(`Row index ${n} out of bounds`);
-      document.getElementById(r).innerText = alternateText;
-      return 0;
-    }
+    // Extract and process cell value
+    const cell = cells[cellIndex];
+    const rawValue = cell.innerText || cell.textContent;
+    const value = parseFloat(rawValue.replace(/,/g, "").trim());
+    const isValidNumber = !isNaN(value);
+    const displayValue = isValidNumber ? formatNumber(value) : (animationClass || "0");
 
-    let u = m[n].cells;
-    if (u.length <= l) {
-      console.warn(`Cell index ${l} out of bounds`);
-      document.getElementById(r).innerText = alternateText;
-      return 0;
-    }
-
-    let h = u[l],
-      g = h.innerText || h.textContent;
-
-    // Use alternate text if the cell value is empty
-    let displayText = g && g.trim() ? g.trim() : alternateText;
-
-    // Display or animate the text
-    if (alternateText) {
-      (function e(t, n, l) {
-        let r = document.getElementById(n);
-        (r.innerHTML = ""),
-          t.split("").forEach((e, t) => {
-            let n = document.createElement("span");
-            (n.textContent = " " === e ? "\xa0" : e),
-              n.classList.add(l),
-              (n.style.animationDelay = `${0.1 * t}s`),
-              r.appendChild(n);
-          });
-      })(displayText, r, alternateText);
+    // Display or animate the value
+    const element = document.getElementById(elementId);
+    if (animationClass) {
+      displayAnimatedText(elementId, displayValue, animationClass);
+      if (elementId === "balance" && value < 0) {
+        element.style.color = "red"; // Apply red color for negative balance
+      }
     } else {
-      document.getElementById(r).innerText = displayText;
+      element.innerText = displayValue;
     }
 
-    // Parse and return the value
-    const value = parseFloat(g.replace(/,/g, "").trim());
- return isNaN(value) ? 0 : formatNumber(value);} catch (p) {
-    console.error("Error fetching data:", p);
-    document.getElementById(r).innerText = alternateText;
+    return isValidNumber ? value : 0;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    document.getElementById(elementId).innerText = animationClass || "0";
     return 0;
   }
 }
-// ...existing code...
-        // Function to animate and display text
-        function displayAnimatedText(elementId, text, animationClass) {
-          const element = document.getElementById(elementId);
-          const computedStyle = window.getComputedStyle(element);
-          const inlineStyle = element.style; // Inline styles
 
-          element.innerHTML = ""; // Clear the element
+// Function to animate text in the DOM
+function displayAnimatedText(elementId, text, animationClass) {
+  const element = document.getElementById(elementId);
+  const computedStyle = window.getComputedStyle(element);
+  element.innerHTML = ""; // Clear existing content
 
-          text.split("").forEach((char, index) => {
-            const span = document.createElement("span");
-            span.textContent = char === " " ? "\xa0" : char; // Handle spaces
-            span.classList.add(animationClass);
-            span.style.animationDelay = `${0.03 * index}s`;
+  text.split("").forEach((char, index) => {
+    const span = document.createElement("span");
+    span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+    span.classList.add(animationClass);
+    span.style.animationDelay = `${0.03 * index}s`;
+    span.style.color = computedStyle.color;
+    span.style.fontFamily = computedStyle.fontFamily;
+    span.style.fontSize = computedStyle.fontSize;
+    span.style.fontWeight = computedStyle.fontWeight;
+    span.style.fontStyle = computedStyle.fontStyle;
+    element.appendChild(span);
+  });
+}
 
-            // Preserve computed and inline styles
-            span.style.color = computedStyle.color;
-            span.style.fontFamily = computedStyle.fontFamily;
-            span.style.fontSize = computedStyle.fontSize;
-            span.style.fontWeight = computedStyle.fontWeight;
-            span.style.fontStyle = computedStyle.fontStyle;
+// Function to format numbers with commas
+function formatNumber(num) {
+  const isNegative = num < 0;
+  const absNumStr = Math.abs(num).toString();
+  const lastThree = absNumStr.slice(-3);
+  let otherNumbers = absNumStr.slice(0, -3);
+  
+  if (otherNumbers) {
+    otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+    return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
+  }
+  return (isNegative ? "-" : "") + lastThree;
+}
 
-            element.appendChild(span);
-          });
-        }
+// Execute when DOM is fully loaded
+document.addEventListener("DOMContentLoaded", async () => {
+  const sheetIndex = 0; // Consistent sheet index
 
-        // FIX: Fetch and animate due after both values are fetched
-        Promise.resolve()
-          .then(async () => {
-            // Fetch values and parse as numbers
-            const recValue = (await n(t, 3, 3, "total-receive", "letter"));
-            const totValue = (await n(t, 3, 1, "total", "letter"));
-            console.log("Received Value:", recValue);
-            console.log("Total Value:", totValue);
-            await n(t, 3, 4, "total-cost", "letter");
-            await n(t, 3, 2, "balance", "letter");
+  // Fetch values for calculations
+  const recValue = await fetchSheetData(sheetIndex, 3, 3, "total-receive", "letter");
+  const totValue = await fetchSheetData(sheetIndex, 3, 1, "total", "letter");
+  console.log("Received Value:", recValue);
+  console.log("Total Value:", totValue);
 
-            // Calculate due using the fetched values
-            let due = totValue - recValue;
-            due = Math.max(due, 0);
-            const formattedDue = formatNumber(due);
+  // Fetch and display total cost and balance
+  await fetchSheetData(sheetIndex, 3, 4, "total-cost", "letter");
+  await fetchSheetData(sheetIndex, 3, 2, "balance", "letter");
 
-            // Animate the due amount text
-            displayAnimatedText("due", formattedDue, "letter");
-          })
-          .then(() => {
-            n(t, 3, 6, "closed", "?");
-            n(t, 4, 6, "closed2", "?");
-          });
-      });
+  // Calculate and display due amount
+  const due = Math.max(totValue - recValue, 0);
+  const formattedDue = formatNumber(due);
+  displayAnimatedText("due", formattedDue, "letter");
 
-      function formatNumber(num) {
-        // Handle negative numbers
-        const isNegative = num < 0;
-        const absNumStr = Math.abs(num).toString(); // Convert the absolute value to a string
-
-        // Split into the last three digits and the rest
-        const lastThree = absNumStr.slice(-3);
-        let otherNumbers = absNumStr.slice(0, -3);
-
-        if (otherNumbers) {
-          // Format the other part with commas every two digits
-          otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
-          return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
-        } else {
-          return (isNegative ? "-" : "") + lastThree;
-        }
-      }
-
-      function formatNumber2(num) {
-        // Convert number to an absolute value for formatting
-        let numStr = Math.abs(num).toString(); // Ignore sign for formatting
-
-        // Split last three digits and format the rest in groups of two
-        let lastThree = numStr.slice(-3);
-        let otherNumbers = numStr.slice(0, -3);
-
-        if (otherNumbers) {
-          // Format the other part with commas every two digits
-          otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
-          return otherNumbers + "," + lastThree;
-        } else {
-          return lastThree;
-        }
-      }
-
+  // Fetch and display closed values
+  await fetchSheetData(sheetIndex, 3, 6, "closed", "?");
+  await fetchSheetData(sheetIndex, 4, 6, "closed2", "?");
+});
       const gid = userdata.gid;
       const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${gid}`;
       const sheetUrl2 = `https://docs.google.com/spreadsheets/d/${sheetid}/edit`;
