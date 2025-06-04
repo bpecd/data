@@ -34,7 +34,7 @@ let audioPlayed = false;
 
     
     // Fetch and process CSV data
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/1_FeX32LmVFARMYbAHRM_5Zg1fwEroBH2JAnrL6yPcH4/gviz/tq?tqx=out:csv';
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/1crclEqWJhNx16c4CNz2zT6Mr-qpkZOA-H_DKBzxK_UA/gviz/tq?tqx=out:csv';
 
     async function fetchCSV() {
         try {
