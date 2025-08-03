@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+<title>Developer Registration</title>    
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+
+
+:root{
+
+    --primary-color: #F8F7FC;
+
+    --secondary-color: #231E1E;
+
+    --accent-color: #fa7f03;
+
+}
+
+*{
+
+    padding: 0;
+
+    margin: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+body{
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    height: 100vh;
+
+    background: var(--primary-color);
+    transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
+.claim-button1 {
+            background-color: #f8f0fc;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+
+.registration-container{
+
+    background: #ffffff;
+margin: auto;
+  
+
+    padding: 15px 25px;
+
+    width: 600px;
+
+    border-radius: 12px;
+
+    box-shadow: 10px 14px 90px #F5AC6252;
+
+    opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+.registration-container .registration-header{
+
+    padding: 10px;
+
+
+
+}
+
+.registration-header h2{
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+
+.registration-header .divider{
+
+    display: block;
+
+    width: 15%;
+
+    height: 5px;
+
+    background: var(--accent-color);
+
+    margin-top: 4px;
+
+}
+
+
+
+.registration-body .registration-box{
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+
+    padding: 10px 0px;
+
+}
+
+
+
+.registration-box .input-box{
+
+    position: relative;
+
+    width: 50%;
+
+    justify-content: space-around;
+
+    padding: 5px 10px;
+
+    display: block;
+
+}
+
+.registration-box .input-box label{
+
+    font-size: 14px;
+
+    color: var(--secondary-color);
+
+}
+
+
+
+.registration-box .input-field{
+
+    width: 100%;
+
+    height: 36px;
+
+    display: block;
+
+    border-radius: 4px;
+
+    border: 1px solid #1B1B1B46;
+
+    padding-left: 8px;
+
+}
+
+
+
+.registration-box .input-field:focus{
+
+    border-radius: 4px;
+
+  transition: border 0.4s ease-in-out;
+    outline: none;
+
+    border: solid var(--accent-color);
+
+    border-width: 1px 1px 3px 1px;
+
+    padding-left: 8px;
+
+    height: 40px;
+
+    padding-top: 0px;
+
+}
+
+
+
+.registration-box .input-box:focus-within label{
+
+    transition: display 0.4s ease-in-out;
+    content: '';
+    padding: 0 10px;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.registration-box .input-box:focus-within{
+
+    padding: 0px 10px;
+  transition: 0.5s ease-in-out;
+}
+
+.registration-box .input-box:focus-within .input-field::placeholder{
+
+    visibility: hidden;
+
+  transition: 0.4s ease-in-out;
+}
+
+
+
+.registration-body .btn-register{
+
+    border: 0;
+
+    background: var(--accent-color);
+
+    color: var(--primary-color);
+
+    font-weight: 700;
+
+    font-size: 16px;
+
+    padding: 10px 25px;
+
+    border-radius: 4px;
+
+    box-shadow: 0px 4px 12px #F5AC6280;
+
+    margin: 0px 10px;
+
+}
+
+
+
+.registration-body .btn-register:hover{
+
+    background: var(--secondary-color);
+
+  transition: 0.4s ease-in-out;
+    box-shadow: 0px 4px 12px #231E1E90;
+
+}
+
+
+
+.registration-container .registration-footer{
+
+    text-align: center;
+
+    padding: 20px;
+
+}
+
+
+
+.registration-footer h3{
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    color: var(--secondary-color);
+
+}
+
+
+
+.registration-footer a{
+
+    color: var(--accent-color);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+
+.registration-footer a:hover{
+
+    border-bottom: 2px solid #FC8C1B;
+
+} 
+
+
+
+
+.calculator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: #fff;
+            z-index: 1000;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .calculator input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+
+        .calculator button {
+          
+            width: calc(25% - 10px);
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+.calculator-btn{
+  border: 0;
+
+    background: var(--secondary-color);
+    color: var(--primary-color);
+
+    font-weight: 700;
+
+    font-size: 16px;
+
+    padding: 10px 25px;
+
+    border-radius: 4px;
+
+    box-shadow: 0px 4px 12px #F5AC6280;
+
+    margin: 5px 10px;
+
+    cursor: pointer;
+
+}
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+@media screen and (max-width:480px){
+
+    .registration-container{
+
+        display: block;
+
+        padding: 10px;
+
+        border-radius: 12px;
+
+        max-width: 400px;
+
+    }
+
+    .registration-container .registration-header{
+
+        padding: 10px 0px;
+
+    }
+
+    .registration-body .registration-box{
+
+        display: block;
+
+    }
+
+    .registration-box .input-box{
+
+        width: 100%;
+
+        padding: 05px 0px;
+
+    }
+
+
+
+    .registration-box .input-box:focus-within{
+
+        padding: 12px 0px;
+
+      transition: 0.4s ease-in-out;
+    }
+
+    .registration-body .btn-register{
+
+        width: 100%;
+
+        margin: auto;
+
+    }
+
+    .input-box {
+                flex: 1 1 100%;
+            }
+
+            .calculator {
+                width: 90%;
+              height:50%;
+                padding: 10px;
+            }
+
+            .calculator button {
+                width: calc(23.33% - 10px);
+                margin: 5px;
+            }
+
+
+
+}
+.container {
+    width: 483px;
+    height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .button2 {
+        border: none;
+        background-color: var(--accent-color);
+        color: #ffffff;
+        border-radius: 10px;
+      padding: 10px 20px;
+      margin-top: 20px;
+    }
+
+
+.loader {
+  --c1:#673b14;
+  --c2:#f8b13b;
+  width: 40px;
+  height: 80px;
+  border-top: 4px solid var(--c1);
+  border-bottom: 4px solid var(--c1);
+  background: linear-gradient(90deg, var(--c1) 2px, var(--c2) 0 5px,var(--c1) 0) 50%/7px 8px no-repeat;
+  display: grid;
+  overflow: hidden;
+  animation: l5-0 1.5s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  width: 75%;
+  height: calc(50% - 4px);
+  margin: 0 auto;
+  border: 2px solid var(--c1);
+  border-top: 0;
+  box-sizing: content-box;
+  border-radius: 0 0 40% 40%;
+  -webkit-mask: 
+    linear-gradient(#000 0 0) bottom/4px 2px no-repeat,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+  background: 
+    linear-gradient(var(--d,0deg),var(--c2) 50%,#0000 0) bottom /100% 205%,
+    linear-gradient(var(--c2) 0 0) center/0 100%;
+  background-repeat: no-repeat;
+  animation: inherit;
+  animation-name: l5-1;
+}
+.loader::after {
+  transform-origin: 50% calc(100% + 2px);
+  transform: scaleY(-1);
+  --s:3px;
+  --d:180deg;
+}
+@keyframes l5-0 {
+  80%  {transform: rotate(0)}
+  100% {transform: rotate(0.5turn)}
+}
+@keyframes l5-1 {
+  10%,70%  {background-size:100% 205%,var(--s,0) 100%}
+  70%,100% {background-position: top,center}
+}
+
+  </style>
+</head>
+<body> <button class="claim-button1" id="backButton"><i class="fas fa-circle-arrow-left"></i></button>
+    <div class="registration-container">
+        <div class="container">
+            <h3>Tap On create Link then open!</h3>
+            <button id="urlcrt1" class="button2" onclick="createFormAndSheet()">Create link 1</button>
+            <button id="urlcrt2" style="background-color: rgb(26, 26, 255);" class="button2" onclick="createFormAndSheet2()">Create link 2</button>
+            <div style="margin-left: 2vh;margin-top: 1.25rem;" id="result1"><div class="loader"></div></div>
+                <div style="margin-left: 2vh;margin-top: 1.25rem;" id="result2"><div class="loader"></div></div>
+                <img style="width: 15.625rem;height: 15.625rem;pointer-events: none;display: none;" id="suc" src="suc3.gif">
+                <img style="width: 12.5rem;height: 12.5rem;pointer-events: none;display: none;" id="fall" src="fall.gif">
+                <p style="font-size: 1.375rem;color: rgb(8, 8, 221);background-color: #8cffff;border-radius: 0.625rem;padding: 0.313rem;display: none;" id="result222"></p>
+            </div>
+            </div>
+    <div class="registration-container">
+        <div class="registration-header">
+            <h2>Registration: Developer Building</h2>
+            <span class="divider"></span>
+        </div>
+        <div class="registration-body">
+            <form id="regi">
+                <div class="registration-box">
+                    <div class="input-box hidenowb">
+                        <label >Form LINK</label>
+                        <input type="text" class="input-field" id="formurl"placeholder="" required>
+                    </div>
+                    <div class="input-box hidenowb">
+                        <label >Sheet LINK</label>
+                        <input type="text" class="input-field" id="sheeturl"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >SheetID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Sheet GID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetgid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >FormID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="formid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Sdentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sd"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Srentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sr"placeholder=""required>
+                    </div>
+                    <div class="input-box hidenowb">
+                        <label >Saentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sa"placeholder=""required>
+                    </div>
+                    <div class="input-box hidenowbx">
+                        <label >Form LINK 2</label>
+                        <input type="text" class="input-field" id="formurl2"placeholder="" required>
+                    </div>
+                    <div class="input-box hidenowbx">
+                        <label >Sheet LINK 2</label>
+                        <input type="text" class="input-field" id="sheeturl2"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >SheetID 2</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetid2"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >SheetID 2 entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetiden"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >Sheet GID 2</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetgid2"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >Sheet GID entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="giden"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >FormID 2</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="formid2"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >form ID 2 entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="formen"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >name entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="nameen"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >phone entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="phoneen"placeholder=""required>
+                    </div>
+                    <div class="input-box hidenowbx">
+                        <label >flat entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="houseen"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >mail entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="mailen"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >status entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="statusen"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >Sdentry entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sd2"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowbx">
+                        <label >Srentry entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sr2"placeholder=""required>
+                    </div>
+                    <div class="input-box hidenowbx">
+                        <label >Saentry entry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sa2"placeholder=""required>
+                    </div>
+                    
+                    <div class="input-box">
+                        <label >Building Name</label> 
+                        <input type="text" class="input-field" id="name" placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Land Area / Plot no.</label>
+                        <input type="text" class="input-field" id="land"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Phone Number</label>
+                        <input type="text" class="input-field" id="instal"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Agreement</label>
+                        <input type="text" class="input-field" id="agree"placeholder=""required>
+                    </div>
+                    
+                </div><div style="display: flex; gap: 0.625rem;">
+                <button class="btn-register" id="btn-register">Register Now</button>
+                <h3>Start Auto Input <button style="display: none;" class="calculator-btn"id="autoen">Auto ENTRY</button>
+                    <button class="calculator-btn"id="autoid">Auto ID</button>
+                    <button style="display: none;" class="calculator-btn"id="autoen2">Auto ENTRY 2</button>
+                    <button class="calculator-btn"id="autoid2">Auto ID 2</button>
+                </h3>
+                </div>
+                <h3 id="result3"></h3>
+            </form>
+        </div>
+        <div class="registration-footer">
+             <h3>developer list sheet <a href="https://docs.google.com/spreadsheets/d/1-eLT3ufiAq5QEUMtJPPl3UFeVlbGuFe_1NSnIgXdncw/edit?gid=2005736034#gid=2005736034" target="_blank">here</a></h3>
+        </div>
+    </div>
+    <script>
+    document.getElementById("result1").style.display = "none";
+    document.getElementById("result2").style.display = "none";
+     const checkAndUpdate = () => {
+        const inputField = document.getElementById('sa');
+        const xyz = inputField.value.trim(); // Get the value of the input field
+    
+        if (xyz) {
+            setTimeout(() => {
+                // If the input has a value, hide elements with class 'hidenowb' after 2 seconds
+                document.querySelectorAll('.hidenowb').forEach(element => {
+                    element.style.display = 'none'; // Hide the elements
+                });
+            }, 2000); // 2-second delay to hide elements
+        } else {
+            document.querySelectorAll('.hidenowb').forEach(element => {
+                element.style.display = ''; // Show elements if the input is empty
+            });
+        }
+    
+        // Retry the check after 500ms to continuously monitor the input value
+        setTimeout(checkAndUpdate, 500);
+    };
+    
+    // Initial call to check and update
+    checkAndUpdate();
+    const checkAndUpdatex = () => {
+        const inputField = document.getElementById('sa2');
+        const xyzx = inputField.value.trim(); // Get the value of the input field
+    
+        if (xyzx) {
+            setTimeout(() => {
+                // If the input has a value, hide elements with class 'hidenowb' after 2 seconds
+                document.querySelectorAll('.hidenowbx').forEach(element => {
+                    element.style.display = 'none'; // Hide the elements
+                });
+            }, 2000); // 2-second delay to hide elements
+        } else {
+            document.querySelectorAll('.hidenowbx').forEach(element => {
+                element.style.display = ''; // Show elements if the input is empty
+            });
+        }
+    
+        // Retry the check after 500ms to continuously monitor the input value
+        setTimeout(checkAndUpdatex, 500);
+    };
+    
+    // Initial call to check and update
+    checkAndUpdatex();
+    const e = JSON.parse(localStorage.getItem("secureDataV2"));
+            if (!e) {
+                window.location.href = "index.html";
+            }
+        document.getElementById('backButton').addEventListener('click', function() {
+    // Add class to move the body down
+    document.body.classList.add('move-down');
+    
+    // Wait for the animation to complete (1 second), then go back
+    setTimeout(function() {
+        window.location.href = 'developers.html';
+    }, 400);  // Match this duration with the CSS transition time
+});
+
+
+document.getElementById('urlcrt1').addEventListener('click', function() {
+document.getElementById('urlcrt1').style.display = 'none';
+
+
+});
+
+document.getElementById('urlcrt2').addEventListener('click', function() {
+document.getElementById('urlcrt2').style.display = 'none';
+});
+
+document.getElementById('btn-register').style.display = 'none';
+document.getElementById('autoid2').style.display = 'none';
+document.getElementById('autoen2').style.display = 'none';
+document.getElementById('urlcrt2').style.display = 'none';
+
+function createFormAndSheet() {
+    document.getElementById("result1").style.display = "block";
+    document.getElementById("result2").style.display = "none";
+  fetch("https://script.google.com/macros/s/AKfycbx2eDxy5oWJr9YgQMvBKDI0560CJuwsUMdzf81O61NExyKY56Brer7D22ArVm4B-YeTVQ/exec")
+    .then(response => response.json())
+    .then(data => {
+      displayResult1(data);
+      // Show the first result and hide the second one
+      document.getElementById("result1").style.display = "block";
+      document.getElementById("result2").style.display = "none";
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function createFormAndSheet2() {
+    document.getElementById("result1").style.display = "none";
+    document.getElementById("result2").style.display = "block"; 
+  fetch("https://script.google.com/macros/s/AKfycbxE3jUBnftx3QhQ2hf0o_lcTm4j7D3bgaqsIxrjn31Lcue5SOTi_ozelPOzHPA230bskg/exec")
+    .then(response => response.json())
+    .then(data => {
+      displayResult2(data);
+      // Show the second result and hide the first one
+      document.getElementById("result1").style.display = "none";
+      document.getElementById("result2").style.display = "block";
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function displayResult1(result) {
+  const formUrl = result.formUrl.replace(/\/edit.*/, '/viewform');
+  const sheetUrl = result.sheetUrl.replace(/\/edit.*/, '/');
+
+  const resultDiv1 = document.getElementById("result1");
+  resultDiv1.innerHTML = `
+    <p><strong>Form URL:</strong> <a href="${formUrl}" target="_blank"> Click me - Form Link 1</a></p>
+    <p><strong>Sheet URL:</strong> <a href="${sheetUrl}" target="_blank"> Click me - Sheet link 1</a></p>
+  `;
+  document.getElementById('urlcrt2').style.display = 'block';
+}
+
+function displayResult2(result) {
+  const formUrl2 = result.formUrl.replace(/\/edit.*/, '/viewform');
+  const sheetUrl2 = result.sheetUrl.replace(/\/edit.*/, '/');
+  const resultDiv2 = document.getElementById("result2");
+  resultDiv2.innerHTML = `
+    <p><strong>Form URL:</strong> <a href="${formUrl2}" target="_blank"> Form Link 2</a></p>
+    <p><strong>Sheet URL:</strong> <a href="${sheetUrl2}" target="_blank"> Sheet link 2</a></p>
+  `;
+}
+
+      </script>
+    <script>
+    
+    document.getElementById('autoen').addEventListener('click', async function(event) {
+        event.preventDefault();
+        document.getElementById("autoen").style.display = 'none';
+        document.getElementById("autoen2").style.display = 'block';
+        const formId = document.getElementById('formid').value;
+        const scriptUrl = `https://script.google.com/macros/s/AKfycbwLHHfv5S_Y68QHP64_Xe5tp5s7XfVRuaKhppNb2bxqSLdOyKQwU24KvMHZ_wV42-qicg/exec?formId=${formId}`; 
+    
+        try {
+            const response = await fetch(scriptUrl);
+            if (response.ok) {
+                const fbData = await response.json();
+                const descriptionNumber = fbData[1][1][0][4][0][0];
+                const reasonNumber = fbData[1][1][1][4][0][0];
+                const amountNumber = fbData[1][1][2][4][0][0];
+    
+                document.getElementById("sd").value = descriptionNumber || "Description not found";
+                document.getElementById("sr").value = reasonNumber || "Reason not found";
+                document.getElementById("sa").value = amountNumber || "Amount not found";
+            } else {
+                document.getElementById("result3").textContent = 'Failed to fetch form data!';
+            }
+        } catch (error) {
+            document.getElementById("result3").textContent = 'Error fetching form data!';
+        }
+    });
+    
+    document.getElementById('autoen2').addEventListener('click', async function(event) {
+    event.preventDefault();
+    document.getElementById("autoen2").style.display = 'none';
+
+    const formId = document.getElementById('formid2').value;
+    const scriptUrl = `https://script.google.com/macros/s/AKfycbwLHHfv5S_Y68QHP64_Xe5tp5s7XfVRuaKhppNb2bxqSLdOyKQwU24KvMHZ_wV42-qicg/exec?formId=${formId}`;
+
+    try {
+        const response = await fetch(scriptUrl);
+        if (response.ok) {
+            const fbData = await response.json();
+            console.log("fbData:", fbData);
+
+            // Access the nested array structure
+            const nestedArray = fbData[1][1]; // This should be the array containing all the elements
+
+            // Extract values using the nested structure
+            const Sheetid2 = nestedArray[5][4][0][0] || "Not found";
+            const SGid2 = nestedArray[6][4][0][0] || "Not found";
+            const Formid2 = nestedArray[7][4][0][0] || "Not found";
+            const sdentry2 = nestedArray[8][4][0][0] || "Not found";
+            const srentry2 = nestedArray[9][4][0][0] || "Not found";
+            const saentry2 = nestedArray[10][4][0][0] || "Not found";
+            const nameen = nestedArray[0][4][0][0] || "Not found";
+            const phoneen = nestedArray[1][4][0][0] || "Not found";
+            const houseen = nestedArray[2][4][0][0] || "Not found";
+            const mailen = nestedArray[3][4][0][0] || "Not found";
+            const statusen = nestedArray[4][4][0][0] || "Not found";
+
+            // Set values in the corresponding elements
+            document.getElementById("sheetiden").value = Sheetid2;
+            document.getElementById("giden").value = SGid2;
+            document.getElementById("formen").value = Formid2;
+            document.getElementById("sd2").value = sdentry2;
+            document.getElementById("sr2").value = srentry2;
+            document.getElementById("sa2").value = saentry2;
+            document.getElementById("nameen").value = nameen;
+            document.getElementById("phoneen").value = phoneen;
+            document.getElementById("houseen").value = houseen;
+            document.getElementById("mailen").value = mailen;
+            document.getElementById("statusen").value = statusen;
+            document.getElementById('btn-register').style.display = 'block';
+        } else {
+            console.error("Response not OK", response.status, response.statusText);
+            const resultElement = document.getElementById("result3");
+            if (resultElement) {
+                resultElement.textContent = 'Failed to fetch form data!';
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        const resultElement = document.getElementById("result3");
+        if (resultElement) {
+            resultElement.textContent = 'Error fetching form data!';
+        }
+    }
+});
+
+
+    document.getElementById('autoid').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById("autoid").style.display = 'none';
+        document.getElementById("autoid2").style.display = 'block';
+    
+        const sheetUrl = document.getElementById('sheeturl').value;
+        const formUrl = document.getElementById('formurl').value;
+    
+        const idRegexSheet = /\/d\/([a-zA-Z0-9_-]+)/;
+        const gidRegex = /gid=([0-9]+)/;
+        const sheetIdMatch = sheetUrl.match(idRegexSheet);
+        const gidMatch = sheetUrl.match(gidRegex);
+    
+        const sheetId = sheetIdMatch ? sheetIdMatch[1] : "Not found";
+        const sheetGid = gidMatch ? gidMatch[1] : "Not found";
+    
+        document.getElementById('sheetid').value = sheetId;
+        document.getElementById('sheetgid').value = sheetGid;
+    
+        const idRegexForm = /\/e\/([a-zA-Z0-9_-]+)/;
+        const formIdMatch = formUrl.match(idRegexForm);
+        const formId = formIdMatch ? formIdMatch[1] : "Not found";
+        document.getElementById('formid').value = formId;
+       
+    });
+    
+    document.getElementById('autoid2').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById("autoid2").style.display = 'none';
+        document.getElementById("autoen").style.display = 'block';
+    
+        const sheetUrl = document.getElementById('sheeturl2').value;
+        const formUrl = document.getElementById('formurl2').value;
+    
+        const idRegexSheet = /\/d\/([a-zA-Z0-9_-]+)/;
+        const gidRegex = /gid=([0-9]+)/;
+        const sheetIdMatch = sheetUrl.match(idRegexSheet);
+        const gidMatch = sheetUrl.match(gidRegex);
+    
+        const sheetId = sheetIdMatch ? sheetIdMatch[1] : "Not found";
+        const sheetGid = gidMatch ? gidMatch[1] : "Not found";
+    
+        document.getElementById('sheetid2').value = sheetId;
+        document.getElementById('sheetgid2').value = sheetGid;
+    
+        const idRegexForm = /\/e\/([a-zA-Z0-9_-]+)/;
+        const formIdMatch = formUrl.match(idRegexForm);
+        const formId = formIdMatch ? formIdMatch[1] : "Not found";
+        document.getElementById('formid2').value = formId;
+        document.getElementById('btn-register').style.display = 'block';
+    });
+
+    document.getElementById('regi').addEventListener('submit', function(e) {
+    e.preventDefault();   
+    document.getElementById('btn-register').style.opacity = '0.5';
+    document.getElementById('btn-register').innerText = 'Working...';
+
+    const name = document.getElementById('name').value;
+    const land = document.getElementById('land').value;
+    const sheetId = document.getElementById('sheetid').value;
+    const sheetGid = document.getElementById('sheetgid').value;
+    const formId = document.getElementById('formid').value;
+    const sd = document.getElementById('sd').value;
+    const sr = document.getElementById('sr').value;
+    const sa = document.getElementById('sa').value;
+    const sheetIden = document.getElementById('sheetiden').value;
+    const sheetGiden = document.getElementById('giden').value;
+    const formIden = document.getElementById('formen').value;
+    const sheetId2 = document.getElementById('sheetid2').value;
+    const sheetGid2 = document.getElementById('sheetgid2').value;
+    const formId2 = document.getElementById('formid2').value;
+    const sd2 = document.getElementById('sd2').value;
+    const sr2 = document.getElementById('sr2').value;
+    const sa2 = document.getElementById('sa2').value;
+    const nameen = document.getElementById('nameen').value;
+    const phoneen = document.getElementById('phoneen').value;
+    const houseen = document.getElementById('houseen').value;
+    const mailen = document.getElementById('mailen').value;
+    const statusen = document.getElementById('statusen').value;
+    const wdt = document.getElementById('agree').value;
+    const ind2 = document.getElementById('instal').value;
+
+    const ts = '=SUM(D3:D,0)';
+    const rst = '=SUMIF(D3:D,">0")';
+    const cst = '=SUMIF(D3:D,"<0")';
+
+    const formUrl1 = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+    const formUrl2 = 'https://docs.google.com/forms/d/e/1FAIpQLSfky3VZddO0PMFYSLSjoq-cPAYpoGvTptUdiqk1uffJjzOWnQ/formResponse';
+    
+    const formData2 = new FormData();
+    formData2.append(`entry.${sd}`, ts);
+    formData2.append(`entry.${sr}`, rst);
+    formData2.append(`entry.${sa}`, cst);
+
+    const formData1 = new FormData();
+    formData1.append('entry.890999944', name);
+    formData1.append('entry.696253293', land);
+    formData1.append('entry.1604063136', ind2);
+    formData1.append('entry.189558853', sheetId);
+    formData1.append('entry.2104162461', sheetGid);
+    formData1.append('entry.2031665051', formId);
+    formData1.append('entry.1199415050', sd);
+    formData1.append('entry.828373213', sr);
+    formData1.append('entry.1358821049', sa);
+    formData1.append('entry.459391209', sheetId2);
+    formData1.append('entry.872154504', sheetGid2);
+    formData1.append('entry.1814445085', formId2);
+    formData1.append('entry.715648846', sheetIden);
+    formData1.append('entry.2057056279', sheetGiden);
+    formData1.append('entry.1353507225', formIden);
+    formData1.append('entry.1429312171', sd2);
+    formData1.append('entry.301331594', sr2);
+    formData1.append('entry.1803541113', sa2);
+    formData1.append('entry.1134044436', nameen);
+    formData1.append('entry.2015067503', phoneen);
+    formData1.append('entry.60734906', houseen);
+    formData1.append('entry.1806859832', mailen);
+    formData1.append('entry.2066563220', statusen);
+
+     Promise.all([
+        fetch(formUrl1, { method: 'POST', body: formData2, mode: 'no-cors' }),
+        fetch(formUrl2, { method: 'POST', body: formData1, mode: 'no-cors' }),
+ ])
+    .then(() => {
+        setTimeout(() => {
+            const formData3 = new FormData();
+            formData3.append(`entry.${sd}`, `Agreement ${wdt}`);
+            formData3.append(`entry.${sr}`, `Do not remove B3 ${ind2}`);
+            formData3.append(`entry.${sa}`, "0");
+            
+            fetch(formUrl1, { method: 'POST', body: formData3, mode: 'no-cors' })
+            .then(() => {
+                document.getElementById('btn-register').style.display = 'none';document.getElementById('regi').style.display = 'none';
+                document.getElementById('result222').innerText = 'Registration successful';
+                document.getElementById('suc').style.display ='';
+                document.getElementById('btn-register').style.display = 'none';
+                document.getElementById('result3').innerText = 'Registration successful';
+            })
+            .catch(error => {document.getElementById('suc').src ='fall.gif';
+            document.getElementById('result222').style.display = '';
+            document.getElementById('result222').innerText = 'Error: ' + error;
+                document.getElementById('result3').innerText = 'Error: ' + error;
+                console.error('Error submitting form:', error);
+            });
+        }, 1000);
+    })
+    .catch(error => {
+        document.getElementById('result3').innerText = 'Error: ' + error;
+        console.error('Error submitting form:', error);
+    });
+});
+    </script>
+</body>
+</html>

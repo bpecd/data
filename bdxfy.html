@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction ID Date and Time</title> <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+        }
+        body.move-down {
+            transform: translateY(5vh);
+        }
+        .container {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-left: 25rem;
+            background-color: #ffffff;
+            padding: 2em;
+            border-radius: 0.50rem;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            width: 28.125rem;
+        opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        input,textarea, button {
+            background-color: #e2e7ea;
+            border: none;
+            padding: 0.938rem;
+            width: 70%;
+            text-align: center;
+            border-radius: 1.25rem;
+            font-size: 1.125rem;
+            margin: 0.625rem;
+        }
+        button {
+            background-color: #b2ceff;
+            margin-bottom: 0.625rem;
+        }
+        button:hover {
+            background-color: #50a5ff;
+        }
+        #dateTimeResult {
+            margin-top: 1em;
+            font-weight: bold;
+            color: #333;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            transition: background-color 0.5s ease, padding 0.8s ease;
+        }
+        a:hover {
+            background-color: #ffb2f1;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+        .top-bar .nav-items a i {
+            color: #db049b;
+        }
+        .top-bar .logo img {
+            width: 3.125rem;
+            height: 3.125rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn" href="home.html"><i class="fa-duotone fa-solid fa-chart-line"></i> Main Dashboard</a>
+            <a class="backbtn" href="officehome.html"><i class="fa-solid fa-person-seat-reclined"></i> Office Area</a>
+            <a class="backbtn" href="devhome.html"><i class="fa-solid fa-building-memo"></i> Developer Company</a>
+            <a class="backbtn" style="color: #364fa1; font-weight: bold; font-size: large; background-color: #e8ecff; padding: 0.625rem; border-radius: 0.938rem;" href="bdxfy.html"><i class="fa-solid fa-money-check-dollar-pen"></i> Verify BDX</a>
+        </div>
+        <div style="display: flex; gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo">
+        </div>
+    </div>
+    <div class="container">
+        <h1>TI BDX ID</h1>
+        <input type="text" id="transactionIdInput" placeholder="12345678" required>
+        <button id="hh">Show Data</button>
+        <button id="result" onclick="genid()">Generate ID</button>
+        <textarea type="text" id="msg" placeholder="Message" required></textarea>
+        <button id="subbtn">Save it</button>
+        <p style="color: blue;" id="dateTimeResult"></p>
+        <div style="color: red; font-size: large; background-color: #e8ecff; padding: 0.625rem; border-radius: 0.938rem;" id="transaction-list"></div>
+    </div>
+
+    <script>document.body.addEventListener('contextmenu', function(event) {
+        event.preventDefault();  // Prevent the right-click context menu
+    });
+    
+        document.querySelectorAll('.backbtn').forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.add('move-down');
+            setTimeout(() => window.location.href = button.getAttribute('href'), 400);
+        });
+    });
+
+    const e = JSON.parse(localStorage.getItem("secureDataV2"));
+    if (!e) window.location.href = "index.html";
+    document.getElementById("img").src = e.img;
+    const stt = e.state;
+             if(stt === "admin"){
+                   } else if(stt === "mod"){
+                    document.getElementById("result").style.display = "none";
+                 }else{
+                    document.getElementById("result").style.display = "none";
+                 }
+    document.getElementById("msg").style.display = "none";
+    document.getElementById("subbtn").style.display = "none";
+
+    window.onload = function() {
+        const transactionId = localStorage.getItem('transactionId');
+        const expirationTime = localStorage.getItem('expirationTime');
+        if (transactionId && expirationTime && expirationTime > Date.now()) {
+            displayTransactionId(transactionId, expirationTime);
+        } else {
+            localStorage.removeItem('transactionId');
+            localStorage.removeItem('expirationTime');
+        }
+    };
+
+    function genid() {
+        const transactionId = `BDX ID- ${Math.floor(Date.now() / 1000 / 60)}`;
+        const expirationTime = Date.now() + 60000;
+         document.getElementById('result').disabled = true;
+        localStorage.setItem('transactionId', transactionId);
+        localStorage.setItem('expirationTime', expirationTime);
+        displayTransactionId(transactionId, expirationTime);
+    }
+
+    function displayTransactionId(transactionId, expirationTime) {
+        document.getElementById('dateTimeResult').innerText = transactionId;
+        document.getElementById('transactionIdInput').style.display = 'none';
+        const hide = localStorage.getItem('hide');
+            console.log("Checking localStorage on load: hide =", hide); // Debug statement
+
+            if (hide === 'true') {
+                console.log("Hiding elements due to hide flag");
+                document.getElementById("subbtn").style.display = 'none';
+                document.getElementById("msg").style.display = 'none';
+            } else {
+               
+        document.getElementById("msg").style.display = "";
+        document.getElementById("subbtn").style.display = "";
+            }
+        document.getElementById('hh').style.display = 'none';
+document.getElementById('result').disabled = true;
+        const countdownInterval = setInterval(() => {
+            const remainingTime = expirationTime - Date.now();
+            if (remainingTime > 0) {
+                document.getElementById('result').innerText = `New code after: ${Math.floor(remainingTime / 1000)} sec`;
+            } else {
+                clearInterval(countdownInterval);
+                document.getElementById('result').style.display = 'none';
+                if (hide === 'true') {
+                location.reload();
+                }else {
+                     document.getElementById('transaction-list').innerText = 'Save it or reload the page';
+                }
+                localStorage.removeItem('hide');
+                localStorage.removeItem('transactionId');
+                localStorage.removeItem('expirationTime');
+              
+            }
+        }, 1000);
+    }
+
+    function showDateTime() {
+        const input = document.getElementById('transactionIdInput').value.trim();
+        const timestampInSeconds = parseInt(input, 10);
+        if (isNaN(timestampInSeconds) || timestampInSeconds <= 0) {
+            document.getElementById('dateTimeResult').innerText = "Invalid Transaction ID.";
+            document.getElementById('transaction-list').style.display = 'none';
+            return;
+        }
+        const date = new Date(timestampInSeconds * 60 * 1000);
+        document.getElementById('dateTimeResult').innerText = `Date and Time: ${date.toLocaleString('en-GB', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+        })}`;
+    }
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/11WvmBS2jTuPBZyIN9vMe0k5-aw0zzMO3Znz7zRpoIGs/gviz/tq?gid=1528931226';
+let transactions = [];
+
+// Fetch and parse the Google Sheets data
+fetch(sheetUrl)
+    .then(response => response.text())
+    .then(data => {
+        try {
+            const jsonData = JSON.parse(data.substring(47).slice(0, -2));
+            const rows = jsonData.table.rows;
+            parseTransactions(rows);
+            console.log('Transactions loaded:', transactions);  // Log loaded transactions for debugging
+        } catch (error) {
+            console.error('Error parsing Google Sheet data:', error);
+        }
+    })
+    .catch(error => console.error('Error fetching the Google Sheet data:', error));
+
+// Parse transactions
+function parseTransactions(rows) {
+    transactions = rows.map(row => ({
+        Description: String(row.c[1]?.v || '').toLowerCase(),  // Convert to string to avoid errors
+        Reason: String(row.c[2]?.v || 'N/A')                   // Convert to string to avoid errors
+    }));
+}
+
+// Filter and display transactions based on search input
+function filterTransactions() {
+    const searchValue = document.getElementById('transactionIdInput').value.toLowerCase();
+    const keywords = searchValue.split(' ').filter(keyword => keyword);
+    const container = document.getElementById('transaction-list');
+    container.innerHTML = '';  // Clear previous results
+
+    transactions.forEach(transaction => {
+        const { Description, Reason } = transaction;
+
+        // Check if all keywords match in Description or Reason
+        const matchesSearch = keywords.every(keyword => 
+            Description.includes(keyword) || Reason.toLowerCase().includes(keyword)
+        );
+
+        if (matchesSearch) {
+            // Create a div to display the Reason for each matched result
+            const reasonDiv = document.createElement('div');
+            reasonDiv.classList.add('transaction');
+            reasonDiv.style.textAlign = 'center';
+            reasonDiv.textContent = `${Reason}`;
+            
+            container.appendChild(reasonDiv);  // Append to container
+        }
+    });
+}
+
+document.getElementById("hh").addEventListener('click', () => {
+    filterTransactions();
+    showDateTime();
+    document.getElementById('result').style.display = 'none';
+});
+
+
+        document.getElementById("subbtn").addEventListener('click', function(e) {
+            e.preventDefault();
+            const submitButton = this;
+            submitButton.style.display = 'block';
+            submitButton.style.opacity = '0.5';
+            submitButton.innerText = 'Saving....';
+            submitButton.disabled = true;
+
+            const amountText = document.getElementById("dateTimeResult").innerText;
+            const amountMatch = amountText.match(/\d+/);
+            const amount = amountMatch ? amountMatch[0] : null;
+            const rmsg = document.getElementById('msg').value;
+
+            // Error handling for input values
+            if (!amount || isNaN(parseFloat(amount))) {
+                submitButton.innerText = 'Error: Invalid Amount';
+                resetButtonState(submitButton);
+                return;
+            }
+            if (parseFloat(amount) < 5) {
+                submitButton.innerText = 'Error: Minimum amount is 5';
+                resetButtonState(submitButton);
+                return;
+            }
+            if (!rmsg.trim()) {
+                submitButton.innerText = 'Error: Message cannot be empty';
+                resetButtonState(submitButton);
+                return;
+            }
+
+            // Proceed with form submission
+            fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfQzsPLbhznv9pNlCYo3OiMsJ7rgFy4YPXK2R0V_xCKtVL5yA/formResponse", {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new URLSearchParams({ "entry.2111696735": amount, "entry.458544774": rmsg })
+            }).then(() => {
+                document.getElementById('dateTimeResult').innerText = 'ID & Message saved';
+                
+                // Set the hide flag in localStorage
+                localStorage.setItem('hide', 'true');
+                console.log("Hide flag set in localStorage."); // Debug statement
+
+                submitButton.style.display = 'none';
+                setTimeout(() => location.reload(), 1500);
+            }).catch((error) => {
+                console.error("Submission Error:", error);
+                submitButton.innerText = 'Error: Network Issue, Try Again';
+                resetButtonState(submitButton);
+            });
+        });
+
+        // Function to reset button state
+        function resetButtonState(button) {
+            button.style.opacity = '1';
+            button.disabled = false;
+            setTimeout(() => {
+                button.innerText = 'Submit';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

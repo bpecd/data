@@ -1,0 +1,143 @@
+       /* Prevent body scroll when popup is active */
+        body.popup-active {
+            overflow: hidden;
+        }
+
+        /* Additional isolation for popup */
+        .popuptwo * {
+            box-sizing: border-box;
+        }
+
+        /* Ensure popup doesn't interfere with other fixed elements */
+        .popuptwo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 10000;
+            transition: visibility 0s 0.3s, opacity 0.3s ease;
+            pointer-events: none;
+            /* Prevent interaction when hidden */
+            isolation: isolate;
+            /* Create new stacking context */
+            /* Prevent any backdrop filters from affecting other elements */
+            backdrop-filter: none;
+        }
+
+        .popuptwo.active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+            /* Allow interaction when active */
+        }
+
+        .popup-contenttwo {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 120px;
+            height: auto;
+            position: relative;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            /* Ensure content doesn't leak outside */
+            overflow: hidden;
+            /* Prevent margin collapse */
+            contain: layout style paint;
+        }
+
+        .popuptwo.active .popup-contenttwo {
+            transform: scale(1);
+        }
+
+        .popup-contenttwo img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            /* Prevent image from affecting layout */
+            max-width: 100%;
+        }
+ 
+<div class="popuptwo" id="popuptwo">
+        <div class="popup-contenttwo">
+            <img src="logo.gif" alt="logo">
+        </div>
+    </div>
+
+    (function () {
+            const popuptwo = document.getElementById("popuptwo");
+
+            if (!popuptwo) {
+                console.error("Popuptwo element not found");
+                return;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show popup on page load
+                showPopup();
+
+                // Auto-hide popup after 2.5 seconds
+                setTimeout(() => {
+                    closePopup();
+                }, 2500);
+
+                // Show popup function
+                function showPopup() {
+                    popuptwo.classList.add("active");
+                    document.body.classList.add("popup-active");
+                }
+
+                // Close popup function
+                function closePopup() {
+                    popuptwo.classList.remove("active");
+                    document.body.classList.remove("popup-active");
+                }
+
+                // Click outside popup to close (only on overlay background)
+                popuptwo.addEventListener("click", function (e) {
+                    // Only close if clicking directly on the overlay (not the content)
+                    if (e.target === popuptwo) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closePopup();
+                    }
+                });
+
+                // Click on popup content to close
+                const popupContent = popuptwo.querySelector('.popup-contenttwo');
+                if (popupContent) {
+                    popupContent.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closePopup();
+                    });
+                }
+
+                // Prevent popup from interfering with page scrolling
+                popuptwo.addEventListener("wheel", function (e) {
+                    if (popuptwo.classList.contains("active")) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+
+                // Keyboard support - close on Escape key
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape" && popuptwo.classList.contains("active")) {
+                        e.preventDefault();
+                        closePopup();
+                    }
+                });
+            });
+        })();

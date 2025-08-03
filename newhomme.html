@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href=
+  "https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+<title></title>    
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+
+
+:root{
+
+    --primary-color: #F8F7FC;
+
+    --secondary-color: #231E1E;
+
+    --accent-color: #fa7f03;
+
+}
+
+*{
+
+    padding: 0;
+
+    margin: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+body{
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    background: var(--primary-color);
+    transition: transform 0.5s ease-in-out;
+}
+body.move-down {
+    transform: translateY(5vh);
+}
+.claim-button1 {
+            background-color: #f8f0fc;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.75rem;
+            cursor: pointer;
+            position: absolute;
+            top: 0.625rem;
+            left: 0.625rem;
+        }
+
+
+.registration-container{
+
+    background: #ffffff;
+margin: auto;
+  
+
+    padding: 0.938rem 25px;
+
+    width: 37.5rem;
+
+    border-radius: 0.75rem;
+
+    box-shadow: 0.625rem 0.875rem 90px #F5AC6252;
+
+    opacity: 0;
+          transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+  @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+.registration-container .registration-header{
+
+    padding: 0.625rem;
+
+
+
+}
+
+.registration-header h2{
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+
+}
+
+
+
+.registration-header .divider{
+
+    display: block;
+
+    width: 15%;
+
+    height: 0.313rem;
+
+    background: var(--accent-color);
+
+    margin-top: 0.25rem;
+
+}
+
+
+
+.registration-body .registration-box{
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+
+    padding: 0.625rem 0px;
+
+}
+
+
+
+.registration-box .input-box{
+
+    position: relative;
+
+    width: 50%;
+
+    justify-content: space-around;
+
+    padding: 0.313rem 0.625rem;
+
+    display: block;
+
+}
+
+.registration-box .input-box label{
+
+    font-size: 0.875rem;
+
+    color: var(--secondary-color);
+
+}
+
+
+
+.registration-box .input-field{
+
+    width: 100%;
+
+    height: 2.25rem;
+
+    display: block;
+
+    border-radius: 0.25rem;
+
+    border: 0.063rem solid #1B1B1B46;
+
+    padding-left: 0.50rem;
+
+}
+
+
+
+.registration-box .input-field:focus{
+
+    border-radius: 0.25rem;
+
+  transition: border 0.4s ease-in-out;
+    outline: none;
+
+    border: solid var(--accent-color);
+
+    border-width: 0.063rem 0.063rem 0.188rem 0.063rem;
+
+    padding-left: 0.50rem;
+
+    height: 2.5rem;
+
+    padding-top: 0px;
+
+}
+
+
+
+.registration-box .input-box:focus-within label{
+
+    transition: display 0.4s ease-in-out;
+    content: '';
+    padding: 0 0.625rem;
+
+    margin-bottom: 0.938rem;
+
+}
+
+
+
+.registration-box .input-box:focus-within{
+
+    padding: 0px 0.625rem;
+  transition: 0.5s ease-in-out;
+}
+
+.registration-box .input-box:focus-within .input-field::placeholder{
+
+    visibility: hidden;
+
+  transition: 0.4s ease-in-out;
+}
+
+
+
+.registration-body .btn-register{
+
+    border: 0;
+
+    background: var(--accent-color);
+
+    color: var(--primary-color);
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    padding: 0.625rem 25px;
+
+    border-radius: 0.25rem;
+
+    box-shadow: 0px 0.25rem 0.75rem #F5AC6280;
+
+    margin: 0px 0.625rem;
+
+}
+
+
+
+.registration-body .btn-register:hover{
+
+    background: var(--secondary-color);
+
+  transition: 0.4s ease-in-out;
+    box-shadow: 0px 0.25rem 0.75rem #231E1E90;
+
+}
+
+
+
+.registration-container .registration-footer{
+
+    text-align: center;
+
+    padding: 1.25rem;
+
+}
+
+
+
+.registration-footer h3{
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+    color: var(--secondary-color);
+
+}
+
+
+
+.registration-footer a{
+
+    color: var(--accent-color);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+
+.registration-footer a:hover{
+
+    border-bottom: 0.125rem solid #FC8C1B;
+
+} 
+
+
+
+
+.calculator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 0.063rem solid #ccc;
+            padding: 1.25rem;
+            background: #fff;
+            z-index: 1000;
+            width: 18.75rem;
+            box-shadow: 0 0.25rem 0.50rem rgba(0,0,0,0.1);
+        }
+
+        .calculator input {
+            width: 100%;
+            margin-bottom: 0.625rem;
+            padding: 0.625rem;
+            font-size: 1.2em;
+        }
+
+        .calculator button {
+          
+            width: calc(25% - 0.625rem);
+            padding: 0.625rem;
+            font-size: 1.2em;
+            margin: 0.313rem;
+            border: 0.063rem solid #ccc;
+            border-radius: 0.313rem;
+            cursor: pointer;
+        }
+.calculator-btn{
+  border: 0;
+
+    background: var(--secondary-color);
+    color: var(--primary-color);
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    padding: 0.625rem 25px;
+
+    border-radius: 0.25rem;
+
+    box-shadow: 0px 0.25rem 0.75rem #F5AC6280;
+
+    margin: 0.313rem 0.625rem;
+
+    cursor: pointer;
+
+}
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+@media screen and (max-width:480px){
+
+    .registration-container{
+
+        display: block;
+
+        padding: 0.625rem;
+
+        border-radius: 0.75rem;
+
+        max-width: 25rem;
+
+    }
+
+    .registration-container .registration-header{
+
+        padding: 0.625rem 0px;
+
+    }
+
+    .registration-body .registration-box{
+
+        display: block;
+
+    }
+
+    .registration-box .input-box{
+
+        width: 100%;
+
+        padding: 05px 0px;
+
+    }
+
+
+
+    .registration-box .input-box:focus-within{
+
+        padding: 0.75rem 0px;
+
+      transition: 0.4s ease-in-out;
+    }
+
+    .registration-body .btn-register{
+
+        width: 100%;
+
+        margin: auto;
+
+    }
+
+    .input-box {
+                flex: 1 1 100%;
+            }
+
+            .calculator {
+                width: 90%;
+              height:50%;
+                padding: 0.625rem;
+            }
+
+            .calculator button {
+                width: calc(23.33% - 0.625rem);
+                margin: 0.313rem;
+            }
+
+
+
+}
+.container {
+    width: 483px;
+    height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .button2 {
+        border: none;
+        background-color: var(--accent-color);
+        color: #ffffff;
+        border-radius: 0.625rem;
+      padding: 0.625rem 1.25rem;
+      margin-top: 1.25rem;
+    }
+.loader {
+  --c1:#673b14;
+  --c2:#f8b13b;
+  width: 2.5rem;
+  height: 5rem;
+  border-top: 0.25rem solid var(--c1);
+  border-bottom: 0.25rem solid var(--c1);
+  background: linear-gradient(90deg, var(--c1) 0.125rem, var(--c2) 0 0.313rem,var(--c1) 0) 50%/7px 0.50rem no-repeat;
+  display: grid;
+  overflow: hidden;
+  animation: l5-0 1.5s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  width: 75%;
+  height: calc(50% - 0.25rem);
+  margin: 0 auto;
+  border: 0.125rem solid var(--c1);
+  border-top: 0;
+  box-sizing: content-box;
+  border-radius: 0 0 40% 40%;
+  -webkit-mask: 
+    linear-gradient(#000 0 0) bottom/0.25rem 0.125rem no-repeat,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+  background: 
+    linear-gradient(var(--d,0deg),var(--c2) 50%,#0000 0) bottom /100% 205%,
+    linear-gradient(var(--c2) 0 0) center/0 100%;
+  background-repeat: no-repeat;
+  animation: inherit;
+  animation-name: l5-1;
+}
+.loader::after {
+  transform-origin: 50% calc(100% + 0.125rem);
+  transform: scaleY(-1);
+  --s:0.188rem;
+  --d:180deg;
+}
+@keyframes l5-0 {
+  80%  {transform: rotate(0)}
+  100% {transform: rotate(0.5turn)}
+}
+@keyframes l5-1 {
+  10%,70%  {background-size:100% 205%,var(--s,0) 100%}
+  70%,100% {background-position: top,center}
+}
+
+
+  </style>
+</head>
+<body> <button class="claim-button1" id="backButton"><i class="fas fa-circle-arrow-left"></i></button>
+    <div class="registration-container">
+        <div class="container">
+            <h3>Tap On create Link then open!</h3>
+            <button id="hideit" class="button2" onclick="createFormAndSheet()">Create link</button>
+            <div style="margin-left: 2vh;" id="result"><div id="loader" style="display: none;" class="loader"></div>
+                <img style="width: 15.625rem;height: 15.625rem;pointer-events: none;display: none;" id="suc" src="suc3.gif">
+                <img style="width: 12.5rem;height: 12.5rem;pointer-events: none;display: none;" id="fall" src="fall.gif">
+                <p style="font-size: 1.375rem;color: rgb(8, 8, 221);background-color: #8cffff;border-radius: 0.625rem;padding: 0.313rem;display: none;" id="result222"></p>
+            </div>
+            </div>
+            </div>
+    <div class="registration-container">
+        <div class="registration-header">
+            <h2>Registration: New client / Contactor</h2>
+            <span class="divider"></span>
+        </div>
+        <div class="registration-body">
+            <form id="regi">
+                <div class="registration-box">
+                    <div class="input-box hidenowb">
+                        <label >Form LINK</label>
+                        <input type="text" class="input-field" id="formurl"placeholder="" required>
+                    </div>
+                    <div class="input-box hidenowb">
+                        <label >Sheet LINK</label>
+                        <input type="text" class="input-field" id="sheeturl"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >SheetID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Sheet GID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sheetgid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >FormID</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="formid"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Sdentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sd"placeholder=""required>
+                    </div>
+                    <div  class="input-box hidenowb">
+                        <label >Srentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sr"placeholder=""required>
+                    </div>
+                    <div class="input-box hidenowb">
+                        <label >Saentry</label>
+                        <input style="background-color: #ccc;" type="text" class="input-field" id="sa"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Name</label> 
+                        <input type="text" class="input-field" id="name"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Flat / Plot / Contactor</label>
+                        <input type="text" class="input-field" id="land"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Phone Number</label>
+                        <input type="text" class="input-field" id="phone"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >Email</label>
+                        <input type="text" class="input-field" id="email"placeholder=""required>
+                    </div>
+                    <div class="input-box">
+                        <label >User Type</label>
+                        <input list="usertype" class="input-field" id="wdt"placeholder=""required>
+                    <datalist id="usertype">
+                        <option value="Land Owner"></option>
+                        <option value="Other"></option>
+                        <option value="Labour"></option>
+                        <option value="Client"></option>
+                        <option value="Flat Owner"></option>
+                        <option value="Thai"></option>
+                        <option value="Tiles"></option>
+                        <option value="Plumbing"></option>
+                        <option value="Electric"></option>
+                        <option value="Wasa"></option>
+                        <option value="Paint"></option>
+                        <option value="Civil"></option>
+                        <option value="Stone"></option>
+                        <option value="Brick"></option>
+                        <option value="Sand"></option>
+                        <option value="Rod"></option>
+                        <option value="Window"></option>
+                        <option value="Cement"></option>
+                        <option value="Wood"></option>
+                    </datalist>
+                    </div>
+                    <div class="input-box">
+                        <label >Agreement</label>
+                        <input type="text" class="input-field" id="ind" placeholder=" "required>
+                    </div>
+                    
+                </div><div style="display: flex; gap: 0.625rem;">
+                <button class="btn-register" id="btn-register">Register Now</button><h3>Start Auto Input <button style="display: none;" class="calculator-btn"id="calculate">Auto ENTRY</button><button class="calculator-btn"id="calculate2">Auto ID</button></h3>
+                </div>
+                <h3 id="result2"></h3>
+            </form>
+        </div>
+        <div class="registration-footer">
+             <h3>Owner list sheet <a href="https://docs.google.com/spreadsheets/d/1Bp3NBLwOvw3KJ6znz47s1mhbC5phzHSVP9O3_i1ydUQ/edit?gid=1664436013#gid=1664436013" target="_blank">here</a></h3>
+        </div>
+    </div>
+    <script> const checkAndUpdate = () => {
+        const inputField = document.getElementById('sa');
+        const xyz = inputField.value.trim(); // Get the value of the input field
+    
+        if (xyz) {
+            setTimeout(() => {
+                // If the input has a value, hide elements with class 'hidenowb' after 2 seconds
+                document.querySelectorAll('.hidenowb').forEach(element => {
+                    element.style.display = 'none'; // Hide the elements
+                });
+            }, 2000); // 2-second delay to hide elements
+        } else {
+            document.querySelectorAll('.hidenowb').forEach(element => {
+                element.style.display = ''; // Show elements if the input is empty
+            });
+        }
+    
+        // Retry the check after 500ms to continuously monitor the input value
+        setTimeout(checkAndUpdate, 500);
+    };
+    
+    // Initial call to check and update
+    checkAndUpdate();
+    const e = JSON.parse(localStorage.getItem("secureDataV2"));
+            if (!e) {
+                window.location.href = "index.html";
+            }
+         document.getElementById('btn-register').style.display = 'none';
+        document.getElementById('backButton').addEventListener('click', function() {
+    // Add class to move the body down
+    document.body.classList.add('move-down');
+    
+    // Wait for the animation to complete (1 second), then go back
+    setTimeout(function() {
+        window.location.href = 'developerid.html';
+    }, 400);  // Match this duration with the CSS transition time
+});
+document.getElementById('hideit').addEventListener('click', function() {
+document.getElementById('hideit').style.display = 'none';
+
+});
+function createFormAndSheet() {
+    document.getElementById("loader").style.display = "";
+  fetch("https://script.google.com/macros/s/AKfycbx2eDxy5oWJr9YgQMvBKDI0560CJuwsUMdzf81O61NExyKY56Brer7D22ArVm4B-YeTVQ/exec")
+    .then(response => response.json())
+    .then(data => displayResult(data))
+    .catch(error => console.error("Error:", error));
+}
+
+function displayResult(result) {
+  const formUrl = result.formUrl.replace(/\/edit.*/, '/viewform');
+  const sheetUrl = result.sheetUrl.replace(/\/edit.*/, '/');
+  document.getElementById("loader").style.display = "none";
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = `
+    <p><strong>Form URL:</strong> <a href="${formUrl}" target="_blank">Click me - Form Link</a></p>
+    <p><strong>Sheet URL:</strong> <a href="${sheetUrl}" target="_blank">Click me - Sheet link</a></p>
+  `;
+}
+
+      </script>
+    <script>
+document.getElementById('calculate').addEventListener('click', async function(event) {
+    event.preventDefault();
+    document.getElementById("calculate").style.display = 'none';
+    const formId = document.getElementById('formid').value;
+    const scriptUrl = `https://script.google.com/macros/s/AKfycbwLHHfv5S_Y68QHP64_Xe5tp5s7XfVRuaKhppNb2bxqSLdOyKQwU24KvMHZ_wV42-qicg/exec?formId=${formId}`; // Replace YOUR_SCRIPT_ID
+
+    try {
+        const response = await fetch(scriptUrl);
+
+        if (response.ok) {
+            const fbData = await response.json();
+
+            // Extract data from `fbData` (adjust based on form structure)
+            const descriptionNumber = fbData[1][1][0][4][0][0]; // Description value
+            const reasonNumber = fbData[1][1][1][4][0][0];      // Reason value
+            const amountNumber = fbData[1][1][2][4][0][0];      // Amount value
+
+            // Populate input fields with extracted values
+            document.getElementById("sd").value = descriptionNumber || "Description not found";
+            document.getElementById("sr").value = reasonNumber || "Reason not found";
+            document.getElementById("sa").value = amountNumber || "Amount not found";
+            document.getElementById('btn-register').style.display = 'block';
+        } else {
+            document.getElementById("result").textContent = 'Failed to fetch form data!';
+        }
+    } catch (error) {
+        document.getElementById("result").textContent = 'Error fetching form data!';
+    }
+});
+const devdatax = JSON.parse(localStorage.getItem('devdata'));
+document.title = `Project List > ${devdatax.name} > Registration Client / contactor`;
+document.getElementById('calculate2').addEventListener('click', async function(e) {
+    e.preventDefault();
+    document.getElementById("calculate2").style.display = 'none';
+    document.getElementById("calculate").style.display = 'block';
+
+    const sheetUrl = document.getElementById('sheeturl').value;
+    const formUrl = document.getElementById('formurl').value;
+
+    const idRegexSheet = /\/d\/([a-zA-Z0-9_-]+)/;
+    const gidRegex = /gid=([0-9]+)/;
+    const sheetIdMatch = sheetUrl.match(idRegexSheet);
+    const gidMatch = sheetUrl.match(gidRegex);
+
+    const sheetId = sheetIdMatch ? sheetIdMatch[1] : "Not found";
+    const sheetGid = gidMatch ? gidMatch[1] : "Not found";
+
+    document.getElementById('sheetid').value = sheetId;
+    document.getElementById('sheetgid').value = sheetGid;
+
+    const idRegexForm = /\/e\/([a-zA-Z0-9_-]+)/;
+    const formIdMatch = formUrl.match(idRegexForm);
+    const formId = formIdMatch ? formIdMatch[1] : "Not found";
+    document.getElementById('formid').value = formId;
+    document.getElementById('sheeturl').style.display ='none';
+    document.getElementById('formurl').style.display = 'none';
+});
+
+document.getElementById('regi').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Update button UI to show the form is being processed
+    const registerButton = document.getElementById('btn-register');
+    registerButton.style.opacity = '0.5';
+    registerButton.innerText = 'Working...';
+
+    // Get stored data from localStorage
+    const devdata = JSON.parse(localStorage.getItem('devdata'));
+
+    // Form field values
+    const name = document.getElementById('name').value;
+    const land = document.getElementById('land').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const sheetId = document.getElementById('sheetid').value;
+    const sheetGid = document.getElementById('sheetgid').value;
+    const formId = document.getElementById('formid').value;
+    const sd = document.getElementById('sd').value;
+    const sr = document.getElementById('sr').value;
+    const sa = document.getElementById('sa').value;
+    const ind = "0";
+    const wdt = document.getElementById('wdt').value;
+
+    // Formulas
+    const ts = '=SUM(D3:D,0)';
+    const rst = '=SUMIF(D3:D,">0")';
+    const cst = '=SUMIF(D3:D,"<0")';
+
+    // URLs
+    const formUrl1 = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+    const formUrl3 = `https://docs.google.com/forms/d/e/${devdata.formid2}/formResponse`;
+
+    // FormData objects
+    const formData2 = new FormData();
+    formData2.append(`entry.${sd}`, ts);
+    formData2.append(`entry.${sr}`, rst);
+    formData2.append(`entry.${sa}`, cst);
+
+    const formData1 = new FormData();
+    formData1.append(`entry.${devdata.nameen}`, name);
+    formData1.append(`entry.${devdata.houseen}`, land);
+    formData1.append(`entry.${devdata.phoneen}`, phone);
+    formData1.append(`entry.${devdata.mailen}`, email);
+    formData1.append(`entry.${devdata.statusen}`, wdt);
+    formData1.append(`entry.${devdata.sheetiden}`, sheetId);
+    formData1.append(`entry.${devdata.sgiden}`, sheetGid);
+    formData1.append(`entry.${devdata.formiden}`, formId);
+    formData1.append(`entry.${devdata.sdentry2}`, sd);
+    formData1.append(`entry.${devdata.srentry2}`, sr);
+    formData1.append(`entry.${devdata.saentry2}`, sa);
+
+    // Submit the forms concurrently
+    Promise.all([
+        fetch(formUrl1, { method: 'POST', body: formData2, mode: 'no-cors' }),
+        fetch(formUrl3, { method: 'POST', body: formData1, mode: 'no-cors' })
+    ])
+    .then(() => {
+        // Delay before the next form submission
+        setTimeout(() => {
+            const formData3 = new FormData();
+            formData3.append(`entry.${sd}`, `Agreement ${wdt}`);
+            formData3.append(`entry.${sr}`, `Do not remove B3 ${ind}`);
+            formData3.append(`entry.${sa}`, "0");
+
+            fetch(formUrl1, { method: 'POST', body: formData3, mode: 'no-cors' })
+            .then(() => {
+                document.getElementById('regi').style.display = 'none';
+                document.getElementById('result222').innerText = 'Registration successful';
+                document.getElementById('suc').style.display ='';
+                registerButton.style.display = 'none';
+                document.getElementById('result2').innerText = 'Registration successful';
+            })
+            .catch(error => {document.getElementById('suc').style.display ='';
+            document.getElementById('suc').src ='fall.gif';
+                document.getElementById('result222').style.display = '';
+                document.getElementById('result222').innerText = 'Error: Failed to submit form';
+                document.getElementById('result2').innerText = 'Error: ' + error.message;
+                console.error('Error submitting form:', error);
+            });
+        }, 1000);
+    })
+    .catch(error => {
+        document.getElementById('result2').innerText = 'Error: ' + error.message;
+        console.error('Error submitting form:', error);
+    });
+});
+    </script>
+</body>
+  </html>
