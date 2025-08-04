@@ -1639,57 +1639,6 @@
             document.getElementById('edit-permission-toggle').style.display = 'none';
         }
 
-
-
-
-
-
-    </script>
-    <script>
-        // Optimized checkAndUpdate function that uses fetched data directly
-        const checkAndUpdateWithData = (data) => {
-            const {
-                totalCost,
-                totalReceive,
-                balance,
-                officeCost,
-                loanAmount
-            } = data;
-
-            // Calculate owner cost (build cost)
-            const buildCost = Math.max(0, totalCost - officeCost);
-
-            // Display owner cost with animation
-            displayAnimatedText("blcost", formatNumber(buildCost));
-
-            // Immediately update the progress without delay
-            const calculatePercentage = (part, total) => total > 0 ? (part / total) * 100 : 0;
-
-            // Calculate percentages using fetched data
-            const buildPercentage = calculatePercentage(buildCost, totalCost);
-            const officePercentage = calculatePercentage(officeCost, totalCost);
-            const loanPercentage = calculatePercentage(loanAmount, balance);
-            const overallPercentage = calculatePercentage(totalCost, totalReceive);
-
-            // Update progress bars immediately
-            requestAnimationFrame(() => {
-                document.getElementById("build-progress").style.width = `${buildPercentage}%`;
-                document.getElementById("office-progress").style.width = `${officePercentage}%`;
-                document.getElementById("loan-progress").style.width = `${loanPercentage}%`;
-
-                // Circular progress animation
-                const progressCircle = document.querySelector(".progress-circle");
-                const circumference = 2 * Math.PI * 70; // Radius = 70
-                const offset = circumference - (overallPercentage / 100) * circumference;
-
-                progressCircle.style.strokeDasharray = circumference;
-                progressCircle.style.transition = "stroke-dashoffset 0.5s"; // Faster transition
-                progressCircle.style.strokeDashoffset = offset;
-
-                // Update percentage display
-                document.querySelector(".percentage").textContent = `${Math.round(overallPercentage)}%`;
-            });
-        };
     </script>
 
 </body>
