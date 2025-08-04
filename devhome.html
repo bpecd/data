@@ -1763,66 +1763,6 @@
 
         // Start updating stats on page load
         updateStats();
-        // Optimized checkAndUpdate function - now much faster and more accurate
-        const checkAndUpdate = () => {
-            const xyz = ["total-cost", "total-receive", "ccost", "lcost", "balance"];
-
-            // Helper function to check if all elements have valid values
-            const areAllIdsValid = (ids) => {
-                return ids.every(id => {
-                    const element = document.getElementById(id);
-                    return element && element.textContent.trim() !== "";
-                });
-            };
-
-            if (areAllIdsValid(xyz)) {
-                // Immediately calculate and update without delay
-                calculateAndDisplayPaymentDue();
-
-                const totalCost = parseFloat(document.getElementById("total-cost").textContent.replace(/,/g, ""));
-                const totalReceive = parseFloat(document.getElementById("total-receive").textContent.replace(/,/g, ""));
-                const buildCost = parseInt(document.getElementById("ccost").textContent.replace(/,/g, ""));
-                const officeCost = parseInt(document.getElementById("lcost").textContent.replace(/,/g, ""));
-                const pCost = Math.max(0, totalCost - (officeCost + buildCost)); // Ensure pCost is not negative
-
-                displayAnimatedText("pCost", formatNumber2(pCost));
-
-                // Calculate percentages with validation
-                const calculatePercentage = (part, total) => total > 0 ? (part / total) * 100 : 0;
-
-                const buildPercentage = calculatePercentage(buildCost, totalCost);
-                const officePercentage = calculatePercentage(officeCost, totalCost);
-                const pPercentage = calculatePercentage(pCost, totalCost);
-
-                // Update progress bars immediately
-                requestAnimationFrame(() => {
-                    document.getElementById("build-progress").style.width = `${buildPercentage}%`;
-                    document.getElementById("office-progress").style.width = `${officePercentage}%`;
-                    document.getElementById("p-progress").style.width = `${pPercentage}%`;
-
-                    // Circular progress with validation
-                    const px = calculatePercentage(totalCost, totalReceive);
-                    const percentage = Math.min(Math.max(isFinite(px) ? px : 0, 0), 100);
-
-                    const progressCircle = document.querySelector('.progress-circle');
-                    const circumference = 2 * Math.PI * 70; // Radius is 70
-                    const offset = circumference - (percentage / 100) * circumference;
-
-                    progressCircle.style.strokeDasharray = circumference;
-                    progressCircle.style.transition = "stroke-dashoffset 0.5s"; // Faster transition
-                    progressCircle.style.strokeDashoffset = offset;
-
-                    // Update percentage display
-                    document.querySelector(".percentage").textContent = `${Math.round(percentage)}%`;
-                });
-            } else {
-                console.log("Not all required IDs have valid values. Retrying...");
-                // Retry after shorter interval
-                setTimeout(checkAndUpdate, 200);
-            }
-        };
-
-        // checkAndUpdate will be called after data is fetched, not immediately
     </script>
 </body>
 
