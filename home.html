@@ -1074,7 +1074,7 @@
                 // Calculate totals and balance with proper validation
                 const totalcost = Math.max(0, officeCost + devCost);
                 const totalreceive = Math.max(0, officeReceive + devReceive);
-                const balanceValue = totalreceive - totalcost - loanAmount - bankBalance;
+                const balanceValue = totalreceive - totalcost;
 
                 console.log('Calculated values:', {
                     totalcost, totalreceive, balanceValue
@@ -1193,73 +1193,7 @@
                 window.location.href = "index.html";
             }, 900);
         });
-
-        // Optimized checkAndUpdate function that uses fetched data directly
-        const checkAndUpdateWithData = (data) => {
-            const {
-                officeCost,
-                officeReceive,
-                devCost,
-                devReceive,
-                avbl,
-                avof,
-                bankBalance,
-                loanAmount
-            } = data;
-
-            // Calculate totals and balance with validation
-            const totalcost = Math.max(0, officeCost + devCost);
-            const totalreceive = Math.max(0, officeReceive + devReceive);
-            const balanceValue = totalreceive - totalcost;
-
-            // Update balance color immediately
-            const balanceDisplay = document.getElementById("balance");
-            if (balanceValue < 0) {
-                balanceDisplay.style.color = "red";
-            } else {
-                balanceDisplay.style.color = "rgb(4, 119, 4)";
-            }
-
-            displayAnimatedText("total-cost", formatNumber(totalcost));
-            displayAnimatedText("total-receive", formatNumber(totalreceive));
-            displayAnimatedText("balance", formatNumber(balanceValue));
-
-            // Immediately update progress bars without delay
-            const calculatePercentage = (part, total) => total > 0 ? (part / total) * 100 : 0;
-
-            // Calculate percentages using fetched data
-            const buildPercentage = calculatePercentage(devCost, totalcost);
-            const officePercentage = calculatePercentage(officeCost, totalcost);
-            const buildReceivePercentage = calculatePercentage(devReceive, totalreceive);
-            const officeReceivePercentage = calculatePercentage(officeReceive, totalreceive);
-            const bankPercentage = calculatePercentage(bankBalance, Math.abs(balanceValue));
-            const loanPercentage = calculatePercentage(loanAmount, Math.abs(balanceValue));
-            const overallPercentage = calculatePercentage(totalcost, totalreceive);
-
-            // Update progress bars immediately
-            requestAnimationFrame(() => {
-                document.getElementById("bank-progress").style.width = `${bankPercentage}%`;
-                document.getElementById("buildc-progress").style.width = `${buildPercentage}%`;
-                document.getElementById("officec-progress").style.width = `${officePercentage}%`;
-                document.getElementById("buildr-progress").style.width = `${buildReceivePercentage}%`;
-                document.getElementById("officer-progress").style.width = `${officeReceivePercentage}%`;
-                document.getElementById("loan-progress").style.width = `${loanPercentage}%`;
-
-                // Circular progress animation
-                const progressCircle = document.querySelector(".progress-circle");
-                const circumference = 2 * Math.PI * 70; // Radius = 70
-                const offset = circumference - (overallPercentage / 100) * circumference;
-
-                progressCircle.style.strokeDasharray = circumference;
-                progressCircle.style.transition = "stroke-dashoffset 0.5s"; // Faster transition
-                progressCircle.style.strokeDashoffset = offset;
-
-                // Update percentage display
-                document.querySelector(".percentage").textContent = `${Math.round(overallPercentage)}%`;
-            });
-        };
-    </script>
+ </script>
 </body>
-
 
 </html>
