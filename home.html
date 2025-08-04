@@ -1210,7 +1210,7 @@
             // Calculate totals and balance with validation
             const totalcost = Math.max(0, officeCost + devCost);
             const totalreceive = Math.max(0, officeReceive + devReceive);
-            const balanceValue = totalreceive - totalcost - loanAmount - bankBalance;
+            const balanceValue = totalreceive - totalcost;
 
             // Update balance color immediately
             const balanceDisplay = document.getElementById("balance");
@@ -1260,5 +1260,6 @@
         };
     </script>
 </body>
+
 
 </html>
