@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const storedPhoneNumber = localStorage.getItem('phonenumberV2');
-    if (storedPhoneNumber) {
-        animateText(storedPhoneNumber, 'phonenumber');
-    } else {
-        window.location.href = "verify.html";
-    }
+   if (storedPhoneNumber) {
+       animateText(storedPhoneNumber, 'phonenumber');
+   }
+    // else {
+// window.location.href = "verify.html";
+  //  }
 let audioPlayed = false;
     const audioElement = new Audio('https://bpecd.github.io/data/nyr.mp3');
 
@@ -65,10 +66,10 @@ let audioPlayed = false;
         const storedPhoneNumber = document.getElementById('phonenumber').value;
         const pinInput = document.getElementById('pin').value; // Use the masked PIN
 
-        if (!storedPhoneNumber) {
-            window.location.href = "https://upburl.github.io/app/verify.html";
-            return false;
-        }
+      //  if (!storedPhoneNumber) {
+      //      window.location.href = "https://upburl.github.io/app/verify.html";
+      //      return false;
+      //  }
 
         const normalizedInput = normalizeNumber(storedPhoneNumber);
 
