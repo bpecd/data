@@ -156,6 +156,21 @@
             width: 15.625rem;
         }
 
+        .search-bar select {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            min-width: 8rem;
+        }
+
+        .search-bar select:hover {
+            background-color: #f8f9fa;
+        }
+
         .search-bar .fa-file-spreadsheet {
             color: #096faa;
             font-size: 2rem;
@@ -302,6 +317,9 @@
                 Owners list</h1>
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <select id="status-filter" onchange="filterTransactions()">
+                    <option value="">All Status</option>
+                </select>
                 <i id="shtl"
                     onclick="window.open('https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/edit?resourcekey=&gid=138275939#gid=138275939', '_blank');"
                     class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
@@ -397,7 +415,6 @@
         async function fetchAllData() {
             try {
                 const csvUrl = 'https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?tqx=out:csv&gid=138275939';
-                console.log('Fetching CSV data from:', csvUrl);
 
                 const response = await fetch(csvUrl);
                 if (!response.ok) {
@@ -405,7 +422,6 @@
                 }
 
                 const csvText = await response.text();
-                console.log('CSV data received');
 
                 // Parse CSV data
                 const rows = csvText.split('\n').map(row => {
@@ -435,6 +451,9 @@
             const container = document.getElementById('transaction-list');
             transactions = [];
 
+            // Collect unique status values for the filter dropdown
+            const statusSet = new Set();
+
             // Start serial number from the total count of rows
             let serialNumber = rows.length;
 
@@ -453,6 +472,9 @@
                 const sdentry = row[9] || 'N/A';
                 const srentry = row[10] || 0;
                 const saentry = row[11] || 'N/A';
+
+                // Add status to the set for filter options
+                statusSet.add(Status);
 
                 let formattedDate = rawDate;
                 if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
@@ -499,6 +521,9 @@
                 // Attach event listener for the "View" button
                 attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
             }
+
+            // Populate the status filter dropdown
+            populateStatusFilter(statusSet);
         }
 
         function attachRedirectEvent(buttonId, transaction) {
@@ -531,22 +556,44 @@
 
         function filterTransactions() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const statusValue = document.getElementById('status-filter').value;
             const container = document.getElementById('transaction-list');
             container.innerHTML = '';
 
             transactions.forEach((transaction, index) => {
-                if (
+                const matchesSearch =
                     transaction.Name.toLowerCase().includes(searchValue) ||
                     transaction.formattedDate.toLowerCase().includes(searchValue) ||
                     transaction.Land.toString().toLowerCase().includes(searchValue) ||
                     transaction.Status.toLowerCase().includes(searchValue) ||
-                    transaction.phone.toString().includes(searchValue)
-                ) {
+                    transaction.phone.toString().includes(searchValue);
+
+                const matchesStatus = statusValue === '' || transaction.Status === statusValue;
+
+                if (matchesSearch && matchesStatus) {
                     container.innerHTML += transaction.html;
 
                     // Reattach the event listener for the "View" button after rendering the HTML
                     const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
                     attachRedirectEvent(uniqueId, transaction);
+                }
+            });
+        }
+
+        function populateStatusFilter(statusSet) {
+            const statusFilter = document.getElementById('status-filter');
+
+            // Clear existing options except the first one
+            statusFilter.innerHTML = '<option value="">All Status</option>';
+
+            // Sort status values and add them as options
+            const sortedStatuses = Array.from(statusSet).sort();
+            sortedStatuses.forEach(status => {
+                if (status && status !== 'N/A') {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    statusFilter.appendChild(option);
                 }
             });
         }
@@ -587,6 +634,12 @@
                     return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
                 case 'client':
                     return '<i class="fa-solid fa-user-visor" style="color:#409c1f;"></i>';
+                case 'architect':
+                    return '<i class="fa-solid fa-pen-ruler" style="color:#409c1f;"></i>';
+                case 'developer':
+                    return '<i class="fa-solid fa-building-user" style="color:black;"></i>';
+                case 'close':
+                    return '<i class="fa-solid fa-xmark" style="color:red;"></i>';
                 default:
                     return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';
             }
