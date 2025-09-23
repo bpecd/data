@@ -906,7 +906,7 @@
                 document.getElementById("reminderDate2").style.display = validStates.includes(state) ? "" : "none";
                 document.getElementById("vcno").style.display = validStates.includes(state) ? "" : "none";
 
-                if (['client', 'land owner', 'flat owner'].includes(state)) {
+                if (['client', 'land owner', 'flat owner','owner'].includes(state)) {
                     showbtn2.style.display = "none";
                     showbtn.style.display = "none";
                 } else if (['other'].includes(state)) {
@@ -2592,5 +2592,6 @@
 
     </script>
 </body>
+
 
 </html>
