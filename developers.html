@@ -335,7 +335,7 @@
 
         const e = JSON.parse(localStorage.getItem("secureDataV2"));
         if (!e) {
-            window.location.href = "index.html";
+         window.location.href = "index.html";
         }
         document.getElementById("img").src = e.img;
         const popupOverlay = document.createElement('div');
@@ -434,11 +434,37 @@
             const container = document.getElementById('transaction-list');
             transactions = [];
 
-            // Start serial number from the total count of rows
-            let serialNumber = rows.length;
+            // Helper function to check if status indicates closed
+            function isClosedStatus(status) {
+                const lowerStatus = status.toLowerCase();
+                return lowerStatus.includes('close') ||
+                    lowerStatus.includes('closed') ||
+                    lowerStatus.includes('end') ||
+                    lowerStatus.includes('account close');
+            }
+
+            // Separate rows into active and closed
+            const activeRows = [];
+            const closedRows = [];
 
             for (let i = rows.length - 1; i >= 0; i--) {
                 const row = rows[i];
+                const Status = row[3] || 'N/A';
+
+                if (isClosedStatus(Status)) {
+                    closedRows.push({ row, originalIndex: i });
+                } else {
+                    activeRows.push({ row, originalIndex: i });
+                }
+            }
+
+            // Combine arrays: active rows first (already in reverse order), then closed rows (already in reverse order)
+            const orderedRows = [...activeRows, ...closedRows];
+
+            orderedRows.forEach(({ row, originalIndex }) => {
+                // Calculate original serial number based on original position (reverse order)
+                const originalSerialNumber = originalIndex + 1;
+
                 // For CSV data, access columns directly by index
                 const rawDate = row[0] || 'N/A';
                 const Name = row[1] || 'N/A';
@@ -470,17 +496,18 @@
                     formattedDate = parseGoogleDate(rawDate);
                 }
 
-                const uniqueId = `viewbtn-${i}`;
-                const rowClass = serialNumber % 2 === 0 ? 'even' : 'odd';
+                const uniqueId = `viewbtn-${originalIndex}`;
+                const rowClass = originalSerialNumber % 2 === 0 ? 'even' : 'odd';
 
                 transactions.push({
                     Name, Land, Status, formattedDate, sheetid, sheetid2, sgid, sgid2, formid,
                     formid2, sdentry, sdentry2, srentry, srentry2, saentry, saentry2,
                     nameen, phoneen, houseen, mailen, statusen, sheetiden, sgiden, formiden,
+                    originalSerialNumber: originalSerialNumber,
                     html: `
 <div class="transaction ${rowClass}">
     <div style="flex: 0.5; text-align: center;">
-        ${serialNumber}
+        ${originalSerialNumber}
     </div>
     <div style="flex: 1; text-align: center; line-height: 1.5;">
         ${Name}
@@ -499,13 +526,19 @@
     </div>
 </div>`
                 });
-                document.querySelector('.loader').style.display = 'none';
-                container.innerHTML += transactions[transactions.length - 1].html;
-                serialNumber--;
+            });
 
-                // Attach event listener for the "OPEN" button
-                attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
-            }
+            // Display all transactions
+            document.querySelector('.loader').style.display = 'none';
+            transactions.forEach(transaction => {
+                container.innerHTML += transaction.html;
+            });
+
+            // Attach event listeners for all "OPEN" buttons
+            transactions.forEach((transaction, index) => {
+                const buttonId = transaction.html.match(/id="([^"]+)"/)[1];
+                attachRedirectEvent(buttonId, transaction);
+            });
         }
 
         function attachRedirectEvent(buttonId, transaction) {
