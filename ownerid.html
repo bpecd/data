@@ -907,22 +907,23 @@
       .addEventListener("click", function () {
         location.reload();
       });
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
     document
       .getElementById("backButton")
       .addEventListener("click", function () {
         // Add class to move the body down
         document.body.classList.add("move-down");
+        const search_state = userdata.state;
         localStorage.removeItem("userdata");
 
         // Wait for the animation to complete (1 second), then go back
         setTimeout(function () {
-          window.location.href = "owners.html";
+          window.location.href = `owners.html?status=${search_state}`;
         }, 400); // Match this duration with the CSS transition time
       });
   </script>
 
   <script>
-    const userdata = JSON.parse(localStorage.getItem("userdata"));
     if (!userdata) {
       window.location.href = "owners.html";
     }
@@ -1922,5 +1923,6 @@
     });
   </script>
 </body>
+
 
 </html>
