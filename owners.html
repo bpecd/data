@@ -445,7 +445,9 @@
         }
 
         // Call the function when the page loads
-        document.addEventListener('DOMContentLoaded', fetchAllData);
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAllData();
+        });
 
         function displayTransaction(rows) {
             const container = document.getElementById('transaction-list');
@@ -562,6 +564,47 @@
 
             // Populate the status filter dropdown
             populateStatusFilter(statusSet);
+
+            // Apply URL status filter if present (with a small delay to ensure dropdown is ready)
+            setTimeout(() => {
+                applyUrlStatusFilter();
+            }, 100);
+        }
+
+        // Function to check URL parameters and apply status filter
+        function applyUrlStatusFilter() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const statusParam = urlParams.get('status');
+
+            console.log('Checking URL parameters:', statusParam); // Debug log
+
+            if (statusParam) {
+                // Set the status filter dropdown to the URL parameter value
+                const statusFilter = document.getElementById('status-filter');
+                if (statusFilter && statusFilter.options.length > 1) {
+                    console.log('Available options:', Array.from(statusFilter.options).map(opt => opt.value)); // Debug log
+
+                    // Find matching option (case-insensitive)
+                    let foundMatch = false;
+                    for (let i = 0; i < statusFilter.options.length; i++) {
+                        if (statusFilter.options[i].value.toLowerCase() === statusParam.toLowerCase()) {
+                            statusFilter.selectedIndex = i;
+                            foundMatch = true;
+                            console.log('Found matching status:', statusFilter.options[i].value); // Debug log
+                            break;
+                        }
+                    }
+
+                    if (foundMatch) {
+                        // Trigger the filter function
+                        filterTransactions();
+                    } else {
+                        console.log('No matching status found for:', statusParam); // Debug log
+                    }
+                } else {
+                    console.log('Status filter dropdown not ready or empty'); // Debug log
+                }
+            }
         }
 
         function attachRedirectEvent(buttonId, transaction) {
