@@ -287,6 +287,21 @@
             width: 15.625rem;
         }
 
+        .search-bar select {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            min-width: 8rem;
+        }
+
+        .search-bar select:hover {
+            background-color: #f8f9fa;
+        }
+
         .search-bar2 input {
             padding: 0.625rem;
             border: 0.188rem dotted #170aca;
@@ -574,6 +589,9 @@
             <p id="rqtt"></p>
             <div id="1stsrc" class="search-bar">
                 <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <select id="status-filter" onchange="filterTransactions()">
+                    <option value="">All Status</option>
+                </select>
                 <i id="shtl" style="cursor: pointer;" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
             </div>
             <div style="display: none;" id="2ndsrc" class="search-bar2">
@@ -986,7 +1004,7 @@
 
     <script> const e = JSON.parse(localStorage.getItem("secureDataV2"));
         if (!e) {
-            window.location.href = "index.html";
+            //  window.location.href = "index.html";
         }
         document.getElementById("img").src = e.img;
         const popupOverlay = document.createElement('div');
@@ -1197,6 +1215,9 @@
             const container = document.getElementById('transaction-list');
             transactions = [];
 
+            // Collect unique status values for the filter dropdown
+            const statusSet = new Set();
+
             // Start serial number from the total count of rows
             let serialNumber = rows.length;
 
@@ -1215,6 +1236,9 @@
                 const sdentry = row[9] || 'N/A';
                 const srentry = row[10] || 0;
                 const saentry = row[11] || 'N/A';
+
+                // Add status to the set for filter options
+                statusSet.add(Status);
 
                 let formattedDate = rawDate;
                 if (typeof rawDate === 'string' && rawDate.startsWith('Date')) {
@@ -1259,6 +1283,9 @@
                 // Attach event listener for the "View" button
                 attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
             }
+
+            // Populate the status filter dropdown
+            populateStatusFilter(statusSet);
         }
 
         function attachRedirectEvent(buttonId, transaction) {
@@ -1291,23 +1318,46 @@
 
         function filterTransactions() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const statusValue = document.getElementById('status-filter').value;
             const container = document.getElementById('transaction-list');
             container.innerHTML = '';
 
             transactions.forEach((transaction, index) => {
-                if (
+                const matchesSearch =
                     transaction.Name.toLowerCase().includes(searchValue) ||
                     transaction.formattedDate.toLowerCase().includes(searchValue) ||
                     transaction.Land.toString().toLowerCase().includes(searchValue) ||
                     transaction.Status.toLowerCase().includes(searchValue) ||
-                    transaction.phone.toString().includes(searchValue)
-                ) {
+                    transaction.phone.toString().includes(searchValue);
+
+                const matchesStatus = statusValue === '' || transaction.Status === statusValue;
+
+                if (matchesSearch && matchesStatus) {
                     container.innerHTML += transaction.html;
                     const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
                     attachRedirectEvent(uniqueId, transaction);
                 }
             });
         }
+
+        function populateStatusFilter(statusSet) {
+            const statusFilter = document.getElementById('status-filter');
+
+            // Clear existing options except the first one
+            statusFilter.innerHTML = '<option value="">All Status</option>';
+
+            // Sort status values and add them as options
+            const sortedStatuses = Array.from(statusSet).sort();
+            sortedStatuses.forEach(status => {
+                if (status && status !== 'N/A') {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    statusFilter.appendChild(option);
+                }
+            });
+        }
+
         function parseGoogleDate2(dateString) {
             const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
             const matches = dateString.match(regex);
