@@ -1004,7 +1004,7 @@
 
     <script> const e = JSON.parse(localStorage.getItem("secureDataV2"));
         if (!e) {
-             window.location.href = "index.html";
+            //  window.location.href = "index.html";
         }
         document.getElementById("img").src = e.img;
         const popupOverlay = document.createElement('div');
@@ -1334,8 +1334,12 @@
 
                 if (matchesSearch && matchesStatus) {
                     container.innerHTML += transaction.html;
-                    const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
-                    attachRedirectEvent(uniqueId, transaction);
+                    // Extract the unique ID from the transaction's HTML
+                    const htmlMatch = transaction.html.match(/id="([^"]+)"/);
+                    if (htmlMatch) {
+                        const uniqueId = htmlMatch[1];
+                        attachRedirectEvent(uniqueId, transaction);
+                    }
                 }
             });
         }
@@ -1869,4 +1873,3 @@
 </body>
 
 </html>
-
