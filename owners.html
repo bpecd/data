@@ -454,6 +454,9 @@
             // Collect unique status values for the filter dropdown
             const statusSet = new Set();
 
+            // Create array to store transaction data with original row numbers
+            const transactionData = [];
+
             // Start serial number from the total count of rows
             let serialNumber = rows.length;
 
@@ -484,43 +487,78 @@
                 const uniqueId = `viewbtn-${i}`;
                 const rowClass = serialNumber % 2 === 0 ? 'even' : 'odd';
 
-                transactions.push({
+                // Store transaction data with original serial number
+                transactionData.push({
                     Name, Land, phone, Status, formattedDate, Mail, Surl, Gid, Furl, sdentry, srentry, saentry,
+                    originalSerialNumber: serialNumber,
+                    uniqueId: uniqueId,
+                    rowClass: rowClass,
+                    index: i
+                });
+
+                serialNumber--;
+            }
+
+            // Sort transactions: put close/closed/end status at the bottom
+            transactionData.sort((a, b) => {
+                const aIsClosedStatus = ['close', 'closed', 'end'].includes(a.Status.toLowerCase());
+                const bIsClosedStatus = ['close', 'closed', 'end'].includes(b.Status.toLowerCase());
+
+                if (aIsClosedStatus && !bIsClosedStatus) return 1; // a goes to bottom
+                if (!aIsClosedStatus && bIsClosedStatus) return -1; // b goes to bottom
+                return 0; // maintain original order for same category
+            });
+
+            // Now process the sorted transactions
+            transactionData.forEach(transactionItem => {
+                const transaction = {
+                    Name: transactionItem.Name,
+                    Land: transactionItem.Land,
+                    phone: transactionItem.phone,
+                    Status: transactionItem.Status,
+                    formattedDate: transactionItem.formattedDate,
+                    Mail: transactionItem.Mail,
+                    Surl: transactionItem.Surl,
+                    Gid: transactionItem.Gid,
+                    Furl: transactionItem.Furl,
+                    sdentry: transactionItem.sdentry,
+                    srentry: transactionItem.srentry,
+                    saentry: transactionItem.saentry,
                     html: `
-<div class="transaction ${rowClass}" style="display: flex; justify-content: space-between;">
+<div class="transaction ${transactionItem.rowClass}" style="display: flex; justify-content: space-between;">
     <div style="flex: 0.5; text-align: center; margin-right: 0.938rem;">
-        ${serialNumber}
+        ${transactionItem.originalSerialNumber}
     </div>
     <div style="flex: 1; text-align: center; margin-right: 0.938rem; line-height: 1.5;">
-        ${Name}
+        ${transactionItem.Name}
     </div>
     <div style="flex: 1; text-align: center; line-height: 1.5;">
-        ${Land}
+        ${transactionItem.Land}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${phone}
+        ${transactionItem.phone}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${getStatusIcon(Status)} ${Status}
+        ${getStatusIcon(transactionItem.Status)} ${transactionItem.Status}
     </div>
     <div style="flex: 1; text-align: center;">
-        ${formattedDate}
+        ${transactionItem.formattedDate}
     </div>
     <div style="flex: 1; text-align: center;">
-        <button class="redirect-btn" id="${uniqueId}">View</button>
+        <button class="redirect-btn" id="${transactionItem.uniqueId}">View</button>
     </div>
 </div>
 `
-                });
+                };
+
+                transactions.push(transaction);
                 document.querySelector('.loader').style.display = 'none';
 
-                container.innerHTML += transactions[transactions.length - 1].html;
-
-                serialNumber--;
+                container.innerHTML += transaction.html;
 
                 // Attach event listener for the "View" button
-                attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
-            }
+                attachRedirectEvent(transactionItem.uniqueId, transaction);
+            });
 
             // Populate the status filter dropdown
             populateStatusFilter(statusSet);
@@ -560,7 +598,8 @@
             const container = document.getElementById('transaction-list');
             container.innerHTML = '';
 
-            transactions.forEach((transaction, index) => {
+            // Filter transactions first
+            const filteredTransactions = transactions.filter((transaction, index) => {
                 const matchesSearch =
                     transaction.Name.toLowerCase().includes(searchValue) ||
                     transaction.formattedDate.toLowerCase().includes(searchValue) ||
@@ -570,11 +609,27 @@
 
                 const matchesStatus = statusValue === '' || transaction.Status === statusValue;
 
-                if (matchesSearch && matchesStatus) {
-                    container.innerHTML += transaction.html;
+                return matchesSearch && matchesStatus;
+            });
 
-                    // Reattach the event listener for the "View" button after rendering the HTML
-                    const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
+            // Sort filtered transactions: put close/closed/end status at the bottom
+            filteredTransactions.sort((a, b) => {
+                const aIsClosedStatus = ['close', 'closed', 'end'].includes(a.Status.toLowerCase());
+                const bIsClosedStatus = ['close', 'closed', 'end'].includes(b.Status.toLowerCase());
+
+                if (aIsClosedStatus && !bIsClosedStatus) return 1; // a goes to bottom
+                if (!aIsClosedStatus && bIsClosedStatus) return -1; // b goes to bottom
+                return 0; // maintain original order for same category
+            });
+
+            // Display the sorted and filtered transactions
+            filteredTransactions.forEach((transaction, index) => {
+                container.innerHTML += transaction.html;
+
+                // Extract the unique ID from the transaction's HTML
+                const htmlMatch = transaction.html.match(/id="([^"]+)"/);
+                if (htmlMatch) {
+                    const uniqueId = htmlMatch[1];
                     attachRedirectEvent(uniqueId, transaction);
                 }
             });
