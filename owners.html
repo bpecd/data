@@ -565,6 +565,9 @@
             // Populate the status filter dropdown
             populateStatusFilter(statusSet);
 
+            // Initialize will_filter to false by default (no filter applied initially)
+            localStorage.setItem('will_filter', 'false');
+
             // Apply URL status filter if present (with a small delay to ensure dropdown is ready)
             setTimeout(() => {
                 applyUrlStatusFilter();
@@ -573,6 +576,15 @@
 
         // Function to check URL parameters and apply status filter
         function applyUrlStatusFilter() {
+            // Check if filtering is enabled in localStorage
+            const willFilter = localStorage.getItem('will_filter');
+            console.log('will_filter from localStorage:', willFilter); // Debug log
+
+            if (willFilter !== 'true') {
+                console.log('URL filtering disabled - will_filter is not true'); // Debug log
+                return;
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const statusParam = urlParams.get('status');
 
@@ -640,6 +652,11 @@
             const statusValue = document.getElementById('status-filter').value;
             const container = document.getElementById('transaction-list');
             container.innerHTML = '';
+
+            // Set will_filter based on whether any filter is applied
+            const isFiltered = searchValue !== '' || statusValue !== '';
+            localStorage.setItem('will_filter', isFiltered.toString());
+            console.log('Setting will_filter to:', isFiltered); // Debug log
 
             // Filter transactions first
             const filteredTransactions = transactions.filter((transaction, index) => {
