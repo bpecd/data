@@ -1335,7 +1335,7 @@
                     // Get developer and client data for homme userinfo
                     const devdata = JSON.parse(localStorage.getItem('devdata'));
                     const cldata = JSON.parse(localStorage.getItem('cldata'));
-                    let printfunding;
+                    let printfunding = "0";
                     const state = cldata.state.toLowerCase().replace(/\s+/g, '');
 
 const printStates1 = ['owner', 'client'];
@@ -1347,7 +1347,6 @@ if (printStates1.some(s => state.includes(s))) {
     printfunding = document.getElementById("total-cost")?.innerText;
 }
 
-console.log("Determined printfunding:", printfunding);
 
 
                     // Store the transaction data in localStorage for the print page
