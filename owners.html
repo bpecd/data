@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Owner List</title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        body.move-down {
+            transform: translateY(5vh);
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 1.25rem;
+            border-radius: 1.125rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+
+        a:hover {
+            background-color: #dbdbfd;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        .bb {
+            width: 80vh;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 0.625rem;
+            border-radius: 1.125rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .top-bar .nav-items a i {
+            font-size: 1.25rem;
+            color: #096faa;
+        }
+
+        .top-bar .logo img {
+            width: 3.438rem;
+            height: 3.438rem;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #000;
+            transition: transform 0.5s ease;
+        }
+
+        .header h1:hover {
+            transform: scale(1.05);
+        }
+
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            transition: transform 0.5s ease;
+        }
+
+        .search-bar:hover {
+            transform: scale(1.05);
+        }
+
+        .search-bar input {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            width: 15.625rem;
+        }
+
+        .search-bar select {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            min-width: 8rem;
+        }
+
+        .search-bar select:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-bar .fa-file-spreadsheet {
+            color: #096faa;
+            font-size: 2rem;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0.625rem;
+
+            margin-bottom: 0.938rem;
+            margin-top: 0.938rem;
+            background-color: #ddd;
+            border-radius: 1.25rem;
+        }
+
+        .menu span {
+            padding: 0.625rem 1.25rem;
+            background-color: #0ccccc;
+            border-radius: 1.25rem;
+            color: black;
+            font-weight: bold;
+            margin-right: 3%;
+            margin-left: -2%;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.125rem dotted black;
+
+            padding: 0.625rem;
+            min-height: 68px;
+        }
+
+        .transaction:hover {
+            background-color: rgb(218, 225, 255);
+        }
+
+        .transaction:hover .redirect-btn {
+            transform: scale(1.2);
+            background-color: #1942c9;
+        }
+
+        .transaction i {
+            font-size: 1.25rem;
+        }
+
+        .transaction-info {
+            flex: 1;
+            font-size: 0.875rem;
+        }
+
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 0.50rem;
+        }
+
+        .redirect-btn {
+            margin-left: 1.25rem;
+            padding: 0.313rem 0.625rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0.313rem;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .redirect-btn:hover {
+
+            transform: scale(1.2);
+
+            background-color: #0056b3;
+        }
+
+        .loader {
+            width: 3.125rem;
+            padding: 0.50rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: 6.25rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        .xbb {
+            transition: box-shadow 0.5s ease;
+        }
+
+        .xbb:hover {
+            box-shadow: inset 0.063rem 0.063rem 0.125rem #BABECC,
+                inset -0.063rem -0.063rem 0.125rem #ffffff73;
+
+        }
+
+        .xbb:hover i {
+            padding: 0.1rem;
+            font-size: smaller;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn" href="officehome.html"><i class="fa-duotone fa-regular fa-chart-tree-map"></i> Office
+                Dashboard</a>
+            <a class="backbtn"
+                style="color: #db049b;font-weight: bold;font-size: large;background-color: #fae6f4;padding: 0.625rem;border-radius: 0.938rem;"
+                href="owners.html"><i class="fa-solid fa-bars-progress"></i> Owners</a>
+            <a class="backbtn" href="office.html"><i class="fa-duotone fa-solid fa-chair-office"></i> Office</a>
+            <a class="backbtn" href="loan.html"><i class="fa-solid fa-hand-holding-circle-dollar"></i> Loan</a>
+            <a class="backbtn" id="nn" href="newowner.html"><i class="fas fa-user-plus"></i> New Owner</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="xbb"
+                style="border: none;cursor: pointer;font-size: 1.25rem;padding: 0.625rem; border-radius: 0.938rem;position: relative;"
+                onclick="window.location.href='home.html'"><i class="fa-solid fa-house-chimney"></i></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa fa-list-alt"></i>
+                Owners list</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <select id="status-filter" onchange="filterTransactions()">
+                    <option value="">All Status</option>
+                </select>
+                <i id="shtl"
+                    onclick="window.open('https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/edit?resourcekey=&gid=138275939#gid=138275939', '_blank');"
+                    class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
+            </div>
+        </div>
+
+        <p>List of all owners. Click View for more.</p>
+
+        <div class="menu">
+            <span>No.</span>
+            <span>Name</span>
+            <span>Land Area</span>
+            <span>Phone No</span>
+            <span>Status</span>
+            <span>Assign Date</span>
+            <span>ID</span>
+        </div>
+        <div id="transaction-list">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <script>
+
+        document.querySelectorAll('.backbtn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevents immediate navigation
+                document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+                setTimeout(function () {
+                    window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+                }, 400); // 300 ms delay
+            });
+        });
+
+        const e = JSON.parse(localStorage.getItem("secureDataV2"));
+        if (!e) {
+        }
+        document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+        const popupImage = document.createElement('img');
+
+        // Set styles for the popup overlay
+        popupOverlay.style.position = "fixed";
+        popupOverlay.style.top = "0";
+        popupOverlay.style.left = "0";
+        popupOverlay.style.width = "100%";
+        popupOverlay.style.height = "100%";
+        popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        popupOverlay.style.display = "none";
+        popupOverlay.style.justifyContent = "center";
+        popupOverlay.style.alignItems = "center";
+
+        // Set styles for the popup image
+        popupImage.style.maxWidth = "90%";
+        popupImage.style.maxHeight = "90%";
+        popupImage.style.borderRadius = "0.625rem";
+        popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+        // Append the image to the popup overlay
+        popupOverlay.appendChild(popupImage);
+
+        // Append the popup overlay to the body
+        document.body.appendChild(popupOverlay);
+
+        // Add event listener to the original image to show the popup
+        document.getElementById("img").addEventListener('click', function () {
+            popupImage.src = e.img;  // Set the image source for the popup
+            popupOverlay.style.display = "flex";  // Show the popup
+        });
+
+        // Add event listener to the popup to close it when clicked
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = "none";  // Hide the popup
+            }
+        });
+        const stt = e.state;
+        if (stt === "admin") {
+            document.getElementById("nn").style.display = "block";
+        } else if (stt === "mod") {
+            document.getElementById("nn").style.display = "none";
+        } else {
+            document.getElementById("nn").style.display = "none";
+            document.getElementById('shtl').style.display = 'none';
+        }
+
+    </script>
+    <script>
+        let transactions = [];
+
+        // Function to fetch and display data using CSV format
+        async function fetchAllData() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?tqx=out:csv&gid=138275939';
+
+                const response = await fetch(csvUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const csvText = await response.text();
+
+                // Parse CSV data
+                const rows = csvText.split('\n').map(row => {
+                    // Split by comma but respect quoted fields
+                    return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell =>
+                        cell.replace(/^"(.*)"$/, '$1').trim()
+                    );
+                });
+
+                // Remove header row and empty rows
+                const dataRows = rows.slice(1).filter(row => row.length > 1 && row[0]);
+
+                displayTransaction(dataRows);
+
+            } catch (error) {
+                console.error('Error fetching CSV data:', error);
+                document.querySelector('.loader').style.display = 'none';
+                const container = document.getElementById('transaction-list');
+                container.innerHTML = '<div style="text-align: center; color: red; padding: 20px;">Error loading data. Please try again.</div>';
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAllData();
+        });
+
+        function displayTransaction(rows) {
+            const container = document.getElementById('transaction-list');
+            transactions = [];
+
+            // Collect unique status values for the filter dropdown
+            const statusSet = new Set();
+
+            // Create array to store transaction data with original row numbers
+            const transactionData = [];
+
+            // Start serial number from the total count of rows
+            let serialNumber = rows.length;
+
+            for (let i = rows.length - 1; i >= 0; i--) {
+                const row = rows[i];
+                // For CSV data, access columns directly by index
+                const rawDate = row[0] || 'N/A';
+                const Name = row[1] || 'N/A';
+                const Land = row[2] || 0;
+                const phone = row[3] || 'N/A';
+                const Mail = row[4] || 'N/A';
+                const Status = row[5] || 'N/A';
+                const Surl = row[6] || 'N/A';
+                const Gid = row[7] || 'N/A';
+                const Furl = row[8] || 'N/A';
+                const sdentry = row[9] || 'N/A';
+                const srentry = row[10] || 0;
+                const saentry = row[11] || 'N/A';
+
+                // Add status to the set for filter options
+                statusSet.add(Status);
+
+                let formattedDate = smartDateConversion(rawDate);
+
+                const uniqueId = `viewbtn-${i}`;
+                const rowClass = serialNumber % 2 === 0 ? 'even' : 'odd';
+
+                // Store transaction data with original serial number
+                transactionData.push({
+                    Name, Land, phone, Status, formattedDate, Mail, Surl, Gid, Furl, sdentry, srentry, saentry,
+                    originalSerialNumber: serialNumber,
+                    uniqueId: uniqueId,
+                    rowClass: rowClass,
+                    index: i
+                });
+
+                serialNumber--;
+            }
+
+            // Sort transactions: put close/closed/end status at the bottom
+            transactionData.sort((a, b) => {
+                const aIsClosedStatus = ['close', 'closed', 'end'].includes(a.Status.toLowerCase());
+                const bIsClosedStatus = ['close', 'closed', 'end'].includes(b.Status.toLowerCase());
+
+                if (aIsClosedStatus && !bIsClosedStatus) return 1; // a goes to bottom
+                if (!aIsClosedStatus && bIsClosedStatus) return -1; // b goes to bottom
+                return 0; // maintain original order for same category
+            });
+
+            // Now process the sorted transactions
+            transactionData.forEach(transactionItem => {
+                const transaction = {
+                    Name: transactionItem.Name,
+                    Land: transactionItem.Land,
+                    phone: transactionItem.phone,
+                    Status: transactionItem.Status,
+                    formattedDate: transactionItem.formattedDate,
+                    Mail: transactionItem.Mail,
+                    Surl: transactionItem.Surl,
+                    Gid: transactionItem.Gid,
+                    Furl: transactionItem.Furl,
+                    sdentry: transactionItem.sdentry,
+                    srentry: transactionItem.srentry,
+                    saentry: transactionItem.saentry,
+                    html: `
+<div class="transaction ${transactionItem.rowClass}" style="display: flex; justify-content: space-between;">
+    <div style="flex: 0.5; text-align: center; margin-right: 0.938rem;">
+        ${transactionItem.originalSerialNumber}
+    </div>
+    <div style="flex: 1; text-align: center; margin-right: 0.938rem; line-height: 1.5;">
+        ${transactionItem.Name}
+    </div>
+    <div style="flex: 1; text-align: center; line-height: 1.5;">
+        ${transactionItem.Land}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${transactionItem.phone}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${getStatusIcon(transactionItem.Status)} ${transactionItem.Status}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${transactionItem.formattedDate}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        <button class="redirect-btn" id="${transactionItem.uniqueId}">View</button>
+    </div>
+</div>
+`
+                };
+
+                transactions.push(transaction);
+                document.querySelector('.loader').style.display = 'none';
+
+                container.innerHTML += transaction.html;
+
+                // Attach event listener for the "View" button
+                attachRedirectEvent(transactionItem.uniqueId, transaction);
+            });
+
+            // Populate the status filter dropdown
+            populateStatusFilter(statusSet);
+
+            // Initialize will_filter to false by default (no filter applied initially)
+            localStorage.setItem('will_filter', 'false');
+
+            // Apply URL status filter if present (with a small delay to ensure dropdown is ready)
+            setTimeout(() => {
+                applyUrlStatusFilter();
+            }, 100);
+        }
+
+        // Function to check URL parameters and apply status filter
+        function applyUrlStatusFilter() {
+            // Check if filtering is enabled in localStorage
+            const willFilter = localStorage.getItem('will_filter');
+            console.log('will_filter from localStorage:', willFilter); // Debug log
+
+            if (willFilter !== 'true') {
+                console.log('URL filtering disabled - will_filter is not true'); // Debug log
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const statusParam = urlParams.get('status');
+
+            console.log('Checking URL parameters:', statusParam); // Debug log
+
+            if (statusParam) {
+                // Set the status filter dropdown to the URL parameter value
+                const statusFilter = document.getElementById('status-filter');
+                if (statusFilter && statusFilter.options.length > 1) {
+                    console.log('Available options:', Array.from(statusFilter.options).map(opt => opt.value)); // Debug log
+
+                    // Find matching option (case-insensitive)
+                    let foundMatch = false;
+                    for (let i = 0; i < statusFilter.options.length; i++) {
+                        if (statusFilter.options[i].value.toLowerCase() === statusParam.toLowerCase()) {
+                            statusFilter.selectedIndex = i;
+                            foundMatch = true;
+                            console.log('Found matching status:', statusFilter.options[i].value); // Debug log
+                            break;
+                        }
+                    }
+
+                    if (foundMatch) {
+                        // Trigger the filter function
+                        filterTransactions();
+                    } else {
+                        console.log('No matching status found for:', statusParam); // Debug log
+                    }
+                } else {
+                    console.log('Status filter dropdown not ready or empty'); // Debug log
+                }
+            }
+        }
+
+        function attachRedirectEvent(buttonId, transaction) {
+            setTimeout(() => {
+                document.getElementById(buttonId).addEventListener('click', (event) => {
+                    event.preventDefault();
+                    saveAndRedirect(transaction);
+                });
+            }, 400);
+        }
+
+        function saveAndRedirect(transaction) {
+            localStorage.removeItem("userdata");
+            const userdata = {
+                name: transaction.Name,
+                phone: transaction.phone,
+                land: transaction.Land,
+                mail: transaction.Mail,
+                sheetid: transaction.Surl,
+                gid: transaction.Gid,
+                furl: transaction.Furl,
+                sdentry: transaction.sdentry,
+                srentry: transaction.srentry,
+                saentry: transaction.saentry,
+                state: transaction.Status
+            };
+            localStorage.setItem('userdata', JSON.stringify(userdata));
+            setTimeout(() => { window.location.href = 'ownerid.html'; }, 300);
+        }
+
+        function filterTransactions() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const statusValue = document.getElementById('status-filter').value;
+            const container = document.getElementById('transaction-list');
+            container.innerHTML = '';
+
+            // Set will_filter based on whether any filter is applied
+            const isFiltered = searchValue !== '' || statusValue !== '';
+            localStorage.setItem('will_filter', isFiltered.toString());
+            console.log('Setting will_filter to:', isFiltered); // Debug log
+
+            // Filter transactions first
+            const filteredTransactions = transactions.filter((transaction, index) => {
+                const matchesSearch =
+                    transaction.Name.toLowerCase().includes(searchValue) ||
+                    transaction.formattedDate.toLowerCase().includes(searchValue) ||
+                    transaction.Land.toString().toLowerCase().includes(searchValue) ||
+                    transaction.Status.toLowerCase().includes(searchValue) ||
+                    transaction.phone.toString().includes(searchValue);
+
+                const matchesStatus = statusValue === '' || transaction.Status === statusValue;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            // Sort filtered transactions: put close/closed/end status at the bottom
+            filteredTransactions.sort((a, b) => {
+                const aIsClosedStatus = ['close', 'closed', 'end'].includes(a.Status.toLowerCase());
+                const bIsClosedStatus = ['close', 'closed', 'end'].includes(b.Status.toLowerCase());
+
+                if (aIsClosedStatus && !bIsClosedStatus) return 1; // a goes to bottom
+                if (!aIsClosedStatus && bIsClosedStatus) return -1; // b goes to bottom
+                return 0; // maintain original order for same category
+            });
+
+            // Display the sorted and filtered transactions
+            filteredTransactions.forEach((transaction, index) => {
+                container.innerHTML += transaction.html;
+
+                // Extract the unique ID from the transaction's HTML
+                const htmlMatch = transaction.html.match(/id="([^"]+)"/);
+                if (htmlMatch) {
+                    const uniqueId = htmlMatch[1];
+                    attachRedirectEvent(uniqueId, transaction);
+                }
+            });
+        }
+
+        function populateStatusFilter(statusSet) {
+            const statusFilter = document.getElementById('status-filter');
+
+            // Clear existing options except the first one
+            statusFilter.innerHTML = '<option value="">All Status</option>';
+
+            // Sort status values and add them as options
+            const sortedStatuses = Array.from(statusSet).sort();
+            sortedStatuses.forEach(status => {
+                if (status && status !== 'N/A') {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    statusFilter.appendChild(option);
+                }
+            });
+        }
+
+        // Smart date format detection and conversion function
+        function smartDateConversion(dateString) {
+            if (!dateString || dateString === 'N/A') return dateString;
+
+            // Handle Google Sheets date format
+            if (typeof dateString === 'string' && dateString.startsWith('Date')) {
+                return parseGoogleDate(dateString);
+            }
+
+            // Handle regular date strings (mm/dd/yyyy or dd/mm/yyyy)
+            if (typeof dateString === 'string' && dateString.includes('/')) {
+                const parts = dateString.split(/[\s\/]/);
+                if (parts.length >= 3) {
+                    const first = parseInt(parts[0]);
+                    const second = parseInt(parts[1]);
+                    const year = parseInt(parts[2]);
+
+                    // Extract time part if exists
+                    const timeMatch = dateString.match(/(\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?)/);
+                    const timePart = timeMatch ? timeMatch[1] : '';
+
+                    let day, month;
+
+                    // Logic to detect format:
+                    // If first number > 12, it must be day (dd/mm/yyyy format)
+                    if (first > 12) {
+                        day = first;
+                        month = second;
+                    }
+                    // If second number > 12, it must be day, so first is month (mm/dd/yyyy format - needs conversion)
+                    else if (second > 12) {
+                        day = second;
+                        month = first;
+                    }
+                    // Both numbers <= 12, assume it's mm/dd/yyyy format and convert
+                    else {
+                        day = second;
+                        month = first;
+                    }
+
+                    // Validate month and day
+                    if (month > 12 || month < 1 || day > 31 || day < 1) {
+                        return formatDateTo12Hour(dateString); // Fallback
+                    }
+
+                    // Create date object and format with time
+                    const dateObj = new Date(year, month - 1, day);
+                    if (timePart) {
+                        // Parse time and add to date
+                        const timeRegex = /(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM|am|pm)?/;
+                        const timeMatches = timePart.match(timeRegex);
+                        if (timeMatches) {
+                            let hour = parseInt(timeMatches[1]);
+                            const minute = parseInt(timeMatches[2]);
+                            const ampm = timeMatches[4];
+
+                            if (ampm && ampm.toLowerCase() === 'pm' && hour !== 12) hour += 12;
+                            if (ampm && ampm.toLowerCase() === 'am' && hour === 12) hour = 0;
+
+                            dateObj.setHours(hour, minute, 0, 0);
+                        }
+                    }
+
+                    return formatDateTo12Hour(dateObj.toISOString());
+                }
+            }
+
+            // For other formats, use parseGoogleDate or default formatting
+            return parseGoogleDate(dateString);
+        }
+
+        // Helper function to format dates consistently
+        function formatDateTo12Hour(dateInput) {
+            try {
+                let date;
+
+                // Handle Date object
+                if (dateInput instanceof Date) {
+                    date = dateInput;
+                }
+                // Handle ISO string or other date strings
+                else if (typeof dateInput === 'string') {
+                    // Check if it's already in our desired format
+                    if (dateInput.includes("/") && (dateInput.includes("AM") || dateInput.includes("PM"))) {
+                        return dateInput; // Already in desired format
+                    }
+                    date = new Date(dateInput);
+                }
+                else {
+                    return dateInput; // Return as-is if not recognized
+                }
+
+                // Check if date is valid
+                if (isNaN(date.getTime())) {
+                    return dateInput; // Return original if can't parse
+                }
+
+                // Format to dd/mm/yyyy HH:MM AM/PM
+                const day = String(date.getDate()).padStart(2, "0");
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const year = date.getFullYear();
+                let hour = date.getHours();
+                const minute = String(date.getMinutes()).padStart(2, "0");
+
+                // Convert to 12-hour format
+                const ampm = hour >= 12 ? "PM" : "AM";
+                hour = hour % 12;
+                hour = hour ? String(hour).padStart(2, "0") : "12";
+
+                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+            } catch (error) {
+                console.error("Error formatting date:", error);
+                return dateInput; // Return original on error
+            }
+        }
+
+        function parseGoogleDate(dateString) {
+            const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+            const matches = dateString.match(regex);
+
+            if (matches) {
+                const year = matches[1];
+                const month = String(parseInt(matches[2]) + 1).padStart(2, '0');
+                const day = String(matches[3]).padStart(2, '0');
+                let hour = parseInt(matches[4]);
+                const minute = String(matches[5]).padStart(2, '0');
+
+                // Convert to 12-hour format
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour ? String(hour).padStart(2, '0') : '12';
+
+                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+            }
+
+            return 'Invalid Date';
+        }
+
+        function getStatusIcon(status) {
+            switch (status.toLowerCase()) {
+                case 'office':
+                    return '<i class="fa-duotone fa-solid fa-phone-office" style="color:red;"></i>';
+                case 'office owner':
+                    return '<i class="fa-duotone fa-solid fa-chair-office" style="color:blue;"></i>';
+                case 'staff':
+                    return '<i class="fa-solid fa-user-headset" style="color:blue;"></i>';
+                case 'working':
+                    return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
+                case 'end':
+                    return '<i class="fa-solid fa-box-check" style="color:green;"></i>';
+                case 'admin':
+                    return '<i class="fa-solid fa-user-robot" style="color:red;"></i>';
+                case 'land owner':
+                    return '<i class="fa-solid fa-street-view" style="color:magenta;"></i>';
+                case 'owner':
+                    return '<i class="fa-sharp fa-solid fa-user-tie" style="color:#069494;"></i>';
+                case 'engineer':
+                    return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
+                case 'client':
+                    return '<i class="fa-solid fa-user-visor" style="color:#409c1f;"></i>';
+                case 'architect':
+                    return '<i class="fa-solid fa-pen-ruler" style="color:#409c1f;"></i>';
+                case 'developer':
+                    return '<i class="fa-solid fa-building-user" style="color:black;"></i>';
+                case 'close':
+                    return '<i class="fa-solid fa-xmark" style="color:red;"></i>';
+                default:
+                    return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';
+            }
+        }
+    </script>
+</body>
+
+</html>

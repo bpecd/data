@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        body.move-down {
+            transform: translateY(5vh);
+        }
+
+        .container {
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 1.125rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotateX(90deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        /* Style for individual letters */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform-origin: bottom;
+            animation: rotateIn 0.4s ease forwards;
+        }
+
+        .container1 {
+            min-height: 28.125rem;
+            display: flex;
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 0.625rem;
+            border-radius: 1.75rem;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .info {
+            margin: 0.313rem;
+            font-size: 1.5rem;
+        }
+
+        .buttons {
+            margin-top: 1.25rem;
+        }
+
+        .buttonx {
+            background-color: #e2e7ea;
+            border: none;
+            padding: 0.938rem;
+            width: 10rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.625rem;
+
+        }
+
+        .button {
+            background-color: #e2e7ea;
+            border: none;
+            padding: 0.938rem;
+            width: 332px;
+            text-align: center;
+            border-radius: 1.25rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.625rem;
+
+        }
+
+        .cost-btn {
+            background-color: #f28d8d;
+            color: rgb(99, 1, 1);
+            margin: 0.313rem;
+        }
+
+        .receive-btn {
+            background-color: #90f28d;
+            color: rgb(3, 88, 0);
+            margin: 0.313rem;
+        }
+
+        .right-section {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .claim-button1 {
+            color: black;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 0.625rem;
+            left: 0.625rem;
+        }
+
+        .balance-info {
+            font-size: 1.4rem;
+            margin: 0.313rem;
+        }
+
+        .bb {
+            width: 28.75rem;
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(253, 208, 208);
+            padding: 0.625rem;
+            border-radius: 1.125rem;
+            margin-bottom: 0.625rem;
+            transition: transform 0.5s ease;
+        }
+
+        .bb:hover {
+            transform: scale(1.05);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+
+        a:hover {
+            background-color: #dbdbfd;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        .top-bar .nav-items a i {
+            font-size: 1.5rem;
+            color: #096faa;
+        }
+
+        .top-bar .logo img {
+            width: 3.438rem;
+            height: 3.438rem;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+
+        img:hover {
+            border: 0.188rem solid #45eba1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #000;
+            transition: transform 0.5s ease;
+        }
+
+        .header h1:hover {
+            transform: scale(1.05);
+        }
+
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            transition: transform 0.5s ease;
+            /* Adds space between elements */
+        }
+
+        .header .search-bar:hover {
+            transform: scale(1.05);
+        }
+
+        .search-bar input {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            width: 15.625rem;
+        }
+
+        .search-bar select {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            min-width: 8rem;
+        }
+
+        .search-bar select:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-bar2 input {
+            padding: 0.625rem;
+            border: 0.188rem dotted #170aca;
+            border-radius: 1.25rem;
+            outline: none;
+            width: 15.625rem;
+        }
+
+        .search-bar .fa-file-spreadsheet {
+            color: #aa0909;
+            font-size: 2rem;
+        }
+
+        .search-bar2 .fa-file-spreadsheet {
+            color: #096faa;
+            font-size: 2rem;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0.625rem;
+
+            margin-bottom: 0.938rem;
+            margin-top: 0.938rem;
+            background-color: #ddd;
+            border-radius: 1.25rem;
+        }
+
+        .menu span {
+            padding: 0.625rem 1.25rem;
+            background-color: #2edddd;
+            border-radius: 1.25rem;
+            color: black;
+            margin-right: 3%;
+            margin-left: -2%;
+            font-weight: bold;
+        }
+
+        .menu2 {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0.625rem;
+            background-color: #ddd;
+            margin-top: 0.938rem;
+            margin-bottom: 0.938rem;
+            border-radius: 1.25rem;
+        }
+
+        .menu2 span {
+            padding: 0.625rem 1.25rem;
+            background-color: #0ccccc;
+            border-radius: 1.25rem;
+            color: black;
+            font-weight: bold;
+            margin-left: 3%;
+            margin-right: 1.8%;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.125rem dotted black;
+
+            padding: 0.625rem;
+            min-height: 68px;
+        }
+
+        .transaction:hover {
+            background-color: rgb(218, 225, 255);
+        }
+
+        .transaction:hover .redirect-btn {
+            transform: scale(1.1);
+            background-color: #1942c9;
+        }
+
+        .transaction i {
+            font-size: 1.5rem;
+        }
+
+        .transaction-info {
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 1rem;
+        }
+
+        .transaction-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .credit {
+            color: green;
+        }
+
+        .debit {
+            color: red;
+        }
+
+        .neutral {
+            color: #808080;
+        }
+
+        .redirect-btn {
+            margin-left: 1.25rem;
+            padding: 0.313rem 0.625rem;
+            background-color: #7a7a7a;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 0.313rem;
+            transition: transform 0.5s ease;
+        }
+
+        .redirect-btn:hover {
+            transform: scale(1.05);
+            background-color: #008fb3;
+        }
+
+        .redirect-btnn {
+            padding: 0.313rem 0.625rem;
+            background-color: #baffb7;
+            color: rgb(0, 0, 0);
+            border-radius: 0.938rem;
+
+            width: auto;
+            font-size: 2.2rem;
+            border: none;
+            transition: transform 0.5s ease;
+        }
+
+        .redirect-btnn:hover {
+            transform: scale(1.05);
+            color: white;
+            background-color: #27d85c;
+        }
+
+        .x {
+            display: none;
+        }
+
+        .loader {
+            width: 3.125rem;
+            padding: 0.50rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: 6.25rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn"
+                style="cursor: pointer;color: #db049b;font-weight: bold;font-size: large;background-color: #fae6f4;padding: 0.625rem;border-radius: 0.938rem;"
+                id="bbkk"><i class="fa-solid fa-circle-arrow-left"></i> Back</a>
+            <a style="cursor: pointer;" class="backbtn" id="nn" href="newhomme.html"><i class="fas fa-user-plus"></i>
+                New Client / Contractor</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo">
+        </div>
+    </div>
+    <div class="container1">
+        <div class="container" style="min-width: 31.25rem;">
+            <div class="left-section">
+                <h1>Developer / Project</h1>
+                <div class="info">Name: <span id="sname"></span></div>
+                <div class="info">Phone: <span id="sstate"></span></div>
+                <br>
+                <div style="background-color: white;" class="bb">
+                    <div class="balance-info">Total receive: <span
+                            style="color: rgb(46, 27, 219);font-family: 'Arial Black', sans-serif;font-size: 1.75rem;"
+                            id="total-receive"></span> BDT</div>
+                </div>
+                <div style="background-color: #ffecec;" class="bb">
+                    <div class="balance-info">Total Cost: <span
+                            style="color: red;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT</div>
+                </div>
+                <div style="background-color: #ffecec;" class="bb">
+                    <div class="balance-info">Sum total: <span
+                            style="color: blue;font-family: 'Arial Black', sans-serif;" id="balance"></span> BDT</div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="min-width: 31.25rem;">
+            <div class="right-section">
+                <div style="background-color: rgb(255, 208, 237);width: 37.5rem;" class="bb">
+                    <div style="font-size: 19px;" class="balance-info">Payment Due: <span
+                            style="color: rgb(219, 27, 37);font-family: 'Arial Black', sans-serif;"
+                            id="total-pdue"></span> BDT</div>
+                </div>
+                <div style="width: 37.5rem;" class="bb">
+                    <div style="font-size: 19px;" class="balance-info">Total funding: <span style="color: blue;"
+                            id="total"></span> BDT</div>
+                    <div style="font-size: 19px;" class="balance-info">Due: <span style="color: red;" id="due"></span>
+                        BDT</div>
+
+                </div>
+                <button style="color: #000;display:none;background-color: rgb(206, 206, 255)" class="buttonx cost-btn"
+                    id="lbcost">Laber Cost</button>
+                <button style="color: #000;display:none;background-color: rgb(206, 206, 255)" class="buttonx cost-btn"
+                    id="adcost">Material Cost</button>
+                <div style="display: none;" id="buttons" class="buttons">
+                    <pre>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-duotone fa-solid fa-turn-left"></i></button>
+                    <input list="materials" id="mname" class="button" placeholder="Material Name">
+                    <input id="munit" class="button" placeholder="Unit">
+                    
+                        
+                    <datalist id="materials">
+                        <option value="Brick">
+                        <option value="Sand">
+                        <option value="Cement">
+                        <option value="Rod">
+                        <option value="Stone Chips">
+                        <option value="Electronics">
+                        <option value="Plumbing">
+                        <option value="Tiles">
+                        <option value="Door Frame">
+                        <option value="Window Grill">
+                        <option value="Thai">
+                        <option value="Paint">
+                      </datalist>
+
+                    <input id="mamount" class="button" placeholder="Amount">
+
+                    <button class="buttonx cost-btn" id="mcostbtn">Cost</button><button class="buttonx receive-btn" id="mrecbtn">Receive</button>
+                    <p style="font-size: 1.375rem;color: rgb(7, 7, 214);background-color: #95ffff; border-radius: 0.625rem;" id="mresult"></p>  
+                </pre>
+                </div>
+                <div style="display: none;" id="buttons22" class="buttons">
+                    <pre>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-duotone fa-solid fa-turn-left"></i></button>
+                    <input id="labername" class="button" placeholder="Laber Name">
+
+                    <input id="labernumber" class="button" placeholder="laber Number">
+
+                    <input list="jobs" id="lreason" class="button" placeholder="Job Name">
+                    <datalist id="jobs"><option value="Electric Labor">
+                        <option value="Plumbing Labor">
+                        <option value="Tiles Labor">
+                        <option value="Window Grill Labor">
+                        <option value="Thai Labor">
+                        <option value="Paint Labor">
+                        <option value="Civil Labor">
+</datalist>
+                    <input id="lamount" class="button" placeholder="Amount">
+
+                    <button class="buttonx cost-btn" id="lcostbtn">Cost</button><button class="buttonx receive-btn" id="lrecbtn">Receive</button>
+                    <p style="font-size: 1.375rem;color: rgb(7, 7, 214);background-color: #95ffff; border-radius: 0.625rem;" id="lresult"></p>  
+                </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <button id="showtnx" style="cursor: pointer;" class="redirect-btnn">Show transaction-list</button>
+            <h1 id="resultElem" style="display: none;" class="redirect-btnn">Total searched Amount</h1>
+            <p id="rqtt"></p>
+            <div id="1stsrc" class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <select id="status-filter" onchange="filterTransactions()">
+                    <option value="">All Status</option>
+                </select>
+                <i id="shtl" style="cursor: pointer;" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+            </div>
+            <div style="display: none;" id="2ndsrc" class="search-bar2">
+                <input type="text" id="search-input2" placeholder="Search..." oninput="filterTransactions2()">
+                <i id="shtl2" style="cursor: pointer;" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+            </div>
+        </div>
+        <p id="ajaira">List of all Clients. Click View for more.</p>
+
+        <div id="tnsso" class="menu">
+            <span>No.</span>
+            <span>Name</span>
+            <span>contactor / Flat</span>
+            <span>Phone No</span>
+            <span>User Type</span>
+            <span>Assign Date</span>
+            <span>ID</span>
+        </div>
+        <div id="tnss" style="display: none;" class="menu2">
+
+            <span>DATE</span>
+            <span>DESCPTION</span>
+            <span>REASON</span>
+            <span>AMOUNT</span>
+            <span>REMARK</span>
+
+        </div>
+
+        <div id="transaction-list">
+            <!-- Transactions will be dynamically inserted here -->
+        </div>
+        <div style="display: none;" id="transaction-list2">
+            <div class="loader"></div><!-- Transactions will be dynamically inserted here -->
+        </div>
+    </div>
+    <script>
+
+        // Centralized Payment Due Calculation Function - Enhanced for Perfect Accuracy
+        function calculateAndDisplayPaymentDue() {
+            if (!transactions2 || transactions2.length === 0) {
+                console.log("No transactions available for payment due calculation");
+                const pdueElem = document.getElementById('total-pdue');
+                if (pdueElem) {
+                    pdueElem.textContent = formatNumber2(0);
+                    pdueElem.style.color = 'green';
+                    pdueElem.style.fontWeight = 'normal';
+                }
+                return 0;
+            }
+
+            let dueamt = 0; // Initialize the due amount
+            let dueTransactionsCount = 0; // Track how many transactions have due amounts
+
+            transactions2.forEach((transaction, index) => {
+                if (!transaction || !transaction.Description) {
+                    console.warn(`Transaction ${index} has no description, skipping`);
+                    return;
+                }
+
+                const { Description } = transaction;
+
+                // Enhanced regex patterns to handle various formats and spaces
+                const stayMatch = Description.match(/\[\s*Due\s*=\s*(\d+(?:,\d+)*)\s*\]/i);
+                const paidMatch = Description.match(/\[\s*Due\s+paid\s*=\s*(\d+(?:,\d+)*)\s*\]/i);
+
+                // Parse numbers properly, handling commas and validating
+                const dueStay = stayMatch ? parseInt(stayMatch[1].replace(/,/g, ''), 10) : 0;
+                const duePaid = paidMatch ? parseInt(paidMatch[1].replace(/,/g, ''), 10) : 0;
+
+                // Validate parsed numbers
+                if (isNaN(dueStay) || isNaN(duePaid)) {
+                    console.warn(`Invalid due amounts in transaction ${index}: Stay=${dueStay}, Paid=${duePaid}`);
+                    return;
+                }
+
+                // Calculate the transaction's due amount
+                const transactionDue = dueStay - duePaid;
+
+                if (dueStay > 0 || duePaid > 0) {
+                    dueTransactionsCount++;
+                    console.log(`Transaction ${index} due calculation: Stay=${dueStay}, Paid=${duePaid}, Net=${transactionDue}`);
+                }
+
+                dueamt += transactionDue;
+            });
+
+            // Validate final amount
+            if (isNaN(dueamt)) {
+                console.error("Final due amount is NaN, setting to 0");
+                dueamt = 0;
+            }
+
+            console.log(`Payment Due Summary: ${dueTransactionsCount} transactions processed, Total Due: ${dueamt}`);
+
+            // Display payment due with proper formatting and error handling
+            const pdueElem = document.getElementById('total-pdue');
+            if (pdueElem) {
+                try {
+                    // Use Math.abs for formatting but preserve sign for color
+                    pdueElem.textContent = formatNumber2(Math.abs(dueamt));
+
+                    // Enhanced color coding with validation
+                    if (dueamt > 0) {
+                        pdueElem.style.color = 'red';
+                        pdueElem.style.fontWeight = 'bold';
+                    } else if (dueamt < 0) {
+                        pdueElem.style.color = 'blue';
+                        pdueElem.style.fontWeight = 'bold';
+                    } else {
+                        pdueElem.style.color = 'green';
+                        pdueElem.style.fontWeight = 'normal';
+                    }
+                } catch (error) {
+                    console.error("Error displaying payment due:", error);
+                    pdueElem.textContent = "Error";
+                    pdueElem.style.color = 'red';
+                }
+            } else {
+                console.error("Payment due element (total-pdue) not found in DOM");
+            }
+
+            return dueamt; // Return the calculated amount for potential use elsewhere
+        }
+
+        function formatNumber(num) {
+            // Handle negative numbers
+            const isNegative = num < 0;
+            const absNumStr = Math.abs(num).toString(); // Convert the absolute value to a string
+
+            // Split into the last three digits and the rest
+            const lastThree = absNumStr.slice(-3);
+            let otherNumbers = absNumStr.slice(0, -3);
+
+            if (otherNumbers) {
+                // Format the other part with commas every two digits
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
+            } else {
+                return (isNegative ? "-" : "") + lastThree;
+            }
+        }
+
+        function formatNumber2(num) {
+            // Convert number to an absolute value for formatting
+            let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+
+            // Split last three digits and format the rest in groups of two
+            let lastThree = numStr.slice(-3);
+            let otherNumbers = numStr.slice(0, -3);
+
+            if (otherNumbers) {
+                // Format the other part with commas every two digits
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return otherNumbers + "," + lastThree;
+            } else {
+                return lastThree;
+            }
+        }
+        document.getElementById('bbkk').addEventListener('click', function () {
+            // Add class to move the body down
+            document.body.classList.add('move-down');
+            localStorage.removeItem('devdata');
+            // Wait for the animation to complete (1 second), then go back
+            setTimeout(function () {
+                window.location.href = 'developers.html';
+            }, 300);  // Match this duration with the CSS transition time
+        });
+        const showtnx = document.getElementById("showtnx");
+        const hidesrc = document.getElementById("1stsrc");
+        showtnx.addEventListener("click", function (e) {
+            e.preventDefault();
+            showtnx.style.display = "none";
+            document.getElementById("tnss").style.display = "";
+            document.getElementById("tnsso").style.display = "none";
+
+            hidesrc.style.display = "none";
+            document.getElementById("2ndsrc").style.display = "";
+            document.getElementById("resultElem").style.display = "";
+            document.getElementById("ajaira").style.display = "none";
+            document.getElementById("transaction-list2").style.display = "";
+            document.getElementById("transaction-list").style.display = "none";
+        });
+        document.getElementById("resultElem").addEventListener("click", function () {
+            location.reload();
+        });
+        const devdata = JSON.parse(localStorage.getItem('devdata'));
+        if (!devdata) {
+            window.location.href = "developers.html";
+        }
+        document.getElementById("sstate").innerText = devdata.status;
+        document.getElementById("sname").innerText = devdata.name;
+        document.title = `Project List > ${devdata.name}`;
+
+        const sheetid = devdata.sheetid;
+        const sgid = devdata.sgid;
+        const sheetUrll = `https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${sgid}`;
+        let transactions2 = [];
+        let transactionData = null; // Store the CSV data globally
+
+        function displayTransaction2(rows) {
+            const container2 = document.getElementById('transaction-list2');
+            transactions2 = [];
+            let serialNumber2 = rows.length + 1;
+            let htmlContent2 = ''; // Store HTML content here to minimize DOM updates
+
+            for (let i = rows.length - 1; i > 1; i--) {
+                const row = rows[i];
+                // For CSV data, access columns directly by index
+                const rawDate = row[0] || 'N/A';
+                const Description = row[1] || 'N/A';
+                const Reason = row[2] || 'N/A';
+                const Amount = parseFloat(row[3]) || 0;
+                const remark = row[4] || '';
+
+                let formattedDate = smartDateConversion(rawDate);
+
+                const uniqueId2 = `viewbtn-${serialNumber2}`;
+
+                transactions2.push({
+                    Description,
+                    Reason,
+                    Amount,
+                    remark,
+                    serialNumber2,
+                    formattedDate,
+                });
+                const formattedAmount = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : 'Due'} `;
+
+                htmlContent2 += `
+                    <div class="transaction" style="display: flex; justify-content: space-between;" data-transaction-id="${serialNumber2}">
+                        <div style="flex: 1; text-align: center;">${formattedDate}</div>
+                        <div style="flex: 1; text-align: center;">${Description}</div>
+                        <div style="flex: 1; text-align: center;">${Reason}</div>
+                        <div style="flex: 1; text-align: center;" class="transaction-amount ${Amount > 0 ? 'credit' : Amount < 0 ? 'debit' : 'neutral'}">
+                            ${formattedAmount}
+                        </div>
+                        <div style="flex: 1; text-align: center;">
+                            ${remark
+                        ? `<span>${remark}</span>` // Show remark if available
+                        : stt === 'admin'
+                            ? `<button class="redirect-btn" style="cursor: pointer;" id="${uniqueId2}" data-transaction-id="${serialNumber2}">Remark</button>` // Show button only if state is "admin"
+                            : ''
+                    }
+                        </div>
+                    </div>
+                `;
+
+                serialNumber2--;
+            }
+            document.querySelector('.loader').style.display = 'none';
+            container2.innerHTML = htmlContent2; // Update the container once
+
+            // Calculate payment due immediately after transaction display
+            calculateAndDisplayPaymentDue();
+        }
+        document.getElementById('transaction-list2').addEventListener('click', (event) => {
+            if (event.target.classList.contains('redirect-btn')) {
+                const transactionId = event.target.getAttribute('data-transaction-id');
+                const transaction = transactions2.find(
+                    (t) => t.serialNumber2 === parseInt(transactionId, 10)
+                );
+                if (transaction) {
+                    const redirectUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/edit?gid=${sgid}#range=E${transaction.serialNumber2}`;
+                    window.open(redirectUrl, '_blank');
+                } else {
+                    console.error('Transaction not found for ID:', transactionId);
+                }
+            }
+        });
+
+        // Add payment due recalculation when searching/filtering transactions
+        // Debounce Function for performance optimization
+        function debounce(func, delay) {
+            let debounceTimer;
+            return function (...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function filterTransactions2() {
+            const searchValue = document.getElementById('search-input2').value.toLowerCase().trim();
+            const keywords = searchValue.split(' '); // Split search input by spaces into keywords
+            const container = document.getElementById('transaction-list2');
+            const resultElem = document.getElementById('resultElem');
+            container.innerHTML = '';
+
+            let totalAmount = 0;
+            let totalqtt = 0;// Initialize total amount
+            const fragment = document.createDocumentFragment(); // Create a DocumentFragment for efficient DOM updates
+
+            transactions2.forEach(transaction => {
+                const { Description, Reason, Amount, formattedDate, remark, serialNumber2 } = transaction;
+
+                // Combine Description and Reason for a universal search
+                const combinedText = `${Description} ${remark}`.toLowerCase();
+                const resotxt = `${Reason}`.toLowerCase();
+                // Check if all keywords are found in the combined text or date
+                const matchesSearch = keywords.every(keyword => combinedText.includes(keyword) || resotxt.includes(keyword));
+
+                if (matchesSearch) {
+                    // Create elements manually instead of using innerHTML to ensure proper display
+                    const transactionDiv = document.createElement('div');
+                    transactionDiv.classList.add('transaction');
+                    transactionDiv.style.display = 'flex';
+                    transactionDiv.style.justifyContent = 'space-between';
+
+                    const dateDiv = document.createElement('div');
+                    dateDiv.style.flex = '1';
+                    dateDiv.style.textAlign = 'center';
+                    dateDiv.innerHTML = formattedDate;
+
+                    const descriptionDiv = document.createElement('div');
+                    descriptionDiv.style.flex = '1';
+                    descriptionDiv.style.textAlign = 'center';
+                    descriptionDiv.textContent = Description;
+
+                    const reasonDiv = document.createElement('div');
+                    reasonDiv.style.flex = '1';
+                    reasonDiv.style.textAlign = 'center';
+                    reasonDiv.textContent = Reason;
+
+                    const amountDiv = document.createElement('div');
+                    amountDiv.style.flex = '1';
+                    amountDiv.style.textAlign = 'center';
+                    amountDiv.classList.add('transaction-amount');
+                    amountDiv.classList.add(Amount > 0 ? 'credit' : (Amount < 0 ? 'debit' : 'neutral'));
+                    amountDiv.textContent = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : 'Due'} `;
+
+                    const remarkDiv = document.createElement('div');
+                    remarkDiv.style.flex = '1';
+                    remarkDiv.style.textAlign = 'center';
+
+                    if (remark) {
+                        // Display the remark if it exists
+                        remarkDiv.textContent = remark;
+                    } else if (stt === 'admin') {
+                        // Display the "Remark" button for admins if the remark is missing
+                        const addRemarkButton = document.createElement('button');
+                        addRemarkButton.textContent = 'Remark';
+                        addRemarkButton.classList.add('redirect-btn');
+                        addRemarkButton.id = `viewbtn-${serialNumber2}`;
+                        addRemarkButton.addEventListener('click', () => {
+                            const redirectUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/edit?gid=${sgid}#range=E${transaction.serialNumber2}`;
+                            window.open(redirectUrl, '_blank');
+                        });
+                        remarkDiv.appendChild(addRemarkButton);
+                    }
+
+                    // Append all created elements to the transaction div
+                    transactionDiv.appendChild(dateDiv);
+                    transactionDiv.appendChild(descriptionDiv);
+                    transactionDiv.appendChild(reasonDiv);
+                    transactionDiv.appendChild(amountDiv);
+                    transactionDiv.appendChild(remarkDiv);
+
+                    // Append the transaction div to the DocumentFragment
+                    fragment.appendChild(transactionDiv);
+                    // Extract and accumulate the quantity from the Reason field
+                    const qttMatch = Reason.match(/Qntt:\s*([\d,]+)/); // Match the quantity in "Qntt: 1,000" format
+                    if (qttMatch) {
+                        totalqtt += parseInt(qttMatch[1].replace(/,/g, ''), 10); // Remove commas and parse to number
+                    }
+
+                    // Sum the amounts of matching transactions
+                    totalAmount += Number(Amount); // Ensure Amount is a number
+                }
+            });
+
+            // Update the DOM in one operation
+            container.appendChild(fragment);
+
+            // Recalculate payment due after filtering transactions
+            calculateAndDisplayPaymentDue();
+
+            // Format the total amount for display
+            const formattedValue = formatNumber(totalAmount);
+            const formattedqtt = formatNumber2(totalqtt);
+
+            // Update the result element with the total amount
+            document.getElementById('rqtt').textContent = `Total Quantity: ${formattedqtt}`;
+            document.getElementById('rqtt').style.fontSize = '1.5rem';
+            document.getElementById('rqtt').style.color = 'blue';
+            // Update the total amount in resultElem
+            resultElem.textContent = `Total searched Amount: ${formattedValue} BDT`;
+
+            // Apply color styling based on totalAmount
+            if (totalAmount > 0) {
+                resultElem.style.color = 'green'; // Green color for positive total amount
+            } else if (totalAmount < 0) {
+                resultElem.style.color = 'red'; // Red color for negative total amount
+            } else {
+                resultElem.style.color = 'black'; // Default color for neutral total amount
+            }
+        }
+
+        // Add debounced event listener for search input
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput2 = document.getElementById('search-input2');
+            if (searchInput2) {
+                searchInput2.addEventListener('input', debounce(filterTransactions2, 200));
+            }
+        });
+
+    </script>
+    </script>
+
+    <script> const e = JSON.parse(localStorage.getItem("secureDataV2"));
+        if (!e) {
+            //  window.location.href = "index.html";
+        }
+        document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+        const popupImage = document.createElement('img');
+
+        // Set styles for the popup overlay
+        popupOverlay.style.position = "fixed";
+        popupOverlay.style.top = "0";
+        popupOverlay.style.left = "0";
+        popupOverlay.style.width = "100%";
+        popupOverlay.style.height = "100%";
+        popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        popupOverlay.style.display = "none";
+        popupOverlay.style.justifyContent = "center";
+        popupOverlay.style.alignItems = "center";
+
+        // Set styles for the popup image
+        popupImage.style.maxWidth = "90%";
+        popupImage.style.maxHeight = "90%";
+        popupImage.style.borderRadius = "0.625rem";
+        popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+        // Append the image to the popup overlay
+        popupOverlay.appendChild(popupImage);
+
+        // Append the popup overlay to the body
+        document.body.appendChild(popupOverlay);
+
+        // Add event listener to the original image to show the popup
+        document.getElementById("img").addEventListener('click', function () {
+            popupImage.src = e.img;  // Set the image source for the popup
+            popupOverlay.style.display = "flex";  // Show the popup
+        });
+
+        // Add event listener to the popup to close it when clicked
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = "none";  // Hide the popup
+            }
+        });
+        const stt = e.state;
+        if (stt === "admin") {
+            document.getElementById("nn").style.display = "block";
+        } else if (stt === "mod") {
+            document.getElementById("nn").style.display = "none";
+        } else {
+            document.getElementById("nn").style.display = "none";
+            document.getElementById('shtl').style.display = 'none';
+            document.getElementById('shtl2').style.display = 'none';
+        }
+
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const devdata = JSON.parse(localStorage.getItem('devdata'));
+            const sheetid = devdata.sheetid;
+            let devData = null;
+
+            // Function to animate and display text - optimized for faster execution
+            function displayAnimatedText(elementId, text, animationClass = "letter") {
+                const element = document.getElementById(elementId);
+                const computedStyle = window.getComputedStyle(element);
+
+                element.innerHTML = ""; // Clear the element
+
+                text.split("").forEach((char, index) => {
+                    const span = document.createElement("span");
+                    span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+                    span.classList.add(animationClass);
+                    span.style.animationDelay = `${0.01 * index}s`; // Faster delay: 0.03s→0.01s
+
+                    // Preserve computed and inline styles
+                    span.style.color = computedStyle.color;
+                    span.style.fontFamily = computedStyle.fontFamily;
+                    span.style.fontSize = computedStyle.fontSize;
+                    span.style.fontWeight = computedStyle.fontWeight;
+                    span.style.fontStyle = computedStyle.fontStyle;
+
+                    element.appendChild(span);
+                });
+            }
+
+            // Fetch all data using CSV format
+            async function fetchAllData() {
+                try {
+                    // Fetch developer data using CSV
+                    const devResponse = await fetch(`https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?tqx=out:csv`);
+                    const devCsvText = await devResponse.text();
+                    const devRows = devCsvText.split("\n");
+                    devData = devRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+                    displayTransaction2(devData);
+
+                    console.log("Developer data fetched successfully");
+                    displayAllData();
+                } catch (error) {
+                    console.error("Error fetching developer data:", error);
+                }
+            }
+
+            function displayAllData() {
+                // Fetch values and parse as numbers with enhanced validation
+                const totalReceive = parseFloat(devData[1]?.[2] || 0); // total-receive (D4)
+                const totalCost = parseFloat(devData[1]?.[3] || 0);
+                let totText = devData[2]?.[1] || "";
+                let totValue = 0;
+                const match = totText.match(/(\d+(?:,\d+)*)/);
+                if (match) {
+                    totValue = parseFloat(match[1].replace(/,/g, ''));
+                } // total (B4)
+                const balance = parseFloat(devData[1]?.[1] || 0); // balance (C4)
+
+                console.log("Calculated values:", {
+                    totalReceive, totalCost, totValue, balance
+                });
+
+                // Apply balance color immediately for better UX
+                const balanceElement = document.getElementById("balance");
+                if (balance < 0) {
+                    balanceElement.style.color = "red";
+                } else {
+                    balanceElement.style.color = "blue";
+                }
+
+                // Display all values simultaneously with faster animations
+                const displayPromises = [
+                    new Promise(resolve => {
+                        displayAnimatedText("total-receive", formatNumber(Math.abs(totalReceive)), "letter");
+                        setTimeout(resolve, 30); // Reduced timeout
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("total-cost", formatNumber(Math.abs(totalCost)), "letter");
+                        setTimeout(resolve, 30);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("total", formatNumber(Math.abs(totValue)), "letter");
+                        setTimeout(resolve, 30);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("balance", formatNumber(balance), "letter");
+                        setTimeout(resolve, 30);
+                    })
+                ];
+
+                // Calculate and display due immediately
+                const due = Math.max(totValue - totalReceive, 0);
+                const formattedDue = formatNumber(due);
+
+                displayPromises.push(new Promise(resolve => {
+                    displayAnimatedText("due", formattedDue, "letter");
+                    setTimeout(resolve, 30);
+                }));
+
+                // Wait for all animations to start, then trigger immediate payment due calculation
+                Promise.all(displayPromises).then(() => {
+                    // Calculate payment due immediately after display
+                    calculateAndDisplayPaymentDue();
+                });
+            }
+
+            // Start fetching data
+            fetchAllData();
+        });
+        const sheetid2 = devdata.sheetid2;
+        const sgid2 = devdata.sgid2;
+
+        const sheetUrl2 = `https://docs.google.com/spreadsheets/d/${sheetid2}/edit`;
+        document.getElementById('shtl').addEventListener('click', function () {
+            window.open(sheetUrl2, '_blank');
+        });
+
+        const sheetUrl23 = `https://docs.google.com/spreadsheets/d/${sheetid}/edit`;
+        document.getElementById('shtl2').addEventListener('click', function () {
+            window.open(sheetUrl23, '_blank');
+        });
+        // URL with sheetid2 and sgid2 used for client list
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetid2}/gviz/tq?tqx=out:csv&gid=${sgid2}`;
+
+        let transactions = [];
+        let clientData = null; // Store the CSV data globally
+
+        // Fetch client data using CSV format
+        async function fetchClientData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                const rows = csvText.split("\n");
+                clientData = rows.map((row) =>
+                    row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                        .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                );
+
+                console.log("Client data fetched successfully");
+                displayTransaction(clientData);
+            } catch (error) {
+                console.error('Error fetching client data:', error);
+            }
+        }
+
+        // Call the fetch function
+        fetchClientData();
+
+        function displayTransaction(rows) {
+            const container = document.getElementById('transaction-list');
+            transactions = [];
+
+            // Collect unique status values for the filter dropdown
+            const statusSet = new Set();
+
+            // Start serial number from the total count of rows
+            let serialNumber = rows.length;
+
+            for (let i = rows.length - 1; i >= 1; i--) {
+                const row = rows[i];
+                // For CSV data, access columns directly by index
+                const rawDate = row[0] || 'N/A';
+                const Name = row[1] || 'N/A';
+                const phone = row[2] || 'N/A';
+                const Land = row[3] || 0;
+                const Mail = row[4] || 'N/A';
+                const Status = row[5] || 'N/A';
+                const sheetid = row[6] || 'N/A';
+                const Gid = row[7] || 'N/A';
+                const formid = row[8] || 'N/A';
+                const sdentry = row[9] || 'N/A';
+                const srentry = row[10] || 0;
+                const saentry = row[11] || 'N/A';
+
+                // Add status to the set for filter options
+                statusSet.add(Status);
+
+                let formattedDate = smartDateConversion(rawDate);
+
+                const uniqueId = `viewbtn-${i}`;
+
+                transactions.push({
+                    Name, Land, phone, Status, formattedDate, Mail, sheetid, Gid, formid, sdentry, srentry, saentry,
+                    html: `
+<div class="transaction" style="display: flex; justify-content: space-between;">
+    <div style="flex: 0.5; text-align: center; margin-right: 0.938rem;">
+        ${serialNumber}
+    </div>
+    <div style="flex: 1; text-align: center; margin-right: 0.938rem; line-height: 1.5;">
+        ${Name}
+    </div>
+    <div style="flex: 1; text-align: center; line-height: 1.5;">
+        ${Land}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${phone}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${getStatusIcon(Status)} ${Status}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${formattedDate}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        <button style="background-color: #0051ff;cursor: pointer;" class="redirect-btn" id="${uniqueId}">View</button>
+    </div>
+</div>
+`
+                });
+
+                container.innerHTML += transactions[transactions.length - 1].html;
+
+                serialNumber--;
+
+                // Attach event listener for the "View" button
+                attachRedirectEvent(uniqueId, transactions[transactions.length - 1]);
+            }
+
+            // Populate the status filter dropdown
+            populateStatusFilter(statusSet);
+        }
+
+        function attachRedirectEvent(buttonId, transaction) {
+            setTimeout(() => {
+                document.getElementById(buttonId).addEventListener('click', (event) => {
+                    event.preventDefault();
+                    saveAndRedirect(transaction);
+                });
+            }, 400);
+        }
+
+        function saveAndRedirect(transaction) {
+            localStorage.removeItem("cldata");
+            const cldata = {
+                name: transaction.Name,
+                phone: transaction.phone,
+                land: transaction.Land,
+                mail: transaction.Mail,
+                sheetid: transaction.sheetid,
+                gid: transaction.Gid,
+                formid: transaction.formid,
+                sdentry: transaction.sdentry,
+                srentry: transaction.srentry,
+                saentry: transaction.saentry,
+                state: transaction.Status
+            };
+            localStorage.setItem('cldata', JSON.stringify(cldata));
+            setTimeout(() => { window.location.href = 'homme.html'; }, 300);
+        }
+
+        function filterTransactions() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const statusValue = document.getElementById('status-filter').value;
+            const container = document.getElementById('transaction-list');
+            container.innerHTML = '';
+
+            transactions.forEach((transaction, index) => {
+                const matchesSearch =
+                    transaction.Name.toLowerCase().includes(searchValue) ||
+                    transaction.formattedDate.toLowerCase().includes(searchValue) ||
+                    transaction.Land.toString().toLowerCase().includes(searchValue) ||
+                    transaction.Status.toLowerCase().includes(searchValue) ||
+                    transaction.phone.toString().includes(searchValue);
+
+                const matchesStatus = statusValue === '' || transaction.Status === statusValue;
+
+                if (matchesSearch && matchesStatus) {
+                    container.innerHTML += transaction.html;
+                    // Extract the unique ID from the transaction's HTML
+                    const htmlMatch = transaction.html.match(/id="([^"]+)"/);
+                    if (htmlMatch) {
+                        const uniqueId = htmlMatch[1];
+                        attachRedirectEvent(uniqueId, transaction);
+                    }
+                }
+            });
+        }
+
+        function populateStatusFilter(statusSet) {
+            const statusFilter = document.getElementById('status-filter');
+
+            // Clear existing options except the first one
+            statusFilter.innerHTML = '<option value="">All Status</option>';
+
+            // Sort status values and add them as options
+            const sortedStatuses = Array.from(statusSet).sort();
+            sortedStatuses.forEach(status => {
+                if (status && status !== 'N/A') {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    statusFilter.appendChild(option);
+                }
+            });
+        }
+
+        // Smart date format detection and conversion function
+        function smartDateConversion(dateString) {
+            if (!dateString || dateString === 'N/A') return dateString;
+
+            // Handle Google Sheets date format
+            if (typeof dateString === 'string' && dateString.startsWith('Date')) {
+                return parseGoogleDate(dateString);
+            }
+
+            // Handle regular date strings (mm/dd/yyyy or dd/mm/yyyy)
+            if (typeof dateString === 'string' && dateString.includes('/')) {
+                const parts = dateString.split(/[\s\/]/);
+                if (parts.length >= 3) {
+                    const first = parseInt(parts[0]);
+                    const second = parseInt(parts[1]);
+                    const year = parseInt(parts[2]);
+
+                    // Extract time part if exists
+                    const timeMatch = dateString.match(/(\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?)/);
+                    const timePart = timeMatch ? timeMatch[1] : '';
+
+                    let day, month;
+
+                    // Logic to detect format:
+                    // If first number > 12, it must be day (dd/mm/yyyy format)
+                    if (first > 12) {
+                        day = first;
+                        month = second;
+                    }
+                    // If second number > 12, it must be day, so first is month (mm/dd/yyyy format - needs conversion)
+                    else if (second > 12) {
+                        day = second;
+                        month = first;
+                    }
+                    // Both numbers <= 12, assume it's mm/dd/yyyy format and convert
+                    else {
+                        day = second;
+                        month = first;
+                    }
+
+                    // Validate month and day
+                    if (month > 12 || month < 1 || day > 31 || day < 1) {
+                        return formatDateTo12Hour(dateString); // Fallback
+                    }
+
+                    // Create date object and format with time
+                    const dateObj = new Date(year, month - 1, day);
+                    if (timePart) {
+                        // Parse time and add to date
+                        const timeRegex = /(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM|am|pm)?/;
+                        const timeMatches = timePart.match(timeRegex);
+                        if (timeMatches) {
+                            let hour = parseInt(timeMatches[1]);
+                            const minute = parseInt(timeMatches[2]);
+                            const ampm = timeMatches[4];
+
+                            if (ampm && ampm.toLowerCase() === 'pm' && hour !== 12) hour += 12;
+                            if (ampm && ampm.toLowerCase() === 'am' && hour === 12) hour = 0;
+
+                            dateObj.setHours(hour, minute, 0, 0);
+                        }
+                    }
+
+                    return formatDateTo12Hour(dateObj.toISOString());
+                }
+            }
+
+            // For other formats, use parseGoogleDate or default formatting
+            return parseGoogleDate(dateString);
+        }
+
+        // Helper function to format dates consistently
+        function formatDateTo12Hour(dateInput) {
+            try {
+                let date;
+
+                // Handle Date object
+                if (dateInput instanceof Date) {
+                    date = dateInput;
+                }
+                // Handle ISO string or other date strings
+                else if (typeof dateInput === 'string') {
+                    // Check if it's already in our desired format
+                    if (dateInput.includes("/") && (dateInput.includes("AM") || dateInput.includes("PM"))) {
+                        return dateInput; // Already in desired format
+                    }
+                    date = new Date(dateInput);
+                }
+                else {
+                    return dateInput; // Return as-is if not recognized
+                }
+
+                // Check if date is valid
+                if (isNaN(date.getTime())) {
+                    return dateInput; // Return original if can't parse
+                }
+
+                // Format to dd/mm/yyyy HH:MM AM/PM
+                const day = String(date.getDate()).padStart(2, "0");
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const year = date.getFullYear();
+                let hour = date.getHours();
+                const minute = String(date.getMinutes()).padStart(2, "0");
+
+                // Convert to 12-hour format
+                const ampm = hour >= 12 ? "PM" : "AM";
+                hour = hour % 12;
+                hour = hour ? String(hour).padStart(2, "0") : "12";
+
+                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+            } catch (error) {
+                console.error("Error formatting date:", error);
+                return dateInput; // Return original on error
+            }
+        }
+
+        function parseGoogleDate2(dateString) {
+            const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+            const matches = dateString.match(regex);
+
+            if (matches) {
+                const year = matches[1];
+                const month = String(parseInt(matches[2]) + 1).padStart(2, '0'); // Adjust month and pad with zero
+                const day = String(matches[3]).padStart(2, '0'); // Pad day with zero
+                let hour = parseInt(matches[4]);
+                const minute = String(matches[5]).padStart(2, '0'); // Pad minute with zero
+                const second = String(matches[6]).padStart(2, '0'); // Pad second with zero
+
+                // Convert to 12-hour format
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour ? String(hour).padStart(2, '0') : '12';  // Pad hour with zero and handle midnight/noon
+
+                // Separate date and time with a line break
+                const datePart = `${day}/${month}/${year}`;
+                const timePart = `${hour}:${minute}:${second} ${ampm}`;
+
+                return `${datePart}<br>${timePart}`; // Include <br> for line break
+            }
+
+            return 'Invalid Date';  // Fallback if parsing fails
+        }
+
+        function parseGoogleDate(dateString) {
+            const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+            const matches = dateString.match(regex);
+
+            if (matches) {
+                const year = matches[1];
+                const month = String(parseInt(matches[2]) + 1).padStart(2, '0');
+                const day = String(matches[3]).padStart(2, '0');
+                return `${day}/${month}/${year}`;
+            }
+
+            return 'Invalid Date';
+        }
+
+        function getStatusIcon(status) {
+            switch (status.toLowerCase()) {
+                case 'paint':
+                    return '<i class="fa-duotone fa-regular fa-paint-roller" style="color:red;"></i>';
+                case 'other':
+                    return '<i class="fa-sharp-duotone fa-light fa-globe" style="color:green;"></i>';
+                case 'client':
+                    return '<i style="color:green;" class="fa-duotone fa-solid fa-users"></i>';
+                case 'flat owner':
+                    return '<i class="fa-regular fa-map-location-dot" style="color:green;"></i>';
+                case 'window':
+                    return '<i class="fa-sharp fa-solid fa-block-brick"></i>';
+                case 'land owner':
+                    return '<i class="fa-solid fa-map-location-dot" style="color:red;"></i>';
+                case 'owner':
+                    return '<i class="fa-solid fa-user-tag" style="color:red;"></i>';
+                case 'wasa':
+                    return '<i class="fa-duotone fa-regular fa-water" style="color:blue;"></i>';
+                case 'wood':
+                    return '<i class="fa-solid fa-bench-tree" style="color:#A1662F;"></i>';
+                case 'thai':
+                    return '<i class="fa-solid fa-user-tag" style="color:red;"></i>';
+                case 'labour':
+                    return '<i style="color:red;" class="fa-sharp fa-solid fa-user-helmet-safety"></i>';
+                case 'electric':
+                    return '<i style="color:blue" class="fa-duotone fa-regular fa-bolt"></i>';
+                case 'civil':
+                    return '<i style="color:blue;" class="fa-duotone fa-solid fa-user-secret"></i>';
+                case 'plumbing':
+                    return '<i style="color:black;" class="fa-duotone fa-solid fa-pipe-valve"></i>';
+                case 'tiles':
+                    return '<i style="color:orange;" class="fa-solid fa-grid"></i>';
+                case 'cement':
+                    return '<i style="color:#e1c16a;" class="fa-solid fa-bag-seedling"></i>';
+                case 'brick':
+                    return '<i style="color:red;" class="fa-regular fa-trowel-bricks"></i>';
+                case 'sand':
+                    return '<i style="color:black;" class="fa-duotone fa-solid fa-mountain"></i>';
+                case 'stone':
+                    return '<i style="color:blue;" class="fa-sharp fa-solid fa-gem"></i>';
+                case 'rod':
+                    return '<i style="color:black;" class="fa-duotone fa-regular fa-chopsticks"></i>';
+                case 'piling':
+                    return '<i style="color:black;" class="fa-sharp-duotone fa-regular fa-pipe-collar"></i>';
+                default:
+                    return '<i style="color:gray;" class="fa-solid fa-face-awesome"></i>';
+            }
+        }
+        const showbtn = document.getElementById("adcost");
+        const btns = document.getElementById("buttons");
+        const showbtn2 = document.getElementById("lbcost");
+        const btns2 = document.getElementById("buttons22");
+
+        showbtn.addEventListener('click', function () {
+            btns.style.display = 'block';
+            btns2.style.display = 'none';
+            showbtn.style.display = 'none';
+            showbtn2.style.display = 'none';
+
+        });
+
+        showbtn2.addEventListener('click', function () {
+            btns2.style.display = 'block';
+            btns.style.display = 'none';
+            showbtn.style.display = 'none';
+            showbtn2.style.display = 'none';
+
+        });
+
+        mcostbtn.addEventListener('click', function (e) {
+            let audioPlayed = false;
+            const audioElement2 = new Audio('ting.mp3');
+
+            // Preload the audio
+            audioElement2.preload = 'auto';
+            audioElement2.load();
+            mcostbtn.style.opacity = '0.5';
+            mcostbtn.innerText = 'wait....';
+            mcostbtn.disabled = true;
+            mrecbtn.style.display = 'none';
+
+            const amount = parseFloat(document.getElementById('mamount').value);
+            const msg2 = "Material Cost";
+            const mname = document.getElementById('mname').value;
+            const unit = document.getElementById('munit').value;
+            const description = `${mname} - ${unit}`;
+            const rmsg2 = description;
+            const devdata = JSON.parse(localStorage.getItem('devdata'));
+            const name2 = devdata.name;
+            const description2 = `Material cost for ${name2}`;
+            const dformid = devdata.formid;
+            const dsdentry = devdata.sdentry;
+            const dsrentry = devdata.srentry;
+            const dsaentry = devdata.saentry;
+            if (amount >= 5) {
+                let googleFormsData = [
+                    {
+                        url: `https://docs.google.com/forms/u/0/d/e/${dformid}/formResponse`,
+                        entries: {
+                            reason: `entry.${dsrentry}`,
+                            amount: `entry.${dsaentry}`,
+                            description: `entry.${dsdentry}`
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: msg2
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScc1xew-H8oPvltrdS6V4btleh8338PlgpP3xOEGqlIpJF9_Q/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: msg2
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdjtLIf_geNx2MqQx6flFJRsFytRu6lBYeA7nQN840wO-WklA/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: description2
+                        }
+                    }
+                ];
+
+                googleFormsData.forEach((form) => {
+                    const formData = new FormData();
+                    formData.append(form.entries.amount, form.data.amount);
+                    formData.append(form.entries.description, form.data.description);
+                    formData.append(form.entries.reason, form.data.reason);
+
+                    fetch(form.url, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: new URLSearchParams(formData)
+                    })
+
+                        .then(response => {
+                            document.getElementById('mresult').innerText = `Transaction Complete`;
+                            mcostbtn.style.display = 'none';
+                            if (!audioPlayed) {
+                                audioElement2.play().catch(error => {
+                                    console.error('Audio playback failed:', error);
+                                });
+                                audioPlayed = true;
+                            }
+
+                        })
+                        .catch(error => {
+                            document.getElementById('mresult').innerText = `Failure in Transaction`;
+                            mcostbtn.style.display = 'block';
+                        });
+                });
+            } else {
+                document.getElementById('mresult').innerText = `Error Please Contact App Admin`;
+            }
+        });
+        lcostbtn.addEventListener('click', function (e) {
+            let audioPlayed = false;
+            const audioElement2 = new Audio('ting.mp3');
+
+            // Preload the audio
+            audioElement2.preload = 'auto';
+            audioElement2.load();
+            lcostbtn.style.opacity = '0.5';
+            lcostbtn.innerText = 'wait....';
+            lcostbtn.disabled = true;
+            lrecbtn.style.display = 'none';
+
+            const amount = parseFloat(document.getElementById('lamount').value);
+            const msg2 = "Labour Cost";
+            const name = document.getElementById('labername').value;
+            const phone = document.getElementById('labernumber').value;
+            const rmsg2 = document.getElementById('lreason').value;
+            const description = `${name} - ${phone}`;
+            const devdata = JSON.parse(localStorage.getItem('devdata'));
+            const name2 = devdata.name;
+            const description2 = `Labour Cost for ${name2}`;
+            const dformid = devdata.formid;
+            const dsdentry = devdata.sdentry;
+            const dsrentry = devdata.srentry;
+            const dsaentry = devdata.saentry; if (amount >= 5) {
+                let googleFormsData = [
+
+                    {
+                        url: `https://docs.google.com/forms/u/0/d/e/${dformid}/formResponse`,
+                        entries: {
+                            reason: `entry.${dsrentry}`,
+                            amount: `entry.${dsaentry}`,
+                            description: `entry.${dsdentry}`
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: description
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdzREKNblk9aFWeHmotrw0TiR2WnZiJorD9qs87zjUZTA1DvQ/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: description
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdjtLIf_geNx2MqQx6flFJRsFytRu6lBYeA7nQN840wO-WklA/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: description2
+                        }
+                    }
+                ];
+
+                googleFormsData.forEach((form) => {
+                    const formData = new FormData();
+                    formData.append(form.entries.amount, form.data.amount);
+                    formData.append(form.entries.description, form.data.description);
+                    formData.append(form.entries.reason, form.data.reason);
+
+                    fetch(form.url, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: new URLSearchParams(formData)
+                    })
+                        .then(response => {
+                            document.getElementById('lresult').innerText = `Transaction Complete`;
+                            lcostbtn.style.display = 'none';
+                            if (!audioPlayed) {
+                                audioElement2.play().catch(error => {
+                                    console.error('Audio playback failed:', error);
+                                });
+                                audioPlayed = true;
+                            }
+
+                        })
+                        .catch(error => {
+                            document.getElementById('lresult').innerText = `Failure in Transaction`;
+                            lcostbtn.style.display = 'block';
+                        });
+                });
+            } else {
+                document.getElementById('lresult').innerText = `Error Please Contact App Admin`;
+            }
+        });
+
+        mrecbtn.addEventListener('click', function (e) {
+            let audioPlayed = false;
+            const audioElement2 = new Audio('ting.mp3');
+
+            // Preload the audio
+            audioElement2.preload = 'auto';
+            audioElement2.load();
+            mrecbtn.style.opacity = '0.5';
+            mrecbtn.innerText = 'wait....';
+            mrecbtn.disabled = true;
+            mcostbtn.style.display = 'none';
+            const amount = parseFloat(document.getElementById('mamount').value);
+            const msg2 = "Material Receive";
+            const mname = document.getElementById('mname').value;
+            const unit = document.getElementById('munit').value;
+            const description = `${mname} - ${unit}`;
+            const rmsg2 = description;
+            const devdata = JSON.parse(localStorage.getItem('devdata'));
+            const name2 = devdata.name;
+            const description2 = `Material Receive for ${name2}`;
+            const dformid = devdata.formid;
+            const dsdentry = devdata.sdentry;
+            const dsrentry = devdata.srentry;
+            const dsaentry = devdata.saentry;
+            if (amount >= 5) {
+                let googleFormsData = [
+
+                    {
+                        url: `https://docs.google.com/forms/u/0/d/e/${dformid}/formResponse`,
+                        entries: {
+                            reason: `entry.${dsrentry}`,
+                            amount: `entry.${dsaentry}`,
+                            description: `entry.${dsdentry}`
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: msg2
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScc1xew-H8oPvltrdS6V4btleh8338PlgpP3xOEGqlIpJF9_Q/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: msg2
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdjtLIf_geNx2MqQx6flFJRsFytRu6lBYeA7nQN840wO-WklA/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: description2
+                        }
+                    }
+                ];
+
+                googleFormsData.forEach((form) => {
+                    const formData = new FormData();
+                    formData.append(form.entries.amount, form.data.amount);
+                    formData.append(form.entries.description, form.data.description);
+                    formData.append(form.entries.reason, form.data.reason);
+
+                    fetch(form.url, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: new URLSearchParams(formData)
+                    })
+                        .then(response => {
+                            document.getElementById('mresult').innerText = `Transaction Complete`;
+                            mrecbtn.style.display = 'none';
+                            if (!audioPlayed) {
+                                audioElement2.play().catch(error => {
+                                    console.error('Audio playback failed:', error);
+                                });
+                                audioPlayed = true;
+                            }
+
+                        })
+                        .catch(error => {
+                            document.getElementById('mresult').innerText = `Failure in Transaction`;
+                            mrecbtn.style.display = 'block';
+                        });
+                });
+            } else {
+                document.getElementById('mresult').innerText = `Error Please Contact App Admin`;
+            }
+        });
+
+        lrecbtn.addEventListener('click', function (e) {
+            let audioPlayed = false;
+            const audioElement2 = new Audio('ting.mp3');
+
+            // Preload the audio
+            audioElement2.preload = 'auto';
+            audioElement2.load();
+            lrecbtn.style.opacity = '0.5';
+            lrecbtn.innerText = 'wait....';
+            lrecbtn.disabled = true;
+            lcostbtn.style.display = 'none';
+            const name = document.getElementById('labername').value;
+            const amount = parseFloat(document.getElementById('lamount').value);
+            const msg2 = "Labour Receive";
+            const phone = document.getElementById('labernumber').value;
+            const description = `${msg2} - ${name} - ${phone}`;
+            const rmsg2 = document.getElementById('lreason').value;
+            const devdata = JSON.parse(localStorage.getItem('devdata'));
+            const name2 = devdata.name;
+            const description2 = `Labour Receive from ${name2}`;
+            const dformid = devdata.formid;
+            const dsdentry = devdata.sdentry;
+            const dsrentry = devdata.srentry;
+            const dsaentry = devdata.saentry;
+            if (amount >= 5) {
+                let googleFormsData = [
+                    {
+                        url: `https://docs.google.com/forms/u/0/d/e/${dformid}/formResponse`,
+                        entries: {
+                            reason: `entry.${dsrentry}`,
+                            amount: `entry.${dsaentry}`,
+                            description: `entry.${dsdentry}`
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: description
+                        }
+                    }, {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdzREKNblk9aFWeHmotrw0TiR2WnZiJorD9qs87zjUZTA1DvQ/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `-${amount}`,
+                            description: description
+                        }
+                    },
+                    {
+                        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdjtLIf_geNx2MqQx6flFJRsFytRu6lBYeA7nQN840wO-WklA/formResponse",
+                        entries: {
+                            reason: "entry.458544774",
+                            amount: "entry.2032103830",
+                            description: "entry.2111696735"
+                        },
+                        data: {
+                            reason: rmsg2,
+                            amount: `${amount}`,
+                            description: description2
+                        }
+                    }
+                ];
+
+                googleFormsData.forEach((form) => {
+                    const formData = new FormData();
+                    formData.append(form.entries.amount, form.data.amount);
+                    formData.append(form.entries.description, form.data.description);
+                    formData.append(form.entries.reason, form.data.reason);
+
+                    fetch(form.url, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: new URLSearchParams(formData)
+                    })
+                        .then(response => {
+                            document.getElementById('lresult').innerText = `Transaction Complete`;
+                            lrecbtn.style.display = 'none';
+                            if (!audioPlayed) {
+                                audioElement2.play().catch(error => {
+                                    console.error('Audio playback failed:', error);
+                                });
+                                audioPlayed = true;
+                            }
+
+                        })
+                        .catch(error => {
+                            document.getElementById('lresult').innerText = `Failure in Transaction`;
+                            lrecbtn.style.display = 'block';
+                        });
+                });
+            } else {
+                document.getElementById('lresult').innerText = `Error Please Contact App Admin`;
+            }
+        });
+    </script>
+</body>
+
+</html>

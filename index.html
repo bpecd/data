@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <link rel="manifest" href="/data/manifest.json">
+  <link rel="shortcut icon" href="logo.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script> if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registered:', registration);
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+    }
+  </script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+
+  <title>Sign In</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+
+<body>
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <img src="logo.gif" alt="logo">
+    </div>
+
+  </div>
+  <div class="content">
+    <img id="log" style="border-radius: 0.938rem;width: 128px;height: 128px;pointer-events:none" src="logo.jpg"
+      alt="Logo" class="logo">
+    <h1 id="result">Building Plan Engineering Consultant & Developer</h1>
+    <form id="loginForm">
+      <div class="field">
+        <input id="phonenumber" name="username" type="text" maxlength="12" placeholder="Mobile number"
+          autocomplete="username" required>
+        <span class="fa-duotone fa-solid fa-mobile"></span>
+      </div>
+      <div class="field">
+        <input style="font-weight: bold;" id="pin" name="password" type="password" placeholder="Password"
+          autocomplete="current-password" required>
+        <span id="eye" class="fa-duotone fa-solid fa-lock-keyhole"></span>
+      </div>
+      <div class="forgot-pass">
+        <a href="verify.html?cp=cp">Reset Password?</a>
+      </div>
+      <div style="display:none;" class="forgot-passx">
+        <a id="newidl" style="color: brown;" href="verify.html">Login to another Ac ?</a>
+      </div>
+      <button style="cursor: pointer;" id="sub" class="button"><i id="icon"
+          class="fa-duotone fa-regular fa-lock-keyhole-open"></i></button>
+    </form>
+  </div>
+  <script>
+    let audioPlayed = false;
+    const audioElementn = new Audio('nyr.mp3');
+
+    // Preload the audio
+    audioElementn.preload = 'auto';
+    audioElementn.load();
+    document.body.addEventListener('contextmenu', function (event) {
+      event.preventDefault();  // Prevent the right-click context menu
+    }); // Stop the confetti after 3 seconds
+    function requestNotificationPermission() {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            console.log('Notification permission granted.');
+          } else {
+            console.log('Notification permission denied.');
+          }
+        });
+      } else {
+        console.log('Notifications are not supported by your browser.');
+      }
+    }
+
+    // Function to send the first notification
+    function sendNotification() {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        const options = {
+          body: 'Happy New Year!',
+          icon: 'logo.png', // Example placeholder icon
+          tag: '2025n' // Ensures the notification is not duplicated
+        };
+
+        new Notification('Updated!', options);
+      } else {
+        console.log('Notification permission is not granted or unsupported.');
+      }
+    }
+
+    // Function to send the second notification
+    function sendNotification2() {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        const options = {
+          body: '2025 here!',
+          icon: 'logo.png', // Example placeholder icon
+          tag: '2025' // Ensures the notification is not duplicated
+        };
+
+        new Notification('Welcome!', options);
+      } else {
+        console.log('Notification permission is not granted or unsupported.');
+      }
+    }
+
+    // Event listener for the user to interact (trigger notifications)
+    document.addEventListener('DOMContentLoaded', () => {
+      requestNotificationPermission();
+    });
+
+    function showpp() {
+      document.getElementById("popup").classList.add("active");
+      setTimeout(() => {
+        clearInterval(confettiInterval);
+      }, 3500);
+      if (!audioPlayed) {
+        audioElementn.play().catch(error => {
+          console.error('Audio playback failed:', error);
+        });
+        audioPlayed = true;
+      }
+    }
+    let r = "sheetCellValue";
+
+    function o() {
+      console.log("Closing popup");
+      const popupElement = document.getElementById("popup");
+      if (popupElement) {
+        popupElement.classList.remove("active");
+      } else {
+        console.warn("Popup element not found");
+      }
+      localStorage.setItem("popupShown", "true");
+    }
+
+    async function a() {
+      try {
+        let e = await fetch("https://docs.google.com/spreadsheets/d/1VvKwtRmRSLy-eLCQfeCDeN6xT_vv-Gw5CsXbjcwcpxw/htmlview");
+        if (!e.ok) {
+          throw new Error(`Failed to fetch Google Sheets: ${e.status} ${e.statusText}`);
+        }
+        let t = await e.text(),
+          n = new DOMParser(),
+          l = n.parseFromString(t, "text/html"),
+          cell = l.querySelector("table tbody tr:nth-child(2) td:nth-child(5)"); // Row 2, Column 5
+
+        if (!cell) {
+          console.warn("Targeted cell not found in fetched document");
+          return;
+        }
+
+        let o = cell.innerText;
+        console.log("Fetched cell value:", o);
+
+        let a = localStorage.getItem(r);
+        console.log("Stored cell value:", a);
+
+        if (o !== a) {
+          localStorage.setItem(r, o);
+          localStorage.removeItem("popupShown");
+        }
+
+        if (localStorage.getItem("popupShown") !== "true") {
+          console.log("Showing popup");
+          const popupElement = document.getElementById("popupnone");
+          if (popupElement) {
+            sendNotification();
+            setTimeout(() => {
+              clearInterval(confettiInterval);
+            }, 3500); if (!audioPlayed) {
+              audioElementn.play().catch(error => {
+                console.error('Audio playback failed:', error);
+              });
+              audioPlayed = true;
+            }
+
+
+            popupElement.classList.add("active");
+          } else {
+            console.log("Popup element not found");
+          }
+        }
+      } catch (i) {
+        console.error("Error fetching data from Google Sheets:", i);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      a(); // Fetch data and handle popup logic
+    });
+
+    function closePopup() {
+      console.log("closePopup function called");
+      const popupElement = document.getElementById("popup");
+      setTimeout(function () {
+        if (popupElement && (localStorage.getItem("popupShown") !== true)) {
+          console.log("Popup element found");
+          popupElement.classList.remove("active");
+        } else {
+          console.log("Popup element not found");
+        }
+        localStorage.setItem("popupShown", "true"); // Mark as shown
+      }, 500);
+      if (popupElement) {
+        sendNotification2();
+        console.log("Popup element found");
+        popupElement.classList.remove("active");
+      } else {
+        console.warn("Popup element not found");
+      }
+      localStorage.setItem("popupShown", "true"); // Mark as shown
+    }
+    const popupOverlay = document.getElementById("popup");
+    popupOverlay.addEventListener('click', function (e) {
+      if (e.target === popupOverlay) {
+        console.log("closePopup function called");
+        const popupElement = document.getElementById("popup");
+        if (popupElement) {
+          console.log("Popup element found");
+          popupElement.classList.remove("active");
+        } else {
+          console.warn("Popup element not found");
+        }
+        localStorage.setItem("popupShown", "true"); // Mark as shown
+        // Hide the popup
+      }
+    });
+
+    const togglePassword = document.querySelector('#eye');
+    const passwordField = document.querySelector('#pin');
+
+    togglePassword.addEventListener('click', function () {
+      // Toggle the type attribute
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      if (togglePassword.classList.contains("fa-lock-keyhole")) {
+        togglePassword.classList.remove("fa-lock-keyhole");
+        togglePassword.classList.add("fa-lock-a");
+        togglePassword.classList.remove("fa-duotone"); // Remove fa-duotone when toggling to fa-lock-a
+      } else {
+        togglePassword.classList.remove("fa-lock-a");
+        togglePassword.classList.add("fa-lock-keyhole");
+        togglePassword.classList.add("fa-duotone"); // Add fa-duotone back when toggling to fa-lock-keyhole
+      }
+    });
+  </script>
+  <script src="index.js"></script>
+</body>
+
+</html>

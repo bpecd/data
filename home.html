@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            /* For Firefox */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        body::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            background: transparent;
+        }
+
+        /* Additional scrollbar hiding for webkit browsers */
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        html::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            background: transparent !important;
+        }
+
+        /* Global scrollbar hiding for all elements */
+        * {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            background: transparent !important;
+        }
+
+        /* Specific hiding for body and html scrollbars */
+        html,
+        body {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+            background: transparent !important;
+        }
+
+        /* Ensure proper body height and scrollbar control */
+        body.move-down {
+            transform: translateY(5vh);
+        }
+
+        .container {
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 1.125rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container1 {
+            min-height: 25rem;
+            display: flex;
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 0.625rem;
+            border-radius: 1.75rem;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0.625rem;
+            background-color: #ddd;
+            margin-top: 0.938rem;
+            margin-bottom: 0.938rem;
+            border-radius: 1.25rem;
+        }
+
+        .menu span {
+            padding: 0.625rem 1.25rem;
+            background-color: #0ccccc;
+            border-radius: 1.25rem;
+            color: black;
+            font-weight: bold;
+            margin-left: 3%;
+            margin-right: 1.8%;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.125rem dotted black;
+            border-radius: 0.625rem;
+            padding: 0.625rem;
+        }
+
+        .transaction-info {
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            margin: 1.25rem;
+            max-width: 50rem;
+            width: 100%;
+            border-radius: 1.125rem;
+            z-index: 1000;
+        }
+
+        .progress-container {
+            width: 12.5rem;
+            /* Fixed width to give more space to the label */
+            height: 1.875rem;
+            background-color: #ffd1d1;
+            border-radius: 1.125rem;
+            overflow: hidden;
+            margin-right: 1.25rem;
+            transition: transform 0.5s ease;
+
+        }
+
+        .progress-label {
+            flex-grow: 1;
+            /* Allow the label to expand */
+            color: #000000;
+            font-size: 1.5rem;
+            white-space: normal;
+            text-align: left;
+            /* Allow wrapping */
+        }
+
+        .summary-text {
+            justify-content: space-between;
+            font-size: 1.5rem;
+            color: black;
+            transition: transform 0.5s ease;
+        }
+
+        .summary-text:hover {
+            transform: scale(1.12);
+        }
+
+        .progress {
+            height: 100%;
+            background-color: red;
+            border-radius: 1.125rem;
+            width: 0px;
+            transition: width 3s ease;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+
+        a:hover {
+            background-color: #ffb2f1;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotateX(90deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        /* Style for individual letters */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform-origin: bottom;
+            animation: rotateIn 0.5s ease forwards;
+        }
+
+        .bb {
+            width: 80vh;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 0.625rem;
+            border-radius: 25px;
+            margin-bottom: 0.625rem;
+        }
+
+        /* Icon styling */
+        .top-bar .nav-items a i {
+            font-size: 1.5rem;
+            color: #db049b;
+        }
+
+        /* Logo section */
+        .top-bar .logo img {
+            width: 3.438rem;
+            height: 3.438rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hover-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Hover box - Positioned perfectly */
+        .hover-box {
+            display: none;
+            position: absolute;
+            top: 100%;
+            /* Position directly below */
+            left: 50%;
+            /* Center horizontally */
+            transform: translateX(-50%) translateY(10px);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 0.625rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem;
+            z-index: 10;
+            white-space: nowrap;
+
+            /* Ensures the gap is filled */
+            pointer-events: auto;
+            /* Keep events enabled */
+        }
+
+        /* Padding trick: hover area between anchor and box */
+        .hover-container::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            /* Bottom of anchor */
+            left: 0;
+            width: 100%;
+            height: 10px;
+            /* Covers the 10px gap */
+            background: transparent;
+            /* Invisible */
+        }
+
+        /* Show the hover box when hovering on container or hover box */
+        .hover-container:hover .hover-box,
+        .hover-box:hover {
+            display: block;
+        }
+
+        /* Hover Box Links */
+        .hover-box a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+            padding: 0.25rem 0;
+        }
+
+        .hover-box a:hover {
+            background-color: #f0f0f0;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        .transaction-amount {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .credit {
+            color: green;
+        }
+
+        .debit {
+            color: red;
+        }
+
+        .neutral {
+            color: #808080;
+        }
+
+        .progress-containerr {
+
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease;
+        }
+
+        .progress-containerr:hover {
+            transform: scale(1.05);
+        }
+
+        .progress-container:hover {
+            transform: scale(1.05);
+        }
+
+        .circular-progress {
+            transform: rotate(-90deg);
+            /* Start from the top */
+        }
+
+        .bg-circle,
+        .progress-circle {
+            fill: none;
+            stroke-width: 30;
+            /* Set thickness to 30 */
+            cx: 100;
+            cy: 100;
+            r: 70;
+            /* Adjust radius to fit within the container */
+        }
+
+        .bg-circle {
+            stroke: #3e3eff;
+            /* Background circle color */
+        }
+
+        .progress-circle {
+            stroke: red;
+            /* Progress color */
+            stroke-linecap: round;
+            /* Rounded ends */
+            stroke-dasharray: 439.82;
+            /* Circumference of the circle (2 * π * r) */
+            stroke-dashoffset: 439.82;
+            /* Start with the stroke hidden */
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .percentage {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000000;
+        }
+
+
+        .stats-container {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .stat-card {
+            position: relative;
+            width: 11rem;
+            height: 6.25rem;
+            background-color: var(--bg-color, #fff);
+            border-radius: 0.938rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            overflow: hidden;
+            text-align: left;
+            padding: 0 0.938rem;
+            transition: transform 0.5s ease;
+            /* Smooth scaling on hover */
+        }
+
+        .stat-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.313rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+        }
+
+        .stat-icon {
+            font-size: 2.2rem;
+            transition: transform 0.5s ease;
+            /* Smooth scaling on hover */
+        }
+
+        /* Hover effect */
+        .stat-card:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge the card */
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.2);
+            /* Zoom in the icon */
+        }
+
+        .xbb {
+            transition: box-shadow 0.5s ease,
+                font-size 0.5s ease;
+        }
+
+        .xbb:hover {
+            box-shadow: inset 0.063rem 0.063rem 0.125rem #BABECC,
+                inset -0.063rem -0.063rem 0.125rem #ffffff73;
+
+        }
+
+        .xbb:hover i {
+            padding: 0.1rem;
+            font-size: smaller;
+        }
+
+        /* Prevent body scroll when popup is active */
+        body.popup-active {
+            overflow: hidden !important;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* Ensure scrollbar remains hidden even when popup is active */
+        body.popup-active::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        /* Additional isolation for popup */
+        .popuptwo * {
+            box-sizing: border-box;
+        }
+
+        /* Ensure popup doesn't interfere with other fixed elements */
+        .popuptwo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 10000;
+            transition: visibility 0s 0.3s, opacity 0.3s ease;
+            pointer-events: none;
+            /* Prevent interaction when hidden */
+            isolation: isolate;
+            /* Create new stacking context */
+            /* Prevent any backdrop filters from affecting other elements */
+            backdrop-filter: none;
+        }
+
+        .popuptwo.active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+            /* Allow interaction when active */
+        }
+
+        .popup-contenttwo {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 120px;
+            height: auto;
+            position: relative;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            /* Ensure content doesn't leak outside */
+            overflow: hidden;
+            /* Prevent margin collapse */
+            contain: layout style paint;
+        }
+
+        .popuptwo.active .popup-contenttwo {
+            transform: scale(1);
+        }
+
+        .popup-contenttwo img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            /* Prevent image from affecting layout */
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popuptwo" id="popuptwo">
+        <div class="popup-contenttwo">
+            <img src="logo.gif" alt="logo">
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <div class="nav-items">
+            <!-- Main Dashboard -->
+            <a class="backbtn"
+                style="color: #364fa1; font-weight: bold; font-size: large; background-color: #e8ecff; padding: 0.625rem; border-radius: 0.938rem;"
+                href="#">
+                <i class="fa-solid fa-chart-waterfall"></i> Main Dashboard
+            </a>
+
+            <!-- Office Area -->
+            <div class="hover-container">
+                <a class="backbtn" href="officehome.html">
+                    <i class="fa-duotone fa-regular fa-person-seat-reclined"></i> Office Area
+                </a>
+                <div class="hover-box">
+                    <a href="owners.html"><i class="fa-solid fa-bars-progress"></i> Owners</a>
+                </div>
+            </div>
+
+            <!-- Developer Company -->
+            <div class="hover-container">
+                <a class="backbtn" href="devhome.html">
+                    <i class="fa-regular fa-buildings"></i> Developer Company
+                </a>
+                <div class="hover-box">
+                    <a href="developers.html"><i class="fa-solid fa-list-ol"></i> Projects</a>
+                </div>
+            </div>
+            <!-- Bank -->
+            <a class="backbtn" href="bank.html">
+                <i class="fa-solid fa-money-check-dollar-pen"></i> Bank
+            </a>
+
+        </div>
+
+        <!-- Logo -->
+        <div style="display: flex; flex-direction: row; gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo">
+            <button class="xbb"
+                style="cursor: pointer; border: none; font-size: 1.25rem; padding: 0.625rem; border-radius: 0.938rem; position: relative;"
+                id="clearButton">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="container" style="min-width: 750px;">
+            <div class="progress-bar">
+                <div class="progress-container">
+                    <div class="progress" id="officec-progress"></div>
+                </div>
+                <div class="progress-label">Office Cost: <span
+                        style="color: red;font-family: 'Arial Black', sans-serif;" id="ofcost"></span> BDT</div>
+            </div>
+            <div class="progress-bar">
+                <div style="background-color: #b3c5ff;" class="progress-container">
+                    <div style="background-color: blue;" class="progress" id="officer-progress"></div>
+                </div>
+                <div class="progress-label">Office Receive: <span
+                        style="color: blue;font-family: 'Arial Black', sans-serif;" id="ofrec"></span> BDT</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-container">
+                    <div class="progress" id="buildc-progress"></div>
+                </div>
+                <div class="progress-label">Developer Cost: <span
+                        style="color: red;font-family: 'Arial Black', sans-serif;" id="blcost"></span> BDT</div>
+            </div>
+            <div class="progress-bar">
+                <div style="background-color: #b3c5ff;" class="progress-container">
+                    <div style="background-color: blue;" class="progress" id="buildr-progress"></div>
+                </div>
+                <div class="progress-label">Developer Receive: <span
+                        style="color: blue;font-family: 'Arial Black', sans-serif;" id="blrec"></span> BDT</div>
+            </div>
+            <div class="progress-bar">
+                <div style="background-color: #b1afff;" class="progress-container">
+                    <div style="background-color: #f8d823;" class="progress" id="loan-progress"></div>
+                </div>
+                <div class="progress-label">Loan Given: <span
+                        style="color: rgb(0, 0, 0);font-family: 'Arial Black', sans-serif;background-color: #fff45f; padding: 0.313rem; border-radius: 0.625rem;"
+                        id="loan"></span> BDT</div>
+            </div>
+            <div class="progress-bar">
+                <div style="background-color: #77d183;" class="progress-container">
+                    <div style="background-color: #07b212;" class="progress" id="bank-progress"></div>
+                </div>
+                <div class="progress-label">Bank Balance: <span
+                        style="color: rgb(0, 0, 0);font-family: 'Arial Black', sans-serif;background-color: #64ff35; padding: 0.313rem; border-radius: 0.625rem;"
+                        id="bank"></span> BDT</div>
+            </div>
+        </div>
+        <div class="container"
+            style="align-items: center;justify-content: center;display: flex;flex-direction: column;">
+            <div style="width: 25.5rem;background-color: rgb(255, 255, 255); border-radius: 0.938rem;padding: 0.625rem;"
+                class="summary-text">
+                Total Cost: <span style="color:red ;font-family: 'Arial Black', sans-serif;" id="total-cost"></span>
+                BDT<br>
+                Total Receive: <span style="color: blue;font-family: 'Arial Black', sans-serif;"
+                    id="total-receive"></span> BDT
+                <p id="avbl" style="display: none;"></p>
+                <p id="avof" style="display: none;"></p>
+            </div>
+            <h3 style="margin-bottom: 1.25rem;margin-top: 1.25rem;">All Cost vs All Receive</h3>
+            <div class="progress-containerr">
+                <svg class="circular-progress" width="200" height="200">
+                    <circle class="bg-circle" cx="100" cy="100" r="90"></circle>
+                    <circle class="progress-circle" cx="100" cy="100" r="90"></circle>
+                </svg>
+                <div class="percentage">0%</div>
+            </div>
+        </div>
+
+        <div class="container"
+            style="width:100%;display: flex;flex-direction: row;justify-content: flex-start;align-items: left;">
+
+            <div class="stats-container">
+                <div class="stat-card" style="--bg-color: #1b2850;">
+                    <div class="stat-content">
+                        <div class="stat-info">
+                            <div class="stat-label">Owners</div>
+                            <div class="stat-number" id="customers-count">0</div>
+
+                        </div>
+                        <i class="stat-icon fa-duotone fa-regular fa-users"></i>
+                    </div>
+                </div>
+                <div class="stat-card" style="--bg-color: #209655;">
+                    <div class="stat-content">
+                        <div class="stat-info">
+                            <div class="stat-label">Projects</div>
+                            <div class="stat-number" id="suppliers-count">0</div>
+
+                        </div>
+                        <i class="stat-icon fa-solid fa-building-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card" style="--bg-color: #006fca;width: 21.875rem;margin-left: 1.25rem;">
+                <div class="stat-content"><i class="stat-icon fa-solid fa-money-check-dollar"></i>
+                    <div class="stat-info">
+                        <div class="stat-label">Available Balance </div>
+                        <div class="stat-number"
+                            style="color:   rgb(4, 119, 4);padding: 0.313rem;background-color: #ffffff;border-radius: 0.625rem;font-size: 2rem;box-shadow: rgba(0, 0, 0, 0.4) 0px 0.125rem 0.25rem, rgba(0, 0, 0, 0.3) 0px 7px 13px -0.188rem, rgba(0, 0, 0, 0.2) 0px -0.188rem 0px inset;"
+                            id="balance"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const popuptwo = document.getElementById("popuptwo");
+
+            if (!popuptwo) {
+                console.error("Popuptwo element not found");
+                return;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show popup on page load
+                showPopup();
+
+                // Auto-hide popup after 2.5 seconds
+                setTimeout(() => {
+                    closePopup();
+                }, 1500);
+
+                // Show popup function
+                function showPopup() {
+                    popuptwo.classList.add("active");
+                    document.body.classList.add("popup-active");
+                }
+
+                // Close popup function
+                function closePopup() {
+                    popuptwo.classList.remove("active");
+                    document.body.classList.remove("popup-active");
+                }
+
+                // Click outside popup to close (only on overlay background)
+                popuptwo.addEventListener("click", function (e) {
+                    // Only close if clicking directly on the overlay (not the content)
+                    if (e.target === popuptwo) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closePopup();
+                    }
+                });
+
+                // Click on popup content to close
+                const popupContent = popuptwo.querySelector('.popup-contenttwo');
+                if (popupContent) {
+                    popupContent.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closePopup();
+                    });
+                }
+
+                // Prevent popup from interfering with page scrolling
+                popuptwo.addEventListener("wheel", function (e) {
+                    if (popuptwo.classList.contains("active")) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+
+                // Keyboard support - close on Escape key
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape" && popuptwo.classList.contains("active")) {
+                        e.preventDefault();
+                        closePopup();
+                    }
+                });
+            });
+        })();
+
+        const customersSheetUrl = 'https://docs.google.com/spreadsheets/d/1d6A9YXQkEjlQyioOUS5zYc-_bibN_Nt3YmoCQWvv-5s/gviz/tq?tqx=out:csv';
+        const suppliersSheetUrl = 'https://docs.google.com/spreadsheets/d/1-eLT3ufiAq5QEUMtJPPl3UFeVlbGuFe_1NSnIgXdncw/gviz/tq?tqx=out:csv';
+
+        async function fetchSheetData(sheetUrl, skipRows = 1) {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+
+                // Split CSV into rows and parse
+                const rows = csvText.split("\n");
+                const data = rows.map((row) =>
+                    row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                        .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                );
+
+                // Filter out empty rows and skip header rows
+                const validRows = data.slice(skipRows).filter(row =>
+                    row.length > 0 && row.some(cell => cell.trim() !== "")
+                );
+
+                return validRows.length; // Return the count of valid rows
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+                return 0;
+            }
+        }
+
+        // Function to animate the number counting - optimized for faster execution
+        function animateCount(element, max) {
+            let count = 0;
+            const increment = Math.ceil(max / 20); // Faster animation speed
+            const interval = setInterval(() => {
+                count += increment;
+                if (count > max) {
+                    count = max;
+                    clearInterval(interval);
+                }
+                element.textContent = count;
+            }, 15); // Faster animation smoothness
+        }
+
+        // Main function to update the stats for both cards
+        async function updateStats() {
+            // Fetch data for both URLs
+            const customersCount = await fetchSheetData(customersSheetUrl);
+            const suppliersCount = await fetchSheetData(suppliersSheetUrl);
+
+            // Animate counts
+            animateCount(document.getElementById('customers-count'), customersCount);
+            animateCount(document.getElementById('suppliers-count'), suppliersCount);
+        }
+
+        // Start updating stats on page load
+        updateStats();
+        document.querySelectorAll('.backbtn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevents immediate navigation
+                document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+                setTimeout(function () {
+                    window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+                }, 400); // 300 ms delay
+            });
+        }); function formatNumber(num) {
+            // Convert number to a string
+            let numStr = num.toString();
+
+            // Split last three digits and format the rest in groups of two
+            let lastThree = numStr.slice(-3);
+            let otherNumbers = numStr.slice(0, -3);
+
+            if (otherNumbers) {
+                // Format the other part with commas every two digits
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return otherNumbers + "," + lastThree;
+            } else {
+                return lastThree;
+            }
+        }
+        // Function to animate and preserve styles - optimized for faster execution
+        const displayAnimatedText = (elementId, text) => {
+            const displayElement = document.getElementById(elementId);
+            const computedStyle = window.getComputedStyle(displayElement);
+            displayElement.innerHTML = ""; // Clear the element
+
+            text.split("").forEach((char, index) => {
+                const span = document.createElement("span");
+                span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+                span.classList.add("letter");
+                span.style.animationDelay = `${0.01 * index}s`; // Faster delay
+
+                // Preserve original styles
+                span.style.color = computedStyle.color;
+                span.style.fontFamily = computedStyle.fontFamily;
+                span.style.fontSize = computedStyle.fontSize;
+                span.style.fontWeight = computedStyle.fontWeight;
+                span.style.fontStyle = computedStyle.fontStyle;
+
+                displayElement.appendChild(span);
+            });
+        };
+        document.addEventListener("DOMContentLoaded", function () {
+            let devData = null;
+            let officeData = null;
+            let bankData = null;
+            let loanData = null;
+
+            // Fetch all data simultaneously using Promise.all for maximum speed
+            async function fetchAllData() {
+                try {
+                    const [devResponse, officeResponse, bankResponse, loanResponse] = await Promise.all([
+                        fetch("https://docs.google.com/spreadsheets/d/1I-rydhmgYJT084mq1n7SW_2KfU5IWiCiZugRih_ERaE/gviz/tq?tqx=out:csv"),
+                        fetch("https://docs.google.com/spreadsheets/d/1lyQ0otJ0_h8fFj66SPxaW3EZ6QhlEvGQG1srpc4UVW4/gviz/tq?tqx=out:csv"),
+                        fetch("https://docs.google.com/spreadsheets/d/1-4_CBtsrnplDOlc_RmJt3lfO8MdxQbdqFfqPfWWDhzE/gviz/tq?tqx=out:csv"),
+                        fetch("https://docs.google.com/spreadsheets/d/17KgMaKPLSIYgdSu8zbNNYQx275adN66YGOkap1PIHJ0/gviz/tq?tqx=out:csv")
+                    ]);
+
+                    // Parse all CSV data simultaneously
+                    const [devCsvText, officeCsvText, bankCsvText, loanCsvText] = await Promise.all([
+                        devResponse.text(),
+                        officeResponse.text(),
+                        bankResponse.text(),
+                        loanResponse.text()
+                    ]);
+
+                    // Process all data efficiently
+                    const devRows = devCsvText.split("\n");
+                    const officeRows = officeCsvText.split("\n");
+                    const bankRows = bankCsvText.split("\n");
+                    const loanRows = loanCsvText.split("\n");
+
+                    devData = devRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+
+                    officeData = officeRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+
+                    bankData = bankRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+
+                    loanData = loanRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+
+                    console.log("All data fetched successfully");
+                    displayAllDataFast();
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+            }
+
+            function displayAllDataFast() {
+                // Extract all values at once
+                const officeCost = parseFloat(officeData[1]?.[1] || 0);
+                const officeReceive = parseFloat(officeData[1]?.[2] || 0);
+                const devCost = parseFloat(devData[1]?.[1] || 0);
+                const devReceive = parseFloat(devData[1]?.[2] || 0);
+                const avbl = parseFloat(devData[1]?.[3] || 0);
+                const avof = parseFloat(officeData[1]?.[3] || 0);
+                const bankBalance = parseFloat(bankData[1]?.[3] || 0);
+                const loanAmount = parseFloat(loanData[1]?.[3] || 0);
+
+                console.log('Debug values:', {
+                    officeCost, officeReceive, devCost, devReceive,
+                    avbl, avof, bankBalance, loanAmount
+                });
+
+                // Display all values simultaneously with faster animations
+                const displayPromises = [
+                    new Promise(resolve => {
+                        displayAnimatedText("ofcost", formatNumber(Math.abs(officeCost)));
+                        setTimeout(resolve, 50);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("ofrec", formatNumber(Math.abs(officeReceive)));
+                        setTimeout(resolve, 50);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("blcost", formatNumber(Math.abs(devCost)));
+                        setTimeout(resolve, 50);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("blrec", formatNumber(Math.abs(devReceive)));
+                        setTimeout(resolve, 50);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("bank", formatNumber(Math.abs(bankBalance)));
+                        setTimeout(resolve, 50);
+                    }),
+                    new Promise(resolve => {
+                        displayAnimatedText("loan", formatNumber(Math.abs(loanAmount)));
+                        setTimeout(resolve, 50);
+                    })
+                ];
+
+                // Wait for all animations to start, then calculate and update totals
+                Promise.all(displayPromises).then(() => {
+                    updateCalculationsAndProgress({
+                        officeCost: Math.abs(officeCost),
+                        officeReceive: Math.abs(officeReceive),
+                        devCost: Math.abs(devCost),
+                        devReceive: Math.abs(devReceive),
+                        avbl: avbl,
+                        avof: avof,
+                        bankBalance: Math.abs(bankBalance),
+                        loanAmount: Math.abs(loanAmount)
+                    });
+                });
+            }
+
+            function updateCalculationsAndProgress(data) {
+                const {
+                    officeCost,
+                    officeReceive,
+                    devCost,
+                    devReceive,
+                    avbl,
+                    avof,
+                    bankBalance,
+                    loanAmount
+                } = data;
+
+                // Calculate totals and balance with proper validation
+                const totalcost = Math.max(0, officeCost + devCost);
+                const totalreceive = Math.max(0, officeReceive + devReceive);
+                const balanceValue = totalreceive - totalcost;
+
+                console.log('Calculated values:', {
+                    totalcost, totalreceive, balanceValue
+                });
+
+                // Update balance color immediately
+                const balanceDisplay = document.getElementById("balance");
+                if (balanceValue < 0) {
+                    balanceDisplay.style.color = "red";
+                } else {
+                    balanceDisplay.style.color = "rgb(4, 119, 4)";
+                }
+
+                // Display totals and balance
+                displayAnimatedText("total-cost", formatNumber(totalcost));
+                displayAnimatedText("total-receive", formatNumber(totalreceive));
+                displayAnimatedText("balance", formatNumber(balanceValue));
+
+                // Calculate and update progress bars immediately
+                const calculatePercentage = (part, total) => total > 0 ? (part / total) * 100 : 0;
+
+                const buildPercentage = calculatePercentage(devCost, totalcost);
+                const officePercentage = calculatePercentage(officeCost, totalcost);
+                const buildReceivePercentage = calculatePercentage(devReceive, totalreceive);
+                const officeReceivePercentage = calculatePercentage(officeReceive, totalreceive);
+                const bankPercentage = calculatePercentage(bankBalance, Math.abs(balanceValue));
+                const loanPercentage = calculatePercentage(loanAmount, Math.abs(balanceValue));
+                const overallPercentage = calculatePercentage(totalcost, totalreceive);
+
+                // Update all progress bars simultaneously
+                requestAnimationFrame(() => {
+                    document.getElementById("bank-progress").style.width = `${bankPercentage}%`;
+                    document.getElementById("buildc-progress").style.width = `${buildPercentage}%`;
+                    document.getElementById("officec-progress").style.width = `${officePercentage}%`;
+                    document.getElementById("buildr-progress").style.width = `${buildReceivePercentage}%`;
+                    document.getElementById("officer-progress").style.width = `${officeReceivePercentage}%`;
+                    document.getElementById("loan-progress").style.width = `${loanPercentage}%`;
+
+                    // Circular progress animation
+                    const progressCircle = document.querySelector(".progress-circle");
+                    const circumference = 2 * Math.PI * 70; // Radius = 70
+                    const offset = circumference - (overallPercentage / 100) * circumference;
+
+                    progressCircle.style.strokeDasharray = circumference;
+                    progressCircle.style.transition = "stroke-dashoffset 0.5s"; // Faster transition
+                    progressCircle.style.strokeDashoffset = offset;
+
+                    // Update percentage display
+                    document.querySelector(".percentage").textContent = `${Math.round(overallPercentage)}%`;
+                });
+            }
+
+            // Start fetching data
+            fetchAllData();
+        });
+    </script>
+    <script>const e = JSON.parse(localStorage.getItem("secureDataV2"));
+        if (!e) {
+            window.location.href = "index.html";
+        }
+        document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+        const popupImage = document.createElement('img');
+
+        // Set styles for the popup overlay
+        popupOverlay.style.position = "fixed";
+        popupOverlay.style.top = "0";
+        popupOverlay.style.left = "0";
+        popupOverlay.style.width = "100%";
+        popupOverlay.style.height = "100%";
+        popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        popupOverlay.style.display = "none";
+        popupOverlay.style.justifyContent = "center";
+        popupOverlay.style.alignItems = "center";
+
+        // Set styles for the popup image
+        popupImage.style.maxWidth = "90%";
+        popupImage.style.maxHeight = "90%";
+        popupImage.style.borderRadius = "0.625rem";
+        popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+        // Append the image to the popup overlay
+        popupOverlay.appendChild(popupImage);
+
+        // Append the popup overlay to the body
+        document.body.appendChild(popupOverlay);
+
+        // Add event listener to the original image to show the popup
+        document.getElementById("img").addEventListener('click', function () {
+            popupImage.src = e.img;  // Set the image source for the popup
+            popupOverlay.style.display = "flex";  // Show the popup
+        });
+
+        // Add event listener to the popup to close it when clicked
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = "none";  // Hide the popup
+            }
+        });
+        const stt = e.state;
+        if (stt === "admin") {
+
+        } else {
+        }
+
+        document.getElementById("clearButton").addEventListener("click", function () {
+            document.getElementById("img").src = '';
+            document.getElementById("img").style.pointerEvents = 'none';
+            document.getElementById("img").src = 'lock2.gif';
+            setTimeout(() => {
+
+                localStorage.removeItem("secureDataV2");
+                localStorage.removeItem("userdata");
+                localStorage.removeItem("devdata");
+                localStorage.removeItem("cldata");
+                window.location.href = "index.html";
+            }, 900);
+        });
+ </script>
+</body>
+
+</html>

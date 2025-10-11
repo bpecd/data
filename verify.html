@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css"
+      >
+<title>Verify</title>
+    <style>
+        /* Ensure the iframe takes up the full viewport */
+        body, html {
+            background: linear-gradient(180deg, #f8f0fc, #e0f7fa);
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(2p); /* Blur effect */
+  -webkit-backdrop-filter: blur(2px); /* Safari support */
+            display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10000;
+    transition: visibility 0s, opacity 0.3s ease;
+  }
+
+  .popup.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* First Popup (Reminder) */
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100px;
+    position: relative;
+  }
+
+  .popup-content img {
+    width: 80px;
+  }
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn .4s forwards;
+           
+}
+@keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+.receipt {
+    position: relative;
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.receipt .fa-solid {
+    font-size: 50px;
+}
+
+.message p {
+    margin: 10px 0;
+}
+
+.result {
+    margin-top: 20px;
+}
+a {
+  text-decoration: none;
+  color:blue;
+  font-weight: bold;
+}
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    
+    </style>
+    </head>
+<body><div class="popup" id="popupc">
+    <div class="popup-content">
+      <img src="logo.gif">
+      </div>
+ </div>
+    <iframe id="frame" src="https://bpecd.github.io/verify/upv.html" title="Verification"></iframe>
+<script>
+function getQueryParams() {
+    const queryString = window.location.search; // Get the query string from the URL
+    const params = {};
+
+    if (queryString) {
+        const pairs = queryString.substring(1).split("&"); // Remove "?" and split parameters
+        for (const pair of pairs) {
+            const [key, value] = pair.split("="); // Split key and value
+            if (key) {
+                params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+            }
+        }
+    }
+
+    return params; // Return an object with all parameters
+}
+
+const params = getQueryParams();
+
+// Add a message listener for cross-origin communication
+window.addEventListener("message", function (event) {
+    // Ensure the event data is valid
+    if (event && event.data && typeof event.data === "object") {
+        const { phonenumberV2, status } = event.data;
+
+        // Validate the phonenumberV2
+        if (phonenumberV2 && !isNaN(phonenumberV2)) {
+            // Handle different statuses
+            if (status === "verification_success") {
+              localStorage.removeItem("phonenumberV2");
+                localStorage.setItem("phonenumberV2", phonenumberV2);
+
+                if (params.cp) {
+                    window.location.href = "chp.html";
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+        } else {
+            console.warn("Invalid phonenumberV2 received:", phonenumberV2);
+        }
+    } else {
+        console.warn("Invalid message event data:", event.data);
+    }
+});
+
+  </script>
+
+</body>
+</html>

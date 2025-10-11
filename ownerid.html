@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="logo.png" />
+  <title></title>
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+      padding: 1.25rem;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    body.move-down {
+      transform: translateY(5vh);
+    }
+
+    .container {
+      margin: 0 auto;
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+      border-radius: 1.125rem;
+      opacity: 0;
+      transform: translateY(5vh);
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .print-btn {
+      margin-left: 1.25rem;
+      padding: 0.313rem 0.625rem;
+      background-color: #3462ee;
+      color: white;
+      border: none;
+      border-radius: 0.313rem;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .print-btn:hover {
+      transform: scale(1.05);
+      background-color: #60adff;
+    }
+
+    .container1 {
+      min-height: 31.25rem;
+      display: flex;
+      margin: 0 auto;
+      margin-bottom: 1.25rem;
+      padding: 0.625rem;
+      border-radius: 25px;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(5vh);
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
+
+    .info {
+      margin: 0.313rem;
+      font-size: 1.125rem;
+    }
+
+    .buttons {
+      margin-top: 1.25rem;
+    }
+
+    .buttonx {
+      background-color: #e2e7ea;
+      border: none;
+      padding: 0.938rem;
+      width: 10rem;
+      text-align: center;
+      border-radius: 1.25rem;
+      font-size: 1.125rem;
+      margin-bottom: 0.625rem;
+      transition: transform 0.5s ease;
+    }
+
+    .buttonx:hover {
+      transform: scale(1.05);
+    }
+
+    .button {
+      background-color: #e2e7ea;
+      border: none;
+      padding: 0.938rem;
+      width: 332px;
+      text-align: center;
+      border-radius: 1.25rem;
+      font-size: 1.125rem;
+      margin-bottom: 0.625rem;
+      transition: transform 0.5s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+    }
+
+    .cost-btn {
+      background-color: #ffaaaa;
+      color: rgb(99, 1, 1);
+      margin: 0.313rem;
+      cursor: pointer;
+    }
+
+    .receive-btn {
+      background-color: #90f28d;
+      color: rgb(12, 66, 10);
+      margin: 0.313rem;
+      cursor: pointer;
+    }
+
+    .right-section {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .claim-button1 {
+      color: black;
+      border: none;
+      background-color: #f0f2f5;
+      border-radius: 25px;
+      font-size: 1.75rem;
+      cursor: pointer;
+      position: fixed;
+      top: 0.625rem;
+      left: 0.625rem;
+      height: auto;
+    }
+
+    .balance-info {
+      font-size: 1.5rem;
+      margin: 0.313rem;
+    }
+
+    .bb {
+      width: 28.75rem;
+      display: flex;
+      flex-direction: row;
+      background-color: rgb(253, 208, 208);
+      padding: 0.625rem;
+      border-radius: 1.125rem;
+      margin-bottom: 0.625rem;
+      transition: transform 0.5s ease;
+    }
+
+    .bb:hover {
+      transform: scale(1.05);
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.625rem;
+      background-color: #fff;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.25rem;
+      border-radius: 1.25rem;
+      opacity: 0;
+      transform: translateY(5vh);
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .top-bar .nav-items {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .top-bar .nav-items a {
+      text-decoration: none;
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.5s ease;
+      transition: padding 0.8s ease;
+    }
+
+    a:hover {
+      background-color: #dbdbfd;
+      padding: 0.625rem;
+      border-radius: 0.938rem;
+    }
+
+    .top-bar .nav-items a i {
+      color: #096faa;
+    }
+
+    .top-bar .logo img {
+      width: 3.125rem;
+      height: 3.125rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    img:hover {
+      border: 0.188rem solid #45eba1;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      color: #000;
+      transition: transform 0.5s ease;
+    }
+
+    .header h1:hover {
+      transform: scale(1.05);
+    }
+
+    .header .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      transition: transform 0.5s ease;
+      /* Adds space between elements */
+    }
+
+    .header .search-bar:hover {
+      transform: scale(1.05);
+    }
+
+    .search-bar input[type="text"] {
+      padding: 0.625rem;
+      border: 0.188rem dotted blue;
+      border-radius: 1.25rem;
+      outline: none;
+      width: 15.625rem;
+    }
+
+    .search-bar .fa-file-spreadsheet {
+      color: #096faa;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.625rem 0.625rem;
+      background-color: #ddd;
+      margin-top: 0.938rem;
+      margin-bottom: 0.938rem;
+      border-radius: 1.25rem;
+    }
+
+    .menu span {
+      padding: 0.625rem 1.25rem;
+      background-color: #0ccccc;
+      border-radius: 1.25rem;
+      color: black;
+      font-weight: bold;
+      margin-left: 3%;
+      margin-right: 1.8%;
+    }
+
+    .transaction {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.125rem dotted black;
+      border-radius: 0.625rem;
+      padding: 0.625rem;
+    }
+
+    .transaction-info {
+      flex: 1;
+      font-size: 0.875rem;
+    }
+
+    .transaction-time {
+      color: #cfcfcf;
+      font-size: 0.5rem;
+    }
+
+    .transaction-amount {
+      font-size: 0.938rem;
+      font-weight: bold;
+    }
+
+    .credit {
+      color: green;
+    }
+
+    .debit {
+      color: red;
+    }
+
+    .neutral {
+      color: #808080;
+    }
+
+    .redirect-btn {
+      margin-left: 1.25rem;
+      padding: 0.313rem 0.625rem;
+      background-color: #7a7a7a;
+      color: white;
+      border: none;
+      border-radius: 0.313rem;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .redirect-btn:hover {
+      transform: scale(1.05);
+      background-color: #0056b3;
+    }
+
+    @keyframes rotateIn {
+      from {
+        opacity: 0;
+        transform: rotateX(90deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: rotateX(0);
+      }
+    }
+
+    /* Style for individual letters */
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform-origin: bottom;
+      animation: rotateIn 0.4s ease forwards;
+    }
+
+    .loader {
+      width: 3.125rem;
+      padding: 0.5rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: 6.25rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #25b09b;
+      --_m: conic-gradient(#0000 10%, #000),
+        linear-gradient(#000 0 0) content-box;
+      -webkit-mask: var(--_m);
+      mask: var(--_m);
+      -webkit-mask-composite: source-out;
+      mask-composite: subtract;
+      animation: l3 1s infinite linear;
+    }
+
+    @keyframes l3 {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+
+    .popup {
+      display: none;
+      /* Initially hidden */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 0.625rem;
+      text-align: center;
+      width: 25rem;
+      position: relative;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-content h1 {
+      font-size: 1.375rem;
+      color: #333;
+      margin-bottom: 0.938rem;
+    }
+
+    .popup-content .close-btn {
+      background-color: #2a23ff;
+      color: white;
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.313rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 0.625rem;
+    }
+
+    /* Overlay */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    #overlay.active {
+      display: block;
+    }
+
+    #xvc {
+      border-radius: 0.5rem;
+      z-index: 1001;
+      /* Ensures it appears above the overlay */
+      transition: box-shadow 0.5s ease;
+      /* Smooth transition for the pop effect */
+      transform: translateY(5vh);
+      animation: fadeIn 1s forwards;
+    }
+
+    /* Loading and Success Messages */
+    #loading,
+    #success {
+      display: none;
+      position: fixed;
+      border-radius: 0.625rem;
+      padding: 0.938rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      z-index: 1001;
+    }
+
+    #xvc {
+      border-radius: 0.5rem;
+      z-index: 1001;
+      /* Ensures it appears above the overlay */
+      transition: box-shadow 0.5s ease;
+      /* Smooth transition for the pop effect */
+      transform: translateY(5vh);
+      animation: fadeIn 1s forwards;
+    }
+
+    .inputField {
+      background-color: #b9e5ff;
+      border: 0.125rem solid red;
+      padding: 0.625rem;
+      width: 18.75rem;
+      text-align: center;
+      border-radius: 0.313rem;
+      font-size: 1.125rem;
+      margin: 0.625rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .inputField:focus {
+      outline: none;
+    }
+
+    /* HTML: <div class="loader"></div> */
+    .loader2 {
+      width: 3.125rem;
+      aspect-ratio: 1;
+      display: grid;
+      color: #e40000;
+      background: radial-gradient(farthest-side,
+          currentColor calc(100% - 0.375rem),
+          #0000 calc(100% - 0.313rem) 0);
+      -webkit-mask: radial-gradient(farthest-side,
+          #0000 calc(100% - 13px),
+          #000 calc(100% - 0.75rem));
+      border-radius: 50%;
+      animation: l19 2s infinite linear;
+    }
+
+    .loader2::before,
+    .loader2::after {
+      content: "";
+      grid-area: 1/1;
+      background: linear-gradient(currentColor 0 0) center,
+        linear-gradient(currentColor 0 0) center;
+      background-size: 100% 0.625rem, 0.625rem 100%;
+      background-repeat: no-repeat;
+    }
+
+    .loader2::after {
+      transform: rotate(45deg);
+    }
+
+    @keyframes l19 {
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+
+    #edit-permission-toggle {
+      transition: color 0.5s;
+    }
+
+    #edit-icon {
+      transition: color 0.5s;
+    }
+
+    #edit-permission-toggle.active {
+      color: green;
+      /* Color when enabled */
+    }
+
+    #edit-permission-toggle.inactive {
+      color: red;
+      /* Color when disabled */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="nav-items">
+      <a class="backButton" style="
+            color: #db049b;
+            font-weight: bold;
+            font-size: large;
+            background-color: #fae6f4;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+          " id="backButton"><i class="fa-solid fa-circle-arrow-left"></i> Back</a>
+    </div>
+    <div style="display: flex; flex-direction: row; gap: 0.625rem" class="logo">
+      <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo" />
+    </div>
+  </div>
+  <div class="popup" id="popupx">
+    <div class="popup-content">
+      <h1 id="popstxt">Your are Editing Data!</h1>
+      <input type="text" id="cellValue" class="inputField" required /><br />
+      <button style="background-color: #d61f2c" class="close-btn" onclick="location.reload()">
+        <i class="fa-solid fa-rectangle-xmark"></i>
+      </button>
+      <button class="close-btn" onclick="generateLink()">Edit</button>
+      <p id="result"></p>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+  <div id="popup">
+    <iframe style="display: none" id="iframe" src=""></iframe>
+  </div>
+  <div id="loading">
+    <img style="width: 6.25rem; height: 6.25rem; border-radius: 0.5rem" src="edt.gif" />
+  </div>
+  <div id="success">
+    <img style="width: 6.25rem; height: 6.25rem; border-radius: 0.5rem" src="done.gif" />
+  </div>
+  <div class="container1" id="xvchd">
+    <div class="container" style="min-width: 31.25rem">
+      <div class="left-section">
+        <h1>
+          <span style="font-family: 'Arial Black', sans-serif">Owner ID</span>
+        </h1>
+        <div class="info">Name: <span id="sname"></span></div>
+        <div class="info">Mobile: <span id="sphone"></span></div>
+        <div class="info">Email: <span id="semail"></span></div>
+        <div class="info">State: <span id="sstate"></span></div>
+        <br />
+        <div id="xbxb" style="background-color: white" class="bb">
+          <div class="balance-info">
+            Total Receive:
+            <span style="
+                  color: rgb(46, 27, 219);
+                  font-family: 'Arial Black', sans-serif;
+                  font-size: 1.75rem;
+                " id="total-receive"></span>
+            BDT
+          </div>
+        </div>
+        <div id="xaxa" style="background-color: #ffecec" class="bb">
+          <div class="balance-info">
+            Total Cost:
+            <span style="color: red; font-family: 'Arial Black', sans-serif" id="total-cost"></span>
+            BDT (<span style="color: red" id="closed"></span>)
+          </div>
+        </div>
+        <div style="width: 37.5rem" class="bb">
+          <div style="font-size: 19px" class="balance-info">
+            Total Funding: <span style="color: blue" id="total"></span> BDT
+          </div>
+          <div style="font-size: 19px" class="balance-info">
+            Due: <span style="color: red" id="due"></span> BDT (<span style="color: red" id="closed2"></span>)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="min-width: 31.25rem">
+      <div class="right-section">
+        <img style="
+              width: 15.625rem;
+              height: 15.625rem;
+              pointer-events: none;
+              margin-top: -35px;
+              display: none;
+            " id="suc" src="suc4.gif" />
+        <img style="
+              width: 12.5rem;
+              height: 12.5rem;
+              pointer-events: none;
+              margin-top: -25px;
+              display: none;
+            " id="fall" src="fall.gif" />
+        <p style="
+              font-size: 1.375rem;
+              color: rgb(8, 8, 221);
+              background-color: #8cffff;
+              border-radius: 0.625rem;
+              padding: 0.313rem;
+              display: none;
+            " id="result222"></p>
+        <button style="
+              cursor: pointer;
+              color: #000;
+              background-color: rgb(206, 206, 255);
+            " class="buttonx cost-btn" id="Entry">
+          New Entry
+        </button>
+        <div style="display: none" id="buttons222" class="buttons">
+          <pre>
+<button class="claim-button1" onclick="location.reload()">
+<i class="fa-duotone fa-solid fa-turn-left"></i></button>
+                    <input list="reasonss" id="reason" class="button" placeholder="Reason">
+                    <input list="ppm" id="payment" class="button" placeholder="Payment Mathod">
+                    <datalist id="reasonss" >
+                        <option value="1st Instalment">
+                            <option value="2nd Instalment">
+                            <option value="3rd Instalment">
+                            <option value="Milon Nilo">
+                            <option value="Salary">
+                    </datalist>
+                    <datalist id="ppm" >
+                        <option value="Cash">
+                        <option value="Bank">
+                        <option value="Bkash">
+                        <option value="Nagad">
+                        <option value="Rocket">
+                        <option value="Upay">
+                        <option value="Others">
+                </datalist>
+                    <input id="amount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
+
+                    <button class="buttonx cost-btn" id="costbtn">Cost <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i></button><button class="buttonx receive-btn" id="recbtn">Receive <i class="fa-duotone fa-solid fa-arrow-down-to-bracket"></i></button>
+                    
+                     <label id="lbl">
+                        <input type="checkbox" id="mailCheckbox"> Send Receive / Give mail?
+                    </label>    
+                </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="xvc">
+    <div class="header">
+      <h1 id="resultElem">
+        Current balance:
+        <span style="
+              color: blue;
+              padding: 0.313rem;
+              background-color: #ebf1ff;
+              border-radius: 0.625rem;
+            " id="balance"></span>
+        BDT
+      </h1>
+      <div class="search-bar">
+        <button id="edit-permission-toggle2" style="
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 2rem;
+            ">
+          <i id="edit-icon2" class="fa-duotone fa-regular fa-fire-flame-curved" style="color: #7a7a7a"></i>
+        </button>
+        <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()" />
+        <i id="shtl" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+
+        <button id="edit-permission-toggle" style="
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 2rem;
+            ">
+          <i id="edit-icon" class="fa-duotone fa-regular fa-pen-to-square" style="color: #ff3021"></i>
+        </button>
+      </div>
+    </div>
+
+    <p>
+      <span style="color: red">*Some owner's first installment is not visible but still
+        included.</span>
+    </p>
+
+    <div class="menu">
+      <span>DATE</span>
+      <span>DESCRIPTION</span>
+      <span>REASON</span>
+      <span>AMOUNT</span>
+      <span>REMARK</span>
+      <span>ACTION</span>
+    </div>
+    <div style="margin-top: -0.938rem" id="transaction-list">
+      <div class="loader"></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    const e = JSON.parse(localStorage.getItem("secureDataV2"));
+    if (!e) {
+      window.location.href = "index.html";
+    }
+    document.getElementById("img").src = e.img;
+    const popupOverlay = document.createElement("div");
+    const popupImage = document.createElement("img");
+
+    // Set styles for the popup overlay
+    popupOverlay.style.position = "fixed";
+    popupOverlay.style.top = "0";
+    popupOverlay.style.left = "0";
+    popupOverlay.style.width = "100%";
+    popupOverlay.style.height = "100%";
+    popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    popupOverlay.style.display = "none";
+    popupOverlay.style.justifyContent = "center";
+    popupOverlay.style.alignItems = "center";
+
+    // Set styles for the popup image
+    popupImage.style.maxWidth = "90%";
+    popupImage.style.maxHeight = "90%";
+    popupImage.style.borderRadius = "0.625rem";
+    popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+    // Append the image to the popup overlay
+    popupOverlay.appendChild(popupImage);
+
+    // Append the popup overlay to the body
+    document.body.appendChild(popupOverlay);
+
+    // Add event listener to the original image to show the popup
+    document.getElementById("img").addEventListener("click", function () {
+      popupImage.src = e.img; // Set the image source for the popup
+      popupOverlay.style.display = "flex"; // Show the popup
+    });
+
+    // Add event listener to the popup to close it when clicked
+    popupOverlay.addEventListener("click", function (e) {
+      if (e.target === popupOverlay) {
+        popupOverlay.style.display = "none"; // Hide the popup
+      }
+    });
+    function formatIndianNumberInput(input) {
+      // Remove any existing commas for raw value
+      const rawValue = input.value.replace(/,/g, "");
+
+      // Format the number in Indian numbering system
+      const lastThree = rawValue.slice(-3);
+      const otherNumbers = rawValue.slice(0, -3);
+      const formattedValue =
+        otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+        (otherNumbers ? "," : "") +
+        lastThree;
+
+      // Set the display value with commas
+      input.value = formattedValue;
+    }
+
+    document
+      .getElementById("edit-permission-toggle")
+      .addEventListener("click", () => {
+        const editIcon = document.getElementById("edit-icon");
+        const editPermissionToggle = document.getElementById(
+          "edit-permission-toggle"
+        );
+
+        // Toggle the edit permission state
+        const isEditEnabled = editIcon.classList.contains("fa-pen-to-square"); // If it shows a lock (disabled)
+
+        if (isEditEnabled) {
+          // Enable editing: change to unlocked icon and set the state to true
+          editIcon.classList.remove("fa-pen-to-square"); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
+          editIcon.classList.add("fa-pen-field"); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+          editIcon.style.color = "green"; // Set green color when editing is enabled
+          editPermissionToggle.classList.add("active");
+          editPermissionToggle.classList.remove("inactive");
+          const xvc = document.getElementById("xvc");
+          xvc.style.boxShadow =
+            "rgba(222, 7, 7, 0.4) 0px 0px 0px 0.125rem, rgba(222, 7, 7, 0.65) 0px 0.25rem 0.375rem -0.063rem, rgba(255, 255, 255, 0.08) 0px 0.063rem 0px inset";
+          document.getElementById("xvchd").style.display = "none";
+        } else {
+          // Disable editing: change to locked icon and set the state to false
+          editIcon.classList.remove("fa-pen-field"); // Remove unlock icon
+          editIcon.classList.add("fa-pen-to-square"); // Add lock icon
+          editIcon.style.color = "#ff3021"; // Set default color for locked state
+          editPermissionToggle.classList.add("inactive");
+          editPermissionToggle.classList.remove("active");
+          document.getElementById("xvc").style.boxShadow = "";
+          document.getElementById("xvchd").style.display = "";
+        }
+      });
+
+    document
+      .getElementById("edit-permission-toggle2")
+      .addEventListener("click", () => {
+        const editIcon2 = document.getElementById("edit-icon2");
+        const editPermissionToggle2 = document.getElementById(
+          "edit-permission-toggle2"
+        );
+
+        // Toggle the edit permission state
+        const isEditEnabled2 = editIcon2.classList.contains(
+          "fa-fire-flame-curved"
+        ); // If it shows a lock (disabled)
+
+        if (isEditEnabled2) {
+          // Enable editing: change to unlocked icon and set the state to true
+          editIcon2.classList.remove("fa-fire-flame-curved"); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
+          editIcon2.classList.add("fa-fire"); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+          editIcon2.style.color = "red"; // Set green color when editing is enabled
+          editPermissionToggle2.classList.add("active");
+          editPermissionToggle2.classList.remove("inactive");
+          document.getElementById("search-input").style.border =
+            "0.188rem dotted red";
+          alert(
+            "আহা! সার্চ বার ২০২৪ সাল থেকে আজ পর্যন্ত সব তথ্য খুঁজে বের করবে। তবে, এটি কিছুটা ধীরগতির"
+          );
+        } else {
+          // Disable editing: change to locked icon and set the state to false
+          editIcon2.classList.remove("fa-fire"); // Remove unlock icon
+          editIcon2.classList.add("fa-fire-flame-curved"); // Add lock icon
+          editIcon2.style.color = "#7a7a7a"; // Set default color for locked state
+          editPermissionToggle2.classList.add("inactive");
+          editPermissionToggle2.classList.remove("active");
+          document.getElementById("search-input").style.border =
+            "0.188rem dotted blue";
+          alert(
+            "হুম! এখন সার্চ বার গত ১ বছরের তথ্য খুঁজে বের করতে পারবে। যা অনেক দ্রুত গতির"
+          );
+        }
+      });
+
+    const stt = e.state;
+    if (stt === "admin") {
+    } else {
+      document.getElementById("Entry").style.display = "none";
+      document.getElementById("shtl").style.display = "none";
+      document.getElementById("edit-permission-toggle").style.display =
+        "none";
+    }
+    document
+      .getElementById("resultElem")
+      .addEventListener("click", function () {
+        location.reload();
+      });
+    document
+      .getElementById("backButton")
+      .addEventListener("click", function () {
+        // Add class to move the body down
+        document.body.classList.add("move-down");
+        localStorage.removeItem("userdata");
+
+        // Wait for the animation to complete (1 second), then go back
+        setTimeout(function () {
+          window.location.href = "owners.html";
+        }, 400); // Match this duration with the CSS transition time
+      });
+  </script>
+
+  <script>
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    if (!userdata) {
+      window.location.href = "owners.html";
+    }
+     let printfunding = "0";
+    document.getElementById("sname").innerText = userdata.name;
+    document.getElementById("sphone").innerText = userdata.phone;
+    document.getElementById("semail").innerText = userdata.mail;
+    document.getElementById("sstate").innerText = userdata.state;
+    const checksta = userdata.state;
+    if (
+      checksta.toLowerCase() === "engineer" ||
+      checksta.toLowerCase() === "staff" ||
+      checksta.toLowerCase() === "admin" ||
+      checksta.toLowerCase() === "architect" ||
+      checksta.toLowerCase() === "office staff"
+    ) {
+      document.getElementById(
+        "xaxa"
+      ).innerHTML = `<div  class="balance-info">Total Handed: <span style="color: red;font-family: 'Arial Black', sans-serif;" id="total-cost"></span> BDT (<span style="color: red;" id="closed"></span>)</div>`;
+      document.getElementById(
+        "resultElem"
+      ).innerHTML = `Sum Balance: <span style="color: blue;padding: 0.313rem;background-color: #ebf1ff;border-radius: 0.938rem;" id="balance"></span> BDT`;
+      document.getElementById(
+        "costbtn"
+      ).innerHTML = `Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;
+   } 
+    document.title = `Owner List > ${userdata.name} ( ${checksta} )`;
+    const sheetid = userdata.sheetid;
+    const url =
+      "https://docs.google.com/spreadsheets/d/" + sheetid + "/htmlview";
+    document.addEventListener("DOMContentLoaded", function () {
+      const userdata = JSON.parse(localStorage.getItem("userdata"));
+      const sheetid = userdata.sheetid;
+      let ownerData = null;
+
+      // Function to animate and display text
+      function displayAnimatedText(elementId, text, animationClass) {
+        const element = document.getElementById(elementId);
+        const computedStyle = window.getComputedStyle(element);
+        const inlineStyle = element.style; // Inline styles
+
+        element.innerHTML = ""; // Clear the element
+
+        text.split("").forEach((char, index) => {
+          const span = document.createElement("span");
+          span.textContent = char === " " ? "\xa0" : char; // Handle spaces
+          span.classList.add(animationClass);
+          span.style.animationDelay = `${0.03 * index}s`;
+
+          // Preserve computed and inline styles
+          span.style.color = computedStyle.color;
+          span.style.fontFamily = computedStyle.fontFamily;
+          span.style.fontSize = computedStyle.fontSize;
+          span.style.fontWeight = computedStyle.fontWeight;
+          span.style.fontStyle = computedStyle.fontStyle;
+
+          element.appendChild(span);
+        });
+      }
+
+      // Fetch all data once using CSV format
+      async function fetchAllData() {
+        try {
+          // Fetch Owner data using CSV
+          const ownerResponse = await fetch(`https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?tqx=out:csv`);
+          const ownerCsvText = await ownerResponse.text();
+          const ownerRows = ownerCsvText.split("\n");
+          ownerData = ownerRows.map((row) =>
+            row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+              .map((cell) => cell.replace(/^"|"$/g, "").trim())
+          );
+
+          console.log("Owner data fetched successfully");
+          displayAllData();
+          displayTransaction(ownerData);
+        } catch (error) {
+          console.error("Error fetching owner data:", error);
+        }
+      }
+
+      function displayAllData() {
+        // Fetch values and parse as numbers (row 3 = index 3, but in 0-indexed arrays)
+        // Extract only the number from text like "set 300000 agreement"
+        let totText = ownerData[2]?.[1];
+        let totValue = 0;
+        const match = totText.match(/(\d+)/);
+        if (match) {
+          totValue = parseFloat(match[1]);
+        }
+        const balance = parseFloat(ownerData[1]?.[1] || 0); // balance (C4)
+        const recValue = parseFloat(ownerData[1]?.[2] || 0); // total-receive (D4)
+        const totalCost = parseFloat(ownerData[1]?.[3] || 0); // total-cost (E4)
+
+        console.log("Received Value:", recValue);
+        console.log("Total Value:", totValue);
+
+        // Display animated values
+        displayAnimatedText("total-receive", formatNumber(Math.abs(recValue)), "letter");
+        displayAnimatedText("total", formatNumber(Math.abs(totValue)), "letter");
+        displayAnimatedText("total-cost", formatNumber(Math.abs(totalCost)), "letter");
+
+        // Handle balance with negative color
+        const element = document.getElementById("balance");
+        if (balance < 0) {
+          element.style.color = "red";
+        }
+        displayAnimatedText("balance", formatNumber(balance), "letter");
+
+        // Calculate due using the fetched values
+        let due = totValue - recValue;
+        due = Math.max(due, 0);
+        const formattedDue = formatNumber(due);
+
+        // Animate the due amount text
+        displayAnimatedText("due", formattedDue, "letter");
+
+        // Display closed status values
+        const closed1 = ownerData[1]?.[4] || "?";
+        const closed2 = ownerData[2]?.[4] || "?";
+        document.getElementById("closed").innerText = closed1;
+        document.getElementById("closed2").innerText = closed2;
+      }
+
+      // Start fetching data
+      fetchAllData();
+    });
+
+    function formatNumber(num) {
+      // Handle negative numbers
+      const isNegative = num < 0;
+      const absNumStr = Math.abs(num).toString(); // Convert the absolute value to a string
+
+      // Split into the last three digits and the rest
+      const lastThree = absNumStr.slice(-3);
+      let otherNumbers = absNumStr.slice(0, -3);
+
+      if (otherNumbers) {
+        // Format the other part with commas every two digits
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
+      } else {
+        return (isNegative ? "-" : "") + lastThree;
+      }
+    }
+
+    function formatNumber2(num) {
+      // Convert number to an absolute value for formatting
+      let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+
+      // Split last three digits and format the rest in groups of two
+      let lastThree = numStr.slice(-3);
+      let otherNumbers = numStr.slice(0, -3);
+
+      if (otherNumbers) {
+        // Format the other part with commas every two digits
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return otherNumbers + "," + lastThree;
+      } else {
+        return lastThree;
+      }
+    }
+
+    const gid = userdata.gid;
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?gid=${gid}`;
+    const sheetUrl2 = `https://docs.google.com/spreadsheets/d/${sheetid}/edit`;
+    document.getElementById("shtl").addEventListener("click", function () {
+      window.open(sheetUrl2, "_blank");
+    });
+    // Add click event to the 'closed' element
+    document.getElementById("closed").addEventListener("click", function () {
+      if (stt === "admin") {
+        const redirectUrlx = `https://docs.google.com/spreadsheets/d/${sheetid}/edit?gid=${gid}#range=E2`;
+        window.open(redirectUrlx, "_blank"); // Open the URL in a new tab
+      } else {
+      }
+    });
+
+    // Add click event to the 'closed2' element
+    document.getElementById("closed2").addEventListener("click", function () {
+      if (stt === "admin") {
+        const redirectUrlx = `https://docs.google.com/spreadsheets/d/${sheetid}/edit?gid=${gid}#range=E3`;
+        window.open(redirectUrlx, "_blank"); // Open the URL in a new tab
+      } else {
+      }
+    });
+
+    let transactions = [];
+
+    function displayTransaction(rows) {
+      const container = document.getElementById("transaction-list");
+      transactions = [];
+      let serialNumber = rows.length + 1;
+      let htmlContent = "";
+
+      for (let i = rows.length - 1; i > 2; i--) {
+        const row = rows[i];
+        // For CSV data, access columns directly by index
+        const rawDate = row[0] || "N/A";
+        const Description = row[1] || "N/A";
+        const Reason = row[2] || "N/A";
+        const Amount = parseFloat(row[3]) || 0;
+        const remark = row[4] || "";
+
+        let formattedDate = smartDateConversion(rawDate);
+        const uniqueId = `viewbtn-${serialNumber}`;
+        transactions.push({
+          Description,
+          Reason,
+          Amount,
+          remark,
+          serialNumber,
+          formattedDate,
+        });
+
+        const formattedAmount = `${Amount > 0
+          ? `+ ৳${formatNumber2(Amount)}`
+          : Amount < 0
+            ? `- ৳${formatNumber2(Amount)}`
+            : "Due"
+          } `;
+        const rowClass = serialNumber % 2 === 0 ? "even" : "odd";
+
+        htmlContent += `
+            <div class="transaction ${rowClass}" style="display: flex; justify-content: space-between;" data-transaction-id="${serialNumber}">
+                <div style="flex: 1; text-align: center;">${formattedDate}</div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-description" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="B">
+                    ${Description}
+                </div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-reason" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="C">
+                    ${Reason}
+                </div>
+                <div 
+                    style="flex: 1; text-align: center; cursor: pointer;" 
+                    class="transaction-amount ${Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral"
+          }" 
+                    data-transaction-id="${serialNumber}" 
+                    data-column="D">
+                    ${formattedAmount}
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    ${remark
+            ? `<span>${remark}</span>`
+            : stt === "admin"
+              ? `<button class="redirect-btn" id="${uniqueId}" data-transaction-id="${serialNumber}">Remark</button>`
+              : ""
+          }
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <button class="print-btn" id="${uniqueId}" data-transaction-id="${serialNumber}">Print</button>
+                </div>
+            </div>
+        `;
+        serialNumber--;
+      }
+      document.querySelector(".loader").style.display = "none";
+      container.innerHTML = htmlContent;
+    }
+
+    // Add Remark and Editing Logic
+    document
+      .getElementById("transaction-list")
+      .addEventListener("click", (event) => {
+        const target = event.target;
+
+        // Handle Print Button
+        if (target.classList.contains("print-btn")) {
+          const transactionId = target.getAttribute("data-transaction-id");
+          const transaction = transactions.find(
+            (t) => t.serialNumber === parseInt(transactionId, 10)
+          );
+
+          if (transaction) {
+            // Extract payment method from reason if it exists
+            let reasonText = transaction.Reason;
+            let paymentMethod = "";
+
+            // Check if reason contains payment method in brackets [payment method]
+            const paymentMatch = reasonText.match(/^(.*?)\s*\[([^\]]+)\]$/);
+            if (paymentMatch) {
+              reasonText = paymentMatch[1].trim(); // Reason without payment method
+              paymentMethod = paymentMatch[2].trim(); // Payment method from brackets
+            }
+
+  const printStates1 = ['owner', 'client'];
+const printStates2 = ['developer', 'constructor'];
+
+const state = checksta.toLowerCase().replace(/\s+/g, ''); // remove spaces for better match
+
+if (printStates1.some(s => state.includes(s))) {
+    printfunding = document.getElementById("total-receive").innerText;
+} else if (printStates2.some(s => state.includes(s))) {
+    printfunding = document.getElementById("total-cost").innerText;
+}
+            // Store the transaction data in localStorage for the print page
+            const printData = {
+              ownerInfo: {
+                name: userdata.name,
+                phone: userdata.phone,
+                email: userdata.mail,
+                state: userdata.state,
+                Funding: printfunding,
+                due: document.getElementById("due").innerText,
+                address: userdata.land || "Not Provided",
+              },
+              transactionData: {
+                date: transaction.formattedDate,
+                description: transaction.Description,
+                reason: reasonText,
+                paymentMethod: paymentMethod,
+                amount: transaction.Amount,
+                remark: transaction.remark,
+                serialNumber: "00" + transaction.serialNumber
+              },
+              timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem("printTransactionData", JSON.stringify(printData));
+
+            // Redirect to print page (you'll need to create this page)
+            window.open("invo.html", "_blank");
+          }
+          return; // Exit early for print button
+        }
+
+        // Handle Remark Button
+        if (target.classList.contains("redirect-btn") && !target.classList.contains("print-btn")) {
+          const transactionId = target.getAttribute("data-transaction-id");
+          const transaction = transactions.find(
+            (t) => t.serialNumber === parseInt(transactionId, 10)
+          );
+          if (transaction) {
+            const redirectUrl = `https://docs.google.com/spreadsheets/d/${sheetid}/edit?gid=${gid}#range=E${transaction.serialNumber}`;
+            window.open(redirectUrl, "_blank");
+          }
+        }
+
+        // Handle Editing Logic
+        const editPermission = document
+          .getElementById("edit-icon")
+          .classList.contains("fa-pen-field");
+        if (editPermission) {
+          if (
+            target.classList.contains("transaction-reason") ||
+            target.classList.contains("transaction-amount") ||
+            target.classList.contains("transaction-description")
+          ) {
+            const transactionId = parseInt(
+              target.getAttribute("data-transaction-id"),
+              10
+            );
+            const column = target.getAttribute("data-column");
+            if (transactionId && column && stt === "admin") {
+              const iframe = document.getElementById("iframe");
+              const popupx = document.getElementById("popupx");
+              const overlay = document.getElementById("overlay");
+              const loading = document.getElementById("loading");
+              const success = document.getElementById("success");
+              const popstxt = document.getElementById("popstxt");
+              const cellValueInput = document.getElementById("cellValue");
+              popstxt.innerHTML = `<del><span style="color:red; border-radius: 0.938rem;padding: 0.625rem;"> ${target.textContent.trim()}</span></del><i class="fa-sharp-duotone fa-regular fa-pencil"></i>`;
+              popupx.style.display = "flex";
+              cellValueInput.focus();
+              let isPopupClosed = false;
+
+              window.generateLink = function () {
+                const sheetId = `${sheetid}`;
+                const cellRange = `${column}${transactionId}`;
+                const value = cellValueInput.value.trim();
+
+                if (!value) {
+                  alert("Please enter a value.");
+                  return;
+                }
+
+                const url = `https://script.google.com/macros/s/AKfycbyHoAFcyRL5S45eGMObqQRc-GuV6B9GA7MqAtqlRaoodlaHbl6ckwOoM3w93KKUvfjq/exec?sheetId=${sheetId}&cellRange=${cellRange}&value=${encodeURIComponent(
+                  value
+                )}`;
+
+                isPopupClosed = false;
+                loading.style.display = "block";
+                overlay.classList.add("active");
+                iframe.style.display = "none";
+                popupx.style.display = "none";
+                iframe.src = url;
+
+                iframe.onload = () => {
+                  setTimeout(closePopup, 4000);
+                };
+              };
+
+              function closePopup() {
+                if (isPopupClosed) return;
+
+                isPopupClosed = true;
+
+                popupx.style.display = "none";
+                iframe.src = "";
+                loading.style.display = "none";
+                success.style.display = "block";
+
+                setTimeout(() => {
+                  overlay.classList.remove("active");
+                  success.style.display = "none";
+                  location.reload();
+                }, 2000);
+              }
+
+              window.addEventListener("message", (event) => {
+                if (event.data === "closeIframe") {
+                  closePopup();
+                }
+              });
+            }
+          }
+        } else {
+          console.log(
+            "Editing is disabled. Please enable the edit permission."
+          );
+        }
+      });
+
+    // Debounce Function
+    function debounce(func, delay) {
+      let debounceTimer;
+      return function (...args) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+    function filterTransactions() {
+      const searchValue = document
+        .getElementById("search-input")
+        .value.toLowerCase()
+        .trim();
+      const keywords = searchValue.split(" ");
+      const container = document.getElementById("transaction-list");
+      const resultElem = document.getElementById("resultElem"); // Element to display total amount
+      container.innerHTML = "";
+
+      let totalAmount = 0; // Initialize total amount
+      const fragment = document.createDocumentFragment();
+
+      let limitedTransactions;
+      const editPermission2 = document
+        .getElementById("edit-icon2")
+        .classList.contains("fa-fire");
+      if (editPermission2) {
+        limitedTransactions = transactions;
+      } else {
+        limitedTransactions = transactions.slice(0, 1000);
+      }
+
+      limitedTransactions.forEach((transaction) => {
+        const {
+          Description,
+          Reason,
+          Amount,
+          formattedDate,
+          remark,
+          serialNumber,
+        } = transaction;
+        const combinedText =
+          `${Description} ${Reason} ${remark}`.toLowerCase();
+        const matchesSearch = keywords.every(
+          (keyword) =>
+            combinedText.includes(keyword) ||
+            formattedDate.toString().includes(keyword)
+        );
+
+        if (matchesSearch) {
+          // Create the row dynamically
+          const transactionDiv = document.createElement("div");
+          transactionDiv.classList.add("transaction");
+          transactionDiv.style.display = "flex";
+          transactionDiv.style.justifyContent = "space-between";
+          transactionDiv.setAttribute("data-transaction-id", serialNumber);
+
+          // Date
+          const dateDiv = document.createElement("div");
+          dateDiv.style.flex = "1";
+          dateDiv.style.textAlign = "center";
+          dateDiv.innerHTML = formattedDate;
+          transactionDiv.appendChild(dateDiv);
+
+          // Description
+          const descriptionDiv = document.createElement("div");
+          descriptionDiv.style.flex = "1";
+          descriptionDiv.style.textAlign = "center";
+          descriptionDiv.classList.add("transaction-description");
+          descriptionDiv.setAttribute("data-transaction-id", serialNumber);
+          descriptionDiv.setAttribute("data-column", "B");
+          descriptionDiv.textContent = Description;
+          transactionDiv.appendChild(descriptionDiv);
+
+          // Reason
+          const reasonDiv = document.createElement("div");
+          reasonDiv.style.flex = "1";
+          reasonDiv.style.textAlign = "center";
+          reasonDiv.classList.add("transaction-reason");
+          reasonDiv.setAttribute("data-transaction-id", serialNumber);
+          reasonDiv.setAttribute("data-column", "C");
+          reasonDiv.textContent = Reason;
+          transactionDiv.appendChild(reasonDiv);
+
+          // Amount
+          const amountDiv = document.createElement("div");
+          amountDiv.style.flex = "1";
+          amountDiv.style.textAlign = "center";
+          amountDiv.classList.add("transaction-amount");
+          amountDiv.classList.add(
+            Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral"
+          );
+          amountDiv.setAttribute("data-transaction-id", serialNumber);
+          amountDiv.setAttribute("data-column", "D");
+          amountDiv.textContent = `${Amount > 0
+            ? `+ ৳${formatNumber2(Amount)}`
+            : Amount < 0
+              ? `- ৳${formatNumber2(Amount)}`
+              : "Due"
+            } `;
+          transactionDiv.appendChild(amountDiv);
+
+          // Remark
+          const remarkDiv = document.createElement("div");
+          remarkDiv.style.flex = "1";
+          remarkDiv.style.textAlign = "center";
+
+          if (remark) {
+            // Display the remark if it exists
+            remarkDiv.textContent = remark;
+          } else if (stt === "admin") {
+            // Display "Remark" button for admins if remark is missing
+            const addRemarkButton = document.createElement("button");
+            addRemarkButton.textContent = "Remark";
+            addRemarkButton.classList.add("redirect-btn");
+            addRemarkButton.setAttribute("data-transaction-id", serialNumber);
+            remarkDiv.appendChild(addRemarkButton);
+          }
+
+          // Print Button
+          const printDiv = document.createElement("div");
+          printDiv.style.flex = "1";
+          printDiv.style.textAlign = "center";
+
+          const printButton = document.createElement("button");
+          printButton.textContent = "Print";
+          printButton.classList.add("redirect-btn", "print-btn");
+          printButton.setAttribute("data-transaction-id", serialNumber);
+          printDiv.appendChild(printButton);
+
+          transactionDiv.appendChild(printDiv);
+
+          // Append the transaction to the fragment
+          fragment.appendChild(transactionDiv);
+
+          // Accumulate the total amount
+          totalAmount += Number(Amount); // Ensure Amount is treated as a number
+        }
+      });
+
+      // Update the DOM in a single operation
+      container.appendChild(fragment);
+
+      // Format the total amount for display
+      const formattedTotal = `${totalAmount > 0 ? "+" : "-"} ৳${formatNumber2(
+        totalAmount
+      )}`;
+
+      // Update the result element with the total amount
+      resultElem.textContent = `Total searched Amount: ${formattedTotal}`;
+      resultElem.style.color =
+        totalAmount > 0 ? "green" : totalAmount < 0 ? "red" : "black"; // Color code the total amount
+    }
+
+    // Add a debounced event listener to the search input
+    document
+      .getElementById("search-input")
+      .addEventListener("input", debounce(filterTransactions, 300));
+
+    // Smart date format detection and conversion function
+    function smartDateConversion(dateString) {
+      if (!dateString || dateString === 'N/A') return dateString;
+
+      // Handle Google Sheets date format
+      if (typeof dateString === 'string' && dateString.startsWith('Date')) {
+        return parseGoogleDate(dateString);
+      }
+
+      // Handle regular date strings (mm/dd/yyyy or dd/mm/yyyy)
+      if (typeof dateString === 'string' && dateString.includes('/')) {
+        const parts = dateString.split(/[\s\/]/);
+        if (parts.length >= 3) {
+          const first = parseInt(parts[0]);
+          const second = parseInt(parts[1]);
+          const year = parseInt(parts[2]);
+
+          // Extract time part if exists
+          const timeMatch = dateString.match(/(\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?)/);
+          const timePart = timeMatch ? timeMatch[1] : '';
+
+          let day, month;
+
+          // Logic to detect format:
+          // If first number > 12, it must be day (dd/mm/yyyy format)
+          if (first > 12) {
+            day = first;
+            month = second;
+          }
+          // If second number > 12, it must be day, so first is month (mm/dd/yyyy format - needs conversion)
+          else if (second > 12) {
+            day = second;
+            month = first;
+          }
+          // Both numbers <= 12, assume it's mm/dd/yyyy format and convert
+          else {
+            day = second;
+            month = first;
+          }
+
+          // Validate month and day
+          if (month > 12 || month < 1 || day > 31 || day < 1) {
+            return formatDateTo12Hour(dateString); // Fallback to original function
+          }
+
+          // Create date object and format with time
+          const dateObj = new Date(year, month - 1, day);
+          if (timePart) {
+            // Parse time and add to date
+            const timeRegex = /(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM|am|pm)?/;
+            const timeMatches = timePart.match(timeRegex);
+            if (timeMatches) {
+              let hour = parseInt(timeMatches[1]);
+              const minute = parseInt(timeMatches[2]);
+              const ampm = timeMatches[4];
+
+              if (ampm && ampm.toLowerCase() === 'pm' && hour !== 12) hour += 12;
+              if (ampm && ampm.toLowerCase() === 'am' && hour === 12) hour = 0;
+
+              dateObj.setHours(hour, minute, 0, 0);
+            }
+          }
+
+          return formatDateTo12Hour(dateObj.toISOString());
+        }
+      }
+
+      // For other formats, use the existing function
+      return formatDateTo12Hour(dateString);
+    }
+
+    // Function to format various date formats to 12-hour format
+    function formatDateTo12Hour(dateString) {
+      try {
+        // Handle various date formats
+        let date;
+
+        // Check if it's already a formatted date string
+        if (dateString.includes("/") && (dateString.includes("AM") || dateString.includes("PM"))) {
+          return dateString; // Already in 12-hour format
+        }
+
+        // Try to parse the date
+        date = new Date(dateString);
+
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+          return dateString; // Return original if can't parse
+        }
+
+        // Format to dd/mm/yyyy HH:MM AM/PM (no seconds)
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        let hour = date.getHours();
+        const minute = String(date.getMinutes()).padStart(2, "0");
+
+        // Convert to 12-hour format
+        const ampm = hour >= 12 ? "PM" : "AM";
+        hour = hour % 12;
+        hour = hour ? String(hour).padStart(2, "0") : "12";
+
+        return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+      } catch (error) {
+        console.error("Error formatting date:", error);
+        return dateString; // Return original on error
+      }
+    }
+
+    function parseGoogleDate(dateString) {
+      const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+      const matches = dateString.match(regex);
+
+      if (matches) {
+        const year = matches[1];
+        const month = String(parseInt(matches[2]) + 1).padStart(2, "0"); // Adjust month and pad with zero
+        const day = String(matches[3]).padStart(2, "0"); // Pad day with zero
+        let hour = parseInt(matches[4]);
+        const minute = String(matches[5]).padStart(2, "0"); // Pad minute with zero
+        const second = String(matches[6]).padStart(2, "0"); // Pad second with zero
+
+        // Convert to 12-hour format
+        const ampm = hour >= 12 ? "PM" : "AM";
+        hour = hour % 12;
+        hour = hour ? String(hour).padStart(2, "0") : "12"; // Pad hour with zero and handle midnight/noon
+
+        // Return date in dd/mm/yyyy HH:MM AM/PM format (no seconds)
+        return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+      }
+
+      return "Invalid Date"; // Fallback if parsing fails
+    }
+    const showbtn3 = document.getElementById("Entry");
+    const btns3 = document.getElementById("buttons222");
+
+    showbtn3.addEventListener("click", function () {
+      btns3.style.display = "block";
+      showbtn3.style.display = "none";
+    });
+
+    const suc = document.getElementById("suc");
+    const result = document.getElementById("result222");
+    const buttons222 = document.getElementById("buttons222");
+    const fall = document.getElementById("fall");
+
+    const lbl = document.getElementById("lbl");
+    const costbtn = document.getElementById("costbtn");
+    costbtn.addEventListener("click", function (e) {
+      let audioPlayed = false;
+      const audioElement2 = new Audio("ting.mp3");
+
+      // Preload the audio
+      audioElement2.preload = "auto";
+      audioElement2.load();
+
+      // Update button state and UI elements
+      costbtn.style.display = "block";
+      costbtn.style.opacity = "0.5";
+      costbtn.innerText = "wait....";
+      costbtn.disabled = true;
+
+      const recbtn = document.getElementById("recbtn");
+      if (recbtn) recbtn.style.display = "none";
+
+      const userdata = JSON.parse(localStorage.getItem("userdata"));
+
+      const surlid = userdata.furl;
+      const name = userdata.name;
+      const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
+      const sdentry = userdata.sdentry;
+      const srentry = userdata.srentry;
+      const saentry = userdata.saentry;
+      const amount = parseFloat(
+        document.getElementById("amount").value.replace(/,/g, "")
+      );
+      const payment = document.getElementById("payment").value || "";
+      const msg2 = "Cost";
+      const description = "Owner Cost " + name;
+      const dermsg2 = document.getElementById("reason").value;
+      let rmsg2 = document.getElementById("reason").value;
+      if (payment) {
+        rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+      }
+      const checkbox = document.getElementById("mailCheckbox");
+
+      if (amount >= 0) {
+        let googleFormsData = [
+          {
+            url: surl,
+            entries: {
+              reason: `entry.${srentry}`,
+              amount: `entry.${saentry}`,
+              description: `entry.${sdentry}`,
+            },
+          },
+          {
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
+            entries: {
+              reason: "entry.458544774",
+              amount: "entry.2032103830",
+              description: "entry.2111696735",
+            },
+          },
+        ];
+
+        googleFormsData.forEach((form) => {
+          const formData = new FormData();
+          formData.append(form.entries.amount, `-${amount}`);
+          formData.append(
+            form.entries.description,
+            form === googleFormsData[0] ? msg2 : description
+          );
+          formData.append(
+            form.entries.reason,
+            form === googleFormsData[0] ? `${rmsg2}` : `${rmsg2}`
+          );
+
+          fetch(form.url, {
+            method: "POST",
+            mode: "no-cors",
+            body: new URLSearchParams(formData),
+          })
+            .then(() => {
+              suc.style.display = "";
+              result.style.display = "";
+              buttons222.style.display = "none";
+              result.innerText = `Transaction Complete`;
+              costbtn.style.display = "none";
+              const lbl = document.getElementById("lbl");
+              if (lbl) lbl.style.display = "none";
+
+              if (!audioPlayed) {
+                audioElement2
+                  .play()
+                  .catch((error) =>
+                    console.error("Audio playback failed:", error)
+                  );
+                audioPlayed = true;
+              }
+
+              if (checkbox && checkbox.checked) {
+                sendEmailWithRetry();
+              } else {
+                setTimeout(() => {
+                  location.reload();
+                }, 2000);
+              }
+            })
+            .catch((error) => {
+              buttons222.style.display = "none";
+              fall.style.display = "";
+              result.style.display = "";
+              result.style.color = "#cf1919";
+              result.innerText = `transaction error: ${error}`;
+            });
+        });
+        let isEmailSending = false;
+
+        async function sendEmailWithRetry() {
+          if (isEmailSending) return; // Prevent multiple email sends
+
+          isEmailSending = true; // Set the flag to indicate an email is being sent
+
+          const secureDataV2 = JSON.parse(
+            localStorage.getItem("secureDataV2")
+          );
+          let totalpaid;
+          const xtt = userdata.state;
+
+          if (
+            xtt.toLowerCase() !== "engineer" &&
+            xtt.toLowerCase() !== "admin" &&
+            xtt.toLowerCase() !== "civil" &&
+            xtt.toLowerCase() !== "staff"
+          ) {
+            const total = Number(
+              document.getElementById("total").textContent.replace(/,/g, "")
+            );
+            totalpaid = total;
+          } else {
+            const total = Number(
+              document
+                .getElementById("total-cost")
+                .textContent.replace(/,/g, "")
+            );
+            totalpaid = total + amount;
+          }
+
+          // Optional: Log totalPaid for debugging purposes
+          console.log("Total Paid:", totalpaid);
+
+          const due = Number(
+            document.getElementById("due").textContent.replace(/,/g, "")
+          );
+          const totaldue = Math.max(0, due - amount);
+          const date = new Date();
+          const day = String(date.getDate()).padStart(2, "0");
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const year = date.getFullYear();
+          let hour = date.getHours();
+          const minute = String(date.getMinutes()).padStart(2, "0");
+          const ampm = hour >= 12 ? "PM" : "AM";
+          hour = hour % 12;
+          hour = hour ? String(hour).padStart(2, "0") : "12";
+          const formattedDate = `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+          const email = userdata.mail;
+          const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
+
+          const emailParams = {
+            name: name,
+            amount: amount,
+            totalpaid: totalpaid,
+            due: totaldue,
+            description: dermsg2,
+            payment: payment,
+            today: formattedDate,
+            username: `Admin`,
+            to_email: email,
+            transactionId: transactionId,
+          };
+
+          let emailSents = false; // Track if email was sent successfully
+
+          try {
+            // Attempt to send the first email
+            await emailjs.send(
+              "service_7albdgs",
+              "template_4oyl6vc",
+              emailParams,
+              "V33OVjXvWiuEWy-VD"
+            );
+            emailSents = true; // Email sent successfully
+            suc.src = "mail.gif";
+            result.style.display = "";
+            buttons222.style.display = "none";
+            result.innerText = `Email Sent.`;
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          } catch (error) {
+            console.error("First email service failed:", error);
+            emailSents = false; // Ensure retry if first email fails
+          }
+
+          if (!emailSents) {
+            try {
+              // If the first email failed, attempt to send the second email
+              await emailjs.send(
+                "service_f3ydpcl",
+                "template_o5b5lhq",
+                emailParams,
+                "7Atp02WPiZ4w8sYOz"
+              );
+              suc.src = "mail.gif";
+              result.style.display = "";
+              buttons222.style.display = "none";
+              result.innerText = `Email sent with Another Email`;
+              setTimeout(() => {
+                location.reload();
+              }, 2000);
+            } catch (error) {
+              console.error("Second email service failed:", error);
+              buttons222.style.display = "none";
+              fall.style.display = "";
+              result.style.display = "";
+              result.style.color = "#cf1919";
+              result.innerText = `Error Please Contact App Admin`;
+              costbtn.style.display = "none";
+            }
+          }
+
+          // Reset the email sending flag in the finally block to ensure it always happens
+          isEmailSending = false;
+        }
+      } else {
+        buttons222.style.display = "none";
+        fall.style.display = "";
+        result.style.display = "";
+        result.style.color = "#cf1919";
+        result.innerText = `Error Please Contact App Admin`;
+      }
+    });
+
+    const recbtn = document.getElementById("recbtn");
+
+    recbtn.addEventListener("click", function (e) {
+      // Button UI updates to prevent multiple clicks
+      recbtn.style.display = "block";
+      recbtn.style.opacity = "0.5";
+      recbtn.innerText = "wait....";
+      recbtn.disabled = true;
+      costbtn.style.display = "none";
+
+      let audioPlayed = false;
+      const audioElement2 = new Audio("ting.mp3");
+      audioElement2.preload = "auto";
+      audioElement2.load();
+
+      const userdata = JSON.parse(localStorage.getItem("userdata"));
+      const surlid = userdata.furl;
+      const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
+      const name = userdata.name;
+      const sdentry = userdata.sdentry;
+      const srentry = userdata.srentry;
+      const saentry = userdata.saentry;
+      const amount = parseFloat(
+        document.getElementById("amount").value.replace(/,/g, "")
+      );
+      const payment = document.getElementById("payment").value || "";
+      const msg2 = "Receive";
+      const description = `Receive from ${name}`;
+      const dermsg2 = document.getElementById("reason").value;
+      let rmsg2 = document.getElementById("reason").value;
+
+      if (payment) {
+        rmsg2 += (rmsg2 ? " " : "") + "[" + payment + "]"; // Adds payment inside square brackets
+      }
+      const checkbox = document.getElementById("mailCheckbox");
+
+      if (amount >= 0) {
+        const googleFormsData = [
+          {
+            url: surl,
+            entries: {
+              reason: `entry.${srentry}`,
+              amount: `entry.${saentry}`,
+              description: `entry.${sdentry}`,
+            },
+          },
+          {
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe7_Uju4WiVmnqqp8fNJNoPCcB04pDKPbYtZAPXKGfaq7_A4g/formResponse",
+            entries: {
+              reason: "entry.458544774",
+              amount: "entry.2032103830",
+              description: "entry.2111696735",
+            },
+          },
+        ];
+
+        googleFormsData.forEach((form) => {
+          const formData = new FormData();
+          formData.append(form.entries.amount, `${amount}`);
+          formData.append(
+            form.entries.description,
+            form === googleFormsData[0] ? msg2 : description
+          );
+          formData.append(form.entries.reason, `${rmsg2}`);
+
+          fetch(form.url, {
+            method: "POST",
+            mode: "no-cors",
+            body: new URLSearchParams(formData),
+          })
+            .then((response) => {
+              suc.style.display = "";
+              result.style.display = "";
+              buttons222.style.display = "none";
+              result.innerText = `Transaction Complete`;
+              recbtn.style.display = "none";
+              lbl.style.display = "none";
+              if (!audioPlayed) {
+                audioElement2
+                  .play()
+                  .catch((error) =>
+                    console.error("Audio playback failed:", error)
+                  );
+                audioPlayed = true;
+              }
+
+              if (checkbox.checked) {
+                sendEmailWithRetrys();
+              } else {
+                setTimeout(() => {
+                  location.reload();
+                }, 2000);
+              }
+            })
+            .catch((error) => {
+              buttons222.style.display = "none";
+              fall.style.display = "";
+              result.style.display = "";
+              result.style.color = "#cf1919";
+              result.innerText = `Error Please Contact App Admin`;
+            });
+        });
+        let isEmailSendings = false; // Flag to prevent duplicate sends
+
+        async function sendEmailWithRetrys() {
+          if (isEmailSendings) return; // Prevent function from running if an email is already being sent
+          isEmailSendings = true; // Set the flag to indicate that an email is being sent
+
+          const secureDataV2 = JSON.parse(
+            localStorage.getItem("secureDataV2")
+          );
+          const totalp = Number(
+            document
+              .getElementById("total-receive")
+              .textContent.replace(/,/g, "")
+          );
+          const totalpaid = totalp + amount;
+          const due = Number(
+            document.getElementById("due").textContent.replace(/,/g, "")
+          );
+          const totaldue = Math.max(0, due - amount);
+          const date = new Date();
+          const day = String(date.getDate()).padStart(2, "0");
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const year = date.getFullYear();
+          let hour = date.getHours();
+          const minute = String(date.getMinutes()).padStart(2, "0");
+          const ampm = hour >= 12 ? "PM" : "AM";
+          hour = hour % 12;
+          hour = hour ? String(hour).padStart(2, "0") : "12";
+          const formattedDate = `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+          const email = userdata.mail;
+          const username = secureDataV2.name;
+          const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
+
+          const emailParams = {
+            name: name,
+            amount: amount,
+            totalpaid: totalpaid,
+            due: totaldue,
+            description: dermsg2,
+            payment: payment,
+            today: formattedDate,
+            username: `Engr ${username}`,
+            to_email: email,
+            transactionId: transactionId,
+          };
+
+          let emailSent = false; // Flag to track if email was sent successfully
+
+          try {
+            // Attempt to send the email using the first service
+            await emailjs.send(
+              "service_7albdgs",
+              "template_4oyl6vc",
+              emailParams,
+              "V33OVjXvWiuEWy-VD"
+            );
+            emailSent = true;
+            // If the first email is successful
+            suc.src = "mail.gif";
+            result.style.display = "";
+            buttons222.style.display = "none";
+            result.innerText = `Email Sent.`;
+            recbtn.style.display = "none";
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          } catch (error) {
+            console.error("First email service failed:", error);
+            emailSent = false; // Ensure we try sending the second email if the first one fails
+          }
+
+          if (!emailSent) {
+            try {
+              // If the first email fails, attempt to send the second email
+              await emailjs.send(
+                "service_f3ydpcl",
+                "template_o5b5lhq",
+                emailParams,
+                "7Atp02WPiZ4w8sYOz"
+              );
+              suc.src = "mail.gif";
+              result.style.display = "";
+              buttons222.style.display = "none";
+              result.innerText = `Email sent with Another Email`;
+              recbtn.style.display = "none";
+              setTimeout(() => {
+                location.reload();
+              }, 2000);
+            } catch (error) {
+              console.error("Second email service failed:", error);
+              buttons222.style.display = "none";
+              fall.style.display = "";
+              result.style.display = "";
+              result.style.color = "#cf1919";
+              result.innerText = `Error Please Contact App Admin`;
+              recbtn.style.display = "none";
+            }
+          }
+
+          // Reset flag in a finally block to ensure it happens regardless of success or failure
+          isEmailSendings = false;
+        }
+      } else {
+        buttons222.style.display = "none";
+        fall.style.display = "";
+        result.style.display = "";
+        result.style.color = "#cf1919";
+        result.innerText = `Error Please Contact App Admin`;
+        recbtn.style.display = "none";
+      }
+    });
+  </script>
+</body>
+
+
+</html>
+
+
+

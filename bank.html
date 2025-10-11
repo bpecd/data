@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Bank balance</title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+            align-content: center;
+        }
+
+        body.move-down {
+            transform: translateY(5vh);
+        }
+
+        .container {
+            min-width: 31.25rem;
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 1.125rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        .container1 {
+            height: auto;
+            min-height: 570px;
+            display: flex;
+            margin: 0 auto;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border-radius: 1.75rem;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @media (min-width: 1464px) {
+            body {
+                font-size: large;
+            }
+
+            .top-bar a {
+                font-size: large;
+            }
+
+            .container {
+                font-size: large;
+            }
+
+            .transaction {
+                font-size: large;
+            }
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .info {
+            margin: 0.313rem;
+            font-size: 1.125rem;
+        }
+
+        .buttons {
+            margin-top: 1.25rem;
+
+        }
+
+        .buttonx {
+            background-color: #e2e7ea;
+            border: none;
+            padding: 0.938rem;
+            width: 10rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            font-size: 1.125rem;
+            margin-bottom: 0.625rem;
+            transition: transform 0.5s ease;
+
+        }
+
+        .buttonx:hover {
+            transform: scale(1.05);
+        }
+
+        .button {
+            background-color: #e2e7ea;
+            border: none;
+            padding: 0.938rem;
+            width: 332px;
+            text-align: center;
+            border-radius: 1.25rem;
+            font-size: 1.125rem;
+            margin-bottom: 0.625rem;
+            transition: transform 0.5s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .claim-button1 {
+            color: red;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.75rem;
+            cursor: pointer;
+            margin-left: 2.5rem;
+            margin-bottom: 1.25rem;
+            position: absolute;
+        }
+
+        .cost-btn {
+            background-color: #ffaaaa;
+            color: rgb(0, 0, 0);
+            margin: 0.313rem;
+
+
+        }
+
+        .receive-btn {
+            background-color: #90f28d;
+            color: rgb(12, 68, 10);
+            margin: 0.313rem;
+        }
+
+
+        .right-section {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .balance-info {
+            font-size: 1.5rem;
+            margin: 0.313rem;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+
+        a:hover {
+            background-color: #ffb2f1;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        .top-bar .nav-items a i {
+            font-size: 1.25rem;
+            color: #db049b;
+        }
+
+        .bb {
+            min-width: 28.125rem;
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(188, 247, 194);
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .top-bar .logo img {
+            width: 3.438rem;
+            height: 3.438rem;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            /* Adds space between elements */
+        }
+
+        .search-bar input[type="checkbox"] {
+            margin-right: 0.313rem;
+            /* Adjust spacing between the checkbox and "Max" label */
+            transform: scale(1.2);
+            /* Slightly enlarge the checkbox for better visibility */
+        }
+
+        .search-bar input[type="text"] {
+            padding: 0.625rem;
+            border: 0.188rem dotted #ca0a0a;
+            border-radius: 1.25rem;
+            outline: none;
+            width: 15.625rem;
+        }
+
+        .search-bar .fa-file-spreadsheet {
+            color: #096faa;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .menu {
+            margin-top: 0.625rem;
+            display: flex;
+            min-width: 34.375rem;
+            justify-content: space-between;
+            padding: 0.625rem 0.625rem;
+            background-color: #ddd;
+            border-radius: 1.25rem;
+        }
+
+        .menu span {
+            padding: 0.625rem 1.25rem;
+            background-color: #aac2ff;
+            border-radius: 1.25rem;
+            color: black;
+            font-weight: bold;
+
+        }
+
+        .transaction {
+            margin-top: 0.50rem;
+            padding: 0.625rem 0;
+            border-radius: 0.625rem;
+        }
+
+        .transaction.odd {
+            background-color: #fff;
+            /* Light gray */
+        }
+
+        .transaction.even {
+            background-color: #fff;
+            /* White */
+        }
+
+        .transaction-amount.credit {
+            color: green;
+            /* Positive Amount */
+        }
+
+        .transaction-amount.debit {
+            color: red;
+            /* Negative Amount */
+        }
+
+        .transaction-amount.neutral {
+            color: gray;
+            /* Neutral Amount */
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotateX(90deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+        }
+
+        /* Style for individual letters */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform-origin: bottom;
+            animation: rotateIn 0.4s ease forwards;
+        }
+
+        .loader {
+            width: 3.125rem;
+            padding: 0.50rem;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            margin-top: 6.25rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        /* General Popup Styling */
+        .popup {
+            display: none;
+            /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 0.625rem;
+            text-align: center;
+            width: 25rem;
+            position: relative;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content h1 {
+            font-size: 1.375rem;
+            color: #000000;
+            margin-bottom: 0.938rem;
+        }
+
+        .popup-content .close-btn {
+            background-color: #2a23ff;
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.313rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.625rem;
+        }
+
+        /* Overlay */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        #overlay.active {
+            display: block;
+        }
+
+        /* Loading and Success Messages */
+        #loading,
+        #success {
+            display: none;
+            position: fixed;
+            border-radius: 0.625rem;
+            padding: 0.938rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+        }
+
+        .inputField {
+            background-color: #b9e5ff;
+            border: 0.125rem solid red;
+            padding: 0.625rem;
+            width: 18.75rem;
+            text-align: center;
+            border-radius: 0.313rem;
+            font-size: 1.125rem;
+            margin: 0.625rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .inputField:focus {
+            outline: none;
+        }
+
+        /* HTML: <div class="loader"></div> */
+        .loader2 {
+            width: 3.125rem;
+            aspect-ratio: 1;
+            display: grid;
+            color: #e40000;
+            background: radial-gradient(farthest-side, currentColor calc(100% - 0.375rem), #0000 calc(100% - 0.313rem) 0);
+            -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 13px), #000 calc(100% - 0.75rem));
+            border-radius: 50%;
+            animation: l19 2s infinite linear;
+        }
+
+        .loader2::before,
+        .loader2::after {
+            content: "";
+            grid-area: 1/1;
+            background:
+                linear-gradient(currentColor 0 0) center,
+                linear-gradient(currentColor 0 0) center;
+            background-size: 100% 0.625rem, 0.625rem 100%;
+            background-repeat: no-repeat;
+        }
+
+        .loader2::after {
+            transform: rotate(45deg);
+        }
+
+        @keyframes l19 {
+            100% {
+                transform: rotate(1turn)
+            }
+        }
+
+        #edit-permission-toggle {
+            transition: color 0.5s;
+        }
+
+        #edit-icon {
+            transition: color 0.5s;
+        }
+
+        #edit-permission-toggle.active {
+            color: green;
+            /* Color when enabled */
+        }
+
+        #edit-permission-toggle.inactive {
+            color: red;
+            /* Color when disabled */
+        }
+
+        #xvc {
+            border-radius: 0.50rem;
+            z-index: 1001;
+            /* Ensures it appears above the overlay */
+            transition: box-shadow 0.5s ease;
+            /* Smooth transition for the pop effect */
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn" href="home.html"><i class="fa-solid fa-chart-waterfall"></i> Main Dashboard</a>
+            <a class="backbtn" href="officehome.html"><i class="fa-duotone fa-regular fa-person-seat-reclined"></i>
+                Office Area</a>
+            <a class="backbtn" href="devhome.html"><i class="fa-regular fa-buildings"></i> Developer Company</a>
+            <a class="backbtn"
+                style="color: #364fa1;font-weight: bold;font-size: large;background-color: #e8ecff;padding: 0.625rem;border-radius: 0.938rem;"
+                href="bank.html"><i class="fa-solid fa-money-check-dollar-pen"></i> Bank</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="backbtn"
+                style="border: none;font-size: 1.25rem;padding: 0.625rem; border-radius: 0.938rem;position: relative;"
+                onclick="window.location.href='home.html'"><i class="fa-solid fa-house-chimney"></i></button>
+        </div>
+    </div>
+    <div class="popup" id="popupx">
+        <div class="popup-content">
+            <h1 id="popstxt">Your are Editing Data!</h1>
+            <input type="text" id="cellValue" class="inputField" required><br>
+            <button style="background-color: #d61f2c;" class="close-btn" onclick="location.reload()"><i
+                    class="fa-solid fa-rectangle-xmark"></i></button>
+            <button class="close-btn" onclick="generateLink()">Edit</button>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="popup">
+        <iframe style="display: none;" id="iframe" src=""></iframe>
+    </div>
+    <div id="loading"><img style="width: 6.25rem;height: 6.25rem;border-radius: 0.50rem;" src="edt.gif"></div>
+    <div id="success"><img style="width: 6.25rem;height: 6.25rem;border-radius: 0.50rem;" src="done.gif"></div>
+    <div class="container1">
+        <div class="container">
+            <div class="left-section">
+                <h1><i id="shtl2" style="color: blue;" class="fa-duotone fa-solid fa-file-spreadsheet"></i> Bank Balance
+                </h1><br>
+                <div style="background-color: white;" class="bb">
+                    <div class="balance-info">total: <span
+                            style="color: rgb(5, 74, 224);font-size: 1.75rem;font-family: 'Arial Black', sans-serif;"
+                            id="total-cost"></span> BDT</div>
+                </div>
+                <div class="right-section"><img
+                        style="width: 15.625rem;height: 15.625rem;pointer-events: none;display: none;" id="suc"
+                        src="suc4.gif">
+                    <img style="width: 12.5rem;height: 12.5rem;pointer-events: none;display: none;" id="fall"
+                        src="fall.gif">
+                    <p style="font-size: 1.375rem;color: rgb(8, 8, 221);background-color: #8cffff;border-radius: 0.625rem;padding: 0.313rem;display: none;"
+                        id="result222"></p>
+                    <button style="cursor: pointer;" class="buttonx cost-btn" id="adcost">Add Bank</button>
+                    <div style="display: none;" id="buttons" class="buttons">
+                        <pre>
+
+<input list="reasonss" id="reason"  class="button" placeholder="Bank Name"><button class="claim-button1" onclick="location.reload()"><i class="fa-solid fa-rectangle-xmark"></i></button>
+<datalist id="reasonss" >
+<option value="DBBL">
+<option value="IBBL">
+<option value="Uttara Bank">
+<option value="BRAC Bank">
+<option value="Eastern Bank">
+<option value="City Bank">
+<option value="MTB">
+ </datalist>
+<input id="acno"  class="button" placeholder="Account No.">
+<input id="amount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
+<button id="rec" class="buttonx receive-btn">Add <i class="fa-duotone fa-light fa-inbox-in"></i></button>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="xvc">
+            <!-- Toggle button for Edit Permission -->
+            <button id="edit-permission-toggle"
+                style="margin-left:95%;background: none; border: none; cursor: pointer; font-size: 1.625rem;">
+                <i id="edit-icon" class="fa-duotone fa-regular fa-pen-to-square" style="color: #ff3021;"></i>
+                <!-- Initial icon: Lock -->
+            </button>
+
+            <div class="menu">
+                <span>BANK NAME</span>
+                <span>A/C No.</span>
+                <span>BALANCE</span>
+            </div>
+            <div id="transaction-list">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function formatNumber2(num) {
+            // Convert number to an absolute value for formatting
+            let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+
+            // Split last three digits and format the rest in groups of two
+            let lastThree = numStr.slice(-3);
+            let otherNumbers = numStr.slice(0, -3);
+
+            if (otherNumbers) {
+                // Format the other part with commas every two digits
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return otherNumbers + "," + lastThree;
+            } else {
+                return lastThree;
+            }
+        }
+
+        function formatIndianNumberInput(input) {
+            // Remove any existing commas for raw value
+            const rawValue = input.value.replace(/,/g, '');
+
+            // Format the number in Indian numbering system
+            const lastThree = rawValue.slice(-3);
+            const otherNumbers = rawValue.slice(0, -3);
+            const formattedValue = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + (otherNumbers ? "," : "") + lastThree;
+
+            // Set the display value with commas
+            input.value = formattedValue;
+        }
+
+        const e = JSON.parse(localStorage.getItem("secureDataV2"));
+        if (!e) {
+            window.location.href = "index.html";
+        }
+        document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+        const popupImage = document.createElement('img');
+
+        // Set styles for the popup overlay
+        popupOverlay.style.position = "fixed";
+        popupOverlay.style.top = "0";
+        popupOverlay.style.left = "0";
+        popupOverlay.style.width = "100%";
+        popupOverlay.style.height = "100%";
+        popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        popupOverlay.style.display = "none";
+        popupOverlay.style.justifyContent = "center";
+        popupOverlay.style.alignItems = "center";
+
+        // Set styles for the popup image
+        popupImage.style.maxWidth = "90%";
+        popupImage.style.maxHeight = "90%";
+        popupImage.style.borderRadius = "0.625rem";
+        popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+        // Append the image to the popup overlay
+        popupOverlay.appendChild(popupImage);
+
+        // Append the popup overlay to the body
+        document.body.appendChild(popupOverlay);
+
+        // Add event listener to the original image to show the popup
+        document.getElementById("img").addEventListener('click', function () {
+            popupImage.src = e.img;  // Set the image source for the popup
+            popupOverlay.style.display = "flex";  // Show the popup
+        });
+
+        // Add event listener to the popup to close it when clicked
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = "none";  // Hide the popup
+            }
+        });
+
+        document.getElementById('edit-permission-toggle').addEventListener('click', () => {
+            const editIcon = document.getElementById('edit-icon');
+            const editPermissionToggle = document.getElementById('edit-permission-toggle');
+
+            // Toggle the edit permission state
+            const isEditEnabled = editIcon.classList.contains('fa-pen-to-square'); // If it shows a lock (disabled)
+
+            if (isEditEnabled) {
+                // Enable editing: change to unlocked icon and set the state to true
+                editIcon.classList.remove('fa-pen-to-square'); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
+                editIcon.classList.add('fa-pen-field'); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+                editIcon.style.color = 'green'; // Set green color when editing is enabled
+                editPermissionToggle.classList.add('active');
+                editPermissionToggle.classList.remove('inactive');
+                const xvc = document.getElementById('xvc');
+                xvc.style.boxShadow = 'rgba(222, 7, 7, 0.4) 0px 0px 0px 0.125rem, rgba(222, 7, 7, 0.65) 0px 0.25rem 0.375rem -0.063rem, rgba(255, 255, 255, 0.08) 0px 0.063rem 0px inset';
+            } else {
+                // Disable editing: change to locked icon and set the state to false
+                editIcon.classList.remove('fa-pen-field'); // Remove unlock icon
+                editIcon.classList.add('fa-pen-to-square'); // Add lock icon
+                editIcon.style.color = '#ff3021'; // Set default color for locked state
+                editPermissionToggle.classList.add('inactive');
+                editPermissionToggle.classList.remove('active');
+                document.getElementById('xvc').style.boxShadow = '';
+            }
+        });
+        const stt = e.state;
+        if (stt === "admin") {
+            // Admin has full access; no changes needed
+        } else if (stt === "mod") {
+            document.getElementById("adcost").style.display = "none";
+        } else {
+            const editIcon = document.getElementById('edit-icon');
+
+            document.getElementById("adcost").style.display = "none";
+            editIcon.style.display = "none";
+            document.getElementById('shtl2').style.display = 'none';
+        }
+        const sheetUrl23 = `https://docs.google.com/spreadsheets/d/1-4_CBtsrnplDOlc_RmJt3lfO8MdxQbdqFfqPfWWDhzE/edit`;
+        document.getElementById('shtl2').addEventListener('click', function () {
+            window.open(sheetUrl23, '_blank');
+        });
+        document.querySelectorAll('.backbtn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevents immediate navigation
+                document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+                setTimeout(function () {
+                    window.location.href = button.getAttribute('href'); // Navigates after 0.2s delay
+                }, 200); // 200 ms delay
+            });
+        });
+
+        function formatNumber(num) {
+            let numStr = num.toString();
+            let lastThree = numStr.slice(-3);
+            let otherNumbers = numStr.slice(0, -3);
+
+            if (otherNumbers) {
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return otherNumbers + "," + lastThree;
+            } else {
+                return lastThree;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let bankData = null;
+
+            // Function to animate and display text
+            function displayAnimatedText(elementId, text, animationClass) {
+                const element = document.getElementById(elementId);
+                const computedStyle = window.getComputedStyle(element);
+
+                element.innerHTML = "";
+
+                text.split("").forEach((char, index) => {
+                    const span = document.createElement("span");
+                    span.textContent = char === " " ? "\xa0" : char;
+                    span.classList.add(animationClass);
+                    span.style.animationDelay = `${0.03 * index}s`;
+
+                    span.style.color = computedStyle.color;
+                    span.style.fontFamily = computedStyle.fontFamily;
+                    span.style.fontSize = computedStyle.fontSize;
+                    span.style.fontWeight = computedStyle.fontWeight;
+                    span.style.fontStyle = computedStyle.fontStyle;
+
+                    element.appendChild(span);
+                });
+            }
+
+            // Fetch all data using CSV format
+            async function fetchAllData() {
+                try {
+                    // Fetch Bank data using CSV
+                    const bankSheetId = "1-4_CBtsrnplDOlc_RmJt3lfO8MdxQbdqFfqPfWWDhzE";
+                    const bankResponse = await fetch(`https://docs.google.com/spreadsheets/d/${bankSheetId}/gviz/tq?tqx=out:csv`);
+                    const bankCsvText = await bankResponse.text();
+                    const bankRows = bankCsvText.split("\n");
+                    bankData = bankRows.map((row) =>
+                        row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                            .map((cell) => cell.replace(/^"|"$/g, "").trim())
+                    );
+
+                    console.log("Bank data fetched successfully");
+                    displayAllData();
+
+                    // Fetch transaction data using CSV format
+                    displayTransaction(bankData);
+                } catch (error) {
+                    console.error("Error fetching bank data:", error);
+                }
+            }
+            function displayAllData() {
+                // Total Cost (C4 from bank sheet - row 3, column 2)
+                const totalCost = parseFloat(bankData[1]?.[3] || 0);
+                const formattedValue = formatNumber(Math.abs(totalCost));
+                displayAnimatedText("total-cost", formattedValue, "letter");
+            }
+
+            // Start fetching data
+            fetchAllData();
+        });
+        let transactions = [];
+
+        function displayTransaction(rows) {
+            const container = document.getElementById('transaction-list');
+            transactions = [];
+            let serialNumber = rows.length; // Start serial number at the total count of rows
+            container.innerHTML = ''; // Clear any existing content
+
+            for (let i = rows.length - 1; i > 1; i--) {
+                const row = rows[i];
+                if (!row || row.length === 0) continue; // Skip invalid rows
+
+                const description = String(row[1] || ''); // Always treat description as a string
+                const name = row[2] || '';        // Name column
+                const amount = parseFloat(row[3]) || 0;    // Amount column
+
+                // Skip rows where both `name` and `amount` are null or empty
+                if ((!name || name === '0') && (!amount || amount === 0)) continue;
+
+                const formattedAmount = `${amount > 0 ? '' : amount < 0 ? '-' : ''} ৳${formatNumber2(amount)}`;
+                const isOdd = (rows.length - i) % 2 !== 0;
+                const rowClass = isOdd ? 'odd' : 'even';
+
+                // Add valid transaction to the list
+                transactions.push({
+                    serialNumber,
+                    description,
+                    name,
+                    amount,
+                });
+
+                // Append the transaction row to the container
+                container.innerHTML += `
+            <div class="transaction ${rowClass}" style="display: flex; flex-direction: column; padding: 0.625rem 0.938rem; border-bottom: 0.063rem solid #ddd;">
+                <div style="display: flex; justify-content: space-between;">
+                    <div 
+                        style="flex: 1; text-align: left; cursor: pointer;" 
+                        class="transaction-name" 
+                        data-transaction-id="${serialNumber}" 
+                        data-column="C">
+                        ${name}
+                    </div>
+                    <div 
+                        style="text-align: left; cursor: pointer;" 
+                        class="transaction-description" 
+                        data-transaction-id="${serialNumber}" 
+                        data-column="B">
+                        ${description}
+                    </div>
+                    <div 
+                        style="flex: 1; text-align: right; cursor: pointer;" 
+                        class="transaction-amount ${amount > 0 ? 'credit' : amount < 0 ? 'debit' : 'neutral'}" 
+                        data-transaction-id="${serialNumber}" 
+                        data-column="D">
+                        ${formattedAmount}
+                    </div>
+                </div>
+            </div>
+        `;
+
+                serialNumber--; // Decrement serial number only for valid rows
+            }
+
+            // Hide the loader if it exists
+            const loaderElement = document.querySelector('.loader');
+            if (loaderElement) {
+                loaderElement.style.display = 'none';
+            }
+        }
+
+        // Listen for clicks on transactions to edit when permission is enabled
+        document.getElementById('transaction-list').addEventListener('click', (event) => {
+            const target = event.target;
+            const editPermission = document.getElementById('edit-icon').classList.contains('fa-pen-field'); // Check if the permission is enabled
+
+            if (editPermission) {
+                if (
+                    target.classList.contains('transaction-name') ||
+                    target.classList.contains('transaction-amount') ||
+                    target.classList.contains('transaction-description') // Handle clicks on description
+                ) {
+                    const transactionId = parseInt(target.getAttribute('data-transaction-id'), 10);
+                    const column = target.getAttribute('data-column');
+                    if (transactionId && column && stt === "admin") {
+                        const iframe = document.getElementById('iframe');
+                        const popupx = document.getElementById('popupx');
+                        const overlay = document.getElementById('overlay');
+                        const loading = document.getElementById('loading');
+                        const success = document.getElementById('success');
+                        const popstxt = document.getElementById('popstxt'); // Get the h1 element
+                        const cellValueInput = document.getElementById('cellValue'); // The input field for editing
+
+                        popstxt.innerHTML = `You are Editing: <span style="color:red"> ${target.textContent.trim()} </span>`;
+
+                        popupx.style.display = "flex";
+                        cellValueInput.focus();
+                        let isPopupClosed = false;
+
+                        window.generateLink = function () {
+                            const sheetId = "1-4_CBtsrnplDOlc_RmJt3lfO8MdxQbdqFfqPfWWDhzE";
+                            const cellRange = `${column}${transactionId}`;
+                            const value = cellValueInput.value.trim(); // Use the updated input value
+
+                            if (!value) {
+                                alert('Please enter a value.');
+                                return;
+                            }
+
+                            const url = `https://script.google.com/macros/s/AKfycbyHoAFcyRL5S45eGMObqQRc-GuV6B9GA7MqAtqlRaoodlaHbl6ckwOoM3w93KKUvfjq/exec?sheetId=${sheetId}&cellRange=${cellRange}&value=${encodeURIComponent(value)}`;
+
+                            isPopupClosed = false;
+                            loading.style.display = 'block';
+                            overlay.classList.add('active');
+                            iframe.style.display = 'none';
+                            popupx.style.display = 'none';
+                            iframe.src = url;
+
+                            iframe.onload = () => {
+                                setTimeout(closePopup, 4000);
+                            };
+                        };
+
+                        function closePopup() {
+                            if (isPopupClosed) return;
+
+                            isPopupClosed = true;
+
+                            popupx.style.display = 'none';
+                            iframe.src = '';
+                            loading.style.display = 'none';
+                            success.style.display = 'block';
+
+                            setTimeout(() => {
+                                overlay.classList.remove('active');
+                                success.style.display = 'none';
+                                location.reload();
+                            }, 2000);
+                        }
+
+                        window.addEventListener('message', (event) => {
+                            if (event.data === 'closeIframe') {
+                                closePopup();
+                            }
+                        });
+                    }
+                }
+            } else {
+                // Optionally, show a message if the user tries to edit without permission
+                console.log("Editing is disabled. Please enable the edit permission.");
+            }
+        });
+        const showbtn = document.getElementById("adcost");
+        const btns = document.getElementById("buttons");
+        showbtn.addEventListener('click', function (e) {
+            btns.style.display = '';
+            showbtn.style.display = 'none';
+        });
+        const suc = document.getElementById('suc');
+        const result = document.getElementById('result222');
+        const buttons = document.getElementById('buttons');
+        const fall = document.getElementById("fall");
+
+        const rec = document.getElementById("rec");
+        rec.addEventListener('click', function (e) {
+            let audioPlayed = false;
+            const audioElement2 = new Audio('ting.mp3');
+
+            // Preload the audio
+            audioElement2.preload = 'auto';
+            audioElement2.load();
+
+            rec.style.opacity = '0.5';
+            rec.innerText = 'wait....';
+            rec.disabled = true;
+
+            const amount = parseFloat(document.getElementById("amount").value.replace(/,/g, ''));
+            const msg2 = document.getElementById('acno').value;
+            const rmsg2 = document.getElementById('reason').value;
+
+            if (amount >= 0) {
+                const googleForm = {
+                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSez29cGn6kjX7iK2DrWp2GCrj5bJAL0NUT2_N3AYqnkKRlY_A/formResponse",
+                    entries: {
+                        reason: "entry.1525024123",
+                        amount: "entry.178731031",
+                        description: "entry.928043805"
+                    }
+                };
+
+                const formData = new FormData();
+                formData.append(googleForm.entries.amount, amount);
+                formData.append(googleForm.entries.description, msg2);
+                formData.append(googleForm.entries.reason, rmsg2);
+
+                fetch(googleForm.url, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: new URLSearchParams(formData)
+                })
+                    .then(response => {
+                        suc.style.display = '';
+                        result.style.display = '';
+                        buttons.style.display = 'none';
+                        result.innerText = `${rmsg2} Added Successfully`;
+                        if (!audioPlayed) {
+                            audioElement2.play().catch(error => {
+                                console.error('Audio playback failed:', error);
+                            });
+                            audioPlayed = true;
+                        } rec.style.display = 'none';
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2500);
+                    })
+                    .catch(error => {
+                        buttons.style.display = 'none';
+                        fall.style.display = ''; result.style.display = '';
+                        result.style.color = '#cf1919';
+                        result.innerText = `Failure in Bank adding`;
+                        rec.style.display = 'none';
+                    });
+            } else {
+                document.getElementById('result222').innerText = `Error Please Contact App Admin`;
+            }
+        });
+    </script>
+</body>
+
+</html>

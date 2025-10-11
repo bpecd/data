@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Project List</title>
+    <link rel="shortcut icon" href="logo.png">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.1/css/duotone-light.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 1.25rem;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        body.move-down {
+            transform: translateY(5vh);
+        }
+
+        .container {
+
+            margin: 0 auto;
+            padding: 1.25rem;
+            border-radius: 0.50rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem;
+            background-color: #fff;
+            box-shadow: 0 0.25rem 0.50rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25rem;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transform: translateY(5vh);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-bar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .top-bar .nav-items a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.50rem;
+            text-decoration: none;
+            transition: background-color 0.5s ease;
+            transition: padding 0.8s ease;
+        }
+
+        a:hover {
+            background-color: #dbdbfd;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+        }
+
+        .bb {
+            width: 80vh;
+            display: flex;
+            flex-direction: row;
+            background-color: wheat;
+            padding: 0.625rem;
+            border-radius: 0.938rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .top-bar .nav-items a i {
+            font-size: 1.25rem;
+            color: #096faa;
+        }
+
+        .top-bar .logo img {
+            width: 3.438rem;
+            height: 3.438rem;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            transition: transform 0.5s ease;
+            /* Adds space between elements */
+        }
+
+        .search-bar:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge the card */
+        }
+
+        .search-bar input {
+            padding: 0.625rem;
+            border: 0.188rem dotted blue;
+            border-radius: 1.25rem;
+            outline: none;
+            width: 15.625rem;
+        }
+
+        .search-bar .fa-file-spreadsheet {
+            color: #096faa;
+            font-size: 2rem;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0.625rem;
+
+            margin-bottom: 0.938rem;
+            margin-top: 0.938rem;
+            background-color: #ddd;
+            border-radius: 1.25rem;
+        }
+
+        .menu span {
+            padding: 0.625rem 1.25rem;
+            background-color: #2edddd;
+            border-radius: 1.25rem;
+            color: black;
+            margin-right: 3%;
+            margin-left: -2%;
+            font-weight: bold;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.125rem dotted black;
+
+            padding: 0.625rem;
+            min-height: 68px;
+        }
+
+        .transaction:hover {
+            background-color: rgb(218, 225, 255);
+        }
+
+        .transaction:hover .redirect-btn {
+            transform: scale(1.1);
+            background-color: #1942c9;
+        }
+
+        .transaction i {
+            font-size: 1.25rem;
+        }
+
+        .transaction-info {
+            flex: 1;
+            font-size: 0.875rem;
+
+        }
+
+        .transaction-time {
+            color: #cfcfcf;
+            font-size: 0.50rem;
+        }
+
+        .redirect-btn {
+            margin-left: 1.25rem;
+            padding: 0.313rem 0.625rem;
+            background-color: #008cff;
+            color: white;
+            border: none;
+            border-radius: 0.313rem;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .redirect-btn:hover {
+
+            transform: scale(1.05);
+            /* Slightly enlarge the card */
+            background-color: #0056b3;
+        }
+
+        .loader {
+            width: 3.125rem;
+            padding: 0.50rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: 6.25rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        .xbb {
+            transition: box-shadow 0.5s ease;
+        }
+
+        .xbb:hover {
+            box-shadow: inset 0.063rem 0.063rem 0.125rem #BABECC,
+                inset -0.063rem -0.063rem 0.125rem #ffffff73;
+
+        }
+
+        .xbb:hover i {
+            padding: 0.1rem;
+            font-size: smaller;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="nav-items">
+            <a class="backbtn" style="margin-left: 0.625rem;" href="devhome.html"><i class="fa-solid fa-table-tree"></i>
+                Developer Dashboard</a>
+            <a class="backbtn"
+                style="color: #db049b;font-weight: bold;font-size: large;background-color: #fae6f4;padding: 0.625rem;border-radius: 0.938rem;"
+                href="developers.html"><i class="fa-solid fa-list-ol"></i> Projects</a>
+            <a class="backbtn" id="nn" href="newdev.html"><i class="fas fa-user-plus"></i> New Project</a>
+        </div>
+        <div style="display: flex;flex-direction: row;gap: 0.625rem;" class="logo">
+            <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo"><button class="xbb"
+                style="border: none;font-size: 1.25rem;padding: 0.625rem; border-radius: 0.938rem;position: relative;cursor: pointer;"
+                onclick="window.location.href='home.html'"><i class="fa-solid fa-house-chimney"></i></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa fa-list-alt"></i>
+                Project list</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search..." oninput="filterTransactions()">
+                <i id="shtl"
+                    onclick="window.open('https://docs.google.com/spreadsheets/d/1-eLT3ufiAq5QEUMtJPPl3UFeVlbGuFe_1NSnIgXdncw/edit?gid=2005736034#gid=2005736034', '_blank');"
+                    class="fa-duotone fa-solid fa-file-spreadsheet" style="cursor:pointer;"></i>
+            </div>
+        </div>
+
+        <p>List of all Projects. Click Open for Data Entry.</p>
+
+        <div class="menu">
+            <span>No.</span>
+            <span>Project Name</span>
+            <span>Land Area</span>
+            <span>Phone No.</span>
+            <span>Assign Date</span>
+            <span>ID</span>
+        </div>
+        <div id="transaction-list">
+            <div class="loader"></div> <!-- Transactions will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+
+        document.querySelectorAll('.backbtn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevents immediate navigation
+                document.body.classList.add('move-down'); // Adds the class for animation or effect
+
+                setTimeout(function () {
+                    window.location.href = button.getAttribute('href'); // Navigates after 0.4s delay
+                }, 400); // 300 ms delay
+            });
+        });
+
+        const e = JSON.parse(localStorage.getItem("secureDataV2"));
+        if (!e) {
+            window.location.href = "index.html";
+        }
+        document.getElementById("img").src = e.img;
+        const popupOverlay = document.createElement('div');
+        const popupImage = document.createElement('img');
+
+        // Set styles for the popup overlay
+        popupOverlay.style.position = "fixed";
+        popupOverlay.style.top = "0";
+        popupOverlay.style.left = "0";
+        popupOverlay.style.width = "100%";
+        popupOverlay.style.height = "100%";
+        popupOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+        popupOverlay.style.display = "none";
+        popupOverlay.style.justifyContent = "center";
+        popupOverlay.style.alignItems = "center";
+
+        // Set styles for the popup image
+        popupImage.style.maxWidth = "90%";
+        popupImage.style.maxHeight = "90%";
+        popupImage.style.borderRadius = "0.625rem";
+        popupImage.style.boxShadow = "0 0.313rem 0.938rem rgba(0, 0, 0, 0.5)";
+
+        // Append the image to the popup overlay
+        popupOverlay.appendChild(popupImage);
+
+        // Append the popup overlay to the body
+        document.body.appendChild(popupOverlay);
+
+        // Add event listener to the original image to show the popup
+        document.getElementById("img").addEventListener('click', function () {
+            popupImage.src = e.img;  // Set the image source for the popup
+            popupOverlay.style.display = "flex";  // Show the popup
+        });
+
+        // Add event listener to the popup to close it when clicked
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = "none";  // Hide the popup
+            }
+        });
+        const stt = e.state;
+        if (stt === "admin") {
+            document.getElementById("nn").style.display = "block";
+        } else if (stt === "mod") {
+            document.getElementById("nn").style.display = "none";
+        } else {
+            document.getElementById("nn").style.display = "none";
+            document.getElementById('shtl').style.display = 'none';
+        }
+
+
+
+    </script>
+    <script>
+        let transactions = [];
+
+        // Function to fetch and display data using CSV format
+        async function fetchAllData() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/1-eLT3ufiAq5QEUMtJPPl3UFeVlbGuFe_1NSnIgXdncw/gviz/tq?tqx=out:csv&gid=2005736034';
+                console.log('Fetching CSV data from:', csvUrl);
+
+                const response = await fetch(csvUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const csvText = await response.text();
+                console.log('CSV data received');
+
+                // Parse CSV data
+                const rows = csvText.split('\n').map(row => {
+                    // Split by comma but respect quoted fields
+                    return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell =>
+                        cell.replace(/^"(.*)"$/, '$1').trim()
+                    );
+                });
+
+                // Remove header row and empty rows
+                const dataRows = rows.slice(1).filter(row => row.length > 1 && row[0]);
+
+                displayTransaction(dataRows);
+
+            } catch (error) {
+                console.error('Error fetching CSV data:', error);
+                document.querySelector('.loader').style.display = 'none';
+                const container = document.getElementById('transaction-list');
+                container.innerHTML = '<div style="text-align: center; color: red; padding: 20px;">Error loading data. Please try again.</div>';
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAllData);
+
+        function displayTransaction(rows) {
+            const container = document.getElementById('transaction-list');
+            transactions = [];
+
+            // Helper function to check if status indicates closed
+            function isClosedStatus(status) {
+                const lowerStatus = status.toLowerCase();
+                return lowerStatus.includes('close') ||
+                    lowerStatus.includes('closed') ||
+                    lowerStatus.includes('end') ||
+                    lowerStatus.includes('account close');
+            }
+
+            // Separate rows into active and closed
+            const activeRows = [];
+            const closedRows = [];
+
+            for (let i = rows.length - 1; i >= 0; i--) {
+                const row = rows[i];
+                const Status = row[3] || 'N/A';
+
+                if (isClosedStatus(Status)) {
+                    closedRows.push({ row, originalIndex: i });
+                } else {
+                    activeRows.push({ row, originalIndex: i });
+                }
+            }
+
+            // Combine arrays: active rows first (already in reverse order), then closed rows (already in reverse order)
+            const orderedRows = [...activeRows, ...closedRows];
+
+            orderedRows.forEach(({ row, originalIndex }) => {
+                // Calculate original serial number based on original position (reverse order)
+                const originalSerialNumber = originalIndex + 1;
+
+                // For CSV data, access columns directly by index
+                const rawDate = row[0] || 'N/A';
+                const Name = row[1] || 'N/A';
+                const Land = row[2] || 0;
+                const Status = row[3] || 'N/A';
+                const sheetid = row[4] || 'N/A';
+                const sheetid2 = row[5] || 'N/A';
+                const sgid = row[6] || 'N/A';
+                const sgid2 = row[7] || 'N/A';
+                const formid = row[8] || 0;
+                const formid2 = row[9] || 'N/A';
+                const sdentry = row[10] || 'N/A';
+                const sdentry2 = row[11] || 'N/A';
+                const srentry = row[12] || 'N/A';
+                const srentry2 = row[13] || 'N/A';
+                const saentry = row[14] || 'N/A';
+                const saentry2 = row[15] || 0;
+                const nameen = row[16] || 'N/A';
+                const phoneen = row[17] || 'N/A';
+                const houseen = row[18] || 'N/A';
+                const mailen = row[19] || 'N/A';
+                const statusen = row[20] || 0;
+                const sheetiden = row[21] || 'N/A';
+                const sgiden = row[22] || 'N/A';
+                const formiden = row[23] || 'N/A';
+
+                let formattedDate = smartDateConversion(rawDate);
+
+                const uniqueId = `viewbtn-${originalIndex}`;
+                const rowClass = originalSerialNumber % 2 === 0 ? 'even' : 'odd';
+
+                transactions.push({
+                    Name, Land, Status, formattedDate, sheetid, sheetid2, sgid, sgid2, formid,
+                    formid2, sdentry, sdentry2, srentry, srentry2, saentry, saentry2,
+                    nameen, phoneen, houseen, mailen, statusen, sheetiden, sgiden, formiden,
+                    originalSerialNumber: originalSerialNumber,
+                    html: `
+<div class="transaction ${rowClass}">
+    <div style="flex: 0.5; text-align: center;">
+        ${originalSerialNumber}
+    </div>
+    <div style="flex: 1; text-align: center; line-height: 1.5;">
+        ${Name}
+    </div>
+    <div style="flex: 1; text-align: center; line-height: 1.5;">
+        ${Land}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${getStatusIcon(Status)} ${Status}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        ${formattedDate}
+    </div>
+    <div style="flex: 1; text-align: center;">
+        <button class="redirect-btn" id="${uniqueId}">OPEN</button>
+    </div>
+</div>`
+                });
+            });
+
+            // Display all transactions
+            document.querySelector('.loader').style.display = 'none';
+            transactions.forEach(transaction => {
+                container.innerHTML += transaction.html;
+            });
+
+            // Attach event listeners for all "OPEN" buttons
+            transactions.forEach((transaction, index) => {
+                const buttonId = transaction.html.match(/id="([^"]+)"/)[1];
+                attachRedirectEvent(buttonId, transaction);
+            });
+        }
+
+        function attachRedirectEvent(buttonId, transaction) {
+            setTimeout(() => {
+                document.getElementById(buttonId).addEventListener('click', (event) => {
+                    event.preventDefault();
+                    saveAndRedirect(transaction);
+                });
+            }, 300);
+        }
+
+        function saveAndRedirect(transaction) {
+            localStorage.removeItem("devdata");
+            const devdata = {
+                name: transaction.Name,
+                land: transaction.Land,
+                status: transaction.Status,
+                sheetid: transaction.sheetid,
+                sheetid2: transaction.sheetid2,
+                sgid: transaction.sgid,
+                sgid2: transaction.sgid2,
+                formid: transaction.formid,
+                formid2: transaction.formid2,
+                sdentry: transaction.sdentry,
+                sdentry2: transaction.sdentry2,
+                srentry: transaction.srentry,
+                srentry2: transaction.srentry2,
+                saentry: transaction.saentry,
+                saentry2: transaction.saentry2,
+                nameen: transaction.nameen,
+                phoneen: transaction.phoneen,
+                houseen: transaction.houseen,
+                mailen: transaction.mailen,
+                statusen: transaction.statusen,
+                sheetiden: transaction.sheetiden,
+                sgiden: transaction.sgiden,
+                formiden: transaction.formiden
+            };
+            localStorage.setItem('devdata', JSON.stringify(devdata));
+            setTimeout(() => { window.location.href = 'developerid.html'; }, 300);
+        }
+
+        function filterTransactions() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const container = document.getElementById('transaction-list');
+            container.innerHTML = '';
+
+            transactions.forEach((transaction, index) => {
+                if (
+                    transaction.Name.toLowerCase().includes(searchValue) ||
+                    transaction.formattedDate.toLowerCase().includes(searchValue) ||
+                    transaction.Land.toString().toLowerCase().includes(searchValue) ||
+                    transaction.Status.toLowerCase().includes(searchValue) ||
+                    transaction.phoneen.toString().includes(searchValue)
+                ) {
+
+                    container.innerHTML += transaction.html;
+                    const uniqueId = `viewbtn-${transactions.length - 1 - index}`;
+                    attachRedirectEvent(uniqueId, transaction);
+                }
+            });
+        }
+
+        // Smart date format detection and conversion function
+        function smartDateConversion(dateString) {
+            if (!dateString || dateString === 'N/A') return dateString;
+
+            // Handle Google Sheets date format
+            if (typeof dateString === 'string' && dateString.startsWith('Date')) {
+                return parseGoogleDate(dateString);
+            }
+
+            // Handle regular date strings (mm/dd/yyyy or dd/mm/yyyy)
+            if (typeof dateString === 'string' && dateString.includes('/')) {
+                const parts = dateString.split(/[\s\/]/);
+                if (parts.length >= 3) {
+                    const first = parseInt(parts[0]);
+                    const second = parseInt(parts[1]);
+                    const year = parseInt(parts[2]);
+
+                    // Extract time part if exists
+                    const timeMatch = dateString.match(/(\d{1,2}:\d{2}(?::\d{2})?\s*(?:AM|PM|am|pm)?)/);
+                    const timePart = timeMatch ? timeMatch[1] : '';
+
+                    let day, month;
+
+                    // Logic to detect format:
+                    // If first number > 12, it must be day (dd/mm/yyyy format)
+                    if (first > 12) {
+                        day = first;
+                        month = second;
+                    }
+                    // If second number > 12, it must be day, so first is month (mm/dd/yyyy format - needs conversion)
+                    else if (second > 12) {
+                        day = second;
+                        month = first;
+                    }
+                    // Both numbers <= 12, assume it's mm/dd/yyyy format and convert
+                    else {
+                        day = second;
+                        month = first;
+                    }
+
+                    // Validate month and day
+                    if (month > 12 || month < 1 || day > 31 || day < 1) {
+                        return formatDateTo12Hour(dateString); // Fallback
+                    }
+
+                    // Create date object and format with time
+                    const dateObj = new Date(year, month - 1, day);
+                    if (timePart) {
+                        // Parse time and add to date
+                        const timeRegex = /(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM|am|pm)?/;
+                        const timeMatches = timePart.match(timeRegex);
+                        if (timeMatches) {
+                            let hour = parseInt(timeMatches[1]);
+                            const minute = parseInt(timeMatches[2]);
+                            const ampm = timeMatches[4];
+
+                            if (ampm && ampm.toLowerCase() === 'pm' && hour !== 12) hour += 12;
+                            if (ampm && ampm.toLowerCase() === 'am' && hour === 12) hour = 0;
+
+                            dateObj.setHours(hour, minute, 0, 0);
+                        }
+                    }
+
+                    return formatDateTo12Hour(dateObj.toISOString());
+                }
+            }
+
+            // For other formats, use parseGoogleDate or default formatting
+            return parseGoogleDate(dateString);
+        }
+
+        // Helper function to format dates consistently
+        function formatDateTo12Hour(dateInput) {
+            try {
+                let date;
+
+                // Handle Date object
+                if (dateInput instanceof Date) {
+                    date = dateInput;
+                }
+                // Handle ISO string or other date strings
+                else if (typeof dateInput === 'string') {
+                    // Check if it's already in our desired format
+                    if (dateInput.includes("/") && (dateInput.includes("AM") || dateInput.includes("PM"))) {
+                        return dateInput; // Already in desired format
+                    }
+                    date = new Date(dateInput);
+                }
+                else {
+                    return dateInput; // Return as-is if not recognized
+                }
+
+                // Check if date is valid
+                if (isNaN(date.getTime())) {
+                    return dateInput; // Return original if can't parse
+                }
+
+                // Format to dd/mm/yyyy HH:MM AM/PM
+                const day = String(date.getDate()).padStart(2, "0");
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const year = date.getFullYear();
+                let hour = date.getHours();
+                const minute = String(date.getMinutes()).padStart(2, "0");
+
+                // Convert to 12-hour format
+                const ampm = hour >= 12 ? "PM" : "AM";
+                hour = hour % 12;
+                hour = hour ? String(hour).padStart(2, "0") : "12";
+
+                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+            } catch (error) {
+                console.error("Error formatting date:", error);
+                return dateInput; // Return original on error
+            }
+        }
+
+        function parseGoogleDate(dateString) {
+            const regex = /Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
+            const matches = dateString.match(regex);
+
+            if (matches) {
+                const year = matches[1];
+                const month = String(parseInt(matches[2]) + 1).padStart(2, '0');
+                const day = String(matches[3]).padStart(2, '0');
+                return `${day}/${month}/${year}`;
+            }
+
+            return 'Invalid Date';
+        }
+
+        function getStatusIcon(status) {
+            switch (status.toLowerCase()) {
+                case '01718592869':
+                    return '<i class="fa-duotone fa-solid fa-phone" style="color:blue;"></i>';
+                default:
+                    return '<i class="fa-solid fa-phone-volume" style="color:black;"></i>';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+        margin-top: 20px;
+        color: #2e323c;
+        background: #f5f6fa;
+        position: relative;
+        height: 100%;
+        font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .invoice-container {
+        padding: 1rem;
+    }
+
+    .invoice-container .invoice-header .invoice-logo {
+        margin: 0;
+        display: inline-block;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #2e323c;
+    }
+
+    .invoice-container .invoice-header address {
+        font-size: 0.85rem;
+        color: #555;
+        margin: 0;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .invoice-container .invoice-details {
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
+    }
+
+    .invoice-container .invoice-num {
+        text-align: right;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .invoice-container .invoice-footer {
+        text-align: center;
+        font-size: 0.75rem;
+        margin: 5px 0 0 0;
+        font-weight: 400;
+    }
+
+    .invoice-footer table {
+        background-color: #f0f0f0;
+    }
+
+    .custom-table {
+        border: 0;
+        width: 100%;
+    }
+
+    .custom-table thead {
+        background: #f0f0f0;
+    }
+
+    .custom-table thead th {
+        border: 0;
+        color: #333;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: left;
+        padding: 4px;
+    }
+
+    .custom-table thead th:nth-child(1) {
+        width: 15%;
+    }
+
+    .custom-table thead th:nth-child(2) {
+        width: 50%;
+    }
+
+    .custom-table thead th:nth-child(3) {
+        width: 20%;
+    }
+
+    .custom-table thead th:nth-child(4) {
+        width: 15%;
+    }
+
+    .custom-table>tbody td {
+        border: 0;
+        font-size: 0.9rem;
+        font-weight: 400;
+        padding: 4px;
+    }
+
+    .custom-table>tbody tr:first-child td {
+        border-bottom: 1px solid #ccc;
+    }
+
+
+    .card {
+        background: #ffffff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 0;
+        margin-bottom: 1rem;
+    }
+
+    .text-success {
+        margin-top: -2px;
+        color: #000 !important;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .custom-actions-btns {
+        margin: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .custom-actions-btns .btn {
+        margin: .3rem 0 .3rem .3rem;
+    }
+
+    /* Print Styles for A4 with 2 invoices */
+    @media print {
+        @page {
+            size: A4;
+            margin: 0.5cm;
+        }
+
+        body {
+            margin: 0;
+            background: white !important;
+            font-size: 12px;
+            color: black !important;
+            font-family: sans-serif;
+        }
+
+        .invoice-footer table {
+            background-color: #f0f0f0;
+        }
+
+        .invoice-copy {
+            page-break-inside: avoid !important;
+            height: 42vh;
+            display: block;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 0.5cm;
+            margin-bottom: 0.5cm;
+        }
+
+        .invoice-copy:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .custom-actions-btns,
+        .copy-label {
+            display: none !important;
+        }
+
+        .invoice-container {
+            padding: 0;
+        }
+
+        .container {
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: none !important;
+        }
+
+        .invoice-header {
+            padding-bottom: 15px;
+        }
+
+        .invoice-logo {
+            font-size: 1.2rem !important;
+            font-weight: bold;
+        }
+
+        .invoice-num {
+            font-size: 0.8rem !important;
+        }
+
+        address {
+            font-size: 0.8rem !important;
+        }
+
+        .custom-table {
+            width: 100% !important;
+            font-size: 10px !important;
+            border-top: 1px solid #ccc;
+            table-layout: fixed;
+            text-align: center;
+            /* Added this */
+        }
+
+        .custom-table thead th {
+            background: #f0f0f0 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color: #000 !important;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .custom-table>tbody td {
+            padding: 5px;
+            border: none;
+        }
+
+        .text-success {
+            margin-top: -2px;
+            color: #000 !important;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .card {
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .row.gutters {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .col-xl-6 {
+            width: 48%;
+        }
+
+        .signature-area {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    }
+
+    .signature-area {
+        margin-top: 80px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .signature {
+        width: 40%;
+    }
+
+    .signature .line {
+        border-bottom: 1px solid #000;
+        margin: 0 auto 10px auto;
+        width: 70%;
+    }
+
+    .signature p {
+        text-align: center;
+        margin: 0;
+        font-size: 0.85rem;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #e0e3ec;
+        margin: 20px 0;
+    }
+
+    /* Screen styles for preview */
+    .invoice-copy {
+        margin-top: 3rem;
+        border: 1px solid #e0e3ec;
+        padding: 1rem;
+    }
+
+    .copy-label {
+        text-align: center;
+        font-weight: bold;
+        color: #666;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<body>
+
+    <!-- Office Copy -->
+    <div class="invoice-copy">
+        <div class="copy-label">Office Copy</div>
+        <div class="container">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="invoice-container">
+                                <div class="invoice-header">
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div style="display: flex; align-items: center; gap: 15px;"
+                                            class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <img src="iconss.png" alt="Logo" style="max-width:50px;">
+                                            <p class="invoice-logo" style="margin: 0;">
+                                                Building Plan Engineering Consultant & Developers
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <address class="text-right">
+                                                House # H/1, Road # N/S/2, Block # H<br>
+                                                Eastern Housing, Pallabi 2nd Phase<br>
+                                                Mirpur, Dhaka-1216.
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                    <hr>
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                            <div class="invoice-details">
+                                                <address>
+                                                    <span id="client-name"></span><br>
+                                                    <span id="client-contact"></span>, <span id="client-address"></span>
+                                                </address>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="invoice-details">
+                                                <div class="invoice-num">
+                                                    <div>Invoice - #<span id="invoice-number"></span></div>
+                                                    <div id="invoice-date"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                </div>
+                                <div class="invoice-body">
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table custom-table m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Reason</th>
+                                                            <th>Payment Method</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td id="date"></td>
+                                                            <td>
+                                                                <p class="m-0 text-muted" id="reason">
+
+                                                                </p>
+                                                            </td>
+                                                            <td><span id="payment-method">Cash</span></td>
+                                                            <td><span id="amount"></span></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td colspan="2">
+                                                                <h5 class="text-success text-right">
+                                                                    <strong>Total:</strong>
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                <h5 class="text-success"><strong
+                                                                        id="total-amount"></strong></h5>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="invoice-footer">
+                                                <table
+                                                    style="border-collapse: collapse; width: 100%; border: 2px dashed #ccc;background-color: #f0f0f0;"
+                                                    border="1" width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding-left: 15px;text-align: left; border-color: #ccc; border-width: 2px; width: 50%;"
+                                                                align="left">
+                                                                <p
+                                                                    style="margin: 0px; font-weight: bold; text-align: left;">
+                                                                    <span style="font-size: 10pt;">Total Paid</span>
+                                                                </p>
+                                                                <p
+                                                                    style="margin: 0px; font-size: 24px; color: black; text-align: left;">
+                                                                    <span style="font-size: 10pt;"><strong
+                                                                            id="total-paid"></strong></span>
+                                                                </p>
+                                                            </td>
+                                                            <td style="padding-right: 15px;text-align: right; border-color: #ccc; border-width: 2px; width: 50%;"
+                                                                align="right">
+                                                                <p style="margin: 0; font-weight: bold;"><span
+                                                                        style="font-size: 10pt;">Total Due</span></p>
+                                                                <p style="margin: 0; font-size: 24px; "><span
+                                                                        style="font-size: 10pt;"><strong
+                                                                            id="total-due"></strong></span></p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                </div>
+                                <div class="signature-area">
+                                    <div class="signature">
+                                        <div class="line"></div>
+                                        <p id="clientstatus">Client Signature</p>
+                                    </div>
+                                    <div class="signature">
+                                        <div class="line"></div>
+                                        <p>Authorized Signature</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="border-top: 1px dotted #7c7e84;">
+    <!-- Client Copy -->
+    <div style="margin-top: 20px;" class="invoice-copy">
+        <div class="copy-label">Client Copy</div>
+        <div class="container">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="invoice-container">
+                                <div class="invoice-header">
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div style="display: flex; align-items: center; gap: 15px;"
+                                            class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <img src="iconss.png" alt="Logo" style="max-width:50px;">
+                                            <p class="invoice-logo" style="margin: 0;">
+                                                Building Plan Engineering Consultant & Developers
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <address class="text-right">
+                                                House # H/1, Road # N/S/2, Block # H<br>
+                                                Eastern Housing, Pallabi 2nd Phase<br>
+                                                Mirpur, Dhaka-1216.
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                    <hr>
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                            <div class="invoice-details">
+                                                <address>
+                                                    <span id="client-name"></span><br>
+                                                    <span id="client-contact"></span>,<span id="client-address"></span>
+                                                </address>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                            <div class="invoice-details">
+                                                <div class="invoice-num">
+                                                    <div>Invoice - #<span id="invoice-number"></span></div>
+                                                    <div id="invoice-date"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                </div>
+                                <div class="invoice-body">
+                                    <!-- Row start -->
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table custom-table m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Reason</th>
+                                                            <th>Payment Method</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td id="date"></td>
+                                                            <td>
+                                                                <p id="reason" class="m-0 text-muted">
+
+                                                                </p>
+                                                            </td>
+                                                            <td><span id="payment-method">Cash</span></td>
+                                                            <td><span id="amount"></span></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td colspan="2">
+                                                                <h5 class="text-success text-right">
+                                                                    <strong>Total:</strong>
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                <h5 class="text-success"><strong
+                                                                        id="total-amount"></strong></h5>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="invoice-footer">
+                                                    <table
+                                                        style="border-collapse: collapse; width: 100%; border: 2px dashed #ccc;"
+                                                        border="1" width="100%">
+                                                        <tbody style="background-color: #f0f0f0;">
+                                                            <tr>
+                                                                <td style="padding-left: 15px;text-align: left; border-color: #ccc; border-width: 2px; width: 50%;"
+                                                                    align="left">
+                                                                    <p
+                                                                        style="margin: 0px; font-weight: bold; text-align: left;">
+                                                                        <span style="font-size: 10pt;">Total Paid</span>
+                                                                    </p>
+                                                                    <p
+                                                                        style="margin: 0px; font-size: 24px; color: black; text-align: left;">
+                                                                        <span style="font-size: 10pt;"><strong
+                                                                                id="total-paid"></strong></span>
+                                                                    </p>
+                                                                </td>
+                                                                <td style="padding-right: 15px; text-align: right; border-color: #ccc; border-width: 2px; width: 50%;"
+                                                                    align="right">
+                                                                    <p style="margin: 0; font-weight: bold;"><span
+                                                                            style="font-size: 10pt;">Total Due</span>
+                                                                    </p>
+                                                                    <p style="margin: 0; font-size: 24px; ">
+                                                                        <span style="font-size: 10pt;"><strong
+                                                                                id="total-due"></strong></span>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Row end -->
+                                </div>
+                                <div class="signature-area">
+                                    <div class="signature">
+                                        <div class="line"></div>
+                                        <p id="clientstatus">Client Signature</p>
+                                    </div>
+                                    <div class="signature">
+                                        <div class="line"></div>
+                                        <p>Authorized Signature</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>function formatNumber(num) {
+            const isNegative = num < 0;
+            const absNumStr = Math.abs(num).toString();
+            const lastThree = absNumStr.slice(-3);
+            let otherNumbers = absNumStr.slice(0, -3);
+
+            if (otherNumbers) {
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return (isNegative ? "-" : "") + otherNumbers + "," + lastThree;
+            } else {
+                return (isNegative ? "-" : "") + lastThree;
+            }
+        }
+
+    function formatNumber2(num) {
+      // Convert number to an absolute value for formatting
+      let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+
+      // Split last three digits and format the rest in groups of two
+      let lastThree = numStr.slice(-3);
+      let otherNumbers = numStr.slice(0, -3);
+
+      if (otherNumbers) {
+        // Format the other part with commas every two digits
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+        return otherNumbers + "," + lastThree;
+      } else {
+        return lastThree;
+      }
+    }
+        const printDataString = localStorage.getItem('printTransactionData');
+        const printData = JSON.parse(printDataString);
+        const data = {
+            invoiceNumber: `${printData.transactionData.serialNumber}`,
+            printdate: new Date().toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }) + ' ' + new Date().toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }),
+            clientName: printData.ownerInfo.name,
+            clientEmail: printData.ownerInfo.phone,
+            clientAddress: printData.ownerInfo.address,
+            clientstatus: printData.ownerInfo.state,
+            date: printData.transactionData.date,
+            reason: printData.transactionData.reason,
+            paymentMethod: printData.transactionData.paymentMethod || "Cash",
+            amount: Math.abs(printData.transactionData.amount),
+            totalPaid: printData.ownerInfo.Funding + "৳",
+            totalDue: printData.ownerInfo.due + "৳"
+        }
+        // Function to populate all elements with data
+        function populateInvoiceData() {
+            // Get all elements with IDs and populate them
+            const elements = document.querySelectorAll('[id]');
+
+            elements.forEach(element => {
+                const id = element.id;
+                let value = '';
+
+                switch (id) {
+                    case 'invoice-number':
+                        value = data.invoiceNumber;
+                        break;
+                    case 'invoice-date':
+                        value = data.printdate;
+                        break;
+                    case 'client-name':
+                        value = data.clientName;
+                        break;
+                    case 'client-contact':
+                        value = data.clientEmail;
+                        break;
+                    case 'client-address':
+                        value = data.clientAddress;
+                        break;
+                    case 'clientstatus':
+                        value = data.clientstatus + " Signature";
+                        break;
+                    case 'date':
+                        value = data.date;
+                        break;
+                    case 'reason':
+                        value = data.reason;
+                        break;
+                    case 'payment-method':
+                        value = data.paymentMethod;
+                        break;
+                    case 'amount':
+                        value = data.amount;
+                        break;
+                    case 'total-amount':
+                        value = formatNumber2(data.amount)+ "৳";
+                        break;
+                    case 'total-paid':
+                        value = data.totalPaid;
+                        break;
+                    case 'total-due':
+                        value = data.totalDue;
+                        break;
+                }
+
+                // Set the content based on element type
+                if (element.tagName === 'SPAN' || element.tagName === 'DIV') {
+                    element.textContent = value;
+                } else if (element.tagName === 'P') {
+                    element.textContent = value;
+                } else {
+                    element.innerHTML = value;
+                }
+            });
+        }
+
+        // Run the population function when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            populateInvoiceData();
+            window.print();
+            window.onafterprint = function () {
+                window.close();
+            }
+        });
+
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,12 @@
+
+Copyright (c) 2024 Building Plan EC&D
+
+**Notice on Unauthorized Software Copying**
+
+Building Plan EC&D strictly prohibits any unauthorized copying, sharing, or distribution of software within the company. Copying, reproducing, or installing software without a proper license or explicit authorization is a violation of company policy, software licensing agreements, and intellectual property rights.
+
+Employees found involved in unauthorized copying or sharing of software, including using unlicensed versions, unauthorized duplication, or distribution, will face strict disciplinary action, which may lead to immediate termination and potential legal proceedings, including the filing of a formal case.
+
+Building Plan EC&D is committed to upholding copyright laws and protecting intellectual property rights. Regular audits will be conducted to ensure compliance with all software licensing policies. Non-compliance with these rules poses risks to individual employees and exposes Building Plan EC&D to financial penalties and reputational damage.
+
+Please confirm that all software used in the organization is licensed and authorized. For any questions regarding software policies, contact the IT or compliance department.
