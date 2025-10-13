@@ -524,6 +524,7 @@
     .inputField:focus {
       outline: none;
     }
+
     .loader2 {
       width: 3.125rem;
       aspect-ratio: 1;
@@ -965,7 +966,7 @@
       document.getElementById(
         "costbtn"
       ).innerHTML = `Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;
-    } 
+    }
     document.title = `Owner List > ${userdata.name} ( ${checksta} )`;
     const sheetid = userdata.sheetid;
     const url =
@@ -1052,7 +1053,7 @@
         let due = totValue - recValue;
         due = Math.max(due, 0);
         const formattedDue = formatNumber(due);
-        
+
         // Animate the due amount text
         displayAnimatedText("due", formattedDue, "letter");
 
@@ -1071,11 +1072,11 @@
       // Handle negative numbers
       const isNegative = num < 0;
       const absNumStr = Math.abs(num).toString(); // Convert the absolute value to a string
-      
+
       // Split into the last three digits and the rest
       const lastThree = absNumStr.slice(-3);
       let otherNumbers = absNumStr.slice(0, -3);
-      
+
       if (otherNumbers) {
         // Format the other part with commas every two digits
         otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
@@ -1084,7 +1085,7 @@
         return (isNegative ? "-" : "") + lastThree;
       }
     }
-    
+
     function formatNumber2(num) {
       // Convert number to an absolute value for formatting
       let numStr = Math.abs(num).toString(); // Ignore sign for formatting
@@ -1211,37 +1212,39 @@
       .getElementById("transaction-list")
       .addEventListener("click", (event) => {
         const target = event.target;
-        
+
         // Handle Print Button
         if (target.classList.contains("print-btn")) {
           const transactionId = target.getAttribute("data-transaction-id");
           const transaction = transactions.find(
             (t) => t.serialNumber === parseInt(transactionId, 10)
           );
-          
+
           if (transaction) {
             // Extract payment method from reason if it exists
             let reasonText = transaction.Reason;
             let paymentMethod = "";
-            
+
             // Check if reason contains payment method in brackets [payment method]
             const paymentMatch = reasonText.match(/^(.*?)\s*\[([^\]]+)\]$/);
             if (paymentMatch) {
               reasonText = paymentMatch[1].trim(); // Reason without payment method
               paymentMethod = paymentMatch[2].trim(); // Payment method from brackets
             }
-            
+
             let printfunding = "0";
-  const printStates1 = ['owner', 'client'];
-const printStates2 = ['developer', 'constructor'];
+            const printStates1 = ['owner', 'client'];
+            const printStates2 = ['developer', 'constructor'];
 
-const state = checksta.toLowerCase().replace(/\s+/g, ''); // remove spaces for better match
+            const state = checksta.toLowerCase().replace(/\s+/g, ''); // remove spaces for better match
 
-if (printStates1.some(s => state.includes(s))) {
-    printfunding = document.getElementById("total-receive").innerText;
-  } else if (printStates2.some(s => state.includes(s))) {
-    printfunding = document.getElementById("total-cost").innerText;
-}
+            if (printStates1.some(s => state.includes(s))) {
+              printfunding = document.getElementById("total-receive").innerText;
+            } else if (printStates2.some(s => state.includes(s))) {
+              printfunding = document.getElementById("total-cost").innerText;
+            }
+
+            const timex = new Date().getTime().toString().slice(-5);
             // Store the transaction data in localStorage for the print page
             const printData = {
               ownerInfo: {
@@ -1260,7 +1263,7 @@ if (printStates1.some(s => state.includes(s))) {
                 paymentMethod: paymentMethod,
                 amount: transaction.Amount,
                 remark: transaction.remark,
-                serialNumber: "00" + transaction.serialNumber
+                serialNumber: transaction.serialNumber + "0" + timex,
               },
               timestamp: new Date().toISOString()
             };
@@ -1837,16 +1840,21 @@ if (printStates1.some(s => state.includes(s))) {
           const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
 
           const emailParams = {
-            name: name,
-            amount: amount,
-            totalpaid: totalpaid,
-            due: totaldue,
-            description: dermsg2,
-            payment: payment,
-            today: formattedDate,
-            username: `Admin`,
             to_email: email,
-            transactionId: transactionId,
+            // Invoice template variables only
+            clientName: userdata.name,
+            clientContact: userdata.phone,
+            clientAddress: userdata.land || "Not Provided",
+            invoiceNumber: transactionId,
+            invoiceDate: formattedDate,
+            date: formattedDate,
+            reason: dermsg2,
+            paymentMethod: payment || "Cash",
+            amount: amount,
+            totalAmount: `৳${formatNumber2(amount)}`,
+            totalPaid: `${totalpaid}৳`,
+            totalDue: `${totaldue}৳`,
+            clientStatus: userdata.state
           };
 
           let emailSents = false; // Track if email was sent successfully
@@ -2047,16 +2055,21 @@ if (printStates1.some(s => state.includes(s))) {
           const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
 
           const emailParams = {
-            name: name,
-            amount: amount,
-            totalpaid: totalpaid,
-            due: totaldue,
-            description: dermsg2,
-            payment: payment,
-            today: formattedDate,
-            username: `Engr ${username}`,
             to_email: email,
-            transactionId: transactionId,
+            // Invoice template variables only
+            clientName: userdata.name,
+            clientContact: userdata.phone,
+            clientAddress: userdata.land || "Not Provided",
+            invoiceNumber: transactionId,
+            invoiceDate: formattedDate,
+            date: formattedDate,
+            reason: dermsg2,
+            paymentMethod: payment || "Cash",
+            amount: amount,
+            totalAmount: `৳${formatNumber2(amount)}`,
+            totalPaid: `${totalpaid}৳`,
+            totalDue: `${totaldue}৳`,
+            clientStatus: userdata.state
           };
 
           let emailSent = false; // Flag to track if email was sent successfully
@@ -2129,6 +2142,3 @@ if (printStates1.some(s => state.includes(s))) {
 
 
 </html>
-
-
-

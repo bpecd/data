@@ -913,15 +913,15 @@
 
             const cldata = JSON.parse(localStorage.getItem('cldata'));
             let state = cldata.state;
-            
 
-             
+
+
             // Make sure cldata exists before checking the state
             if (!cldata) {
                 window.location.href = "developers.html";
             } else {
                 const validStates = ['electric', 'wasa', 'water', 'electricity', 'bill', 'staff', 'gas'];
-               const state = cldata.state.toLowerCase();
+                const state = cldata.state.toLowerCase();
 
 
                 showbtn2.innerText = validStates.includes(state) ? "Bill Pay" : showbtn2.innerText;
@@ -988,7 +988,7 @@
                     // Fetch client data using CSV
                     const clientResponse = await fetch(`https://docs.google.com/spreadsheets/d/${sheetid}/gviz/tq?tqx=out:csv`);
                     const clientCsvText = await clientResponse.text();
-                   
+
                     const clientRows = clientCsvText.split("\n");
                     clientData = clientRows.map((row) =>
                         row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
@@ -1338,15 +1338,15 @@
                     let printfunding = "0";
                     const state = cldata.state.toLowerCase().replace(/\s+/g, '');
 
-const printStates1 = ['owner', 'client'];
-const printStates2 = ['material', 'constructor', 'contructor', 'developer'];
+                    const printStates1 = ['owner', 'client'];
+                    const printStates2 = ['material', 'constructor', 'contructor', 'developer'];
 
-if (printStates1.some(s => state.includes(s))) {
-    printfunding = document.getElementById("total-receive")?.innerText;
-} else if (printStates2.some(s => state.includes(s))) {
-    printfunding = document.getElementById("total-cost")?.innerText;
-}
-
+                    if (printStates1.some(s => state.includes(s))) {
+                        printfunding = document.getElementById("total-receive")?.innerText;
+                    } else if (printStates2.some(s => state.includes(s))) {
+                        printfunding = document.getElementById("total-cost")?.innerText;
+                    }
+                    const timex = new Date().getTime().toString().slice(-5);
 
 
                     // Store the transaction data in localStorage for the print page
@@ -1367,7 +1367,7 @@ if (printStates1.some(s => state.includes(s))) {
                             paymentMethod: paymentMethod,
                             amount: transaction.Amount,
                             remark: transaction.remark,
-                            serialNumber: "00" + transaction.serialNumber
+                            serialNumber: transaction.serialNumber + "0" + timex,
                         },
                         timestamp: new Date().toISOString()
                     };
@@ -1907,16 +1907,21 @@ if (printStates1.some(s => state.includes(s))) {
                     let reasonable = document.getElementById('ereason').value;
 
                     const emailParams = {
-                        name: name,
-                        amount: amount,
-                        totalpaid: totalpaid,
-                        due: totaldue,
-                        description: reasonable,
-                        payment: payment,
-                        today: formattedDate,
-                        username: `Engr ${secureDataV2.name}`,
                         to_email: email,
-                        transactionId: transactionId,
+                        // Invoice template variables only
+                        clientName: cldata.name,
+                        clientContact: cldata.phone,
+                        clientAddress: cldata.land || "Not Provided",
+                        invoiceNumber: transactionId,
+                        invoiceDate: formattedDate,
+                        date: formattedDate,
+                        reason: reasonable,
+                        paymentMethod: payment || "Cash",
+                        amount: amount,
+                        totalAmount: `৳${formatNumber2(amount)}`,
+                        totalPaid: `${totalpaid}৳`,
+                        totalDue: `${totaldue}৳`,
+                        clientStatus: cldata.state
                     };
 
                     let emailSent = false; // Track whether an email was sent
@@ -2741,16 +2746,21 @@ if (printStates1.some(s => state.includes(s))) {
                     const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
                     let reasonable = document.getElementById('ereason').value;
                     const emailParams = {
-                        name: name,
-                        amount: amount,
-                        totalpaid: totalpaid,
-                        due: totaldue,
-                        description: reasonable,
-                        payment: payment,
-                        today: formattedDate,
-                        username: `Engr ${secureDataV2.name}`,
                         to_email: email,
-                        transactionId: transactionId,
+                        // Invoice template variables only
+                        clientName: cldata.name,
+                        clientContact: cldata.phone,
+                        clientAddress: cldata.land || "Not Provided",
+                        invoiceNumber: transactionId,
+                        invoiceDate: formattedDate,
+                        date: formattedDate,
+                        reason: reasonable,
+                        paymentMethod: payment || "Cash",
+                        amount: amount,
+                        totalAmount: `৳${formatNumber2(amount)}`,
+                        totalPaid: `${totalpaid}৳`,
+                        totalDue: `${totaldue}৳`,
+                        clientStatus: cldata.state
                     };
 
                     let emailSent = false;
@@ -2828,4 +2838,3 @@ if (printStates1.some(s => state.includes(s))) {
 
 
 </html>
-
