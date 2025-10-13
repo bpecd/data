@@ -1837,7 +1837,7 @@
           hour = hour ? String(hour).padStart(2, "0") : "12";
           const formattedDate = `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
           const email = userdata.mail;
-          const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
+          const transactionId = `E-ID-${Math.floor(Date.now() / 1000 / 60)}`;
 
           const emailParams = {
             to_email: email,
@@ -2052,7 +2052,7 @@
           const formattedDate = `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
           const email = userdata.mail;
           const username = secureDataV2.name;
-          const transactionId = `BDX-${Math.floor(Date.now() / 1000 / 60)}`;
+          const transactionId = `E-ID-${Math.floor(Date.now() / 1000 / 60)}`;
 
           const emailParams = {
             to_email: email,
