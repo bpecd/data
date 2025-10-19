@@ -331,7 +331,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <address class="text-right">
-                                                House # H/1, Road # N/S/2, Block # H<br>
+                                                House # H-1, Road # NS-2, Block # H<br>
                                                 Eastern Housing, Pallabi 2nd Phase<br>
                                                 Mirpur, Dhaka-1216.
                                             </address>
@@ -469,12 +469,12 @@
                                             class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                             <img src="iconss.png" alt="Logo" style="max-width:50px;">
                                             <p class="invoice-logo" style="margin: 0;">
-                                                Building Plan Engineering Consultant & Developers
+                                                Building Plan Engineering Consultant & Developer
                                             </p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <address class="text-right">
-                                                House # H/1, Road # N/S/2, Block # H<br>
+                                                House # H-1, Road # NS-2, Block # H<br>
                                                 Eastern Housing, Pallabi 2nd Phase<br>
                                                 Mirpur, Dhaka-1216.
                                             </address>
@@ -716,7 +716,9 @@
         // Run the population function when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             populateInvoiceData();
-            window.print();
+            setTimeout(() => {
+                window.print();
+            }, 500);
             window.onafterprint = function () {
                 window.close();
             }
