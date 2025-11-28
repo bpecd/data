@@ -604,7 +604,7 @@
         <div id="tnsso" class="menu">
             <span>No.</span>
             <span>Name</span>
-            <span>contactor / Flat</span>
+            <span>Work / Flat</span>
             <span>Phone No</span>
             <span>User Type</span>
             <span>Assign Date</span>
@@ -1514,53 +1514,40 @@
         }
 
         function getStatusIcon(status) {
-            switch (status.toLowerCase()) {
-                case 'paint':
-                    return '<i class="fa-duotone fa-regular fa-paint-roller" style="color:red;"></i>';
-                case 'other':
-                    return '<i class="fa-sharp-duotone fa-light fa-globe" style="color:green;"></i>';
-                case 'client':
-                    return '<i style="color:green;" class="fa-duotone fa-solid fa-users"></i>';
-                case 'flat owner':
-                    return '<i class="fa-regular fa-map-location-dot" style="color:green;"></i>';
-                case 'window':
-                    return '<i class="fa-sharp fa-solid fa-block-brick"></i>';
-                case 'land owner':
-                    return '<i class="fa-solid fa-map-location-dot" style="color:red;"></i>';
-                case 'owner':
-                    return '<i class="fa-solid fa-user-tag" style="color:red;"></i>';
-                case 'wasa':
-                    return '<i class="fa-duotone fa-regular fa-water" style="color:blue;"></i>';
-                case 'wood':
-                    return '<i class="fa-solid fa-bench-tree" style="color:#A1662F;"></i>';
-                case 'thai':
-                    return '<i class="fa-solid fa-user-tag" style="color:red;"></i>';
-                case 'labour':
-                    return '<i style="color:red;" class="fa-sharp fa-solid fa-user-helmet-safety"></i>';
-                case 'electric':
-                    return '<i style="color:blue" class="fa-duotone fa-regular fa-bolt"></i>';
-                case 'civil':
-                    return '<i style="color:blue;" class="fa-duotone fa-solid fa-user-secret"></i>';
-                case 'plumbing':
-                    return '<i style="color:black;" class="fa-duotone fa-solid fa-pipe-valve"></i>';
-                case 'tiles':
-                    return '<i style="color:orange;" class="fa-solid fa-grid"></i>';
-                case 'cement':
-                    return '<i style="color:#e1c16a;" class="fa-solid fa-bag-seedling"></i>';
-                case 'brick':
-                    return '<i style="color:red;" class="fa-regular fa-trowel-bricks"></i>';
-                case 'sand':
-                    return '<i style="color:black;" class="fa-duotone fa-solid fa-mountain"></i>';
-                case 'stone':
-                    return '<i style="color:blue;" class="fa-sharp fa-solid fa-gem"></i>';
-                case 'rod':
-                    return '<i style="color:black;" class="fa-duotone fa-regular fa-chopsticks"></i>';
-                case 'piling':
-                    return '<i style="color:black;" class="fa-sharp-duotone fa-regular fa-pipe-collar"></i>';
-                default:
-                    return '<i style="color:gray;" class="fa-solid fa-face-awesome"></i>';
-            }
-        }
+    const s = status.toLowerCase();
+
+    const iconMap = [
+        ['paint',       '<i class="fa-duotone fa-regular fa-paint-roller" style="color:pink;"></i>'],
+        ['other',       '<i class="fa-sharp-duotone fa-light fa-globe" style="color:green;"></i>'],
+        ['client',      '<i style="color:green;" class="fa-duotone fa-solid fa-users"></i>'],
+        ['flat owner',  '<i class="fa-regular fa-map-location-dot" style="color:green;"></i>'],
+        ['window',      '<i class="fa-sharp fa-solid fa-block-brick"></i>'],
+        ['land owner',  '<i class="fa-solid fa-map-location-dot" style="color:red;"></i>'],
+        ['owner',       '<i class="fa-solid fa-user-tag" style="color:red;"></i>'],
+        ['wasa',        '<i class="fa-duotone fa-regular fa-water" style="color:blue;"></i>'],
+        ['wood',        '<i class="fa-solid fa-bench-tree" style="color:#A1662F;"></i>'],
+        ['thai',        '<i class="fa-solid fa-user-tag" style="color:red;"></i>'],
+        ['labour',      '<i style="color:red;" class="fa-sharp fa-solid fa-user-helmet-safety"></i>'],
+        ['electric',    '<i style="color:blue" class="fa-duotone fa-regular fa-bolt"></i>'],
+        ['civil',       '<i style="color:blue;" class="fad fa-shovel"></i>'],
+        ['plumb',       '<i style="color:black;" class="fa-duotone fa-solid fa-pipe-valve"></i>'],
+        ['tiles',       '<i style="color:orange;" class="fa-solid fa-grid"></i>'],
+        ['cement',      '<i style="color:#e1c16a;" class="fa-solid fa-bag-seedling"></i>'],
+        ['brick',       '<i style="color:red;" class="fa-regular fa-trowel-bricks"></i>'],
+        ['sand',        '<i style="color:black;" class="fa-duotone fa-solid fa-mountain"></i>'],
+        ['stone',       '<i style="color:blue;" class="fa-sharp fa-solid fa-gem"></i>'],
+        ['rod',         '<i style="color:black;" class="fa-duotone fa-regular fa-chopsticks"></i>'],
+        ['supplier',        '<i class="fas fa-box-check" style="color:red;"></i>'],
+        ['piling',      '<i style="color:black;" class="fa-sharp-duotone fa-regular fa-pipe-collar"></i>']
+    ];
+
+    for (const [keyword, icon] of iconMap) {
+        if (s.includes(keyword)) return icon;
+    }
+
+    return '<i style="color:gray;" class="fa-solid fa-face-awesome"></i>'; // default
+}
+
         const showbtn = document.getElementById("adcost");
         const btns = document.getElementById("buttons");
         const showbtn2 = document.getElementById("lbcost");

@@ -848,39 +848,33 @@
             return 'Invalid Date';
         }
 
-        function getStatusIcon(status) {
-            switch (status.toLowerCase()) {
-                case 'office':
-                    return '<i class="fa-duotone fa-solid fa-phone-office" style="color:red;"></i>';
-                case 'office owner':
-                    return '<i class="fa-duotone fa-solid fa-chair-office" style="color:blue;"></i>';
-                case 'staff':
-                    return '<i class="fa-solid fa-user-headset" style="color:blue;"></i>';
-                case 'working':
-                    return '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>';
-                case 'end':
-                    return '<i class="fa-solid fa-box-check" style="color:green;"></i>';
-                case 'admin':
-                    return '<i class="fa-solid fa-user-robot" style="color:red;"></i>';
-                case 'land owner':
-                    return '<i class="fa-solid fa-street-view" style="color:magenta;"></i>';
-                case 'owner':
-                    return '<i class="fa-sharp fa-solid fa-user-tie" style="color:#069494;"></i>';
-                case 'engineer':
-                    return '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>';
-                case 'client':
-                    return '<i class="fa-solid fa-user-visor" style="color:#409c1f;"></i>';
-                case 'architect':
-                    return '<i class="fa-solid fa-pen-ruler" style="color:#409c1f;"></i>';
-                case 'developer':
-                    return '<i class="fa-solid fa-building-user" style="color:black;"></i>';
-                case 'close':
-                    return '<i class="fa-solid fa-xmark" style="color:red;"></i>';
-                default:
-                    return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';
-            }
-        }
-    </script>
+   function getStatusIcon(status) {
+    const s = status.toLowerCase();
+
+    const iconMap = [
+        ['office owner', '<i class="fa-duotone fa-solid fa-chair-office" style="color:blue;"></i>'],
+        ['office',       '<i class="fa-duotone fa-solid fa-phone-office" style="color:red;"></i>'],
+        ['staff',        '<i class="fa-solid fa-user-headset" style="color:blue;"></i>'],
+        ['working',      '<i class="fa-regular fa-bars-progress" style="color:blue;"></i>'],
+        ['end',          '<i class="fa-solid fa-box-check" style="color:green;"></i>'],
+        ['admin',        '<i class="fa-solid fa-user-robot" style="color:red;"></i>'],
+        ['land owner',   '<i class="fa-solid fa-street-view" style="color:magenta;"></i>'],
+        ['owner',        '<i class="fa-sharp fa-solid fa-user-tie" style="#069494;"></i>'],
+        ['engineer',     '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>'],
+        ['client',       '<i class="fa-solid fa-user-visor" style="color:#409c1f;"></i>'],
+        ['architect',    '<i class="fa-solid fa-pen-ruler" style="color:#409c1f;"></i>'],
+        ['developer',    '<i class="fa-solid fa-building-user" style="color:black;"></i>'],
+        ['supplier',        '<i class="fa-solid fa-box-isometric-tape" style="color:red;"></i>'],
+        ['close',        '<i class="fa-solid fa-xmark" style="color:red;"></i>'],
+    ];
+
+    for (const [keyword, icon] of iconMap) {
+        if (s.includes(keyword)) return icon;
+    }
+
+    return '<i class="fa-solid fa-cloud-question" style="color:gray;"></i>';  // default
+}
+ </script>
 </body>
 
 </html>
