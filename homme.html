@@ -555,6 +555,40 @@
             box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
         }
 
+        .email-confirm-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Editable email confirmation fields */
+        .email-editable-field {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.375rem;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: border-color 0.2s ease;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .email-editable-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .email-data-row.editable {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .email-data-row.editable .email-data-label {
+            margin-bottom: 0.25rem;
+        }
+
         @keyframes rotateIn {
             from {
                 opacity: 0;
@@ -1546,7 +1580,7 @@
                     const state = cldata.state.toLowerCase().replace(/\s+/g, '');
 
                     const printStates1 = ['owner', 'client'];
-                    const printStates2 = ['material', 'constructor', 'contractor','contructor', 'developer'];
+                    const printStates2 = ['material', 'constructor', 'contractor', 'contructor', 'developer'];
 
                     if (printStates1.some(s => state.includes(s))) {
                         printfunding = document.getElementById("total-receive")?.innerText;
@@ -1716,13 +1750,13 @@
 
             // Build confirmation data HTML
             const confirmDataHTML = `
-                <div class="email-data-row">
+                <div class="email-data-row editable">
                     <span class="email-data-label"><i class="fa-duotone fa-solid fa-user"></i> Client Name:</span>
-                    <span class="email-data-value">${cldata.name}</span>
+                    <input type="text" class="email-editable-field" id="editClientName" value="${cldata.name}">
                 </div>
-                <div class="email-data-row">
+                <div class="email-data-row editable">
                     <span class="email-data-label"><i class="fa-duotone fa-solid fa-envelope"></i> Email:</span>
-                    <span class="email-data-value">${cldata.mail}</span>
+                    <input type="email" class="email-editable-field" id="editClientEmail" value="${cldata.mail}">
                 </div>
                 <div class="email-data-row">
                     <span class="email-data-label"><i class="fa-duotone fa-solid fa-calendar"></i> Date:</span>
@@ -1761,6 +1795,27 @@
         // Close email confirmation modal
         function closeEmailConfirmation() {
             document.getElementById('emailConfirmModal').classList.remove('active');
+
+            // Reset modal inputs to original values
+            const cldata = JSON.parse(localStorage.getItem('cldata'));
+            const nameInput = document.getElementById('editClientName');
+            const emailInput = document.getElementById('editClientEmail');
+            if (nameInput && emailInput) {
+                nameInput.value = cldata.name;
+                emailInput.value = cldata.mail;
+            }
+
+            // Reset button states
+            const sendBtn = document.querySelector('.email-confirm-btn.send');
+            const cancelBtn = document.querySelector('.email-confirm-btn.cancel');
+            if (sendBtn) {
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fa-duotone fa-solid fa-paper-plane"></i> Send Email';
+            }
+            if (cancelBtn) {
+                cancelBtn.disabled = false;
+            }
+
             pendingEmailTransaction = null;
             pendingEmailButton = null;
         }
@@ -1768,9 +1823,24 @@
         // Confirm and send email
         function confirmSendEmail() {
             if (pendingEmailTransaction && pendingEmailButton) {
+                // Get edited values
+                const editedName = document.getElementById('editClientName').value;
+                const editedEmail = document.getElementById('editClientEmail').value;
+
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(editedEmail)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
                 // Store references
                 const transaction = pendingEmailTransaction;
                 const emailButton = pendingEmailButton;
+
+                // Add edited data to transaction
+                transaction.editedName = editedName;
+                transaction.editedEmail = editedEmail;
 
                 // Disable send button and show loading state in modal
                 const sendBtn = document.querySelector('.email-confirm-btn.send');
@@ -1807,7 +1877,7 @@
                 let totalPaid = "0";
                 const state = cldata.state.toLowerCase().replace(/\s+/g, '');
                 const printStates1 = ['owner', 'client'];
-                const printStates2 = ['material', 'constructor', 'contractor','contructor', 'developer'];
+                const printStates2 = ['material', 'constructor', 'contractor', 'contructor', 'developer'];
 
                 if (printStates1.some(s => state.includes(s))) {
                     totalPaid = document.getElementById("total-receive")?.innerText || "0";
@@ -1818,10 +1888,14 @@
                 const totalDue = document.getElementById("due")?.innerText || "0";
                 const transactionId = `E-ID-${Math.floor(Date.now() / 1000 / 60)}`;
 
+                // Use edited values if available, otherwise fall back to original data
+                const clientName = transaction.editedName || cldata.name;
+                const clientEmail = transaction.editedEmail || cldata.mail;
+
                 // Prepare email parameters
                 const emailParams = {
-                    to_email: cldata.mail,
-                    clientName: cldata.name,
+                    to_email: clientEmail,
+                    clientName: clientName,
                     clientContact: cldata.phone,
                     clientAddress: cldata.land || "Not Provided",
                     invoiceNumber: transactionId,
@@ -1848,7 +1922,7 @@
                     );
                     emailSent = true;
                     closeEmailConfirmation(); // Close modal after success
-                    showEmailSuccess(emailButton, "Email sent successfully!");
+                    showEmailSuccess(emailButton, `Email sent successfully!`);
                 } catch (error) {
                     console.error("First email service failed:", error);
                 }
@@ -1863,7 +1937,7 @@
                             "7Atp02WPiZ4w8sYOz"
                         );
                         closeEmailConfirmation(); // Close modal after success
-                        showEmailSuccess(emailButton, "Email sent via backup service!");
+                        showEmailSuccess(emailButton, `Email sent via backup service!`);
                     } catch (error) {
                         console.error("Second email service failed:", error);
                         closeEmailConfirmation(); // Close modal even on error
