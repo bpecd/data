@@ -246,6 +246,8 @@
             opacity: 0;
             transform: translateY(5vh);
             animation: fadeIn 1s forwards;
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes fadeIn {
@@ -259,6 +261,7 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
+            
         }
 
         .top-bar .nav-items a {
@@ -267,15 +270,16 @@
             display: flex;
             align-items: center;
             gap: 0.50rem;
+            border-radius: 0.625rem;
             text-decoration: none;
-            transition: background-color 0.5s ease;
-            transition: padding 0.8s ease;
+            transition: background-color 0.5s ease, padding 0.8s ease;
         }
 
-        a:hover {
+        .top-bar .nav-items>a:hover,
+        .top-bar .nav-items .hover-container>a:hover {
             background-color: #ffb2f1;
             padding: 0.625rem;
-            border-radius: 0.938rem;
+            border-radius: 0.625rem;
         }
 
         @keyframes rotateIn {
@@ -304,7 +308,7 @@
             flex-direction: row;
             background-color: wheat;
             padding: 0.625rem;
-            border-radius: 25px;
+            border-radius: 0.625rem;
             margin-bottom: 0.625rem;
         }
 
@@ -322,66 +326,6 @@
             object-fit: cover;
         }
 
-        .hover-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Hover box - Positioned perfectly */
-        .hover-box {
-            display: none;
-            position: absolute;
-            top: 100%;
-            /* Position directly below */
-            left: 50%;
-            /* Center horizontally */
-            transform: translateX(-50%) translateY(10px);
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 0.625rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 0.5rem 1rem;
-            z-index: 10;
-            white-space: nowrap;
-
-            /* Ensures the gap is filled */
-            pointer-events: auto;
-            /* Keep events enabled */
-        }
-
-        /* Padding trick: hover area between anchor and box */
-        .hover-container::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            /* Bottom of anchor */
-            left: 0;
-            width: 100%;
-            height: 10px;
-            /* Covers the 10px gap */
-            background: transparent;
-            /* Invisible */
-        }
-
-        /* Show the hover box when hovering on container or hover box */
-        .hover-container:hover .hover-box,
-        .hover-box:hover {
-            display: block;
-        }
-
-        /* Hover Box Links */
-        .hover-box a {
-            display: block;
-            color: #000;
-            text-decoration: none;
-            padding: 0.25rem 0;
-        }
-
-        .hover-box a:hover {
-            background-color: #f0f0f0;
-            padding: 0.625rem;
-            border-radius: 0.938rem;
-        }
 
         .transaction-amount {
             font-size: 1rem;
@@ -468,7 +412,7 @@
             width: 11rem;
             height: 6.25rem;
             background-color: var(--bg-color, #fff);
-            border-radius: 0.938rem;
+            border-radius: 0.625rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -477,7 +421,7 @@
             font-weight: bold;
             overflow: hidden;
             text-align: left;
-            padding: 0 0.938rem;
+            padding: 0  0.625rem;
             transition: transform 0.5s ease;
             /* Smooth scaling on hover */
         }
@@ -614,6 +558,53 @@
             /* Prevent image from affecting layout */
             max-width: 100%;
         }
+
+        /* Dropdown Navigation */
+        .dropbtn {
+            padding: 0.625rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            padding: 0.75rem 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            box-shadow: 0px 0.5rem 1rem 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 0.625rem;
+        }
+
+        .top-bar .nav-items .dropdown-content a {
+            color: black;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 0.625rem;
+        }
+
+        .top-bar .nav-items .dropdown-content a:hover {
+            background-color: #b2d7ff;
+            border-radius: 0.625rem;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #ffb2f1;
+            border-radius: 0.625rem;
+        }
     </style>
 </head>
 
@@ -628,27 +619,28 @@
         <div class="nav-items">
             <!-- Main Dashboard -->
             <a class="backbtn"
-                style="color: #364fa1; font-weight: bold; font-size: large; background-color: #e8ecff; padding: 0.625rem; border-radius: 0.938rem;"
+                style="color: #364fa1; font-weight: bold; font-size: large; background-color: #e8ecff; padding: 0.625rem; border-radius:  0.625rem;"
                 href="#">
                 <i class="fa-solid fa-chart-waterfall"></i> Main Dashboard
             </a>
 
             <!-- Office Area -->
-            <div class="hover-container">
-                <a class="backbtn" href="officehome.html">
+            <div class="dropdown">
+                <a class="backbtn dropbtn" href="officehome.html">
                     <i class="fa-duotone fa-regular fa-person-seat-reclined"></i> Office Area
                 </a>
-                <div class="hover-box">
+                <div style="min-width: 8.2rem;" class="dropdown-content">
                     <a href="owners.html"><i class="fa-solid fa-bars-progress"></i> Owners</a>
+                    <a href="office.html"><i class="fa-solid fa-bars-progress"></i> Office</a>
                 </div>
             </div>
 
             <!-- Developer Company -->
-            <div class="hover-container">
-                <a class="backbtn" href="devhome.html">
+            <div class="dropdown">
+                <a class="backbtn dropbtn" href="devhome.html">
                     <i class="fa-regular fa-buildings"></i> Developer Company
                 </a>
-                <div class="hover-box">
+                <div style="min-width: 12.2rem;" class="dropdown-content">
                     <a href="developers.html"><i class="fa-solid fa-list-ol"></i> Projects</a>
                 </div>
             </div>
@@ -663,7 +655,7 @@
         <div style="display: flex; flex-direction: row; gap: 0.625rem;" class="logo">
             <img id="img" src="https://nfcard.github.io/login/user.jpg" alt="Logo">
             <button class="xbb"
-                style="cursor: pointer; border: none; font-size: 1.25rem; padding: 0.625rem; border-radius: 0.938rem; position: relative;"
+                style="cursor: pointer; border: none; font-size: 1.25rem; padding: 0.625rem; border-radius:  0.625rem; position: relative;"
                 id="clearButton">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </button>
@@ -741,7 +733,7 @@
             style="width:100%;display: flex;flex-direction: row;justify-content: flex-start;align-items: left;">
 
             <div class="stats-container">
-                <div class="stat-card" style="--bg-color: #1b2850;">
+                <div onclick="window.location.href='owners.html'" class="stat-card" style="--bg-color: #1b2850;">
                     <div class="stat-content">
                         <div class="stat-info">
                             <div class="stat-label">Owners</div>
@@ -751,7 +743,7 @@
                         <i class="stat-icon fa-duotone fa-regular fa-users"></i>
                     </div>
                 </div>
-                <div class="stat-card" style="--bg-color: #209655;">
+                <div onclick="window.location.href='developers.html'" class="stat-card" style="--bg-color: #209655;">
                     <div class="stat-content">
                         <div class="stat-info">
                             <div class="stat-label">Projects</div>
@@ -1193,7 +1185,7 @@
                 window.location.href = "index.html";
             }, 900);
         });
- </script>
+    </script>
 </body>
 
 </html>
