@@ -611,22 +611,22 @@
             }
         }
 
-    function formatNumber2(num) {
-      // Convert number to an absolute value for formatting
-      let numStr = Math.abs(num).toString(); // Ignore sign for formatting
+        function formatNumber2(num) {
+            // Convert number to an absolute value for formatting
+            let numStr = Math.abs(num).toString(); // Ignore sign for formatting
 
-      // Split last three digits and format the rest in groups of two
-      let lastThree = numStr.slice(-3);
-      let otherNumbers = numStr.slice(0, -3);
+            // Split last three digits and format the rest in groups of two
+            let lastThree = numStr.slice(-3);
+            let otherNumbers = numStr.slice(0, -3);
 
-      if (otherNumbers) {
-        // Format the other part with commas every two digits
-        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
-        return otherNumbers + "," + lastThree;
-      } else {
-        return lastThree;
-      }
-    }
+            if (otherNumbers) {
+                // Format the other part with commas every two digits
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                return otherNumbers + "," + lastThree;
+            } else {
+                return lastThree;
+            }
+        }
         const printDataString = localStorage.getItem('printTransactionData');
         const printData = JSON.parse(printDataString);
         const data = {
@@ -692,7 +692,7 @@
                         value = data.amount;
                         break;
                     case 'total-amount':
-                        value = formatNumber2(data.amount)+ "৳";
+                        value = formatNumber2(data.amount) + "৳";
                         break;
                     case 'total-paid':
                         value = data.totalPaid;
@@ -716,9 +716,14 @@
         // Run the population function when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             populateInvoiceData();
-            setTimeout(() => {
-                window.print();
-            }, 500);
+            // Force a reflow to ensure rendering is complete
+            document.body.offsetHeight;
+            // Use requestAnimationFrame to ensure paint is complete
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    window.print();
+                });
+            });
             window.onafterprint = function () {
                 window.close();
             }

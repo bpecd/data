@@ -1378,67 +1378,99 @@
     document
       .getElementById("transaction-list")
       .addEventListener("click", (event) => {
-        const target = event.target;
+        let target = event.target;
+
+        // Handle clicks on icon inside button - traverse up to find the actual button
+        if (target.tagName === 'I') {
+          target = target.closest('button');
+        }
 
         // Handle Print Button
-        if (target.classList.contains("print-btn")) {
+        if (target && target.classList.contains("print-btn")) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          // Prevent double-clicks
+          if (target.disabled) return;
+          target.disabled = true;
+
           const transactionId = target.getAttribute("data-transaction-id");
           const transaction = transactions.find(
             (t) => t.serialNumber === parseInt(transactionId, 10)
           );
 
           if (transaction) {
-            // Extract payment method from reason if it exists
-            let reasonText = transaction.Reason;
-            let paymentMethod = "";
+            try {
+              // Extract payment method from reason if it exists
+              let reasonText = transaction.Reason;
+              let paymentMethod = "";
 
-            // Check if reason contains payment method in brackets [payment method]
-            const paymentMatch = reasonText.match(/^(.*?)\s*\[([^\]]+)\]$/);
-            if (paymentMatch) {
-              reasonText = paymentMatch[1].trim(); // Reason without payment method
-              paymentMethod = paymentMatch[2].trim(); // Payment method from brackets
+              // Check if reason contains payment method in brackets [payment method]
+              const paymentMatch = reasonText.match(/^(.*?)\s*\[([^\]]+)\]$/);
+              if (paymentMatch) {
+                reasonText = paymentMatch[1].trim(); // Reason without payment method
+                paymentMethod = paymentMatch[2].trim(); // Payment method from brackets
+              }
+
+              let printfunding = "0";
+              const printStates1 = ['owner', 'client'];
+              const printStates2 = ['constructor', 'contractor', 'contructor', 'developer'];
+
+              const state = checksta.toLowerCase().replace(/\s+/g, ''); // remove spaces for better match
+
+              if (printStates1.some(s => state.includes(s))) {
+                printfunding = document.getElementById("total-receive").innerText;
+              } else if (printStates2.some(s => state.includes(s))) {
+                printfunding = document.getElementById("total-cost").innerText;
+              }
+
+              const timex = new Date().getTime().toString().slice(-5);
+              // Store the transaction data in localStorage for the print page
+              const printData = {
+                ownerInfo: {
+                  name: userdata.name,
+                  phone: userdata.phone,
+                  email: userdata.mail,
+                  state: userdata.state,
+                  Funding: printfunding,
+                  due: document.getElementById("due").innerText,
+                  address: userdata.land || "Not Provided",
+                },
+                transactionData: {
+                  date: transaction.formattedDate,
+                  description: transaction.Description,
+                  reason: reasonText,
+                  paymentMethod: paymentMethod,
+                  amount: transaction.Amount,
+                  remark: transaction.remark,
+                  serialNumber: transaction.serialNumber + "0" + timex,
+                },
+                timestamp: new Date().toISOString()
+              };
+
+              localStorage.setItem("printTransactionData", JSON.stringify(printData));
+
+              // Visual feedback
+              const originalHTML = target.innerHTML;
+              target.innerHTML = '<i class="fa-duotone fa-solid fa-check"></i>';
+
+              // Open print page
+              setTimeout(() => {
+                window.open("invo.html", "_blank");
+                // Re-enable button after short delay
+                setTimeout(() => {
+                  target.innerHTML = originalHTML;
+                  target.disabled = false;
+                }, 1000);
+              }, 200);
+            } catch (error) {
+              console.error('Print error:', error);
+              alert('Error preparing print data. Please try again.');
+              target.disabled = false;
             }
-
-            let printfunding = "0";
-            const printStates1 = ['owner', 'client'];
-            const printStates2 = ['constructor', 'contractor', 'contructor', 'developer'];
-
-            const state = checksta.toLowerCase().replace(/\s+/g, ''); // remove spaces for better match
-
-            if (printStates1.some(s => state.includes(s))) {
-              printfunding = document.getElementById("total-receive").innerText;
-            } else if (printStates2.some(s => state.includes(s))) {
-              printfunding = document.getElementById("total-cost").innerText;
-            }
-
-            const timex = new Date().getTime().toString().slice(-5);
-            // Store the transaction data in localStorage for the print page
-            const printData = {
-              ownerInfo: {
-                name: userdata.name,
-                phone: userdata.phone,
-                email: userdata.mail,
-                state: userdata.state,
-                Funding: printfunding,
-                due: document.getElementById("due").innerText,
-                address: userdata.land || "Not Provided",
-              },
-              transactionData: {
-                date: transaction.formattedDate,
-                description: transaction.Description,
-                reason: reasonText,
-                paymentMethod: paymentMethod,
-                amount: transaction.Amount,
-                remark: transaction.remark,
-                serialNumber: transaction.serialNumber + "0" + timex,
-              },
-              timestamp: new Date().toISOString()
-            };
-
-            localStorage.setItem("printTransactionData", JSON.stringify(printData));
-
-            // Redirect to print page (you'll need to create this page)
-            window.open("invo.html", "_blank");
+          } else {
+            alert('Transaction data not found.');
+            target.disabled = false;
           }
           return; // Exit early for print button
         }
