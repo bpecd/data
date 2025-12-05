@@ -819,7 +819,7 @@
                 hour = hour % 12;
                 hour = hour ? String(hour).padStart(2, "0") : "12";
 
-                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+                return `${day}/${month}/${year} <br> ${hour}:${minute} ${ampm}`;
             } catch (error) {
                 console.error("Error formatting date:", error);
                 return dateInput; // Return original on error
@@ -859,7 +859,7 @@
         ['end',          '<i class="fa-solid fa-box-check" style="color:green;"></i>'],
         ['admin',        '<i class="fa-solid fa-user-robot" style="color:red;"></i>'],
         ['land owner',   '<i class="fa-solid fa-street-view" style="color:magenta;"></i>'],
-        ['owner',        '<i class="fa-sharp fa-solid fa-user-tie" style="#069494;"></i>'],
+        ['owner',        '<i class="fa-sharp fa-solid fa-house-user" style="#069494;"></i>'],
         ['engineer',     '<i class="fa-duotone fa-solid fa-user-secret" style="color:blue;"></i>'],
         ['client',       '<i class="fa-solid fa-user-visor" style="color:#409c1f;"></i>'],
         ['architect',    '<i class="fa-solid fa-pen-ruler" style="color:#409c1f;"></i>'],

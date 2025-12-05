@@ -1465,7 +1465,7 @@
                 hour = hour % 12;
                 hour = hour ? String(hour).padStart(2, "0") : "12";
 
-                return `${day}/${month}/${year} ${hour}:${minute} ${ampm}`;
+                return `${day}/${month}/${year} <br> ${hour}:${minute} ${ampm}`;
             } catch (error) {
                 console.error("Error formatting date:", error);
                 return dateInput; // Return original on error
@@ -1520,7 +1520,7 @@
         ['paint',       '<i class="fa-duotone fa-regular fa-paint-roller" style="color:pink;"></i>'],
         ['other',       '<i class="fa-sharp-duotone fa-light fa-globe" style="color:green;"></i>'],
         ['client',      '<i style="color:green;" class="fa-duotone fa-solid fa-users"></i>'],
-        ['flat owner',  '<i class="fa-regular fa-map-location-dot" style="color:green;"></i>'],
+        ['flat owner',  '<i class="fa-regular fa-house-user" style="color:green;"></i>'],
         ['window',      '<i class="fa-sharp fa-solid fa-block-brick"></i>'],
         ['land owner',  '<i class="fa-solid fa-map-location-dot" style="color:red;"></i>'],
         ['owner',       '<i class="fa-solid fa-user-tag" style="color:red;"></i>'],
