@@ -7,8 +7,6 @@
     <link rel="shortcut icon" href="logo.png" />
     <link rel="stylesheet" href="fontawesome/css/all.css" />
 
-    <link rel="stylesheet" href="fontawesome/css/duotone-regular.css" />
-
     <style>
       * {
         box-sizing: border-box;
@@ -716,14 +714,14 @@
             border-radius: 0.938rem;
           "
           href="officehome.html"
-          ><i class="fa-duotone fa-regular fa-chart-tree-map"></i> Office
+          ><i class="fa-solid fa-chart-tree-map"></i> Office
           Dashboard</a
         >
         <a class="backbtn" href="owners.html"
           ><i class="fa-solid fa-bars-progress"></i> Owners</a
         >
         <a class="backbtn" href="office.html"
-          ><i class="fa-duotone fa-solid fa-chair-office"></i> Office</a
+          ><i class="fa-solid fa-chair-office"></i> Office</a
         >
         <a class="backbtn" href="loan.html"
           ><i class="fa-solid fa-hand-holding-circle-dollar"></i> Loan</a
@@ -857,7 +855,7 @@
                   <div class="stat-number" id="customers-count">0</div>
                   <div class="stat-label">Owners</div>
                 </div>
-                <i class="stat-icon fa-duotone fa-regular fa-users"></i>
+                <i class="stat-icon fa-solid fa-users"></i>
               </div>
             </div>
             <div class="stat-card" style="--bg-color: #209655">
@@ -867,7 +865,7 @@
                   <div class="stat-label">transactions</div>
                 </div>
                 <i
-                  class="stat-icon fa-duotone fa-regular fa-clock-rotate-left"
+                  class="stat-icon fa-solid fa-clock-rotate-left"
                 ></i>
               </div>
             </div>
@@ -950,7 +948,7 @@
           >
             <i
               id="fire-search"
-              class="fa-duotone fa-regular fa-fire-flame-curved"
+              class="fa-solid fa-fire-flame-curved"
               style="color: #7a7a7a"
             ></i>
             <!-- Initial icon: Lock -->
@@ -969,7 +967,7 @@
                 '_blank',
               )
             "
-            class="fa-duotone fa-solid fa-file-spreadsheet"
+            class="fa-solid fa-file-spreadsheet"
             style="cursor: pointer"
           ></i>
         </div>
@@ -1822,8 +1820,8 @@
 
           if (isEditEnabled2) {
             // Enable editing: change to unlocked icon and set the state to true
-            editIcon2.classList.remove("fa-fire-flame-curved"); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
-            editIcon2.classList.add("fa-fire"); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+            editIcon2.classList.remove("fa-fire-flame-curved"); // Remove lock icon<i class="fa-solid fa-pen-field"></i>
+            editIcon2.classList.add("fa-fire"); // Add unlock icon<i class="fa-solid fa-pen-to-square"></i>
             editIcon2.style.color = "red"; // Set green color when editing is enabled
             editPermissionToggle2.classList.add("active");
             editPermissionToggle2.classList.remove("inactive");
@@ -1861,3 +1859,4 @@
     </script>
   </body>
 </html>
+

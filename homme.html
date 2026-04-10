@@ -5,8 +5,6 @@
     <title></title>
     <link rel="shortcut icon" href="logo.png" />
     <link rel="stylesheet" href="fontawesome/css/all.css" />
-
-    <link rel="stylesheet" href="fontawesome/css/duotone-regular.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -773,7 +771,7 @@
     <div class="email-confirm-modal" id="emailConfirmModal">
       <div class="email-confirm-content">
         <div class="email-confirm-header">
-          <i class="fa-duotone fa-solid fa-envelope-circle-check"></i>
+          <i class="fa-solid fa-envelope-circle-check"></i>
           <h2>Confirm Email</h2>
         </div>
         <div class="email-confirm-data" id="emailConfirmData">
@@ -784,10 +782,10 @@
             class="email-confirm-btn cancel"
             onclick="closeEmailConfirmation()"
           >
-            <i class="fa-duotone fa-solid fa-times"></i> Cancel
+            <i class="fa-solid fa-times"></i> Cancel
           </button>
           <button class="email-confirm-btn send" onclick="confirmSendEmail()">
-            <i class="fa-duotone fa-solid fa-paper-plane"></i> Send Email
+            <i class="fa-solid fa-paper-plane"></i> Send Email
           </button>
         </div>
       </div>
@@ -990,7 +988,7 @@
           </button>
           <div style="display: none" id="buttons" class="buttons">
             <pre>
-<button class="claim-button1" style="cursor: pointer;" onclick="location.reload()"><i class="fa-duotone fa-solid fa-turn-left"></i></button>
+<button class="claim-button1" style="cursor: pointer;" onclick="location.reload()"><i class="fa-solid fa-turn-left"></i></button>
                     <input list="materials" id="mname" class="button" placeholder="Material Name + Reason">
                     <input class="button" type="tel" id="reminderDate1" oninput="formatIndianNumberInput(this)" placeholder="পরিমাণ (100)">
                     <input id="munit" class="button" placeholder="Suplier_name vc- voucher_no.">
@@ -1013,12 +1011,12 @@
                     <label id="lbl">
                         <input type="checkbox" id="dueCheckbox"> Due payment?
                     </label> 
-                    <button class="buttonx cost-btn" id="mcostbtn">Cost <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i></button><button class="buttonx receive-btn" id="mrecbtn">Receive <i class="fa-duotone fa-solid fa-arrow-down-to-bracket"></i></button>
+                    <button class="buttonx cost-btn" id="mcostbtn">Cost <i class="fa-solid fa-circle-dollar-to-slot"></i></button><button class="buttonx receive-btn" id="mrecbtn">Receive <i class="fa-solid fa-arrow-down-to-bracket"></i></button>
                 </pre>
           </div>
           <div style="display: none" id="buttons22" class="buttons">
             <pre>
-<button class="claim-button1" onclick="location.reload()"><i class="fa-duotone fa-solid fa-turn-left"></i></button>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-solid fa-turn-left"></i></button>
                     <input list="jobs" id="lreason" class="button" placeholder="Reason">
                     <datalist id="jobs"><option value="Electric">
                         <option value="Plumbing">
@@ -1033,12 +1031,12 @@
                    
                     <input id="lamount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
 
-                    <button class="buttonx cost-btn" id="lcostbtn">Payment <i class="fa-duotone fa-solid fa-arrow-up-from-bracket"></i></button><button class="buttonx receive-btn" id="lrecbtn">Receive <i class="fa-duotone fa-solid fa-arrow-down-to-bracket"></i></button>
+                    <button class="buttonx cost-btn" id="lcostbtn">Payment <i class="fa-solid fa-arrow-up-from-bracket"></i></button><button class="buttonx receive-btn" id="lrecbtn">Receive <i class="fa-solid fa-arrow-down-to-bracket"></i></button>
                     </pre>
           </div>
           <div style="display: none" id="buttons222" class="buttons">
             <pre>
-<button class="claim-button1" onclick="location.reload()"><i class="fa-duotone fa-solid fa-turn-left"></i></button>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-solid fa-turn-left"></i></button>
                     <input list="reasonss" id="ereason" class="button" placeholder="Reason">
                     <input list="ppm" id="payment" class="button" placeholder="Payment Mathod">
                     <datalist id="reasonss" >
@@ -1062,7 +1060,7 @@
 
                     <input id="eamount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
 
-                    <button class="buttonx cost-btn" id="ecostbtn">Give <i class="fa-duotone fa-solid fa-arrow-up-from-bracket"></i></button><button class="buttonx receive-btn" id="erecbtn">Receive <i class="fa-duotone fa-solid fa-arrow-down-to-bracket"></i></button>
+                    <button class="buttonx cost-btn" id="ecostbtn">Give <i class="fa-solid fa-arrow-up-from-bracket"></i></button><button class="buttonx receive-btn" id="erecbtn">Receive <i class="fa-solid fa-arrow-down-to-bracket"></i></button>
                     
                     <label id="lbl">
                         <input type="checkbox" id="mailCheckbox"> Send Give / Receive mail?
@@ -1094,7 +1092,7 @@
             placeholder="Search..."
             oninput="filterTransactions()"
           />
-          <i id="shtl" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+          <i id="shtl" class="fa-solid fa-file-spreadsheet"></i>
         </div>
       </div>
 
@@ -1676,8 +1674,8 @@
                             }
                         </div>
                         <div style="flex: 1; text-align: center;" class="action-buttons">
-                            <button class="email-btn" data-transaction-id="${serialNumber}" title="Send Email"><i class="fa-duotone fa-solid fa-envelope"></i></button>
-                            <button class="print-btn" data-transaction-id="${serialNumber}" title="Print Receipt"><i class="fa-duotone fa-solid fa-print"></i></button>
+                            <button class="email-btn" data-transaction-id="${serialNumber}" title="Send Email"><i class="fa-solid fa-envelope"></i></button>
+                            <button class="print-btn" data-transaction-id="${serialNumber}" title="Print Receipt"><i class="fa-solid fa-print"></i></button>
                         </div>
                     </div>
                 `;
@@ -1782,7 +1780,7 @@
                 // Visual feedback
                 const originalHTML = target.innerHTML;
                 target.innerHTML =
-                  '<i class="fa-duotone fa-solid fa-check"></i>';
+                  '<i class="fa-solid fa-check"></i>';
 
                 // Open print page
                 setTimeout(() => {
@@ -1876,44 +1874,44 @@
         // Build confirmation data HTML
         const confirmDataHTML = `
                 <div class="email-data-row editable">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-user"></i> Client Name:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-user"></i> Client Name:</span>
                     <input type="text" class="email-editable-field" id="editClientName" value="${cldata.name}">
                 </div>
                 <div class="email-data-row editable">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-envelope"></i> Email:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-envelope"></i> Email:</span>
                     <input type="email" class="email-editable-field" id="editClientEmail" value="${cldata.mail}">
                 </div>
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-calendar"></i> Date:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-calendar"></i> Date:</span>
                     <span class="email-data-value">${transaction.formattedDate}</span>
                 </div>
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-file-lines"></i> Description:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-file-lines"></i> Description:</span>
                     <span class="email-data-value">${transaction.Description}</span>
                 </div>
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-tag"></i> Reason:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-tag"></i> Reason:</span>
                     <span class="email-data-value">${reasonText}</span>
                 </div>
                 ${
                   paymentMethod
                     ? `
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-credit-card"></i> Payment Method:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-credit-card"></i> Payment Method:</span>
                     <span class="email-data-value">${paymentMethod}</span>
                 </div>
                 `
                     : ""
                 }
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-money-bill-wave"></i> Amount (${amountType}):</span>
+                    <span class="email-data-label"><i class="fa-solid fa-money-bill-wave"></i> Amount (${amountType}):</span>
                     <span class="email-data-value" style="color: ${amountColor}; font-size: 1.2rem; font-weight: 700;">৳${formatNumber2(Math.abs(transaction.Amount))}</span>
                 </div>
                 ${
                   transaction.remark
                     ? `
                 <div class="email-data-row">
-                    <span class="email-data-label"><i class="fa-duotone fa-solid fa-note-sticky"></i> Remark:</span>
+                    <span class="email-data-label"><i class="fa-solid fa-note-sticky"></i> Remark:</span>
                     <span class="email-data-value">${transaction.remark}</span>
                 </div>
                 `
@@ -1944,7 +1942,7 @@
         if (sendBtn) {
           sendBtn.disabled = false;
           sendBtn.innerHTML =
-            '<i class="fa-duotone fa-solid fa-paper-plane"></i> Send Email';
+            '<i class="fa-solid fa-paper-plane"></i> Send Email';
         }
         if (cancelBtn) {
           cancelBtn.disabled = false;
@@ -1981,13 +1979,13 @@
           const cancelBtn = document.querySelector(".email-confirm-btn.cancel");
           sendBtn.disabled = true;
           sendBtn.innerHTML =
-            '<i class="fa-duotone fa-solid fa-spinner-third fa-spin"></i> Sending...';
+            '<i class="fa-solid fa-spinner-third fa-spin"></i> Sending...';
           cancelBtn.disabled = true;
 
           // Disable email button to prevent multiple clicks
           emailButton.disabled = true;
           emailButton.innerHTML =
-            '<i class="fa-duotone fa-solid fa-spinner-third fa-spin"></i>';
+            '<i class="fa-solid fa-spinner-third fa-spin"></i>';
 
           // Call the email function (modal will close after email is sent)
           sendTransactionEmail(transaction, emailButton);
@@ -2100,7 +2098,7 @@
       // Show success message
       function showEmailSuccess(button, message) {
         button.innerHTML =
-          '<i class="fa-duotone fa-solid fa-circle-check"></i>';
+          '<i class="fa-solid fa-circle-check"></i>';
         button.style.background =
           "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)";
 
@@ -2130,7 +2128,7 @@
         // Reset button after 3 seconds
         setTimeout(() => {
           button.disabled = false;
-          button.innerHTML = '<i class="fa-duotone fa-solid fa-envelope"></i>';
+          button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
           button.style.background =
             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
         }, 3000);
@@ -2139,7 +2137,7 @@
       // Show error message
       function showEmailError(button, message) {
         button.innerHTML =
-          '<i class="fa-duotone fa-solid fa-circle-xmark"></i>';
+          '<i class="fa-solid fa-circle-xmark"></i>';
         button.style.background =
           "linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%)";
 
@@ -2168,7 +2166,7 @@
         // Reset button after 3 seconds
         setTimeout(() => {
           button.disabled = false;
-          button.innerHTML = '<i class="fa-duotone fa-solid fa-envelope"></i>';
+          button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
           button.style.background =
             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
         }, 3000);
@@ -2292,7 +2290,7 @@
             emailButton.setAttribute("data-transaction-id", serialNumber);
             emailButton.setAttribute("title", "Send Email");
             emailButton.innerHTML =
-              '<i class="fa-duotone fa-solid fa-envelope"></i>';
+              '<i class="fa-solid fa-envelope"></i>';
             actionDiv.appendChild(emailButton);
 
             // Print Button
@@ -2301,7 +2299,7 @@
             printButton.setAttribute("data-transaction-id", serialNumber);
             printButton.setAttribute("title", "Print Receipt");
             printButton.innerHTML =
-              '<i class="fa-duotone fa-solid fa-print"></i>';
+              '<i class="fa-solid fa-print"></i>';
             actionDiv.appendChild(printButton);
 
             transactionDiv.appendChild(actionDiv);
@@ -3652,3 +3650,4 @@
     </script>
   </body>
 </html>
+

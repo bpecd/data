@@ -5,7 +5,6 @@
     <link rel="shortcut icon" href="logo.png" />
     <title></title>
     <link rel="stylesheet" href="fontawesome/css/all.css" />
-    <link rel="stylesheet" href="fontawesome/css/duotone-regular.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -803,7 +802,7 @@
     <div class="email-confirm-modal" id="emailConfirmModal">
       <div class="email-confirm-content">
         <div class="email-confirm-header">
-          <i class="fa-duotone fa-solid fa-envelope-circle-check"></i>
+          <i class="fa-solid fa-envelope-circle-check"></i>
           <h2>Confirm Email</h2>
         </div>
         <div class="email-confirm-data" id="emailConfirmData">
@@ -814,10 +813,10 @@
             class="email-confirm-btn cancel"
             onclick="closeEmailConfirmation()"
           >
-            <i class="fa-duotone fa-solid fa-times"></i> Cancel
+            <i class="fa-solid fa-times"></i> Cancel
           </button>
           <button class="email-confirm-btn send" onclick="confirmSendEmail()">
-            <i class="fa-duotone fa-solid fa-paper-plane"></i> Send Email
+            <i class="fa-solid fa-paper-plane"></i> Send Email
           </button>
         </div>
       </div>
@@ -953,7 +952,7 @@
           <div style="display: none" id="buttons222" class="buttons">
             <pre>
 <button class="claim-button1" onclick="location.reload()">
-<i class="fa-duotone fa-solid fa-turn-left"></i></button>
+<i class="fa-solid fa-turn-left"></i></button>
                     <input list="reasonss" id="reason" class="button" placeholder="Reason">
                     <input list="ppm" id="payment" class="button" placeholder="Payment Mathod">
                     <datalist id="reasonss" >
@@ -974,7 +973,7 @@
                 </datalist>
                     <input id="amount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
 
-                    <button class="buttonx cost-btn" id="costbtn">Cost <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i></button><button class="buttonx receive-btn" id="recbtn">Receive <i class="fa-duotone fa-solid fa-arrow-down-to-bracket"></i></button>
+                    <button class="buttonx cost-btn" id="costbtn">Cost <i class="fa-solid fa-circle-dollar-to-slot"></i></button><button class="buttonx receive-btn" id="recbtn">Receive <i class="fa-solid fa-arrow-down-to-bracket"></i></button>
                     
                      <label id="lbl">
                         <input type="checkbox" id="mailCheckbox"> Send Receive / Give mail?
@@ -1011,7 +1010,7 @@
           >
             <i
               id="fire-search"
-              class="fa-duotone fa-regular fa-fire-flame-curved"
+              class="fa-solid fa-fire-flame-curved"
               style="color: #7a7a7a"
             ></i>
           </button>
@@ -1021,7 +1020,7 @@
             placeholder="Search..."
             oninput="filterTransactions()"
           />
-          <i id="shtl" class="fa-duotone fa-solid fa-file-spreadsheet"></i>
+          <i id="shtl" class="fa-solid fa-file-spreadsheet"></i>
         </div>
       </div>
 
@@ -1123,8 +1122,8 @@
 
           if (isEditEnabled2) {
             // Enable editing: change to unlocked icon and set the state to true
-            editIcon2.classList.remove("fa-fire-flame-curved"); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
-            editIcon2.classList.add("fa-fire"); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+            editIcon2.classList.remove("fa-fire-flame-curved"); // Remove lock icon<i class="fa-solid fa-pen-field"></i>
+            editIcon2.classList.add("fa-fire"); // Add unlock icon<i class="fa-solid fa-pen-to-square"></i>
             editIcon2.style.color = "red"; // Set green color when editing is enabled
             editPermissionToggle2.classList.add("active");
             editPermissionToggle2.classList.remove("inactive");
@@ -1195,7 +1194,7 @@
         document.getElementById("resultElem").innerHTML =
           `Sum Balance: <span style="color: blue;padding: 0.313rem;background-color: #ebf1ff;border-radius: 0.938rem;" id="balance"></span> BDT`;
         document.getElementById("costbtn").innerHTML =
-          `Give <i class="fa-duotone fa-solid fa-circle-dollar-to-slot"></i>`;
+          `Give <i class="fa-solid fa-circle-dollar-to-slot"></i>`;
       }
       document.title = `Owner List > ${userdata.name} ( ${checksta} )`;
       const sheetid = userdata.sheetid;
@@ -1439,8 +1438,8 @@
                     }
                 </div>
                 <div style="flex: 1; text-align: center;" class="action-buttons">
-                    <button class="email-btn" data-transaction-id="${serialNumber}" title="Send Email"><i class="fa-duotone fa-solid fa-envelope"></i></button>
-                    <button class="print-btn" data-transaction-id="${serialNumber}" title="Print Receipt"><i class="fa-duotone fa-solid fa-print"></i></button>
+                    <button class="email-btn" data-transaction-id="${serialNumber}" title="Send Email"><i class="fa-solid fa-envelope"></i></button>
+                    <button class="print-btn" data-transaction-id="${serialNumber}" title="Print Receipt"><i class="fa-solid fa-print"></i></button>
                 </div>
             </div>
         `;
@@ -1539,7 +1538,7 @@
                 // Visual feedback
                 const originalHTML = target.innerHTML;
                 target.innerHTML =
-                  '<i class="fa-duotone fa-solid fa-check"></i>';
+                  '<i class="fa-solid fa-check"></i>';
 
                 // Open print page
                 setTimeout(() => {
@@ -1631,44 +1630,44 @@
         // Build confirmation data HTML
         const confirmDataHTML = `
         <div class="email-data-row editable">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-user"></i> Client Name:</span>
+          <span class="email-data-label"><i class="fa-solid fa-user"></i> Client Name:</span>
           <input type="text" class="email-editable-field" id="editableClientName" value="${userdata.name}">
         </div>
         <div class="email-data-row editable">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-envelope"></i> Email:</span>
+          <span class="email-data-label"><i class="fa-solid fa-envelope"></i> Email:</span>
           <input type="email" class="email-editable-field" id="editableClientEmail" value="${userdata.mail}">
         </div>
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-calendar"></i> Date:</span>
+          <span class="email-data-label"><i class="fa-solid fa-calendar"></i> Date:</span>
           <span class="email-data-value">${transaction.formattedDate}</span>
         </div>
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-file-lines"></i> Description:</span>
+          <span class="email-data-label"><i class="fa-solid fa-file-lines"></i> Description:</span>
           <span class="email-data-value">${transaction.Description}</span>
         </div>
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-tag"></i> Reason:</span>
+          <span class="email-data-label"><i class="fa-solid fa-tag"></i> Reason:</span>
           <span class="email-data-value">${reasonText}</span>
         </div>
         ${
           paymentMethod
             ? `
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-credit-card"></i> Payment Method:</span>
+          <span class="email-data-label"><i class="fa-solid fa-credit-card"></i> Payment Method:</span>
           <span class="email-data-value">${paymentMethod}</span>
         </div>
         `
             : ""
         }
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-money-bill-wave"></i> Amount (${amountType}):</span>
+          <span class="email-data-label"><i class="fa-solid fa-money-bill-wave"></i> Amount (${amountType}):</span>
           <span class="email-data-value" style="color: ${amountColor}; font-size: 1.2rem; font-weight: 700;">৳${formatNumber2(Math.abs(transaction.Amount))}</span>
         </div>
         ${
           transaction.remark
             ? `
         <div class="email-data-row">
-          <span class="email-data-label"><i class="fa-duotone fa-solid fa-note-sticky"></i> Remark:</span>
+          <span class="email-data-label"><i class="fa-solid fa-note-sticky"></i> Remark:</span>
           <span class="email-data-value">${transaction.remark}</span>
         </div>
         `
@@ -1691,7 +1690,7 @@
         if (sendBtn) {
           sendBtn.disabled = false;
           sendBtn.innerHTML =
-            '<i class="fa-duotone fa-solid fa-paper-plane"></i> Send Email';
+            '<i class="fa-solid fa-paper-plane"></i> Send Email';
         }
 
         if (cancelBtn) {
@@ -1741,13 +1740,13 @@
           const cancelBtn = document.querySelector(".email-confirm-btn.cancel");
           sendBtn.disabled = true;
           sendBtn.innerHTML =
-            '<i class="fa-duotone fa-solid fa-spinner-third fa-spin"></i> Sending...';
+            '<i class="fa-solid fa-spinner-third fa-spin"></i> Sending...';
           cancelBtn.disabled = true;
 
           // Disable email button to prevent multiple clicks
           emailButton.disabled = true;
           emailButton.innerHTML =
-            '<i class="fa-duotone fa-solid fa-spinner-third fa-spin"></i>';
+            '<i class="fa-solid fa-spinner-third fa-spin"></i>';
 
           // Call the email function with updated user data (modal will close after email is sent)
           sendTransactionEmail(transaction, emailButton, updatedUserData);
@@ -1862,7 +1861,7 @@
       // Show success message
       function showEmailSuccess(button, message) {
         button.innerHTML =
-          '<i class="fa-duotone fa-solid fa-circle-check"></i>';
+          '<i class="fa-solid fa-circle-check"></i>';
         button.style.background =
           "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)";
 
@@ -1892,7 +1891,7 @@
         // Reset button after 3 seconds
         setTimeout(() => {
           button.disabled = false;
-          button.innerHTML = '<i class="fa-duotone fa-solid fa-envelope"></i>';
+          button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
           button.style.background =
             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
         }, 3000);
@@ -1901,7 +1900,7 @@
       // Show error message
       function showEmailError(button, message) {
         button.innerHTML =
-          '<i class="fa-duotone fa-solid fa-circle-xmark"></i>';
+          '<i class="fa-solid fa-circle-xmark"></i>';
         button.style.background =
           "linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%)";
 
@@ -1930,7 +1929,7 @@
         // Reset button after 3 seconds
         setTimeout(() => {
           button.disabled = false;
-          button.innerHTML = '<i class="fa-duotone fa-solid fa-envelope"></i>';
+          button.innerHTML = '<i class="fa-solid fa-envelope"></i>';
           button.style.background =
             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
         }, 3000);
@@ -2069,7 +2068,7 @@
             emailButton.setAttribute("data-transaction-id", serialNumber);
             emailButton.setAttribute("title", "Send Email");
             emailButton.innerHTML =
-              '<i class="fa-duotone fa-solid fa-envelope"></i>';
+              '<i class="fa-solid fa-envelope"></i>';
             actionDiv.appendChild(emailButton);
 
             // Print Button
@@ -2078,7 +2077,7 @@
             printButton.setAttribute("data-transaction-id", serialNumber);
             printButton.setAttribute("title", "Print Receipt");
             printButton.innerHTML =
-              '<i class="fa-duotone fa-solid fa-print"></i>';
+              '<i class="fa-solid fa-print"></i>';
             actionDiv.appendChild(printButton);
 
             transactionDiv.appendChild(actionDiv);
@@ -2727,3 +2726,4 @@
     </script>
   </body>
 </html>
+

@@ -6,9 +6,6 @@
     <title>Bank balance</title>
     <link rel="shortcut icon" href="logo.png" />
     <link rel="stylesheet" href="fontawesome/css/all.css" />
-
-    <link rel="stylesheet" href="fontawesome/css/duotone-regular.css" />
-    <link rel="stylesheet" href="fontawesome/css/duotone-light.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -533,7 +530,7 @@
           ><i class="fa-solid fa-chart-waterfall"></i> Main Dashboard</a
         >
         <a class="backbtn" href="officehome.html"
-          ><i class="fa-duotone fa-regular fa-person-seat-reclined"></i> Office
+          ><i class="fa-solid fa-person-seat-reclined"></i> Office
           Area</a
         >
         <a class="backbtn" href="devhome.html"
@@ -615,7 +612,7 @@
             <i
               id="shtl2"
               style="color: blue"
-              class="fa-duotone fa-solid fa-file-spreadsheet"
+              class="fa-solid fa-file-spreadsheet"
             ></i>
             Bank Balance
           </h1>
@@ -688,7 +685,7 @@
  </datalist>
 <input id="acno"  class="button" placeholder="Account No.">
 <input id="amount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
-<button id="rec" class="buttonx receive-btn">Add <i class="fa-duotone fa-light fa-inbox-in"></i></button>
+<button id="rec" class="buttonx receive-btn">Add <i class="fa-solid fa-inbox-in"></i></button>
                         </pre>
             </div>
           </div>
@@ -708,7 +705,7 @@
         >
           <i
             id="edit-icon"
-            class="fa-duotone fa-regular fa-pen-to-square"
+            class="fa-solid fa-pen-to-square"
             style="color: #ff3021"
           ></i>
           <!-- Initial icon: Lock -->
@@ -816,8 +813,8 @@
 
           if (isEditEnabled) {
             // Enable editing: change to unlocked icon and set the state to true
-            editIcon.classList.remove("fa-pen-to-square"); // Remove lock icon<i class="fa-duotone fa-solid fa-pen-field"></i>
-            editIcon.classList.add("fa-pen-field"); // Add unlock icon<i class="fa-duotone fa-regular fa-pen-to-square"></i>
+            editIcon.classList.remove("fa-pen-to-square"); // Remove lock icon<i class="fa-solid fa-pen-field"></i>
+            editIcon.classList.add("fa-pen-field"); // Add unlock icon<i class="fa-solid fa-pen-to-square"></i>
             editIcon.style.color = "green"; // Set green color when editing is enabled
             editPermissionToggle.classList.add("active");
             editPermissionToggle.classList.remove("inactive");
@@ -1178,3 +1175,4 @@
     </script>
   </body>
 </html>
+

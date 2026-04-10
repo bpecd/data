@@ -56,7 +56,7 @@
             autocomplete="username"
             required
           />
-          <span class="fa-duotone fa-solid fa-mobile"></span>
+          <span class="fa-solid fa-mobile"></span>
         </div>
         <div class="field">
           <input
@@ -68,7 +68,7 @@
             autocomplete="current-password"
             required
           />
-          <span id="eye" class="fa-duotone fa-solid fa-lock-keyhole"></span>
+          <span id="eye" class="fa-solid fa-lock-keyhole"></span>
         </div>
         <div class="forgot-pass">
           <a href="verify.html?cp=cp">Reset Password?</a>
@@ -79,7 +79,7 @@
           >
         </div>
         <button style="cursor: pointer" id="sub" class="button">
-          <i id="icon" class="fa-duotone fa-regular fa-lock-keyhole-open"></i>
+          <i id="icon" class="fa-solid fa-lock-keyhole-open"></i>
         </button>
       </form>
     </div>
@@ -279,14 +279,13 @@
         if (togglePassword.classList.contains("fa-lock-keyhole")) {
           togglePassword.classList.remove("fa-lock-keyhole");
           togglePassword.classList.add("fa-lock-a");
-          togglePassword.classList.remove("fa-duotone"); // Remove fa-duotone when toggling to fa-lock-a
         } else {
           togglePassword.classList.remove("fa-lock-a");
           togglePassword.classList.add("fa-lock-keyhole");
-          togglePassword.classList.add("fa-duotone"); // Add fa-duotone back when toggling to fa-lock-keyhole
         }
       });
     </script>
     <script src="index.js"></script>
   </body>
 </html>
+
