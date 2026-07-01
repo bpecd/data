@@ -593,6 +593,30 @@
       background-color: #ffb2f1;
       border-radius: 0.625rem;
     }
+
+    /* Cash-in-hand eye icon */
+    /* Disable scale on the balance card so transform doesn't break hover detection */
+    #balance-card:hover {
+      transform: none;
+    }
+    #balance-card:hover .stat-icon {
+      transform: scale(1.2);
+    }
+    .balance-eye-icon {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.35);
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.25s ease, color 0.25s ease;
+      flex-shrink: 0;
+    }
+    #balance-card:hover .balance-eye-icon {
+      opacity: 1;
+    }
+    .balance-eye-icon.eye-active {
+      color: #ffe066;
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -809,11 +833,14 @@
           </div>
         </div>
       </div>
-      <div class="stat-card" style="--bg-color: #006fca; width: 21.875rem; margin-left: 1.25rem">
+      <div class="stat-card" id="balance-card" style="--bg-color: #006fca; width: 21.875rem; margin-left: 1.25rem">
         <div class="stat-content">
           <i class="stat-icon fa-solid fa-money-check-dollar"></i>
           <div class="stat-info">
-            <div class="stat-label">Available Balance</div>
+            <div style="display:flex;align-items:center;gap:0.4rem;">
+              <div class="stat-label" id="balance-label">Available Balance</div>
+              <i class="fa-solid fa-eye balance-eye-icon" id="balance-eye" title="Show cash in hand"></i>
+            </div>
             <div class="stat-number" style="
                   color: rgb(4, 119, 4);
                   padding: 0.313rem;
@@ -1181,6 +1208,11 @@
           balanceDisplay.style.color = "rgb(4, 119, 4)";
         }
 
+        // Store for cash-in-hand eye feature
+        window._dashBalance = balanceValue;
+        window._dashBank = bankBalance;
+        window._dashLoan = loanAmount;
+
         // Display totals and balance
         displayAnimatedText("total-cost", formatNumber(totalcost));
         displayAnimatedText("total-receive", formatNumber(totalreceive));
@@ -1311,6 +1343,117 @@
           window.location.href = "index.html";
         }, 900);
       });
+  </script>
+
+  <script>
+    // Cash-in-hand eye feature
+    (function () {
+      const SHOW_DURATION = 10000; // 10 seconds
+      let cashMode = false;
+      let timeLeft = 0;
+      let intervalId = null;
+      let isPaused = false;
+      let lastPointerX = -1, lastPointerY = -1;
+
+      const card = document.getElementById("balance-card");
+      const eyeBtn = document.getElementById("balance-eye");
+      const label = document.getElementById("balance-label");
+      const balanceEl = document.getElementById("balance");
+
+      let origText = "";
+      let origColor = "";
+
+      function getCashValue() {
+        const bal = window._dashBalance != null ? window._dashBalance : null;
+        const bank = window._dashBank != null ? window._dashBank : 0;
+        const loan = window._dashLoan != null ? window._dashLoan : 0;
+        if (bal === null) return null;
+        return bal - bank - loan;
+      }
+
+      function isPointerOverCard() {
+        const rect = card.getBoundingClientRect();
+        return lastPointerX >= rect.left && lastPointerX <= rect.right &&
+               lastPointerY >= rect.top  && lastPointerY <= rect.bottom;
+      }
+
+      function startCountdown() {
+        clearInterval(intervalId);
+        intervalId = setInterval(function () {
+          if (!isPaused) {
+            timeLeft -= 100;
+            if (timeLeft <= 0) {
+              clearInterval(intervalId);
+              intervalId = null;
+              exitCashMode();
+            }
+          }
+        }, 100);
+      }
+
+      function enterCashMode() {
+        if (cashMode) return;
+        const cash = getCashValue();
+        if (cash === null) return;
+
+        cashMode = true;
+        origText = balanceEl.textContent;
+        origColor = balanceEl.style.color;
+
+        label.textContent = "Available Cash";
+        eyeBtn.classList.add("eye-active");
+
+        if (cash >= 0) {
+          balanceEl.style.color = "rgb(4, 119, 4)";
+          displayAnimatedText("balance", formatNumber(cash));
+        } else {
+          balanceEl.style.color = "#aaa";
+          balanceEl.textContent = "—";
+        }
+
+        // If cursor is already over the card at click time, start paused
+        isPaused = isPointerOverCard();
+        timeLeft = SHOW_DURATION;
+        startCountdown();
+      }
+
+      function exitCashMode() {
+        if (!cashMode) return;
+        cashMode = false;
+        isPaused = false;
+        clearInterval(intervalId);
+        intervalId = null;
+
+        eyeBtn.classList.remove("eye-active");
+        label.textContent = "Available Balance";
+        balanceEl.style.color = origColor;
+        displayAnimatedText("balance", origText);
+      }
+
+      // Eye click toggles cash mode
+      eyeBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!cashMode) {
+          enterCashMode();
+        } else {
+          exitCashMode();
+        }
+      });
+
+      // Always track pointer coords so we know position even without movement
+      document.addEventListener("pointermove", function (e) {
+        lastPointerX = e.clientX;
+        lastPointerY = e.clientY;
+      });
+
+      // Pause on hover, resume on leave
+      card.addEventListener("mouseenter", function () {
+        isPaused = true;
+      });
+      card.addEventListener("mouseleave", function () {
+        if (cashMode) isPaused = false;
+      });
+    })();
   </script>
 </body>
 

@@ -872,6 +872,15 @@
                 " id="total-pdue"></span>
             BDT
           </div>
+          <div class="balance-info" style="margin-left:1rem;">
+            |&nbsp; Has:
+            <span style="
+                  color: rgb(235, 10, 224);
+                  font-family: &quot;Arial Black&quot;, sans-serif;
+                  font-size: 1.75rem;
+                " id="total-inhand">0</span>
+            BDT
+          </div>
         </div>
       </div>
     </div>
@@ -905,6 +914,13 @@
               background-color: rgb(117, 255, 138);
             " class="buttonx cost-btn" id="Entry">
           New Entry
+        </button>
+        <button style="
+              cursor: pointer;
+              color: #000;
+              background-color: rgb(255, 220, 100);
+            " class="buttonx cost-btn" id="givenBtn">
+          Given
         </button>
         <button style="
               cursor: pointer;
@@ -999,6 +1015,15 @@
                     <label id="lbl">
                         <input type="checkbox" id="mailCheckbox"> Send Give / Receive mail?
                     </label>    
+                </pre>
+        </div>
+        <div style="display: none" id="buttonsGiven" class="buttons">
+          <pre>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-solid fa-turn-left"></i></button>
+                    <input id="greason" class="button" placeholder="Reason">
+                    <input id="gamount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
+
+                    <button class="buttonx cost-btn" id="gsubmitbtn">Given <i class="fa-solid fa-arrow-up-from-bracket"></i></button>
                 </pre>
         </div>
       </div>
@@ -1106,6 +1131,7 @@
     const stt = e.state;
     if (stt !== "admin") {
       document.getElementById("Entry").style.display = "none";
+      document.getElementById("givenBtn").style.display = "none";
       document.getElementById("lbcost").style.display = "none";
       document.getElementById("adcost").style.display = "none";
       document.getElementById("shtl").style.display = "none";
@@ -1139,6 +1165,7 @@
         showbtn.style.display = "none";
         showbtn2.style.display = "none";
         showbtn3.style.display = "none";
+        document.getElementById("givenBtn").style.display = "none";
       });
 
       showbtn2.addEventListener("click", function () {
@@ -1147,6 +1174,7 @@
         showbtn.style.display = "none";
         showbtn2.style.display = "none";
         showbtn3.style.display = "none";
+        document.getElementById("givenBtn").style.display = "none";
       });
 
       showbtn3.addEventListener("click", function () {
@@ -1154,6 +1182,20 @@
         showbtn3.style.display = "none";
         showbtn2.style.display = "none";
         showbtn.style.display = "none";
+        document.getElementById("givenBtn").style.display = "none";
+      });
+
+      const showbtnGiven = document.getElementById("givenBtn");
+      const btnsGiven = document.getElementById("buttonsGiven");
+      showbtnGiven.addEventListener("click", function () {
+        btnsGiven.style.display = "block";
+        btns.style.display = "none";
+        btns2.style.display = "none";
+        btns3.style.display = "none";
+        showbtn.style.display = "none";
+        showbtn2.style.display = "none";
+        showbtn3.style.display = "none";
+        showbtnGiven.style.display = "none";
       });
 
       const cldata = JSON.parse(localStorage.getItem("cldata"));
@@ -1188,6 +1230,7 @@
         if (["client", "land owner", "flat owner", "owner"].includes(state)) {
           showbtn2.style.display = "none";
           showbtn.style.display = "none";
+          document.getElementById("givenBtn").style.display = "none";
         } else if (["other"].includes(state)) {
           showbtn2.innerText = "Bill Pay";
           document.getElementById("lreason").placeholder = "Bill reason";
@@ -1488,6 +1531,20 @@
       return dueamt; // Return the calculated amount for potential use elsewhere
     }
 
+    // Calculate "Given": total Given amounts - total cost (min 0)
+    function calculateAndDisplayInHand() {
+      let totalGiven = 0;
+      transactions.forEach((t) => {
+        const m = t.Description && t.Description.match(/^Given #(\d+(?:\.\d+)?)/i);
+        if (m) totalGiven += parseFloat(m[1]);
+      });
+      const costElem = document.getElementById("total-cost");
+      const totalCost = costElem ? parseFloat(costElem.textContent.replace(/,/g, "")) || 0 : 0;
+      const inhand = Math.max(0, totalGiven - totalCost);
+      const el = document.getElementById("total-inhand");
+      if (el) el.textContent = formatNumber2(inhand);
+    }
+
     function formatNumber2(num) {
       // Convert number to an absolute value for formatting
       let numStr = Math.abs(num).toString(); // Ignore sign for formatting
@@ -1563,11 +1620,19 @@
         const formattedAmount = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : "Due"} `;
         const rowClass = serialNumber % 2 === 0 ? "even" : "odd";
 
+        // Check if this is a "Given" entry
+        const givenMatch = Description.match(/^Given #(\d+(?:\.\d+)?)/i);
+        const isGiven = !!givenMatch;
+        const givenAmt = isGiven ? parseFloat(givenMatch[1]) : 0;
+        const displayAmount = isGiven ? `৳${formatNumber2(givenAmt)}` : formattedAmount;
+        const amtClass = isGiven ? "neutral" : (Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral");
+        const descStyle = isGiven ? `style="flex:1;text-align:center;color:#999;font-style:italic;"` : `style="flex:1;text-align:center;cursor:pointer;"`;
+
         htmlContent += `
                     <div class="transaction ${rowClass}" style="display: flex; justify-content: space-between;" data-transaction-id="${serialNumber}">
                         <div style="flex: 1; text-align: center;">${formattedDate}</div>
                         <div 
-                            style="flex: 1; text-align: center; cursor: pointer;" 
+                            ${descStyle}
                             class="transaction-description" 
                             data-transaction-id="${serialNumber}" 
                             data-column="B">
@@ -1582,10 +1647,10 @@
                         </div>
                         <div 
                             style="flex: 1; text-align: center; cursor: pointer;" 
-                            class="transaction-amount ${Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral"}" 
+                            class="transaction-amount ${amtClass}" 
                             data-transaction-id="${serialNumber}" 
                             data-column="D">
-                            ${formattedAmount}
+                            ${displayAmount}
                         </div>
                         <div style="flex: 1; text-align: center;">
                             ${remark
@@ -1607,6 +1672,7 @@
       container.innerHTML = htmlContent;
       // Calculate payment due immediately after transaction data is loaded
       calculateAndDisplayPaymentDue();
+      calculateAndDisplayInHand();
     }
 
     // Add Remark and Editing Logic
@@ -2153,6 +2219,12 @@
           descriptionDiv.classList.add("transaction-description");
           descriptionDiv.setAttribute("data-transaction-id", serialNumber);
           descriptionDiv.setAttribute("data-column", "B");
+          if (/^Given #/i.test(Description)) {
+            descriptionDiv.style.color = "#999";
+            descriptionDiv.style.fontStyle = "italic";
+          } else {
+            descriptionDiv.style.cursor = "pointer";
+          }
           descriptionDiv.textContent = Description;
           transactionDiv.appendChild(descriptionDiv);
 
@@ -2171,12 +2243,17 @@
           amountDiv.style.flex = "1";
           amountDiv.style.textAlign = "center";
           amountDiv.classList.add("transaction-amount");
-          amountDiv.classList.add(
-            Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral",
-          );
+          const givenMatchF = Description.match(/^Given #(\d+(?:\.\d+)?)/i);
+          if (givenMatchF) {
+            amountDiv.classList.add("neutral");
+            amountDiv.style.color = "#999";
+            amountDiv.textContent = `৳${formatNumber2(parseFloat(givenMatchF[1]))}`;
+          } else {
+            amountDiv.classList.add(Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral");
+            amountDiv.textContent = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : "Due"} `;
+          }
           amountDiv.setAttribute("data-transaction-id", serialNumber);
           amountDiv.setAttribute("data-column", "D");
-          amountDiv.textContent = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : "Due"} `;
           transactionDiv.appendChild(amountDiv);
 
           // Remark
@@ -2241,6 +2318,7 @@
 
       // Recalculate payment due after filtering transactions
       calculateAndDisplayPaymentDue();
+      calculateAndDisplayInHand();
 
       // Format the total amount for display
       const formattedTotal = `${totalAmount > 0 ? "+" : ""} ৳${formatNumber2(totalAmount)}`;
@@ -3566,6 +3644,69 @@
         document.getElementById("result222").innerText =
           `Error Please Contact Head Admin`;
       }
+    });
+
+    // Given panel submit - sends "Given #amount" as description, amount = 0
+    document.getElementById("gsubmitbtn").addEventListener("click", function () {
+      let audioPlayed = false;
+      const audioElement2 = new Audio("ting.mp3");
+      audioElement2.preload = "auto";
+      audioElement2.load();
+
+      const gsubmitbtn = document.getElementById("gsubmitbtn");
+      const buttonsGiven = document.getElementById("buttonsGiven");
+      const cldata = JSON.parse(localStorage.getItem("cldata"));
+      const amount =
+        parseFloat(
+          document.getElementById("gamount").value.replace(/,/g, ""),
+        ) || 0;
+      const reason = document.getElementById("greason").value;
+      const description = `Given #${amount}`;
+      const surlid = cldata.formid;
+      const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
+      const sdentry = cldata.sdentry;
+      const srentry = cldata.srentry;
+      const saentry = cldata.saentry;
+
+      gsubmitbtn.style.opacity = "0.5";
+      gsubmitbtn.innerText = "wait....";
+      gsubmitbtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append(`entry.${saentry}`, "0");
+      formData.append(`entry.${sdentry}`, description);
+      formData.append(`entry.${srentry}`, reason);
+
+      fetch(surl, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(formData),
+      })
+        .then(() => {
+          suc.style.display = "";
+          suc.src = "suc4.gif";
+          result.style.display = "";
+          buttonsGiven.style.display = "none";
+          result.innerText = `Transaction Complete`;
+          gsubmitbtn.style.display = "none";
+          if (!audioPlayed) {
+            audioElement2
+              .play()
+              .catch((error) => console.error("Audio playback failed:", error));
+            audioPlayed = true;
+          }
+          setTimeout(() => {
+            location.reload();
+          }, 2200);
+        })
+        .catch((error) => {
+          buttonsGiven.style.display = "none";
+          fall.style.display = "";
+          result.style.display = "";
+          result.style.color = "#cf1919";
+          result.innerText = `transaction error: ${error}`;
+          gsubmitbtn.style.display = "none";
+        });
     });
   </script>
 </body>
