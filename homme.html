@@ -920,7 +920,7 @@
               color: #000;
               background-color: rgb(255, 220, 100);
             " class="buttonx cost-btn" id="givenBtn">
-          Given
+          Petty Cash
         </button>
         <button style="
               cursor: pointer;
@@ -1023,7 +1023,7 @@
                     <input id="greason" class="button" placeholder="Reason">
                     <input id="gamount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
 
-                    <button class="buttonx cost-btn" id="gsubmitbtn">Given <i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    <button class="buttonx cost-btn" id="gsubmitbtn">Give <i class="fa-solid fa-arrow-up-from-bracket"></i></button>
                 </pre>
         </div>
       </div>
@@ -1620,8 +1620,8 @@
         const formattedAmount = `${Amount > 0 ? `+ ৳${formatNumber2(Amount)}` : Amount < 0 ? `- ৳${formatNumber2(Amount)}` : "Due"} `;
         const rowClass = serialNumber % 2 === 0 ? "even" : "odd";
 
-        // Check if this is a "Given" entry
-        const givenMatch = Description.match(/^Given #(\d+(?:\.\d+)?)/i);
+        // Check if this is a "Petty Cash" entry
+        const givenMatch = Description.match(/^Petty Cash #(\d+(?:\.\d+)?)/i);
         const isGiven = !!givenMatch;
         const givenAmt = isGiven ? parseFloat(givenMatch[1]) : 0;
         const displayAmount = isGiven ? `৳${formatNumber2(givenAmt)}` : formattedAmount;
@@ -2243,7 +2243,7 @@
           amountDiv.style.flex = "1";
           amountDiv.style.textAlign = "center";
           amountDiv.classList.add("transaction-amount");
-          const givenMatchF = Description.match(/^Given #(\d+(?:\.\d+)?)/i);
+          const givenMatchF = Description.match(/^Petty Cash #(\d+(?:\.\d+)?)/i);
           if (givenMatchF) {
             amountDiv.classList.add("neutral");
             amountDiv.style.color = "#999";
@@ -3646,7 +3646,7 @@
       }
     });
 
-    // Given panel submit - sends "Given #amount" as description, amount = 0
+    // Given panel submit - sends "Petty Cash #amount" as description, amount = 0
     document.getElementById("gsubmitbtn").addEventListener("click", function () {
       let audioPlayed = false;
       const audioElement2 = new Audio("ting.mp3");
@@ -3661,7 +3661,7 @@
           document.getElementById("gamount").value.replace(/,/g, ""),
         ) || 0;
       const reason = document.getElementById("greason").value;
-      const description = `Given #${amount}`;
+      const description = `Petty Cash #${amount}`;
       const surlid = cldata.formid;
       const surl = `https://docs.google.com/forms/u/0/d/e/${surlid}/formResponse`;
       const sdentry = cldata.sdentry;
