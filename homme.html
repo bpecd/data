@@ -1751,7 +1751,8 @@
                   address: cldata.land || "Not Provided",
                 },
                 transactionData: {
-                  date: transaction.formattedDate,
+                  // Invoice needs plain "DD/MM/YYYY HH:MM AM/PM" — strip the table <br>.
+                  date: toInvoiceDateTime(transaction.formattedDate),
                   description: transaction.Description,
                   reason: reasonText,
                   paymentMethod: paymentMethod,
@@ -2028,8 +2029,8 @@
           clientContact: cldata.phone,
           clientAddress: cldata.land || "Not Provided",
           invoiceNumber: transactionId,
-          invoiceDate: transaction.formattedDate,
-          date: transaction.formattedDate,
+          invoiceDate: toInvoiceDateTime(transaction.formattedDate),
+          date: toInvoiceDateTime(transaction.formattedDate),
           reason: reasonText,
           paymentMethod: paymentMethod || "Cash",
           amount: Math.abs(transaction.Amount),
@@ -2377,10 +2378,10 @@
             day = second;
             month = first;
           }
-          // Both numbers <= 12, assume it's mm/dd/yyyy format and convert
+          // Both numbers <= 12: ambiguous. Default to dd/mm/yyyy (BD/IN format) — do NOT swap.
           else {
-            day = second;
-            month = first;
+            day = first;
+            month = second;
           }
 
           // Validate month and day
@@ -2409,7 +2410,9 @@
             }
           }
 
-          return formatDateTo12Hour(dateObj.toISOString());
+          // Pass the Date object directly (local time). Do NOT round-trip via
+          // toISOString(): UTC conversion can shift the day for UTC+6.
+          return formatDateTo12Hour(dateObj);
         }
       }
 
@@ -2431,7 +2434,7 @@
           // Check if it's already in our desired format
           if (
             dateInput.includes("/") &&
-            (dateInput.includes("AM") || dateInput.includes("PM"))
+            (dateInput.toUpperCase().includes("AM") || dateInput.toUpperCase().includes("PM"))
           ) {
             return dateInput; // Already in desired format
           }
@@ -2462,6 +2465,17 @@
         console.error("Error formatting date:", error);
         return dateInput; // Return original on error
       }
+    }
+
+    // Invoice/email need plain "DD/MM/YYYY HH:MM AM/PM": strip the table
+    // "<br>", collapse whitespace, and force uppercase AM/PM.
+    function toInvoiceDateTime(s) {
+      if (s == null) return "";
+      return String(s)
+        .replace(/<br\s*\/?>/gi, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/\b(am|pm)\b/gi, (m) => m.toUpperCase());
     }
 
     function parseGoogleDate(dateString) {

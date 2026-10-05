@@ -724,27 +724,66 @@
           return lastThree;
         }
       }
+      // Canonical BD/IN formatter: always DD/MM/YYYY HH:MM AM/PM (12-hour, zero-padded, uppercase).
+      // Never use toLocaleDateString/toLocaleTimeString here: output varies by
+      // browser locale and can render as MM/DD/YYYY or lowercase am/pm.
+      function formatBDDateTime(dateInput) {
+        const d = dateInput instanceof Date ? dateInput : new Date(dateInput);
+        if (isNaN(d.getTime())) {
+          console.warn("formatBDDateTime: invalid date input, using now:", dateInput);
+          const now = new Date();
+          const day = String(now.getDate()).padStart(2, "0");
+          const month = String(now.getMonth() + 1).padStart(2, "0");
+          const year = now.getFullYear();
+          const hour24 = now.getHours();
+          const minute = String(now.getMinutes()).padStart(2, "0");
+          const ampm = hour24 >= 12 ? "PM" : "AM";
+          let hour12 = hour24 % 12;
+          hour12 = hour12 ? String(hour12).padStart(2, "0") : "12";
+          return day + "/" + month + "/" + year + " " + hour12 + ":" + minute + " " + ampm;
+        }
+        const day = String(d.getDate()).padStart(2, "0");
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const year = d.getFullYear();
+        const hour24 = d.getHours();
+        const minute = String(d.getMinutes()).padStart(2, "0");
+        const ampm = hour24 >= 12 ? "PM" : "AM";
+        let hour12 = hour24 % 12;
+        hour12 = hour12 ? String(hour12).padStart(2, "0") : "12";
+        return day + "/" + month + "/" + year + " " + hour12 + ":" + minute + " " + ampm;
+      }
+      // Transaction dates arrive from the app as display strings such as
+      // "DD/MM/YYYY <br> HH:MM AM/PM". Strip the <br> (textContent would print
+      // it literally), collapse whitespace, and force uppercase AM/PM so the
+      // invoice always shows "DD/MM/YYYY HH:MM AM/PM".
+      function normalizeBDDateTimeString(s) {
+        if (s == null) return "";
+        let out = String(s).replace(/<br\s*\/?>/gi, " ");
+        out = out.replace(/\s+/g, " ").trim();
+        out = out.replace(/\b(am|pm)\b/gi, function (m) {
+          return m.toUpperCase();
+        });
+        return out;
+      }
       const printDataString = localStorage.getItem("printTransactionData");
-      const printData = JSON.parse(printDataString);
+      let printData = null;
+      try {
+        printData = JSON.parse(printDataString);
+      } catch (e) {
+        console.error("Invalid printTransactionData in localStorage:", e);
+      }
+      if (!printData || !printData.transactionData || !printData.ownerInfo) {
+        document.body.innerHTML = "<p style='padding:2rem;font-family:sans-serif'>No invoice data found. Please reopen the invoice from the transaction list.</p>";
+        throw new Error("Missing printTransactionData");
+      }
       const data = {
         invoiceNumber: `${printData.transactionData.serialNumber}`,
-        printdate:
-          new Date().toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          }) +
-          " " +
-          new Date().toLocaleTimeString("en-GB", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-          }),
+        printdate: formatBDDateTime(new Date()),
         clientName: printData.ownerInfo.name,
         clientEmail: printData.ownerInfo.phone,
         clientAddress: printData.ownerInfo.address,
         clientstatus: printData.ownerInfo.state,
-        date: printData.transactionData.date,
+        date: normalizeBDDateTimeString(printData.transactionData.date),
         reason: printData.transactionData.reason,
         paymentMethod: printData.transactionData.paymentMethod || "Cash",
         amount: Math.abs(printData.transactionData.amount),
