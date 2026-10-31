@@ -576,6 +576,40 @@
       margin-bottom: 0.25rem;
     }
 
+    #printConfirmModal .email-confirm-content {
+      max-width: 820px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .invoice-edit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .invoice-edit-grid .email-data-row {
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 0;
+    }
+
+    .invoice-edit-grid .email-editable-field {
+      max-width: none;
+    }
+
+    #printConfirmError {
+      display: none;
+      color: #b91c1c;
+      margin: 0 0 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .invoice-edit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @keyframes rotateIn {
       from {
         opacity: 0;
@@ -785,6 +819,32 @@
     </div>
   </div>
 
+  <div class="email-confirm-modal" id="printConfirmModal">
+    <div class="email-confirm-content">
+      <div class="email-confirm-header">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <h2>Review Print Invoice</h2>
+      </div>
+      <div class="invoice-edit-grid" id="printConfirmData">
+        <div class="email-data-row editable"><label class="email-data-label" for="printClientName">Client Name</label><input class="email-editable-field" id="printClientName" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printClientContact">Contact</label><input class="email-editable-field" id="printClientContact" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printClientAddress">Address</label><input class="email-editable-field" id="printClientAddress" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printClientStatus">Status</label><input class="email-editable-field" id="printClientStatus" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printTransactionDate">Transaction Date</label><input class="email-editable-field" id="printTransactionDate" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printReason">Reason</label><input class="email-editable-field" id="printReason" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printPaymentMethod">Payment Method</label><input class="email-editable-field" id="printPaymentMethod" type="text"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printFunding">Total Funding (BDT)</label><input class="email-editable-field" id="printFunding" type="text" inputmode="decimal"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printDue">Total Due (BDT)</label><input class="email-editable-field" id="printDue" type="text" inputmode="decimal"></div>
+        <div class="email-data-row editable"><label class="email-data-label" for="printAmount">Amount (BDT)</label><input class="email-editable-field" id="printAmount" type="text" inputmode="decimal"></div>
+      </div>
+      <p id="printConfirmError" role="alert"></p>
+      <div class="email-confirm-buttons">
+        <button class="email-confirm-btn cancel" onclick="closePrintConfirmation()"><i class="fa-solid fa-times"></i> Cancel</button>
+        <button class="email-confirm-btn send" onclick="confirmPrintInvoice()"><i class="fa-solid fa-print"></i> Print Invoice</button>
+      </div>
+    </div>
+  </div>
+
   <div class="top-bar">
     <div class="nav-items">
       <a class="backButton" style="
@@ -862,7 +922,7 @@
             Due: <span style="color: red" id="due"></span> BDT (<span style="color: red" id="closed2"></span>)
           </div>
         </div>
-        <div style="background-color: white" class="bb">
+        <div style="background-color: white" class="bb" id="pduedev">
           <div class="balance-info">
             Payment Due:
             <span style="
@@ -888,6 +948,14 @@
           </div>
           <div style="font-size: 19px" class="balance-info">
             Payable: <span style="color: red" id="payab"></span> BDT
+          </div>
+        </div>
+        <div style="width: 37.5rem;background-color: #eaf0ff;" class="bb">
+          <div style="font-size: 19px" class="balance-info">
+            Grand Total
+          </div>
+          <div style="font-size: 19px" class="balance-info">
+            <strong style="color: #14532d"><span id="grandTotal">0</span> BDT</strong>
           </div>
         </div>
       </div>
@@ -1282,6 +1350,7 @@
           showbtn2.style.display = "none";
           showbtn.style.display = "none";
           document.getElementById("givenBtn").style.display = "none";
+          document.getElementById("pduedev").style.display = "none";
         } else if (["other"].includes(state)) {
           showbtn2.innerText = "Bill Pay";
           document.getElementById("lreason").placeholder = "Bill reason";
@@ -1371,6 +1440,8 @@
         if (match) {
           total = parseFloat(match[1].replace(/,/g, ""));
         } // total (B4)
+        agreementStatValue = total;
+        updateGrandTotalStats();
         const balance = parseFloat(clientData[1]?.[1] || 0); // balance (C4)
 
         console.log("Calculated values:", {
@@ -1638,6 +1709,9 @@
       }
     });
     let transactions = [];
+    let agreementStatValue = 0;
+    let additionalBillStatValue = 0;
+    let payableStatValue = 0;
     let transactionData = null; // Store the CSV data globally
 
     // Display Transactions using CSV data
@@ -1740,10 +1814,13 @@
       });
       const additionalBillTotal = billPayableTotals["Additional Bill"];
       const payableTotal = billPayableTotals.Payable;
+      additionalBillStatValue = additionalBillTotal;
+      payableStatValue = payableTotal;
       document.getElementById("abtotal").textContent =
         `${additionalBillTotal < 0 ? "-" : ""}${formatBillPayableAmount(additionalBillTotal)}`;
       document.getElementById("payab").textContent =
         `${payableTotal < 0 ? "-" : ""}${formatBillPayableAmount(payableTotal)}`;
+      updateGrandTotalStats();
       // Calculate payment due immediately after transaction data is loaded
       calculateAndDisplayPaymentDue();
       calculateAndDisplayInHand();
@@ -1809,51 +1886,17 @@
                 printfunding =
                   document.getElementById("total-cost")?.innerText;
               }
-              const timex = new Date().getTime().toString().slice(-5);
-
-              // Store the transaction data in localStorage for the print page
-              const printData = {
-                ownerInfo: {
-                  name: cldata.name,
-                  phone: cldata.phone,
-                  email: cldata.mail,
-                  state: cldata.state,
-                  Funding: printfunding,
-                  due: document.getElementById("due").innerText,
-                  address: cldata.land || "Not Provided",
-                },
-                transactionData: {
-                  // Invoice needs plain "DD/MM/YYYY HH:MM AM/PM" — strip the table <br>.
-                  date: toInvoiceDateTime(transaction.formattedDate),
-                  description: transaction.Description,
-                  reason: reasonText,
-                  paymentMethod: paymentMethod,
-                  amount: getInvoiceTransactionAmount(transaction),
-                  remark: transaction.remark,
-                  serialNumber: transaction.serialNumber + "0" + timex,
-                },
-                timestamp: new Date().toISOString(),
-              };
-
-              localStorage.setItem(
-                "printTransactionData",
-                JSON.stringify(printData),
-              );
-
-              // Visual feedback
-              const originalHTML = target.innerHTML;
-              target.innerHTML =
-                '<i class="fa-solid fa-check"></i>';
-
-              // Open print page
-              setTimeout(() => {
-                window.open("invo.html", "_blank");
-                // Re-enable button after short delay
-                setTimeout(() => {
-                  target.innerHTML = originalHTML;
-                  target.disabled = false;
-                }, 1000);
-              }, 200);
+              showPrintConfirmation(transaction, target, {
+                name: cldata.name,
+                phone: cldata.phone,
+                email: cldata.mail,
+                state: cldata.state,
+                Funding: printfunding || "0",
+                due: document.getElementById("due")?.innerText || "0",
+                address: cldata.land || "Not Provided",
+                reason: reasonText,
+                paymentMethod,
+              });
             } catch (error) {
               console.error("Print error:", error);
               alert("Error preparing print data. Please try again.");
@@ -1903,6 +1946,90 @@
           }
         }
       });
+
+    let pendingPrintInvoice = null;
+
+    function showPrintConfirmation(transaction, printButton, ownerInfo) {
+      const date = typeof toInvoiceDateTime === "function"
+        ? toInvoiceDateTime(transaction.formattedDate)
+        : String(transaction.formattedDate || "").replace(/<br\s*\/?\s*>/gi, " ").trim();
+      pendingPrintInvoice = { transaction, printButton, ownerInfo };
+
+      document.getElementById("printClientName").value = ownerInfo.name || "";
+      document.getElementById("printClientContact").value = ownerInfo.phone || "";
+      document.getElementById("printClientAddress").value = ownerInfo.address || "";
+      document.getElementById("printClientStatus").value = ownerInfo.state || "";
+      document.getElementById("printTransactionDate").value = date;
+      document.getElementById("printReason").value = ownerInfo.reason || transaction.Reason || "";
+      document.getElementById("printPaymentMethod").value = ownerInfo.paymentMethod || "";
+      document.getElementById("printFunding").value = ownerInfo.Funding || "0";
+      document.getElementById("printDue").value = ownerInfo.due || "0";
+      document.getElementById("printAmount").value = formatBillPayableAmount(
+        Math.abs(getInvoiceTransactionAmount(transaction)),
+      );
+      document.getElementById("printConfirmError").style.display = "none";
+      document.getElementById("printConfirmError").textContent = "";
+      document.getElementById("printConfirmModal").classList.add("active");
+    }
+
+    function closePrintConfirmation() {
+      document.getElementById("printConfirmModal").classList.remove("active");
+      document.getElementById("printConfirmError").style.display = "none";
+      if (pendingPrintInvoice?.printButton) {
+        pendingPrintInvoice.printButton.disabled = false;
+      }
+      pendingPrintInvoice = null;
+    }
+
+    function confirmPrintInvoice() {
+      if (!pendingPrintInvoice) return;
+
+      const parseNonNegativeAmount = (id) => {
+        const value = document.getElementById(id).value.trim().replace(/,/g, "");
+        if (!value) return null;
+        const amount = Number(value);
+        return Number.isFinite(amount) && amount >= 0 ? amount : null;
+      };
+      const funding = parseNonNegativeAmount("printFunding");
+      const due = parseNonNegativeAmount("printDue");
+      const amount = parseNonNegativeAmount("printAmount");
+      const error = document.getElementById("printConfirmError");
+
+      if (funding === null || due === null || amount === null) {
+        error.textContent = "Enter valid non-negative values for funding, due, and amount.";
+        error.style.display = "block";
+        return;
+      }
+
+      const { transaction, ownerInfo, printButton } = pendingPrintInvoice;
+      const timex = new Date().getTime().toString().slice(-5);
+      const printData = {
+        ownerInfo: {
+          name: document.getElementById("printClientName").value.trim(),
+          phone: document.getElementById("printClientContact").value.trim(),
+          email: ownerInfo.email || "",
+          state: document.getElementById("printClientStatus").value.trim(),
+          Funding: formatBillPayableAmount(funding),
+          due: formatBillPayableAmount(due),
+          address: document.getElementById("printClientAddress").value.trim(),
+        },
+        transactionData: {
+          date: document.getElementById("printTransactionDate").value.trim(),
+          description: transaction.Description,
+          reason: document.getElementById("printReason").value.trim(),
+          paymentMethod: document.getElementById("printPaymentMethod").value.trim(),
+          amount,
+          remark: transaction.remark,
+          serialNumber: transaction.serialNumber + "0" + timex,
+        },
+        timestamp: new Date().toISOString(),
+      };
+
+      localStorage.setItem("printTransactionData", JSON.stringify(printData));
+      closePrintConfirmation();
+      printButton.disabled = false;
+      window.open("invo.html", "_blank");
+    }
 
     // Global variables for email confirmation
     let pendingEmailTransaction = null;
@@ -3754,6 +3881,15 @@
       return Math.abs(amount).toLocaleString("en-IN", {
         maximumFractionDigits: 2,
       });
+    }
+
+    function updateGrandTotalStats() {
+      const grandTotal = agreementStatValue + additionalBillStatValue - payableStatValue;
+      const agreement = `${agreementStatValue < 0 ? "-" : ""}${formatBillPayableAmount(agreementStatValue)}`;
+      const additionalOperator = additionalBillStatValue < 0 ? "-" : "+";
+      const payableOperator = payableStatValue < 0 ? "+" : "-";
+      const result = `${grandTotal < 0 ? "-" : ""}${formatBillPayableAmount(grandTotal)}`;
+      document.getElementById("grandTotal").textContent = result;
     }
 
     function getInvoiceTransactionAmount(transaction) {
