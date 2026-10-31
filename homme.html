@@ -854,9 +854,9 @@
             BDT (<span style="color: red" id="closed"></span>)
           </div>
         </div>
-        <div style="width: 37.5rem" class="bb">
+        <div style="width: 37.5rem;" class="bb">
           <div style="font-size: 19px" class="balance-info">
-            Total funding: <span style="color: blue" id="total"></span> BDT
+            Agreement: <span style="color: blue" id="total"></span> BDT
           </div>
           <div style="font-size: 19px" class="balance-info">
             Due: <span style="color: red" id="due"></span> BDT (<span style="color: red" id="closed2"></span>)
@@ -880,6 +880,14 @@
                   font-size: 1.75rem;
                 " id="total-inhand">0</span>
             BDT
+          </div>
+        </div>
+        <div style="width: 37.5rem;background-color: rgb(211, 253, 208);" class="bb">
+          <div style="font-size: 19px" class="balance-info">
+            Additional Bill: <span style="color: blue" id="abtotal"></span> BDT
+          </div>
+          <div style="font-size: 19px" class="balance-info">
+            Payable: <span style="color: red" id="payab"></span> BDT
           </div>
         </div>
       </div>
@@ -921,6 +929,13 @@
               background-color: rgb(255, 220, 100);
             " class="buttonx cost-btn" id="givenBtn">
           Petty Cash
+        </button>
+        <button style="
+              cursor: pointer;
+              color: #000;
+              background-color: rgb(184, 231, 255);
+            " class="buttonx cost-btn" id="billPayableBtn">
+          Additional
         </button>
         <button style="
               cursor: pointer;
@@ -1025,6 +1040,18 @@
 
                     <button class="buttonx cost-btn" id="gsubmitbtn">Give <i class="fa-solid fa-arrow-up-from-bracket"></i></button><button class="buttonx receive-btn" id="greducebtn">Reduce <i class="fa-solid fa-chart-line-down"></i></button>
                 </pre>
+        </div>
+        <div style="display: none" id="buttonsAdjustment" class="buttons">
+          <pre>
+<button class="claim-button1" onclick="location.reload()"><i class="fa-solid fa-turn-left"></i></button>
+                    <select id="adjustmentType" class="button">
+                      <option value="Additional Bill">Additional Bill</option>
+                      <option value="Payable">Payable</option>
+                    </select>
+                    <input id="adjustmentReason" class="button" placeholder="Reason">
+                    <input id="adjustmentAmount" class="button" oninput="formatIndianNumberInput(this)" placeholder="Amount">
+                    <button class="buttonx cost-btn" id="adjustmentAddBtn">Add <i class="fa-solid fa-plus"></i></button><button class="buttonx receive-btn" id="adjustmentRemoveBtn">Remove <i class="fa-solid fa-minus"></i></button>
+          </pre>
         </div>
       </div>
     </div>
@@ -1132,6 +1159,7 @@
     if (stt !== "admin") {
       document.getElementById("Entry").style.display = "none";
       document.getElementById("givenBtn").style.display = "none";
+      document.getElementById("billPayableBtn").style.display = "none";
       document.getElementById("lbcost").style.display = "none";
       document.getElementById("adcost").style.display = "none";
       document.getElementById("shtl").style.display = "none";
@@ -1159,36 +1187,45 @@
       const showbtn2 = document.getElementById("lbcost");
       const btns2 = document.getElementById("buttons22");
       const showbtnGiven = document.getElementById("givenBtn");
+      const showbtnAdjustment = document.getElementById("billPayableBtn");
+      const btnsAdjustment = document.getElementById("buttonsAdjustment");
 
       showbtn.addEventListener("click", function () {
         btns.style.display = "block";
         btns2.style.display = "none";
+        btnsAdjustment.style.display = "none";
         showbtn.style.display = "none";
         showbtn2.style.display = "none";
         showbtn3.style.display = "none";
         showbtnGiven.style.display = "none";
+        showbtnAdjustment.style.display = "none";
       });
 
       showbtn2.addEventListener("click", function () {
         btns2.style.display = "block";
         btns.style.display = "none";
+        btnsAdjustment.style.display = "none";
         showbtn.style.display = "none";
         showbtn2.style.display = "none";
         showbtn3.style.display = "none";
         showbtnGiven.style.display = "none";
+        showbtnAdjustment.style.display = "none";
       });
 
       showbtn3.addEventListener("click", function () {
         btns3.style.display = "block";
+        btnsAdjustment.style.display = "none";
         showbtn3.style.display = "none";
         showbtn2.style.display = "none";
         showbtn.style.display = "none";
         showbtnGiven.style.display = "none";
+        showbtnAdjustment.style.display = "none";
       });
 
       const btnsGiven = document.getElementById("buttonsGiven");
       showbtnGiven.addEventListener("click", function () {
         btnsGiven.style.display = "block";
+        btnsAdjustment.style.display = "none";
         btns.style.display = "none";
         btns2.style.display = "none";
         btns3.style.display = "none";
@@ -1196,6 +1233,20 @@
         showbtn2.style.display = "none";
         showbtn3.style.display = "none";
         showbtnGiven.style.display = "none";
+        showbtnAdjustment.style.display = "none";
+      });
+
+      showbtnAdjustment.addEventListener("click", function () {
+        btnsAdjustment.style.display = "block";
+        btnsGiven.style.display = "none";
+        btns.style.display = "none";
+        btns2.style.display = "none";
+        btns3.style.display = "none";
+        showbtn.style.display = "none";
+        showbtn2.style.display = "none";
+        showbtn3.style.display = "none";
+        showbtnGiven.style.display = "none";
+        showbtnAdjustment.style.display = "none";
       });
 
       const cldata = JSON.parse(localStorage.getItem("cldata"));
@@ -1624,10 +1675,17 @@
         const givenMatch = Description.match(/^Petty Cash\s*#\s*([+-]?[\d,]+(?:\.\d+)?)/i);
         const isGiven = !!givenMatch;
         const givenAmt = isGiven ? parseFloat(givenMatch[1].replace(/,/g, "")) || 0 : 0;
-        const displayAmount = isGiven ? givenAmt < 0
-          ? `- ৳${formatNumber2(Math.abs(givenAmt))}`
-          : `৳${formatNumber2(givenAmt)} ` : formattedAmount;
-        const amtClass = isGiven ? "neutral" : (Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral");
+        const adjustment = parseBillPayableAdjustment(Description);
+        let displayAmount = formattedAmount;
+        if (adjustment) {
+          const sign = adjustment.amount > 0 ? "+ " : adjustment.amount < 0 ? "- " : "";
+          displayAmount = `${sign}৳${formatBillPayableAmount(adjustment.amount)}`;
+        } else if (isGiven) {
+          displayAmount = givenAmt < 0
+            ? `- ৳${formatNumber2(Math.abs(givenAmt))}`
+            : `৳${formatNumber2(givenAmt)} `;
+        }
+        const amtClass = isGiven || adjustment ? "neutral" : (Amount > 0 ? "credit" : Amount < 0 ? "debit" : "neutral");
         const descStyle = isGiven ? `style="flex:1;text-align:center;color:#999;font-style:italic;"` : `style="flex:1;text-align:center;cursor:pointer;"`;
 
         htmlContent += `
@@ -1672,6 +1730,20 @@
       }
       document.querySelector(".loader").style.display = "none";
       container.innerHTML = htmlContent;
+      const billPayableTotals = {
+        "Additional Bill": 0,
+        Payable: 0,
+      };
+      transactions.forEach(({ Description }) => {
+        const adjustment = parseBillPayableAdjustment(Description);
+        if (adjustment) billPayableTotals[adjustment.category] += adjustment.amount;
+      });
+      const additionalBillTotal = billPayableTotals["Additional Bill"];
+      const payableTotal = billPayableTotals.Payable;
+      document.getElementById("abtotal").textContent =
+        `${additionalBillTotal < 0 ? "-" : ""}${formatBillPayableAmount(additionalBillTotal)}`;
+      document.getElementById("payab").textContent =
+        `${payableTotal < 0 ? "-" : ""}${formatBillPayableAmount(payableTotal)}`;
       // Calculate payment due immediately after transaction data is loaded
       calculateAndDisplayPaymentDue();
       calculateAndDisplayInHand();
@@ -1756,7 +1828,7 @@
                   description: transaction.Description,
                   reason: reasonText,
                   paymentMethod: paymentMethod,
-                  amount: transaction.Amount,
+                  amount: getInvoiceTransactionAmount(transaction),
                   remark: transaction.remark,
                   serialNumber: transaction.serialNumber + "0" + timex,
                 },
@@ -1842,6 +1914,7 @@
       pendingEmailButton = emailButton;
 
       const cldata = JSON.parse(localStorage.getItem("cldata"));
+      const invoiceAmount = getInvoiceTransactionAmount(transaction);
 
       // Extract payment method from reason if it exists
       let reasonText = transaction.Reason;
@@ -1855,12 +1928,12 @@
 
       // Get amount type (credit/debit)
       const amountType =
-        transaction.Amount > 0
+        invoiceAmount > 0
           ? "Received"
-          : transaction.Amount < 0
+          : invoiceAmount < 0
             ? "Given"
             : "N/A";
-      const amountColor = transaction.Amount > 0 ? "#11998e" : "#fc4a1a";
+      const amountColor = invoiceAmount > 0 ? "#11998e" : "#fc4a1a";
 
       // Build confirmation data HTML
       const confirmDataHTML = `
@@ -1895,7 +1968,7 @@
         }
                 <div class="email-data-row">
                     <span class="email-data-label"><i class="fa-solid fa-money-bill-wave"></i> Amount (${amountType}):</span>
-                    <span class="email-data-value" style="color: ${amountColor}; font-size: 1.2rem; font-weight: 700;">৳${formatNumber2(Math.abs(transaction.Amount))}</span>
+                    <span class="email-data-value" style="color: ${amountColor}; font-size: 1.2rem; font-weight: 700;">৳${formatBillPayableAmount(invoiceAmount)}</span>
                 </div>
                 ${transaction.remark
           ? `
@@ -2033,8 +2106,8 @@
           date: toInvoiceDateTime(transaction.formattedDate),
           reason: reasonText,
           paymentMethod: paymentMethod || "Cash",
-          amount: Math.abs(transaction.Amount),
-          totalAmount: `৳${formatNumber2(Math.abs(transaction.Amount))}`,
+          amount: Math.abs(getInvoiceTransactionAmount(transaction)),
+          totalAmount: `৳${formatBillPayableAmount(getInvoiceTransactionAmount(transaction))}`,
           totalPaid: `${totalPaid}৳`,
           totalDue: `${totalDue}৳`,
           clientStatus: cldata.state,
@@ -3661,6 +3734,103 @@
           `Error Please Contact Head Admin`;
       }
     });
+
+    function parseBillPayableAdjustment(description) {
+      const match = String(description || "").match(
+        /^(Additional Bill|Payable) #([+-]?(?:\d{1,3}(?:,\d{2})*,\d{3}|\d+)(?:\.\d+)?)$/i,
+      );
+      if (!match) return null;
+
+      const amount = Number(match[2].replace(/,/g, ""));
+      if (!Number.isFinite(amount)) return null;
+
+      const category = match[1].toLowerCase() === "additional bill"
+        ? "Additional Bill"
+        : "Payable";
+      return { category, amount };
+    }
+
+    function formatBillPayableAmount(amount) {
+      return Math.abs(amount).toLocaleString("en-IN", {
+        maximumFractionDigits: 2,
+      });
+    }
+
+    function getInvoiceTransactionAmount(transaction) {
+      const adjustment = parseBillPayableAdjustment(transaction.Description);
+      return adjustment ? adjustment.amount : transaction.Amount;
+    }
+
+    function submitBillPayableAdjustment(direction) {
+      const category = document.getElementById("adjustmentType").value;
+      const reason = document.getElementById("adjustmentReason").value.trim();
+      const rawAmount = document.getElementById("adjustmentAmount").value.replace(/,/g, "");
+      const amount = Number(rawAmount);
+      const addButton = document.getElementById("adjustmentAddBtn");
+      const removeButton = document.getElementById("adjustmentRemoveBtn");
+      const activeButton = direction > 0 ? addButton : removeButton;
+      const otherButton = direction > 0 ? removeButton : addButton;
+
+      if (
+        !["Additional Bill", "Payable"].includes(category) ||
+        !reason ||
+        !Number.isFinite(amount) ||
+        amount <= 0
+      ) {
+        fall.style.display = "";
+        result.style.display = "";
+        result.style.color = "#cf1919";
+        result.innerText = "Enter a valid category, reason, and amount.";
+        return;
+      }
+
+      const cldata = JSON.parse(localStorage.getItem("cldata"));
+      const description = `${category} #${direction > 0 ? "+" : "-"}${formatBillPayableAmount(amount)}`;
+      const surl = `https://docs.google.com/forms/u/0/d/e/${cldata.formid}/formResponse`;
+      const formData = new FormData();
+      formData.append(`entry.${cldata.saentry}`, "0");
+      formData.append(`entry.${cldata.sdentry}`, description);
+      formData.append(`entry.${cldata.srentry}`, reason);
+
+      addButton.disabled = true;
+      removeButton.disabled = true;
+      activeButton.dataset.originalText = activeButton.innerHTML;
+      activeButton.innerText = "wait....";
+      otherButton.style.display = "none";
+
+      fetch(surl, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(formData),
+      })
+        .then(() => {
+          suc.style.display = "";
+          suc.src = "suc4.gif";
+          fall.style.display = "none";
+          result.style.display = "";
+          result.style.color = "#0808dd";
+          result.innerText = "Transaction Complete";
+          document.getElementById("buttonsAdjustment").style.display = "none";
+          setTimeout(() => location.reload(), 2200);
+        })
+        .catch((error) => {
+          fall.style.display = "";
+          result.style.display = "";
+          result.style.color = "#cf1919";
+          result.innerText = `Transaction error: ${error}`;
+          addButton.disabled = false;
+          removeButton.disabled = false;
+          activeButton.innerHTML = activeButton.dataset.originalText;
+          otherButton.style.display = "";
+        });
+    }
+
+    document
+      .getElementById("adjustmentAddBtn")
+      .addEventListener("click", () => submitBillPayableAdjustment(1));
+    document
+      .getElementById("adjustmentRemoveBtn")
+      .addEventListener("click", () => submitBillPayableAdjustment(-1));
 
     // Given panel submit - sends "Petty Cash #amount" as description, amount = 0
     document.getElementById("greducebtn").addEventListener("click", function () {
